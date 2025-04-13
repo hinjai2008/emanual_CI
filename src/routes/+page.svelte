@@ -1,1 +1,1 @@
-<h1>this is the default page</h1>
+<h1>Default page</h1>

@@ -70,5 +70,9 @@
         <tr>
             <th scope="row">Indication</th>
             <td class="width: 80%;">{data.test.indication}</td>
+        </tr>
+        <tr>
+            <th scope="row">Turn-around Time</th>
+            <td class="width: 80%;">{data.test.turn_around_time}</td>
         </tbody>
     </table>

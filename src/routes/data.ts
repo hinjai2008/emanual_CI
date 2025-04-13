@@ -143,3 +143,26 @@ export const tests: Test[] = [
         last_updated: '2023-10-01',
     },
 ];
+
+// Utility function to find duplicate IDs
+export function findDuplicateIds(tests: Test[]): number[] {
+    const ids = tests.map(test => test.id);
+    const duplicates: number[] = [];
+    const seen = new Set<number>();
+
+    for (const id of ids) {
+        if (seen.has(id)) {
+            duplicates.push(id);
+        } else {
+            seen.add(id);
+        }
+    }
+
+    return [...new Set(duplicates)]; // Ensure duplicates are unique
+}
+
+// Example usage: Validate the `tests` array
+// const duplicateIds = findDuplicateIds(tests);
+// if (duplicateIds.length > 0) {
+//     console.error("Duplicate IDs found in the tests array:", duplicateIds);
+// }
