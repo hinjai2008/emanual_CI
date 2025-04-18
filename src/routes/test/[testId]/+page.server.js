@@ -1,4 +1,4 @@
-import { tests, findDuplicateIds} from '../../data.js';
+import { tests, findDuplicateIds} from '../../dataUtility.js';
 import { error } from '@sveltejs/kit';
 
 /**

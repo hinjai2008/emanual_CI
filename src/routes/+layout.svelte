@@ -1,6 +1,8 @@
 <script>
   let { data, children } = $props();
 
+  let rawTestData = data.rawTestData;
+
   import { base } from '$app/paths';
   import * as JsSearch from 'js-search';
 
@@ -14,6 +16,17 @@
 
   let searchInput = $state('');
   let searchResults = $derived(search.search(searchInput));
+
+  // Function to download rawTestData as JSON
+  function downloadRawTestData() {
+    const blob = new Blob([JSON.stringify(rawTestData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'rawTestData.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 </script>
 
 <!-- NavBar -->
@@ -26,6 +39,11 @@
 
     <ul class="nav nav-pills">
       <li class="nav-item"><a href="{base}/" class="nav-link active" aria-current="page">Home</a></li>
+      <li class="nav-item"><button class="nav-link" onclick={downloadRawTestData}>Download</button></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">About</a></li> -->
     </ul>
   </header>
 </div>
@@ -37,14 +55,7 @@
     <!-- Search -->
     <div class="input-group" style="width: 97%;">
       <img class="input-group-text" src="{base}/search.svg" id="basic-addon1" style="width: 10%;" alt="search">
-      <input
-        bind:value={searchInput}
-        id="search_sideBar"
-        type="text"
-        class="form-control"
-        placeholder="Type in tests / forms to search"
-        tabindex="0"
-      />
+      <input bind:value={searchInput} id="search_sideBar" type="text" class="form-control" placeholder="Type in tests / forms to search" tabindex="0">
     </div>
 
     <!-- Search Results -->
@@ -52,7 +63,10 @@
       {#if searchInput.length === 0}
         <!-- Display all tests when no search input -->
         {#each data.tests as test}
-          <a href="{base}/test/{test.id}" class="list-group-item list-group-item-action py-3 lh-tight">
+          <a
+            href="{base}/test/{test.id}"
+            class="list-group-item list-group-item-action py-3 lh-tight"
+          >
             <div class="d-flex w-100 align-items-center justify-content-between">
               <strong class="mb-1">{test.full_name}</strong>
             </div>
@@ -62,7 +76,10 @@
       {:else}
         <!-- Display search results -->
         {#each searchResults as result}
-          <a href="{base}/test/{result.id}" class="list-group-item list-group-item-action py-3 lh-tight">
+          <a
+            href="{base}/test/{result.id}"
+            class="list-group-item list-group-item-action py-3 lh-tight"
+          >
             <div class="d-flex w-100 align-items-center justify-content-between">
               <strong class="mb-1">{result.full_name}</strong>
             </div>
