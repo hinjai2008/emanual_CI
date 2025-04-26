@@ -10,7 +10,7 @@ export function load({ params }) {
     if (!test) error(404);
 
     return {
-        test
+        test,
     };
 }
 
