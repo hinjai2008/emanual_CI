@@ -4,7 +4,9 @@
   let rawTestData = data.rawTestData;
 
   import { base } from '$app/paths';
-  import {isAdmin} from './stores';
+  import { editedTestData } from './stores';
+  import { isAdmin } from './stores';
+  import { onMount } from "svelte";
  
   import * as JsSearch from 'js-search';
 
@@ -19,16 +21,14 @@
   let searchInput = $state('');
   let searchResults = $derived(search.search(searchInput));
 
-
   async function checkadmin() {
-
     const encoder = new TextEncoder();
     const encodedSearchInput = encoder.encode(searchInput);
-    const hashBuffer= await window.crypto.subtle.digest("SHA-256", encodedSearchInput);
+    const hashBuffer = await window.crypto.subtle.digest("SHA-256", encodedSearchInput);
     const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
     const hashHex = hashArray
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join(""); // convert bytes to hex string
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join(""); // convert bytes to hex string
 
     const encryptedAdminPw = "2ca5161d5fd55633223b61a03cc51c4ce7e32383b480f3eb37b4f122f24e4c23";
 
@@ -37,16 +37,36 @@
     }
   };
 
-  // Function to download rawTestData as JSON
-  function downloadRawTestData() {
-    const blob = new Blob([JSON.stringify(rawTestData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'rawTestData.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  }
+  function exportListener() {
+        const blob = new Blob([JSON.stringify($editedTestData, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "editedTestData.json";
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+  onMount(() => {
+    const exportButton = document.getElementById("exportButton");
+    if (exportButton) {
+      // Ensure no duplicate listeners are added
+      exportButton.addEventListener("click", exportListener);
+    }
+  });
+
+  // Reactive statement to update the event listener when editedTestData changes
+  $effect(() => {
+    console.log("Updating export button listener");
+    const exportButton = document.getElementById("exportButton");
+    if (exportButton) {
+
+
+      // Ensure no duplicate listeners are added
+      exportButton.removeEventListener("click", exportListener);
+      exportButton.addEventListener("click", exportListener);
+    }
+  });
 
 </script>
 
@@ -60,7 +80,7 @@
 
     <ul class="nav nav-pills">
       <li class="nav-item"><a href="{base}/" class="nav-link active" aria-current="page">Home</a></li>
-      <li class="nav-item"><button class="nav-link" onclick={downloadRawTestData}>Download</button></li>
+      <li class="nav-item"><button id="exportButton" class="nav-link">Export changes</button></li>
       <!-- <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
       <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
       <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
@@ -89,9 +109,9 @@
             class="list-group-item list-group-item-action py-3 lh-tight"
           >
             <div class="d-flex w-100 align-items-center justify-content-between">
-              <strong class="mb-1">{test.full_name}</strong>
+              <strong class="mb-1">{test.full_name.blocks[0].data.text}</strong>
             </div>
-            <div class="col-10 mb-1 small">{test.label_name}</div>
+            <div class="col-10 mb-1 small">{test.label_name.blocks[0].data.text}</div>
           </a>
         {/each}
       {:else}
