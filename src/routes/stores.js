@@ -1,8 +1,8 @@
 import { writable } from 'svelte/store';
-import { tests } from './dataUtility';
+import completeJSON from './testData.json'
 
 export const isAdmin = writable(false);
 
 export const isEditMode = writable(false);
 
-export const editedTestData = writable(tests);
+export const editedJSON = writable(completeJSON);

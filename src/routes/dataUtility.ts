@@ -16,7 +16,7 @@ export interface Test {
     last_updated: string;
 }
 
-export const tests: Test[] = testData as Test[];
+export const tests: Test[] = testData.testData as Test[];
 
 // Utility function to find duplicate IDs
 export function findDuplicateIds(tests: Test[]): number[] {

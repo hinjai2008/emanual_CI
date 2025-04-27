@@ -3,8 +3,6 @@
     import { isAdmin } from "../../stores";
     import { isEditMode } from "../../stores";
     import { onDestroy } from "svelte";
-    import { editedTestData } from "../../stores";
-    import Header from '@editorjs/header'; // Header can still be imported normally
     import DataRow from "./DataRow.svelte";
 
     let { data } = $props();
@@ -37,53 +35,6 @@
 
     function setEditMode() {
         isEditMode.set(true);
-    }
-
-    async function initializeEditor(target, data) {
-        if (editor) {
-            editor.destroy(); // Destroy the previous instance if it exists
-            editor = null;
-        }
-
-        let holder = document.getElementById(target);
-        if (holder) {
-            editingData = target;
-        }
-
-        // Dynamically import EditorJS to ensure it is only loaded in the browser
-         const { default: EditorJS } = await import('@editorjs/editorjs');
-
-        editor = new EditorJS({
-            holder: target,
-            tools: {
-                header: Header,
-            },
-            data: data,
-            onReady: () => {
-                console.log('Editor.js is ready to work!');
-            },
-            onChange: () => {
-                console.log('Now I know that Editor\'s content changed!');
-            }
-        });
-    }
-
-    function doneAction(target) {
-        editor.save().then((outputData) => {
-            let editedTestData_copy = $editedTestData;
-            editedTestData_copy.map(editedTest => {
-                if (editedTest.id === data.test.id) {
-                    editedTest[target] = outputData;
-                    editedTestData.set(editedTestData_copy);
-                    console.log(editedTestData_copy);
-                }
-            });
-            editor.readOnly.toggle()
-            editingData = '';
-
-        }).catch((error) => {
-            console.log('Saving failed: ', error);
-        });
     }
 </script>
 

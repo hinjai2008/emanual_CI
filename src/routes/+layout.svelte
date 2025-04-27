@@ -1,10 +1,10 @@
 <script>
   let { data, children } = $props();
 
-  let rawTestData = data.rawTestData;
+  // let rawTestData = data.rawTestData;
 
   import { base } from '$app/paths';
-  import { editedTestData } from './stores';
+  import { editedJSON } from './stores';
   import { isAdmin } from './stores';
   import { onMount } from "svelte";
  
@@ -38,11 +38,11 @@
   };
 
   function exportListener() {
-        const blob = new Blob([JSON.stringify($editedTestData, null, 2)], { type: "application/json" });
+        const blob = new Blob([JSON.stringify($editedJSON, null, 2)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = "editedTestData.json";
+        a.download = "editedJSON.json";
         a.click();
         URL.revokeObjectURL(url);
       }
@@ -55,7 +55,7 @@
     }
   });
 
-  // Reactive statement to update the event listener when editedTestData changes
+  // Reactive statement to update the event listener when editedJSON changes
   $effect(() => {
     console.log("Updating export button listener");
     const exportButton = document.getElementById("exportButton");
