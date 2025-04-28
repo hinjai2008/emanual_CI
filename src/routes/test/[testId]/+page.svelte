@@ -41,10 +41,9 @@
 <div class="m-2 {adminlayout ? 'w-50' : 'w-100'}">
     <table class="table table-striped table-bordered" style="width: 100%;">
         <tbody>
-        <tr>
-            <th scope="row">Alert/Reminder</th>
-            <td class="" style="width: 80%;">
-                {#if data.test.alert.includes("ICE")}
+
+            <DataRow rowName={"alert"} isEditable={false} data={data}/>
+                <!-- {#if data.test.alert.includes("ICE")}
                 <span class="badge rounded-pill text-bg-primary">On-Ice transport</span>
                 {/if}
 
@@ -66,9 +65,7 @@
 
                 {#if data.test.alert.includes("TIME")}
                 <span class="badge rounded-pill text-bg-warning">Fresh specimen needed. Accept only in specific time period.</span>
-                {/if}
-            </td>
-        </tr>
+                {/if} -->
 
         <DataRow rowName={"full_name"} isEditable={false} data={data}/>
         <DataRow rowName={"GCRS_name"} isEditable={false} data={data}/>
@@ -110,7 +107,8 @@
     <div class="m-2">
         <table class="table table-striped table-bordered" style="width: 100%;">
             <tbody>
-            <tr>
+            <DataRow rowName={"alert"} isEditable={true} data={data}/>
+            <!-- <tr>
                 <th scope="row">Alert/Reminder</th>
                 <td class="" style="width: 80%;">
                     {#if data.test.alert.includes("ICE")}
@@ -137,7 +135,7 @@
                     <span class="badge rounded-pill text-bg-warning">Fresh specimen needed. Accept only in specific time period.</span>
                     {/if}
                 </td>
-            </tr>
+            </tr> -->
 
             <DataRow rowName={"full_name"} isEditable={true} data={data}/>
             <DataRow rowName={"GCRS_name"} isEditable={true} data={data}/>

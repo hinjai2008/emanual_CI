@@ -1,6 +1,8 @@
 <script>
     import Header from '@editorjs/header'; // Header can still be imported normally
     import Paragraph from '@editorjs/paragraph';
+    import AlertTag from '$lib/alert-tag/alert-tag.js';
+    
     import { onDestroy, onMount } from 'svelte';
     import { editedJSON } from '../../stores';
     import { page } from "$app/state"; // Import the $page store
@@ -35,6 +37,22 @@
             loadedData = thisTestEdit[rowName];
         }
 
+        let tools = {
+            paragraph: Paragraph,
+            header: Header,
+        };
+
+        if (rowName === "alert") {
+            tools = {
+                alertTag: {
+                    class: AlertTag,
+                    config: {
+                            selectableTag: $editedJSON.config.alertTag
+                    },
+                },
+            }
+        }
+
         // Dynamically import EditorJS to ensure it is only loaded in the browser
         const { default: EditorJS } = await import('@editorjs/editorjs');
         editor = new EditorJS({
@@ -42,10 +60,7 @@
             autofocus: false,
             readOnly: true,
             inlineToolbar: true,
-            tools: {
-                paragraph: Paragraph,
-                header: Header,
-            },
+            tools: tools,
             data: loadedData,
         });
     }
@@ -58,7 +73,7 @@
     function doneAction() {
         editor.save().then((outputData) => {
             let editedJSON_copy = $editedJSON;
-            editedJSON_copy.testData.map((editedTest) => {
+            editedJSON_copy["testData"].map((editedTest) => {
                 if (editedTest.id.toString() === page.params.testId) {
                     editedTest[rowName] = outputData;
                     editedJSON.set(editedJSON_copy);
@@ -78,7 +93,7 @@
         const testId = page.params.testId;
         if (editor) {
             editor.destroy(); // Clean up the previous editor instance
-            thisTestEdit = $editedJSON.testData.find(editedTest => editedTest.id.toString() === page.params.testId);
+            thisTestEdit = $editedJSON["testData"].find(editedTest => editedTest.id.toString() === page.params.testId);
             initializeEditor()
         }
 
