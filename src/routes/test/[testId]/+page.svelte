@@ -1,4 +1,5 @@
 <script>
+    import { base } from '$app/paths';
     import "../../global.css"; // Import global CSS
     import { isAdmin } from "../../stores";
     import { isEditMode } from "../../stores";
@@ -38,7 +39,7 @@
     }
 </script>
 
-<div class="m-2 {adminlayout ? 'w-50' : 'w-100'}">
+<div class="m-2 {adminlayout ? 'w-50' : 'w-100'}" style="height: calc(100vh - 105px); overflow-y: scroll">
     <table class="table table-striped table-bordered" style="width: 100%;">
         <tbody>
 
@@ -82,8 +83,8 @@
                 <div class="card bg-primary-subtle" style="width: 18rem;">
                     <div class="card-body">
                       <p class="card-text">{data.test.container}</p>
+                      <img src="{base}/clot_blood_x1.webp" alt="..." class="img-thumbnail">
                     </div>
-                    <!-- <img src="/clot_blood.jfif" class="card-img-bottom p-2" alt="..."> -->
                   </div>
             </td>
         </tr>
@@ -98,7 +99,7 @@
 </div>
 
 {#if adminlayout}
-<div class="w-50">
+<div class="w-50" style="height: calc(100vh - 105px); overflow-y: scroll">
     {#if !editModeLayout}
 <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
     <button type="button" onclick={setEditMode} class="btn btn-primary">Start new edit</button>
@@ -155,8 +156,8 @@
                     <div class="card bg-primary-subtle" style="width: 18rem;">
                         <div class="card-body">
                           <p class="card-text">{data.test.container}</p>
+                          <img src="{base}/clot_blood_x1.webp" alt="..." class="img-thumbnail">
                         </div>
-                        <!-- <img src="/clot_blood.jfif" class="card-img-bottom p-2" alt="..."> -->
                       </div>
                 </td>
             </tr>
