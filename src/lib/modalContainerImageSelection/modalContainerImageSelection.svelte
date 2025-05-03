@@ -1,6 +1,5 @@
 <script>    
 
-    import { base } from '$app/paths';  
     let { targetImageElement, modalId } = $props();
 
     console.log("data in modalContainerImageSelection", targetImageElement);

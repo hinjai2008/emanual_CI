@@ -8,6 +8,7 @@
     import { page } from "$app/state"; // Import the $page store
     import "../../global.css"
     import SampleContainerTool from '$lib/sample-container-tool/sample-container-tool';
+    import SynonymTool from '$lib/synonym/synonym';
 
 
     let { rowName, isEditable, data } = $props();
@@ -64,6 +65,18 @@
                 },
             }
         }
+
+        if(rowName === "synonyms") {
+            tools = {
+                synonyms: {
+                    class: SynonymTool,
+                    config: {
+                        
+                    },
+                },
+            }
+        }
+
 
         // Dynamically import EditorJS to ensure it is only loaded in the browser
         const { default: EditorJS } = await import('@editorjs/editorjs');

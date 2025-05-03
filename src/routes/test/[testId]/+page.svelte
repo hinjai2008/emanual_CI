@@ -79,10 +79,7 @@
         </tr>
         <DataRow rowName={"requirement"} isEditable={false} data={data}/>
         <DataRow rowName={"container"} isEditable={false} data={data}/>
-        <tr>
-            <th scope="row">Synonyms</th>
-            <td class="width: 80%;">{data.test.synonyms}</td>
-        </tr>
+        <DataRow rowName={"synonyms"} isEditable={false} data={data}/>
         <DataRow rowName={"indication"} isEditable={false} data={data}/>
         <DataRow rowName={"turn_around_time"} isEditable={false} data={data}/>
         </tbody>
@@ -112,13 +109,8 @@
 
             <DataRow rowName={"requirement"} isEditable={true} data={data}/>
             <DataRow rowName={"container"} isEditable={true} data={data}/>
-            <tr>
-                <th scope="row">Synonyms</th>
-                <td class="width: 80%;">{data.test.synonyms}</td>
-            </tr>
-
+            <DataRow rowName={"synonyms"} isEditable={true} data={data}/>
             <DataRow rowName={"indication"} isEditable={true} data={data}/>
-
             <DataRow rowName={"turn_around_time"} isEditable={true} data={data}/>
             </tbody>
         </table>
