@@ -5,6 +5,7 @@
     import { isEditMode } from "../../stores";
     import { onDestroy } from "svelte";
     import DataRow from "./DataRow.svelte";
+    import clotBloodImage from '$lib/containerImages/clot_blood_x1.webp';
 
     let { data } = $props();
 
@@ -77,17 +78,7 @@
             <td class="width: 80%;">{data.test.form}</td>
         </tr>
         <DataRow rowName={"requirement"} isEditable={false} data={data}/>
-        <tr>
-            <th scope="row">Container</th>
-            <td class="width: 80%;">
-                <div class="card bg-primary-subtle" style="width: 18rem;">
-                    <div class="card-body">
-                      <p class="card-text">{data.test.container}</p>
-                      <img src="{base}/clot_blood_x1.webp" alt="..." class="img-thumbnail">
-                    </div>
-                  </div>
-            </td>
-        </tr>
+        <DataRow rowName={"container"} isEditable={false} data={data}/>
         <tr>
             <th scope="row">Synonyms</th>
             <td class="width: 80%;">{data.test.synonyms}</td>
@@ -109,35 +100,6 @@
         <table class="table table-striped table-bordered" style="width: 100%;">
             <tbody>
             <DataRow rowName={"alert"} isEditable={true} data={data}/>
-            <!-- <tr>
-                <th scope="row">Alert/Reminder</th>
-                <td class="" style="width: 80%;">
-                    {#if data.test.alert.includes("ICE")}
-                    <span class="badge rounded-pill text-bg-primary">On-Ice transport</span>
-                    {/if}
-    
-                    {#if data.test.alert.includes("BOOK")}
-                    <span class="badge rounded-pill text-bg-info">Advance Booking/Consultation</span>
-                    {/if}
-    
-                    {#if data.test.alert.includes("CONTAINER")}
-                    <span class="badge rounded-pill text-bg-warning">Special container/collection</span>
-                    {/if}
-    
-                    {#if data.test.alert.includes("URGENT")}
-                    <span class="badge rounded-pill text-bg-danger">Send to lab immediately</span>
-                    {/if}
-    
-                    {#if data.test.alert.includes("FORM")}
-                    <span class="badge rounded-pill text-bg-secondary">Send with request form</span>
-                    {/if}
-    
-                    {#if data.test.alert.includes("TIME")}
-                    <span class="badge rounded-pill text-bg-warning">Fresh specimen needed. Accept only in specific time period.</span>
-                    {/if}
-                </td>
-            </tr> -->
-
             <DataRow rowName={"full_name"} isEditable={true} data={data}/>
             <DataRow rowName={"GCRS_name"} isEditable={true} data={data}/>
             <DataRow rowName={"label_name"} isEditable={true} data={data}/>
@@ -149,18 +111,7 @@
             </tr>
 
             <DataRow rowName={"requirement"} isEditable={true} data={data}/>
-
-            <tr>
-                <th scope="row">Container</th>
-                <td class="width: 80%;">
-                    <div class="card bg-primary-subtle" style="width: 18rem;">
-                        <div class="card-body">
-                          <p class="card-text">{data.test.container}</p>
-                          <img src="{base}/clot_blood_x1.webp" alt="..." class="img-thumbnail">
-                        </div>
-                      </div>
-                </td>
-            </tr>
+            <DataRow rowName={"container"} isEditable={true} data={data}/>
             <tr>
                 <th scope="row">Synonyms</th>
                 <td class="width: 80%;">{data.test.synonyms}</td>

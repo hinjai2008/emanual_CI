@@ -81,10 +81,6 @@
     <ul class="nav nav-pills">
       <li class="nav-item"><a href="{base}/" class="nav-link active" aria-current="page">Home</a></li>
       <li class="nav-item"><button id="exportButton" class="nav-link">Export changes</button></li>
-      <!-- <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">About</a></li> -->
     </ul>
   </header>
 </div>

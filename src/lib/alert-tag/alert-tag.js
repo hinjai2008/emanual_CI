@@ -47,7 +47,6 @@ export default class AlertTag {
 
         if (blockContent.tagName === 'SELECT') {
             let selectedCode = blockContent.value
-            console.log('selectedCode', selectedCode)
             let text = this.config.selectableTag.find(alertTagConfig => alertTagConfig.code === selectedCode).text
             let background = this.config.selectableTag.find(alertTagConfig => alertTagConfig.code === selectedCode).background
             return {

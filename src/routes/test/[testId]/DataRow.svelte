@@ -7,6 +7,7 @@
     import { editedJSON } from '../../stores';
     import { page } from "$app/state"; // Import the $page store
     import "../../global.css"
+    import SampleContainerTool from '$lib/sample-container-tool/sample-container-tool';
 
 
     let { rowName, isEditable, data } = $props();
@@ -48,6 +49,17 @@
                     class: AlertTag,
                     config: {
                             selectableTag: $editedJSON.config.alertTag
+                    },
+                },
+            }
+        }
+
+        if (rowName === "container") {
+            tools = {
+                container: {
+                    class: SampleContainerTool,
+                    config: {
+                        
                     },
                 },
             }
@@ -125,8 +137,6 @@
         <div>
             <button type="button" class="btn btn-sm btn-secondary position-absolute top-50 end-0 mx-3 translate-middle-y opacity-75 z-3" onclick={() => editButtonhandler()}>Edit</button>
         </div>
-        {:else}
-        
         {/if}
     </td>
 </tr>

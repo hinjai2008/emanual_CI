@@ -90,7 +90,20 @@
           ],
           "version": "2.31.0-rc.7"
         },
-        "container": "4mL Heparin blood",
+        "container": {
+          "time": 1746257886846,
+          "blocks": [
+            {
+              "id": "1PaQgqDB7V",
+              "type": "container",
+              "data": {
+                "text": "Heparin Bottle",
+                "imageSrc": "/heparin%20blood.webp"
+              }
+            }
+          ],
+          "version": "2.31.0-rc.7"
+        },
         "indication": "",
         "turn_around_time": {
           "time": 1745692828836,
@@ -155,7 +168,20 @@
         "form": "GCRS",
         "hospital": "PMH Haem Lab",
         "requirement": "",
-        "container": "4mL clotted blood",
+        "container": {
+          "time": 1746258019821,
+          "blocks": [
+            {
+              "id": "pR_i929Y8p",
+              "type": "container",
+              "data": {
+                "text": "Plain Bottle",
+                "imageSrc": "/clot_blood_x1.webp"
+              }
+            }
+          ],
+          "version": "2.31.0-rc.7"
+        },
         "indication": {
           "time": 1745692867389,
           "blocks": [
@@ -251,7 +277,20 @@
           ],
           "version": "2.31.0-rc.7"
         },
-        "container": "light-protected 24 hours urine container, with HCl (≥18y); \n30 mL spot urine in light-protected plain bottle for children",
+        "container": {
+          "time": 1746257956557,
+          "blocks": [
+            {
+              "id": "atx08VNFBM",
+              "type": "container",
+              "data": {
+                "text": "light-protected 24 hour Urine Bottle with acid",
+                "imageSrc": ""
+              }
+            }
+          ],
+          "version": "2.31.0-rc.7"
+        },
         "indication": {
           "time": 1745692918421,
           "blocks": [
@@ -375,7 +414,20 @@
           ],
           "version": "2.31.0-rc.7"
         },
-        "container": "4mL Heparin blood",
+        "container": {
+          "time": 1746258033781,
+          "blocks": [
+            {
+              "id": "0S4lAmYsS4",
+              "type": "container",
+              "data": {
+                "text": "Heparin Bottle",
+                "imageSrc": "/heparin%20blood.webp"
+              }
+            }
+          ],
+          "version": "2.31.0-rc.7"
+        },
         "indication": {
           "time": 1745693005805,
           "blocks": [
@@ -481,8 +533,25 @@
         },
         "form": "QMH Immunology Form",
         "hospital": "QMH Immunology Lab",
-        "requirement": "",
-        "container": "4mL clotted blood",
+        "requirement": {
+          "time": 1746110499978,
+          "blocks": [],
+          "version": "2.31.0-rc.7"
+        },
+        "container": {
+          "time": 1746258047319,
+          "blocks": [
+            {
+              "id": "mCEvSvS0YO",
+              "type": "container",
+              "data": {
+                "text": "Plain Bottle",
+                "imageSrc": "/clot_blood_x1.webp"
+              }
+            }
+          ],
+          "version": "2.31.0-rc.7"
+        },
         "indication": "",
         "turn_around_time": {
           "time": 1745693079445,
@@ -572,7 +641,20 @@
           ],
           "version": "2.31.0-rc.7"
         },
-        "container": "2x 4mL EDTA blood",
+        "container": {
+          "time": 1746258089037,
+          "blocks": [
+            {
+              "id": "CE64vCkc_A",
+              "type": "container",
+              "data": {
+                "text": "2x EDTA bottle",
+                "imageSrc": "/EDTA%20blood.webp"
+              }
+            }
+          ],
+          "version": "2.31.0-rc.7"
+        },
         "indication": {
           "time": 1745693110788,
           "blocks": [
@@ -674,7 +756,20 @@
           ],
           "version": "2.31.0-rc.7"
         },
-        "container": "2x 4mL EDTA blood",
+        "container": {
+          "time": 1746258130270,
+          "blocks": [
+            {
+              "id": "UP0hXss9Yl",
+              "type": "container",
+              "data": {
+                "text": "2x EDTA bottle",
+                "imageSrc": "/EDTA%20blood.webp"
+              }
+            }
+          ],
+          "version": "2.31.0-rc.7"
+        },
         "indication": {
           "time": 1745693156860,
           "blocks": [
@@ -776,7 +871,35 @@
           ],
           "version": "2.31.0-rc.7"
         },
-        "container": "4mL clotted blood",
+        "container": {
+          "time": 1746258182966,
+          "blocks": [
+            {
+              "id": "mMuo9ZpDHV",
+              "type": "container",
+              "data": {
+                "text": "Heparin Bottle",
+                "imageSrc": "/heparin%20blood.webp"
+              }
+            },
+            {
+              "id": "sHuDypFaKf",
+              "type": "paragraph",
+              "data": {
+                "text": "Or"
+              }
+            },
+            {
+              "id": "tpirUtEK7c",
+              "type": "container",
+              "data": {
+                "text": "Plain Bottle",
+                "imageSrc": "/clot_blood_x1.webp"
+              }
+            }
+          ],
+          "version": "2.31.0-rc.7"
+        },
         "indication": "",
         "turn_around_time": {
           "time": 1745693185044,
