@@ -14,3 +14,8 @@
     animation: fade-in 0s ease !important;
     -webkit-animation: fade-in 0s ease !important;
 }
+
+.ce-popover-item,
+.ce-popover__container {
+    z-index: 10 !important;
+}

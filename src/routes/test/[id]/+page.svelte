@@ -43,11 +43,7 @@
         <DataRow datatype={"testData"} rowName={"full_name"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"GCRS_name"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"label_name"} isEditable={false} entryData={entryData}/>
-
-        <tr>
-            <th scope="row">Form</th>
-            <td class="width: 80%;">{entryData.form}</td>
-        </tr>
+        <DataRow datatype={"testData"} rowName={"form"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"requirement"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"container"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"synonyms"} isEditable={false} entryData={entryData}/>
@@ -71,12 +67,13 @@
             <DataRow datatype={"testData"} rowName={"full_name"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"GCRS_name"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"label_name"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"form"} isEditable={true} entryData={entryData}/>
             
 
-            <tr>
+            <!-- <tr>
                 <th scope="row">Form</th>
                 <td class="width: 80%;">{entryData.form}</td>
-            </tr>
+            </tr> -->
 
             <DataRow datatype={"testData"} rowName={"requirement"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"container"} isEditable={true} entryData={entryData}/>

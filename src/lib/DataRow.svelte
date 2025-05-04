@@ -10,6 +10,7 @@
     import SampleContainerTool from '$lib/sample-container-tool/sample-container-tool';
     import SynonymTool from '$lib/synonym/synonym';
     import FormLinkTool from './form-link/form-link';
+    import TestFormTool from './test-form/test-form';
 
 
     let { datatype, rowName, isEditable, entryData } = $props();
@@ -18,6 +19,7 @@
     let editor = null; // Define editor at the top level
 
     let thisEntryEdit = $editedJSON[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
+
 
     editedJSON.subscribe((value) => {
         thisEntryEdit = value[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
@@ -78,6 +80,19 @@
             }
         }
 
+        // For "Test" entries
+        if(rowName === "form") {
+            tools = {
+                form: {
+                    class: TestFormTool,
+                    config: {
+                        formList: $editedJSON.formData,
+                    },
+                },
+            }
+        }
+
+        // For "Form" entries
         if(rowName === "form_link") {
             tools = {
                 form_link: {

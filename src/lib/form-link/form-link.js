@@ -1,5 +1,5 @@
 
-const formModules = import.meta.glob(
+export const formModules = import.meta.glob(
     '/src/lib/forms/*.pdf',
     {
         eager: true,
