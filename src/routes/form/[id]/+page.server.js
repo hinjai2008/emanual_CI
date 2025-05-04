@@ -1,18 +1,17 @@
-import { tests, findDuplicateIds} from '../../dataUtility.js';
+import { forms, findDuplicateIds} from '../../dataUtility.js';
 import { error } from '@sveltejs/kit';
 
-
 /**
- * @param {{ params: { testId: string } }} context - `params.testId` is a string representing a numeric ID.
+ * @param {{ params: { id: string } }} context - `params.id` is a string representing a numeric ID.
  */
 
 export async function load({ params }) {
-    const test = tests.find((test) => test.id === parseInt(params.testId));
+    const form = forms.find((form) => form.id === parseInt(params.id));
 
-    if (!test) error(404);
+    if (!form) error(404);
 
     return {
-        test,
+        entryData: form,
     };
 }
 
@@ -24,14 +23,14 @@ export function entries() {
 
 
     // Check for duplicate IDs in the tests array
-    const duplicateIds = findDuplicateIds(tests);
+    const duplicateIds = findDuplicateIds(forms);
     if (duplicateIds.length > 0) {
-        throw new Error("Duplicate IDs found in the tests array: " + duplicateIds + ". Please ensure all IDs are unique.");
+        throw new Error("Duplicate IDs found in the forms array: " + duplicateIds + ". Please ensure all IDs are unique.");
     }
 
-    return tests.map((test) => {
+    return forms.map((form) => {
         return {
-                testId: test.id.toString()
+                id: form.id.toString()
             }
         });
     };

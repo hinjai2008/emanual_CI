@@ -17,7 +17,6 @@ export default class SynonymTool {
     }
 
     render() {
-        console.log(this.data)
         if (this.data && this.data.synonymList){
             if (this.data.synonymList.length > 0) {
             if (!this.api.readOnly.isEnabled) {

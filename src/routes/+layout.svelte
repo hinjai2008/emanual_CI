@@ -110,6 +110,20 @@
             <div class="col-10 mb-1 small">{test.label_name.blocks[0].data.text}</div>
           </a>
         {/each}
+        
+        <!-- Display all forms when no search input -->
+        {#each data.forms as form}
+          <a
+            href="{base}/form/{form.id}"
+            class="list-group-item list-group-item-action py-3 lh-tight"
+          >
+            <div class="d-flex w-100 align-items-center justify-content-between">
+              <strong class="mb-1">{form.form_name.blocks[0].data.text}</strong>
+            </div>
+            <div class="col-10 mb-1 small">{form.form_code.blocks[0].data.text}</div>
+          </a>
+        {/each}
+
       {:else}
         <!-- Display search results -->
         {#each searchResults as result}

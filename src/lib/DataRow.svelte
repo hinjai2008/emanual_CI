@@ -4,22 +4,23 @@
     import AlertTag from '$lib/alert-tag/alert-tag.js';
     
     import { onDestroy, onMount } from 'svelte';
-    import { editedJSON } from '../../stores';
+    import { editedJSON } from '../routes/stores';
     import { page } from "$app/state"; // Import the $page store
-    import "../../global.css"
+    import "../routes/global.css"
     import SampleContainerTool from '$lib/sample-container-tool/sample-container-tool';
     import SynonymTool from '$lib/synonym/synonym';
+    import FormLinkTool from './form-link/form-link';
 
 
-    let { rowName, isEditable, data } = $props();
+    let { datatype, rowName, isEditable, entryData } = $props();
     let isEditing = $state(false);
 
     let editor = null; // Define editor at the top level
 
-    let thisTestEdit = $editedJSON["testData"].find(editedTest => editedTest.id.toString() === page.params.testId);
+    let thisEntryEdit = $editedJSON[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
 
     editedJSON.subscribe((value) => {
-        thisTestEdit = value["testData"].find(editedTest => editedTest.id.toString() === page.params.testId);
+        thisEntryEdit = value[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
     });
 
     onMount(async () => {
@@ -31,12 +32,12 @@
 
     async function initializeEditor() {
 
-        let loadedData = data.test[rowName];
+        let loadedData = entryData[rowName];
 
         const holder = isEditable ? rowName+"-editable" : rowName;
 
         if (isEditable) {
-            loadedData = thisTestEdit[rowName];
+            loadedData = thisEntryEdit[rowName];
         }
 
         let tools = {
@@ -77,6 +78,17 @@
             }
         }
 
+        if(rowName === "form_link") {
+            tools = {
+                form_link: {
+                    class: FormLinkTool,
+                    config: {
+                        
+                    },
+                },
+            }
+        }
+
 
         // Dynamically import EditorJS to ensure it is only loaded in the browser
         const { default: EditorJS } = await import('@editorjs/editorjs');
@@ -90,16 +102,25 @@
         });
     }
 
+
     function editButtonhandler() {
         isEditing = true;
         editor.readOnly.toggle();
     }
 
+
+    function cancelAction() {
+        editor.destroy(); // Destroy the editor instance
+        isEditing = false; // Reset the editing state
+        initializeEditor(); // Reinitialize the editor with the original data (editingData)
+    }
+
+
     function doneAction() {
         editor.save().then((outputData) => {
             let editedJSON_copy = $editedJSON;
-            editedJSON_copy["testData"].map((editedTest) => {
-                if (editedTest.id.toString() === page.params.testId) {
+            editedJSON_copy[datatype].map((editedTest) => {
+                if (editedTest.id.toString() === page.params.id) {
                     editedTest[rowName] = outputData;
                     editedJSON.set(editedJSON_copy);
                     console.log(editedJSON_copy);
@@ -115,14 +136,15 @@
 
     $effect(() => {
         // This effect will run whenever the page changes
-        const testId = page.params.testId;
+        let currentPage = page.params.id; // Get the current page ID from the URL
         if (editor) {
             editor.destroy(); // Clean up the previous editor instance
-            thisTestEdit = $editedJSON["testData"].find(editedTest => editedTest.id.toString() === page.params.testId);
+            thisEntryEdit = $editedJSON[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
             initializeEditor()
         }
 
     });
+
 
     onDestroy(() => {
         if (editor) {
@@ -141,7 +163,7 @@
 
         <div class="position-relative">
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-sm btn-secondary ms-2 m-1">Cancel</button>
+                <button type="button" class="btn btn-sm btn-secondary ms-2 m-1" onclick={()=>cancelAction()}>Cancel</button>
                 <button type="button" class="btn btn-sm btn-primary m-1" onclick={()=>doneAction()}>Done</button>
             </div>
         </div>

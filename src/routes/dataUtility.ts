@@ -1,4 +1,4 @@
-import testData from './testData.json';
+import rawData from './rawData.json';
 
 export interface Test {
     id: number;
@@ -16,11 +16,22 @@ export interface Test {
     last_updated: string;
 }
 
-export const tests: Test[] = testData.testData as Test[];
+export interface Form {
+    id: number;
+    form_name: string;
+    form_code: string;
+    form_link: string;
+    remark: string;
+    last_updated: string;
+}
+
+export const tests: Test[] = rawData.testData as Test[];
+
+export const forms: Form[] = rawData.formData as Form[];
 
 // Utility function to find duplicate IDs
-export function findDuplicateIds(tests: Test[]): number[] {
-    const ids = tests.map(test => test.id);
+export function findDuplicateIds<T extends { id: number }>(items: T[]): number[] {
+    const ids = items.map(item => item.id);
     const duplicates: number[] = [];
     const seen = new Set<number>();
 
@@ -35,8 +46,6 @@ export function findDuplicateIds(tests: Test[]): number[] {
     return [...new Set(duplicates)]; // Ensure duplicates are unique
 }
 
-// Example usage: Validate the `tests` array
-// const duplicateIds = findDuplicateIds(tests);
-// if (duplicateIds.length > 0) {
-//     console.error("Duplicate IDs found in the tests array:", duplicateIds);
-// }
+// Example usage:
+// const duplicateTestIds = findDuplicateIds(tests);
+// const duplicateFormIds = findDuplicateIds(forms);

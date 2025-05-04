@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import completeJSON from './testData.json'
+import completeJSON from './rawData.json'
 
 export const isAdmin = writable(false);
 
