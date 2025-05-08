@@ -39,16 +39,16 @@
     <table class="table table-striped table-bordered" style="width: 100%;">
         <tbody>
 
-        <DataRow datatype={"testData"} rowName={"alert"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"full_name"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"GCRS_name"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"label_name"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"form"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"requirement"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"container"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"synonyms"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"indication"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"turn_around_time"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"alert"} displayName={"Alert"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"full_name"} displayName={"Full Name"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"GCRS_name"} displayName={"GCRS Name"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"label_name"} displayName={"Label Name"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"form"} displayName={"Form"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"requirement"} displayName={"Requirement"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"container"} displayName={"Container"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"synonyms"} displayName={"Synonyms"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"indication"} displayName={"Indications"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"turn_around_time"} displayName={"Turnaround Time"} isEditable={false} entryData={entryData}/>
         </tbody>
     </table>
 </div>
@@ -63,23 +63,16 @@
     <div class="m-2">
         <table class="table table-striped table-bordered" style="width: 100%;">
             <tbody>
-            <DataRow datatype={"testData"} rowName={"alert"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"full_name"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"GCRS_name"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"label_name"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"form"} isEditable={true} entryData={entryData}/>
-            
-
-            <!-- <tr>
-                <th scope="row">Form</th>
-                <td class="width: 80%;">{entryData.form}</td>
-            </tr> -->
-
-            <DataRow datatype={"testData"} rowName={"requirement"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"container"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"synonyms"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"indication"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"turn_around_time"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"alert"} displayName={"Alert"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"full_name"} displayName={"Full Name"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"GCRS_name"} displayName={"GCRS Name"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"label_name"} displayName={"Label Name"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"form"} displayName={"Form"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"requirement"} displayName={"Requirement"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"container"} displayName={"Container"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"synonyms"} displayName={"Synonyms"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"indication"} displayName={"Indications"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"turn_around_time"} displayName={"Turnaround Time"} isEditable={true} entryData={entryData}/>
             </tbody>
         </table>
     </div>

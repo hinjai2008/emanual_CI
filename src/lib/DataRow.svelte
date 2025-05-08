@@ -13,7 +13,7 @@
     import TestFormTool from './test-form/test-form';
 
 
-    let { datatype, rowName, isEditable, entryData } = $props();
+    let { datatype, rowName, displayName, isEditable, entryData } = $props();
     let isEditing = $state(false);
 
     let editor = null; // Define editor at the top level
@@ -169,7 +169,7 @@
 </script>
 
 <tr>
-    <th scope="row">{rowName}</th>
+    <th scope="row">{displayName}</th>
     <td class="position-relative" style="width: 80%;">
 
         <div id="{rowName}{isEditable ? "-editable" : ""}"></div>

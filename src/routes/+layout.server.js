@@ -1,4 +1,4 @@
-import {tests} from './dataUtility.js'
+import { tests } from './dataUtility.js'
 import { forms } from './dataUtility.js'
 import completeJSON from './rawData.json'
 

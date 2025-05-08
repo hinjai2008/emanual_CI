@@ -40,11 +40,11 @@
     <table class="table table-striped table-bordered" style="width: 100%;">
         <tbody>
 
-        <DataRow datatype={"formData"} rowName={"form_name"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"formData"} rowName={"form_code"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"formData"} rowName={"remark"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"formData"} rowName={"form_link"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"formData"} rowName={"last_updated"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"formData"} rowName={"form_name"} displayName={"Form Name"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"formData"} rowName={"form_code"} displayName={"Form Code"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"formData"} rowName={"remark"} displayName={"Remark"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"formData"} rowName={"form_link"} displayName={"Form Link"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"formData"} rowName={"last_updated"} displayName={"Last Updated"} isEditable={false} entryData={entryData}/>
 
         </tbody>
     </table>
@@ -61,11 +61,11 @@
     <div class="m-2">
         <table class="table table-striped table-bordered" style="width: 100%;">
             <tbody>
-            <DataRow datatype={"formData"} rowName={"form_name"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"formData"} rowName={"form_code"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"formData"} rowName={"remark"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"formData"} rowName={"form_link"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"formData"} rowName={"last_updated"} isEditable={true} entryData={entryData}/>
+                <DataRow datatype={"formData"} rowName={"form_name"} displayName={"Form Name"} isEditable={true} entryData={entryData}/>
+                <DataRow datatype={"formData"} rowName={"form_code"} displayName={"Form Code"} isEditable={true} entryData={entryData}/>
+                <DataRow datatype={"formData"} rowName={"remark"} displayName={"Remark"} isEditable={true} entryData={entryData}/>
+                <DataRow datatype={"formData"} rowName={"form_link"} displayName={"Form Link"} isEditable={true} entryData={entryData}/>
+                <DataRow datatype={"formData"} rowName={"last_updated"} displayName={"Last Updated"} isEditable={true} entryData={entryData}/>
             </tbody>
         </table>
     </div>

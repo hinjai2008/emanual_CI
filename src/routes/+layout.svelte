@@ -8,18 +8,112 @@
   import { isAdmin } from './stores';
   import { onMount } from "svelte";
  
-  import * as JsSearch from 'js-search';
+  import lunr from 'lunr';
+    import { tests } from './dataUtility';
 
   // Initialize search
-  const search = new JsSearch.Search('id');
-  search.addIndex('full_name');
-  search.addIndex('GCRS_name');
-  search.addIndex('label_name');
-  search.addIndex('synonyms');
-  search.addDocuments(data.tests);
+  // const search = new JsSearch.Search('id');
+  // search.addIndex(['full_name', 'blocks[0]', 'data', 'text']);
+  // search.addIndex(['GCRS_name', 'blocks', 'data', 'text']);
+  // search.addIndex(['label_name', 'blocks', 'data', 'text']);
+  // search.addIndex(['synonyms', 'blocks', 'data', 'text']);
+  // search.addDocuments(data.tests);
+
+  // let searchInput = $state('');
+  // let searchResults = $derived(search.search(searchInput));
+
+  let indexData = $state({})
+
+  const index_document = () => {
+    indexData = {
+      tests: data.tests.map((test) => {
+
+        let result = {
+          id: "test/" + test.id,
+          full_name: "",
+          GCRS_name: "",
+          short_name: "",
+          synonyms: "",
+        }
+
+        if (test.GCRS_name.blocks === undefined) {
+          result.GCRS_name = "";
+        } else {
+          result.GCRS_name = test.GCRS_name.blocks[0].data.text;
+        }
+        if (test.label_name.blocks === undefined) {
+          result.short_name = "";
+        } else {
+          result.short_name = test.label_name.blocks[0].data.text;
+        }
+        if (test.synonyms.blocks === undefined) {
+          result.synonyms = "";
+        } else {
+          let synonymsList = test.synonyms.blocks[0].data.synonymList;
+          
+            
+          result.synonyms = synonymsList.join(' ');
+
+        }
+        if (test.full_name.blocks === undefined) {
+          console.log("A test entry is missing a full name");
+          return
+        } else {
+          result.full_name = test.full_name.blocks[0].data.text;
+        }
+
+        return result
+      }),
+
+
+      forms: data.forms.map((form) => {
+
+        if (form.form_name.blocks[0].data.text === undefined) {
+          console.log("A form entry is missing a full name");
+          return
+        }
+        if (form.form_code.blocks[0].data.text === undefined) {
+          form.form_code.blocks[0].data.text = "";
+        }
+
+        return {
+        id: "form/" + form.id,
+        full_name: form.form_name.blocks[0].data.text,
+        short_name: form.form_code.blocks[0].data.text
+      }})
+    };
+    return indexData.tests.concat(indexData.forms)
+  };
+
+  let idx = lunr(function () {
+    this.field('full_name');
+    this.field('GCRS_name');
+    this.field('short_name');
+    this.field('synonyms');
+    this.ref('id');
+
+    index_document().forEach(function (doc) {
+      this.add(doc);
+    }, this);
+
+  });
+
 
   let searchInput = $state('');
-  let searchResults = $derived(search.search(searchInput));
+  let searchResults = $derived(idx.search(searchInput));
+
+  let searchResultsDetails = $derived.by(() => {
+  
+    return searchResults.map(result => {
+      const resultType = result.ref.split('/')[0]; 
+      const foundItem = indexData[resultType+"s"].find(item => item.id === result.ref);
+      return {
+        ...foundItem,
+        score: result.score
+      };
+    });
+  });
+
 
   async function checkadmin() {
     const encoder = new TextEncoder();
@@ -57,7 +151,7 @@
 
   // Reactive statement to update the event listener when editedJSON changes
   $effect(() => {
-    console.log("Updating export button listener");
+    console.log(searchResults);
     const exportButton = document.getElementById("exportButton");
     if (exportButton) {
 
@@ -126,16 +220,18 @@
 
       {:else}
         <!-- Display search results -->
-        {#each searchResults as result}
+        {#each searchResultsDetails as resultDetails}
+
           <a
-            href="{base}/test/{result.id}"
+            href="{base}/{resultDetails.id}"
             class="list-group-item list-group-item-action py-3 lh-tight"
           >
             <div class="d-flex w-100 align-items-center justify-content-between">
-              <strong class="mb-1">{result.full_name}</strong>
+              <strong class="mb-1">{resultDetails.full_name}</strong>
             </div>
-            <div class="col-10 mb-1 small">{result.label_name}</div>
+            <div class="col-10 mb-1 small">{resultDetails.short_name}</div>
           </a>
+          
         {/each}
       {/if}
     </div>
