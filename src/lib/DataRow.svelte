@@ -58,12 +58,27 @@
             }
         }
 
+        // For "testData" entries
         if (rowName === "container") {
             tools = {
                 container: {
                     class: SampleContainerTool,
                     config: {
-                        
+                        forContinerRegistration: false,
+                        containerList: $editedJSON.containerData,
+                    },
+                },
+            }
+        }
+
+        // For "ContainerData" entries
+        if (rowName === "imageSrc") {
+            tools = {
+                imageSrc: {
+                    class: SampleContainerTool,
+                    config: {
+                        forContinerRegistration: true,
+                        containerList: $editedJSON.containerData,
                     },
                 },
             }

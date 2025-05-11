@@ -25,9 +25,21 @@ export interface Form {
     last_updated: string;
 }
 
+export interface container {
+    id: number;
+    code: string;
+    name: string;
+    imageSrc: string;
+    remark: string;
+    synonyms: string[];
+    last_modified: string;
+}
+
 export const tests: Test[] = rawData.testData as Test[];
 
 export const forms: Form[] = rawData.formData as Form[];
+
+export const containers: container[] = rawData.containerData as container[];
 
 // Utility function to find duplicate IDs
 export function findDuplicateIds<T extends { id: number }>(items: T[]): number[] {

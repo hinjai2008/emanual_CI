@@ -68,21 +68,58 @@
 
       forms: data.forms.map((form) => {
 
-        if (form.form_name.blocks[0].data.text === undefined) {
-          console.log("A form entry is missing a full name");
-          return
-        }
-        if (form.form_code.blocks[0].data.text === undefined) {
-          form.form_code.blocks[0].data.text = "";
+        let result = {
+          id: "form/" + form.id,
+          full_name: "",
+          short_name: "",
+          synonyms: "",
         }
 
-        return {
-        id: "form/" + form.id,
-        full_name: form.form_name.blocks[0].data.text,
-        short_name: form.form_code.blocks[0].data.text
-      }})
+        if (form.form_name.blocks === undefined) {
+          console.log("A form entry is missing a full name");
+          return
+        } else {
+          result.full_name = form.form_name.blocks[0].data.text;
+        }
+        if (form.form_code.blocks === undefined) {
+          form.form_code.blocks[0].data.text = "";
+        } else {
+          result.short_name = form.form_code.blocks[0].data.text;
+        }
+
+        return result
+      }),
+
+      containers: data.containers.map((container) => {
+
+        let result = {
+          id: "container/" + container.id,
+          full_name: "",
+          short_name: "",
+        }
+
+        if (container.name.blocks === undefined) {
+          console.log("A container entry is missing a full name");
+          return
+        } else {
+          result.full_name = container.name.blocks[0].data.text;
+        }
+        if (container.code.blocks === undefined) {
+          console.log("A container entry is missing self-defined code");
+        } else {
+          result.short_name = container.code.blocks[0].data.text;
+        }
+        if (container.synonyms.blocks === undefined) {
+          result.synonyms = "";
+        } else {
+          let synonymsList = container.synonyms.blocks[0].data.synonymList;
+          result.synonyms = synonymsList.join(' ');
+        }
+
+        return result
+      })
     };
-    return indexData.tests.concat(indexData.forms)
+    return indexData.tests.concat(indexData.forms).concat(indexData.containers);
   };
 
   let idx = lunr(function () {
@@ -215,6 +252,18 @@
               <strong class="mb-1">{form.form_name.blocks[0].data.text}</strong>
             </div>
             <div class="col-10 mb-1 small">{form.form_code.blocks[0].data.text}</div>
+          </a>
+        {/each}
+
+        {#each data.containers as container}
+          <a
+            href="{base}/container/{container.id}"
+            class="list-group-item list-group-item-action py-3 lh-tight"
+          >
+            <div class="d-flex w-100 align-items-center justify-content-between">
+              <strong class="mb-1">{container.name.blocks[0].data.text}</strong>
+            </div>
+            <div class="col-10 mb-1 small">{container.code.blocks[0].data.text}</div>
           </a>
         {/each}
 
