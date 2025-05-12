@@ -22,7 +22,6 @@ export default class TestFormTool {
     }
 
     render() {
-        console.log(this.data)
         if (this.data && this.data.form) {
             let formData = this.data.form
             if (!this.api.readOnly.isEnabled) {

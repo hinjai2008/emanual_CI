@@ -1,4 +1,5 @@
 import { mount } from 'svelte';
+import { base } from '$app/paths';
 import modalContainerImageSelection from '../modalContainerImageSelection/modalContainerImageSelection.svelte';
 import modalRegisteredContainerSelection from '../modalRegisteredContainerSelection/modalRegisteredContainerSelection.svelte';
 
@@ -234,7 +235,7 @@ export default class SampleContainerTool {
         const linkElement = document.createElement('a');
         linkElement.classList.add('text-decoration-none', 'text-primary', 'linkToContainer');
         linkElement.style.cursor = 'pointer';
-        linkElement.href = "/container/" + matchingContainer.id.toString();
+        linkElement.href = base + "/container/" + matchingContainer.id.toString();
 
         if(!matchingContainer.name.blocks || matchingContainer.name.blocks.length === 0) {
             console.error(`No name found for container with code: ${code}`);

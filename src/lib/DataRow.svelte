@@ -11,6 +11,7 @@
     import SynonymTool from '$lib/synonym/synonym';
     import FormLinkTool from './form-link/form-link';
     import TestFormTool from './test-form/test-form';
+    import LabSelectionTool from './labSelectionTool/labSelectionTool';
 
 
     let { datatype, rowName, displayName, isEditable, entryData } = $props();
@@ -114,6 +115,17 @@
                     class: FormLinkTool,
                     config: {
                         
+                    },
+                },
+            }
+        }
+
+        if(rowName === "lab_and_category") {
+            tools = {
+                lab_and_category: {
+                    class: LabSelectionTool,
+                    config: {
+                        labList: $editedJSON.config.laboratories,
                     },
                 },
             }

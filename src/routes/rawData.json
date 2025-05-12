@@ -34,76 +34,62 @@
         "text": "Genetics"
       }
     ],
-    "laboratory": [
+    "laboratories": [
       {
-        "text": "CMC Core Lab",
-        "category_list": [
-          {
-            "code": "CHEM",
-            "telephone": "3408 7739",
-            "fax": ""
-          },
-          {
-            "code": "HAEM",
-            "telephone": "3408 7738",
-            "fax": ""
-          },
-          {
-            "code": "BB",
-            "telephone": "3408 7740",
-            "fax": ""
-          }
-        ]
+        "labName": "CMC Core Lab",
+        "categoryCode": "CHEM",
+        "categoryName": "Chemical Pathology",
+        "telephone": "3408 7739",
+        "fax": ""
       },
       {
-        "text": "PMH Chem Lab",
-        "category_list": [
-          {
-            "code": "CHEM",
-            "telephone": "2990 1867",
-            "fax": ""
-          }
-        ]
+        "labName": "CMC Core Lab",
+        "categoryCode": "HAEM",
+        "categoryName": "Haematology",
+        "telephone": "3408 7738",
+        "fax": ""
       },
       {
-        "text": "PMH Haem Lab",
-        "category_list": [
-          {
-            "code": "HAEM",
-            "telephone": "2990 1888",
-            "fax": ""
-          }
-        ]
+        "labName": "CMC Core Lab",
+        "categoryCode": "BB",
+        "categoryName": "Blood Bank",
+        "telephone": "3408 7740",
+        "fax": ""
       },
       {
-        "text": "PMH Mic Lab",
-        "category_list": [
-          {
-            "code": "MIC",
-            "telephone": "2990 1851",
-            "fax": ""
-          }
-        ]
+        "labName": "PMH Chem Lab",
+        "categoryCode": "CHEM",
+        "categoryName": "Chemical Pathology",
+        "telephone": "2990 1867",
+        "fax": ""
       },
       {
-        "text": "QMH Mic Lab",
-        "category_list": [
-          {
-            "code": "MIC",
-            "telephone": "",
-            "fax": ""
-          }
-        ]
+        "labName": "PMH Haem Lab",
+        "categoryCode": "HAEM",
+        "categoryName": "Haematology",
+        "telephone": "2990 1888",
+        "fax": ""
       },
       {
-        "text": "QMH Immunology Lab",
-        "category_list": [
-          {
-            "code": "IMM",
-            "telephone": "",
-            "fax": ""
-          }
-        ]
+        "labName": "PMH Mic Lab",
+        "categoryCode": "MIC",
+        "categoryName": "Microbiology & Virology",
+        "telephone": "2990 1851",
+        "fax": ""
+      },
+      {
+        "labName": "QMH Mic Lab",
+        "categoryCode": "MIC",
+        "categoryName": "Microbiology & Virology",
+        "telephone": "",
+        "fax": ""
+      },
+      {
+        "labName": "QMH Immunology Lab",
+        "categoryCode": "IMM",
+        "categoryName": "Immunology",
+        "telephone": "",
+        "fax": ""
       }
     ],
     "alertTag": [
@@ -207,6 +193,30 @@
           }
         ],
         "version": "2.31.0-rc.7"
+      },
+      "lab_and_category": {
+        "time": 1747064686716,
+        "blocks": [
+          {
+            "id": "MDLiqyerqI",
+            "type": "lab_and_category",
+            "data": {
+              "labName": "CMC Core Lab",
+              "categoryCode": "CHEM",
+              "categoryName": "Chemical Pathology"
+            }
+          },
+          {
+            "id": "u74t_0r6Mh",
+            "type": "lab_and_category",
+            "data": {
+              "labName": "CMC Core Lab",
+              "categoryCode": "HAEM",
+              "categoryName": "Haematology"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
       }
     },
     {
@@ -276,6 +286,21 @@
           }
         ],
         "version": ""
+      },
+      "lab_and_category": {
+        "time": 1747064695756,
+        "blocks": [
+          {
+            "id": "qyAq6PGg_g",
+            "type": "lab_and_category",
+            "data": {
+              "labName": "QMH Immunology Lab",
+              "categoryCode": "IMM",
+              "categoryName": "Immunology"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
       }
     }
   ],
@@ -673,6 +698,21 @@
         ""
       ],
       "alert": [],
+      "lab_and_category": {
+        "time": 1745692835540,
+        "blocks": [
+          {
+            "id": "2hkpIQ0Yua",
+            "type": "lab_and_category",
+            "data": {
+              "labName": "CMC Core Lab",
+              "categoryCode": "CHEM",
+              "categoryName": "Chemical Pathology"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      },
       "last_updated": "2023-10-01"
     },
     {
@@ -775,7 +815,22 @@
         "version": "2.31.0-rc.7"
       },
       "alert": [],
-      "last_updated": "2023-10-01"
+      "last_updated": "2023-10-01",
+      "lab_and_category": {
+        "time": 1747064541541,
+        "blocks": [
+          {
+            "id": "aSuFB9V5cN",
+            "type": "lab_and_category",
+            "data": {
+              "labName": "PMH Haem Lab",
+              "categoryCode": "HAEM",
+              "categoryName": "Haematology"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      }
     },
     {
       "id": 3,
@@ -917,7 +972,22 @@
         ],
         "version": "2.31.0-rc.7"
       },
-      "last_updated": "2023-10-01"
+      "last_updated": "2023-10-01",
+      "lab_and_category": {
+        "time": 1747064553381,
+        "blocks": [
+          {
+            "id": "0RcbgpTYkW",
+            "type": "lab_and_category",
+            "data": {
+              "labName": "PMH Chem Lab",
+              "categoryCode": "CHEM",
+              "categoryName": "Chemical Pathology"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      }
     },
     {
       "id": 4,
@@ -1063,7 +1133,22 @@
         ],
         "version": "2.31.0-rc.7"
       },
-      "last_updated": "2023-10-01"
+      "last_updated": "2023-10-01",
+      "lab_and_category": {
+        "time": 1747064585269,
+        "blocks": [
+          {
+            "id": "Twp54GjBzz",
+            "type": "lab_and_category",
+            "data": {
+              "labName": "PMH Chem Lab",
+              "categoryCode": "CHEM",
+              "categoryName": "Chemical Pathology"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      }
     },
     {
       "id": 5,
@@ -1189,7 +1274,22 @@
         ],
         "version": "2.31.0-rc.7"
       },
-      "last_updated": "2023-10-01"
+      "last_updated": "2023-10-01",
+      "lab_and_category": {
+        "time": 1747064596893,
+        "blocks": [
+          {
+            "id": "GPcdEc8iBi",
+            "type": "lab_and_category",
+            "data": {
+              "labName": "QMH Immunology Lab",
+              "categoryCode": "IMM",
+              "categoryName": "Immunology"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      }
     },
     {
       "id": 6,
@@ -1304,7 +1404,22 @@
         ],
         "version": "2.31.0-rc.7"
       },
-      "last_updated": "2023-10-01"
+      "last_updated": "2023-10-01",
+      "lab_and_category": {
+        "time": 1747064617692,
+        "blocks": [
+          {
+            "id": "jJmsoCnxRw",
+            "type": "lab_and_category",
+            "data": {
+              "labName": "QMH Mic Lab",
+              "categoryCode": "MIC",
+              "categoryName": "Microbiology & Virology"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      }
     },
     {
       "id": 7,
@@ -1419,7 +1534,22 @@
         ],
         "version": "2.31.0-rc.7"
       },
-      "last_updated": "2023-10-01"
+      "last_updated": "2023-10-01",
+      "lab_and_category": {
+        "time": 1747064630149,
+        "blocks": [
+          {
+            "id": "Ba4rxtcKOX",
+            "type": "lab_and_category",
+            "data": {
+              "labName": "QMH Mic Lab",
+              "categoryCode": "MIC",
+              "categoryName": "Microbiology & Virology"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      }
     },
     {
       "id": 8,

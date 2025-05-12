@@ -44,6 +44,7 @@
         <DataRow datatype={"formData"} rowName={"form_code"} displayName={"Form Code"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"formData"} rowName={"remark"} displayName={"Remark"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"formData"} rowName={"form_link"} displayName={"Form Link"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"formData"} rowName={"lab_and_category"} displayName={"Laboratory"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"formData"} rowName={"last_updated"} displayName={"Last Updated"} isEditable={false} entryData={entryData}/>
 
         </tbody>
@@ -65,6 +66,7 @@
                 <DataRow datatype={"formData"} rowName={"form_code"} displayName={"Form Code"} isEditable={true} entryData={entryData}/>
                 <DataRow datatype={"formData"} rowName={"remark"} displayName={"Remark"} isEditable={true} entryData={entryData}/>
                 <DataRow datatype={"formData"} rowName={"form_link"} displayName={"Form Link"} isEditable={true} entryData={entryData}/>
+                <DataRow datatype={"formData"} rowName={"lab_and_category"} displayName={"Laboratory"} isEditable={true} entryData={entryData}/>
                 <DataRow datatype={"formData"} rowName={"last_updated"} displayName={"Last Updated"} isEditable={true} entryData={entryData}/>
             </tbody>
         </table>
