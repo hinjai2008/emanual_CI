@@ -22,11 +22,29 @@
   // let searchInput = $state('');
   // let searchResults = $derived(search.search(searchInput));
 
-  let indexData = $state({})
+  let indexData = {}
 
-  const index_document = () => {
+  const index_document = (type, category) => {
     indexData = {
-      tests: data.tests.map((test) => {
+
+      tests: data.tests.filter((test)=>{
+
+        if (type !== "allTypesSelected" && type !== "testSelected") {
+          return false; // filter by type
+        }
+
+        if (!category) {
+          return true; // include all tests if no category is provided
+        }
+
+        if (test.lab_and_category) {
+          return test.lab_and_category.blocks.some((block) => {
+            return block.data.categoryCode === category;
+          });
+        } else {
+          return false; // exclude tests without lab_and_category
+        }
+      }).map((test) => {
 
         let result = {
           id: "test/" + test.id,
@@ -35,6 +53,7 @@
           short_name: "",
           synonyms: "",
         }
+
 
         if (test.GCRS_name.blocks === undefined) {
           result.GCRS_name = "";
@@ -66,7 +85,24 @@
       }),
 
 
-      forms: data.forms.map((form) => {
+      forms: data.forms.filter((form)=>{
+
+        if (type !== "allTypesSelected" && type !== "formSelected") {
+          return false; // filter by type
+        }
+
+        if (!category) {
+          return true; // include all tests if no category is provided
+        }
+
+        if (form.lab_and_category) {
+          return form.lab_and_category.blocks.some((block) => {
+            return block.data.categoryCode === category;
+          });
+        } else {
+          return false; // exclude tests without lab_and_category
+        }
+      }).map((form) => {
 
         let result = {
           id: "form/" + form.id,
@@ -90,7 +126,15 @@
         return result
       }),
 
-      containers: data.containers.map((container) => {
+      containers: data.containers.filter(()=>{
+
+        if (type !== "allTypesSelected" && type !== "containerSelected") {
+          return false; // filter by type
+        } else {
+          return true; // return all containers if type is "allTypesSelected" or "containerSelected"
+        }
+
+      }).map((container) => {
 
         let result = {
           id: "container/" + container.id,
@@ -122,18 +166,23 @@
     return indexData.tests.concat(indexData.forms).concat(indexData.containers);
   };
 
-  let idx = lunr(function () {
+  let selectedCategory = $state('');
+  let selectedType = $state('allTypesSelected');
+
+  let idx = $derived.by(()=>{return lunr(function () {
     this.field('full_name');
     this.field('GCRS_name');
     this.field('short_name');
     this.field('synonyms');
     this.ref('id');
 
-    index_document().forEach(function (doc) {
+    index_document(selectedType, selectedCategory).forEach(function (doc) {
       this.add(doc);
     }, this);
 
+  })
   });
+
 
 
   let searchInput = $state('');
@@ -188,7 +237,6 @@
 
   // Reactive statement to update the event listener when editedJSON changes
   $effect(() => {
-    console.log(searchResults);
     const exportButton = document.getElementById("exportButton");
     if (exportButton) {
 
@@ -220,54 +268,44 @@
 <div class="d-flex flex-row">
   <!-- Sidebar -->
   <div class="mt-2 d-flex flex-column align-items-stretch bg-white" style="width: 500px; border-right: 1px solid #eaeaea;">
+  
+  <!--Type Selection-->
+  <div class="input-group mb-2 justify-content-center" style="width: 100%;">
+  <!-- <img class="input-group-text" src="{base}/filter.svg" id="basic-addon1" style="width: 10%;" alt="filter"> -->
+  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+  <input type="radio" class="btn-check" name="selectType" bind:group={selectedType} id="btnradio1" value="allTypesSelected" autocomplete="off">
+  <label class="btn btn-outline-secondary" for="btnradio1">All Types</label>
+
+  <input type="radio" class="btn-check" name="selectType" bind:group={selectedType} id="btnradio2" value="testSelected" autocomplete="off">
+  <label class="btn btn-outline-secondary" for="btnradio2">Test</label>
+
+  <input type="radio" class="btn-check" name="selectType" bind:group={selectedType} id="btnradio3" value="formSelected" autocomplete="off">
+  <label class="btn btn-outline-secondary" for="btnradio3">Form</label>
+
+  <input type="radio" class="btn-check" name="selectType" bind:group={selectedType} id="btnradio4" value="containerSelected" autocomplete="off">
+  <label class="btn btn-outline-secondary" for="btnradio4">Container</label>
+  </div>
+  </div>
+
+  <!-- Category Filter -->
+  <div class="input-group mb-1" style="width: 97%;">
+  <img class="input-group-text" src="{base}/filter.svg" id="basic-addon1" style="width: 10%;" alt="filter">
+  <select bind:value={selectedCategory} class="form-select form-control" aria-label="Default select example">
+  <option value="">All Categories</option>
+  {#each $editedJSON.config.category as category}
+    <option value={category.code}>{category.text}</option>
+  {/each}
+  </select>
+  </div>
+
     <!-- Search -->
     <div class="input-group" style="width: 97%;">
       <img class="input-group-text" src="{base}/search.svg" id="basic-addon1" style="width: 10%;" alt="search">
-      <input bind:value={searchInput} onkeydown={checkadmin} id="search_sideBar" type="text" class="form-control" placeholder="Type in tests / forms to search" tabindex="0">
+      <input bind:value={searchInput} onkeydown={checkadmin} id="search_sideBar" type="text" class="form-control" placeholder="Type in test / form name..." tabindex="0">
     </div>
 
     <!-- Search Results -->
     <div class="list-group list-group-flush border-bottom" style="height: calc(100vh - 143px); overflow-y: scroll">
-      {#if searchInput.length === 0}
-        <!-- Display all tests when no search input -->
-        {#each data.tests as test}
-          <a
-            href="{base}/test/{test.id}"
-            class="list-group-item list-group-item-action py-3 lh-tight"
-          >
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <strong class="mb-1">{test.full_name.blocks[0].data.text}</strong>
-            </div>
-            <div class="col-10 mb-1 small">{test.label_name.blocks[0].data.text}</div>
-          </a>
-        {/each}
-        
-        <!-- Display all forms when no search input -->
-        {#each data.forms as form}
-          <a
-            href="{base}/form/{form.id}"
-            class="list-group-item list-group-item-action py-3 lh-tight"
-          >
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <strong class="mb-1">{form.form_name.blocks[0].data.text}</strong>
-            </div>
-            <div class="col-10 mb-1 small">{form.form_code.blocks[0].data.text}</div>
-          </a>
-        {/each}
-
-        {#each data.containers as container}
-          <a
-            href="{base}/container/{container.id}"
-            class="list-group-item list-group-item-action py-3 lh-tight"
-          >
-            <div class="d-flex w-100 align-items-center justify-content-between">
-              <strong class="mb-1">{container.name.blocks[0].data.text}</strong>
-            </div>
-            <div class="col-10 mb-1 small">{container.code.blocks[0].data.text}</div>
-          </a>
-        {/each}
-
-      {:else}
         <!-- Display search results -->
         {#each searchResultsDetails as resultDetails}
 
@@ -282,7 +320,6 @@
           </a>
           
         {/each}
-      {/if}
     </div>
   </div>
 

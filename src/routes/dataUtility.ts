@@ -14,6 +14,7 @@ export interface Test {
     synonyms: string[];
     alert: string[];
     last_updated: string;
+    lab_and_category: string;
 }
 
 export interface Form {
@@ -22,6 +23,7 @@ export interface Form {
     form_code: string;
     form_link: string;
     remark: string;
+    lab_and_category: string;
     last_updated: string;
 }
 
