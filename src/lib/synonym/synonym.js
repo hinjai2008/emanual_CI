@@ -2,7 +2,13 @@ export default class SynonymTool {
     static get toolbox() {
         return {
             title: 'Synonym',
-            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v2m0 4h.01M21 16a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2L12 4l9 12z"/></svg>'
+            // SVG: double tilde (≈) symbol, filled with blue color
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 48 48">
+  <g>
+    <path d="M10 16 Q16 12, 24 16 T38 16" stroke="#1976d2" stroke-width="4" fill="#1976d2" stroke-linecap="round"/>
+    <path d="M10 28 Q16 24, 24 28 T38 28" stroke="#1976d2" stroke-width="4" fill=""#1976d2" stroke-linecap="round"/>
+  </g>
+</svg>`
         };
     }
 

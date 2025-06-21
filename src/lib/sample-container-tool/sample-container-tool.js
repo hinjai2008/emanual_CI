@@ -18,7 +18,14 @@ export default class SampleContainerTool {
     static get toolbox() {
         return {
             title: 'Sample Container',
-            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v2m0 4h.01M21 16a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2L12 4l9 12z"/></svg>'
+            // SVG: specimen container with blue cap, simplified lines
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 48 48">
+  <rect x="8" y="6" width="32" height="8" rx="2" fill="#4fc3f7" stroke="#1976d2" stroke-width="2"/>
+  <path d="M12 14 v22 a4 4 0 0 0 4 4 h16 a4 4 0 0 0 4-4 V14" fill="#fff" stroke="#1976d2" stroke-width="2"/>
+  <path d="M16 26 v6" stroke="#90a4ae" stroke-width="2" stroke-linecap="round"/>
+  <path d="M16 20 v2" stroke="#90a4ae" stroke-width="2" stroke-linecap="round"/>
+  <rect x="8" y="6" width="32" height="8" rx="2" fill="none" stroke="#1976d2" stroke-width="2"/>
+</svg>`
         };
     }
 
@@ -103,7 +110,6 @@ export default class SampleContainerTool {
     }
 
     _createCard(text, imageSrc, editable = false) {
-        console.log("renderCalled")
         const card = document.createElement('div');
         card.classList.add('card', 'bg-primary-subtle');
         card.style.width = '18rem';
@@ -204,8 +210,7 @@ export default class SampleContainerTool {
         cardText.setAttribute('rawText', text);
 
         const regex = /##.*##/g
-        const matches = text.match(regex);
-        console.log(matches);
+        const matches = text.match(regex);;
 
         if (!matches) {
             return;

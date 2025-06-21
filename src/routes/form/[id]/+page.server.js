@@ -8,7 +8,11 @@ import { error } from '@sveltejs/kit';
 export async function load({ params }) {
     const form = forms.find((form) => form.id === parseInt(params.id));
 
-    if (!form) error(404);
+    if (!form) {
+    return {
+        entryData: null,
+    }
+    }
 
     return {
         entryData: form,
@@ -28,9 +32,19 @@ export function entries() {
         throw new Error("Duplicate IDs found in the forms array: " + duplicateIds + ". Please ensure all IDs are unique.");
     }
 
-    return forms.map((form) => {
-        return {
-                id: form.id.toString()
-            }
-        });
+      const maximumId = Math.max(...forms.map(form => form.id));
+  
+      const NUM_RESERVED_ID = 50;
+  
+      const idArray = []
+  
+      for (let i = 1; i <= maximumId + NUM_RESERVED_ID; i++) {
+  
+          // If the test is not found, we can still add an entry with a placeholder
+          idArray.push({
+              id: i.toString(),
+          });
+      }
+  
+      return idArray
     };

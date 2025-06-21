@@ -2,6 +2,7 @@ import { tests, findDuplicateIds} from '../../dataUtility.js';
 import { error } from '@sveltejs/kit';
 
 
+
 /**
  * @param {{ params: { id: string } }} context - `params.id` is a string representing a numeric ID.
  */
@@ -9,7 +10,11 @@ import { error } from '@sveltejs/kit';
 export async function load({ params }) {
     const test = tests.find((test) => test.id === parseInt(params.id));
 
-    if (!test) error(404);
+    if (!test) {
+        return {
+            entryData: null,
+        }
+    }
 
     return {
         entryData: test,
@@ -29,9 +34,20 @@ export function entries() {
         throw new Error("Duplicate IDs found in the tests array: " + duplicateIds + ". Please ensure all IDs are unique.");
     }
 
-    return tests.map((test) => {
-        return {
-                id: test.id.toString()
-            }
+    const maximumId = Math.max(...tests.map(test => test.id));
+
+    const NUM_RESERVED_ID = 50;
+
+    const idArray = []
+
+    for (let i = 1; i <= maximumId + NUM_RESERVED_ID; i++) {
+
+        // If the test is not found, we can still add an entry with a placeholder
+        idArray.push({
+            id: i.toString(),
         });
+    }
+
+    return idArray
+
     };

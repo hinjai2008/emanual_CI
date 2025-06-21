@@ -4,7 +4,7 @@
     import AlertTag from '$lib/alert-tag/alert-tag.js';
     
     import { onDestroy, onMount } from 'svelte';
-    import { editedJSON } from '../routes/stores';
+    import { editedJSON, isCreateMode, pauseEditorRender } from '../routes/stores';
     import { page } from "$app/state"; // Import the $page store
     import "../routes/global.css"
     import SampleContainerTool from '$lib/sample-container-tool/sample-container-tool';
@@ -12,6 +12,9 @@
     import FormLinkTool from './form-link/form-link';
     import TestFormTool from './test-form/test-form';
     import LabSelectionTool from './labSelectionTool/labSelectionTool';
+    import { afterNavigate, beforeNavigate, onNavigate } from "$app/navigation";
+    import { concurrentEditLock } from "../routes/stores";
+    import "$lib/hideParagraphTool.css";
 
 
     let { datatype, rowName, displayName, isEditable, entryData } = $props();
@@ -23,30 +26,36 @@
 
 
     editedJSON.subscribe((value) => {
+
+        if (pauseEditorRender) { return; } // Skip rendering if pauseEditorRender is true
+
         thisEntryEdit = value[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
     });
 
-    onMount(async () => {
-
-        initializeEditor(); // Initialize the editor after the component is mounted
+    onMount(() => {
+        
+        if(!editor) {
+            initializeEditor(); // Initialize the editor when the component is mounted
+        }
 
         });
 
 
     async function initializeEditor() {
 
-        let loadedData = entryData[rowName];
+        let loadedData = thisEntryEdit[rowName];
+
+        if (!isEditable && entryData) {
+            loadedData = entryData[rowName];
+        }
 
         const holder = isEditable ? rowName+"-editable" : rowName;
-
-        if (isEditable) {
-            loadedData = thisEntryEdit[rowName];
-        }
 
         let tools = {
             paragraph: Paragraph,
             header: Header,
         };
+
 
         if (rowName === "alert") {
             tools = {
@@ -146,20 +155,51 @@
 
 
     function editButtonhandler() {
+
+        if ($concurrentEditLock) {
+            alert("Please complete/cancel the other editing action before starting a new one.");
+            return;
+        }
+
         isEditing = true;
         editor.readOnly.toggle();
+        concurrentEditLock.set(true); // Set the lock to true when editing starts
+
     }
 
 
     function cancelAction() {
         editor.destroy(); // Destroy the editor instance
         isEditing = false; // Reset the editing state
+        concurrentEditLock.set(false); // Release the lock
         initializeEditor(); // Reinitialize the editor with the original data (editingData)
     }
 
 
     function doneAction() {
         editor.save().then((outputData) => {
+
+            //validation
+            // The following fields cannot be empty as they will be indexed by the search
+            if (rowName === "full_name" || rowName === "label_name" || rowName === "form_name" || rowName === "form_code" || rowName === "name" || rowName === "code") {
+
+                if (!outputData.blocks) {
+                    alert("This field cannot be empty.");
+                    return;
+                }
+
+                if (outputData.blocks.length === 0) {
+                    alert("This field cannot be empty.");
+                    return;
+                }
+
+                if (outputData.blocks[0].data.text.length === 0) {
+                    alert("This field cannot be empty.");
+                    return;
+                }
+            }
+
+
             let editedJSON_copy = $editedJSON;
             editedJSON_copy[datatype].map((editedTest) => {
                 if (editedTest.id.toString() === page.params.id) {
@@ -170,19 +210,26 @@
             });
             editor.readOnly.toggle();
             isEditing = false;
+            concurrentEditLock.set(false); // Release the lock
+       
         }).catch((error) => {
             console.log('Saving failed: ', error);
         });
     }
 
 
-    $effect(() => {
+    afterNavigate(() => {
+
+        if ($pauseEditorRender) { return; } // Skip rendering if pauseEditorRender is true
+
         // This effect will run whenever the page changes
         let currentPage = page.params.id; // Get the current page ID from the URL
         if (editor) {
-            editor.destroy(); // Clean up the previous editor instance
+
+            editor.destroy();
             thisEntryEdit = $editedJSON[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
             initializeEditor()
+
         }
 
     });
@@ -190,9 +237,21 @@
 
     onDestroy(() => {
         if (editor) {
-            editor.destroy(); // Clean up the editor instance when the component is destroyed
+
+            editor.isReady.then(() => {
+
+                editor.destroy(); // Clean up the editor instance when the component is destroyed
+            });
         }
     });
+
+    beforeNavigate(({cancel})=>{
+        if (isEditing) {
+            window.alert("You have unsaved changes. Please save or cancel before navigating away.");
+            cancel();
+        }
+    })
+
 </script>
 
 <tr>
@@ -210,7 +269,7 @@
             </div>
         </div>
 
-        {:else if isEditable}
+        {:else if isEditable && !$concurrentEditLock}
         <div>
             <button type="button" class="btn btn-sm btn-secondary position-absolute top-50 end-0 mx-3 translate-middle-y opacity-75 z-3" onclick={() => editButtonhandler()}>Edit</button>
         </div>

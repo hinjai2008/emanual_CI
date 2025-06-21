@@ -7,7 +7,13 @@ export default class TestFormTool {
     static get toolbox() {
         return {
             title: 'Test Form',
-            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v2m0 4h.01M21 16a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2L12 4l9 12z"/></svg>'
+            // SVG: simple form/document icon
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 24 24" fill="none" stroke="#1976d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="4" y="3" width="16" height="18" rx="2" fill="#e3f2fd" stroke="#1976d2"/>
+  <line x1="8" y1="7" x2="16" y2="7" stroke="#1976d2"/>
+  <line x1="8" y1="11" x2="16" y2="11" stroke="#1976d2"/>
+  <line x1="8" y1="15" x2="12" y2="15" stroke="#1976d2"/>
+</svg>`
         };
     }
 

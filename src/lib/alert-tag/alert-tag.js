@@ -14,6 +14,7 @@ export default class AlertTag {
     constructor({data, config}) {
         this.data = data
         this.config = config || {}
+        
     }
 
 

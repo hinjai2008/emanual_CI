@@ -379,7 +379,8 @@
         "time": 1746892494785,
         "blocks": [],
         "version": "2.31.0-rc.7"
-      }
+      },
+      "refId": "11111111111111111111"
     },
     {
       "id": 2,
@@ -452,7 +453,8 @@
           }
         ],
         "version": "2.31.0-rc.7"
-      }
+      },
+      "refId": "22222222222222222222"
     },
     {
       "id": 3,
@@ -516,7 +518,8 @@
           }
         ],
         "version": "2.31.0-rc.7"
-      }
+      },
+      "refId": "33333333333333333333"
     },
     {
       "id": 4,
@@ -587,7 +590,8 @@
           }
         ],
         "version": "2.31.0-rc.7"
-      }
+      },
+      "refId": "44444444444444444444"
     }
   ],
   "testData": [
@@ -654,13 +658,13 @@
       },
       "hospital": "CMC Core Lab",
       "requirement": {
-        "time": 1745692821652,
+        "time": 1747560232537,
         "blocks": [
           {
             "id": "G84aWzcxNM",
             "type": "paragraph",
             "data": {
-              "text": "Deliver to CMC Core within four hours after collection"
+              "text": "Deliver to CMC Core Lab within four hours after collection"
             }
           }
         ],
@@ -713,7 +717,21 @@
         ],
         "version": "2.31.0-rc.7"
       },
-      "last_updated": "2023-10-01"
+      "last_updated": "2023-10-01",
+      "specimen_type": {
+        "time": 1747560050442,
+        "blocks": [
+          {
+            "id": "i4tii8kZba",
+            "type": "paragraph",
+            "data": {
+              "text": "4mL heparin blood"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      },
+      "refId": "55555555555555555555"
     },
     {
       "id": 2,
@@ -830,7 +848,21 @@
           }
         ],
         "version": "2.31.0-rc.7"
-      }
+      },
+      "specimen_type": {
+        "time": 1747560040377,
+        "blocks": [
+          {
+            "id": "obry5OWcq0",
+            "type": "paragraph",
+            "data": {
+              "text": "4mL clotted blood"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      },
+      "refId": "66666666666666666666"
     },
     {
       "id": 3,
@@ -987,7 +1019,21 @@
           }
         ],
         "version": "2.31.0-rc.7"
-      }
+      },
+      "specimen_type": {
+        "time": 1747560077785,
+        "blocks": [
+          {
+            "id": "tMN_H99WIV",
+            "type": "paragraph",
+            "data": {
+              "text": "24 hour urine"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      },
+      "refId": "77777777777777777777"
     },
     {
       "id": 4,
@@ -1106,11 +1152,22 @@
         ],
         "version": "2.31.0-rc.7"
       },
-      "synonyms": [
-        "diabetic ketoacidosis",
-        "ketones",
-        "ketosis"
-      ],
+      "synonyms": {
+        "time": 1747849861848,
+        "blocks": [
+          {
+            "id": "7QlxeTK2Hp",
+            "type": "synonyms",
+            "data": {
+              "synonymList": [
+                "ketones",
+                "diabetic ketoacidosis"
+              ]
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      },
       "alert": {
         "time": 1745872580806,
         "blocks": [
@@ -1148,7 +1205,21 @@
           }
         ],
         "version": "2.31.0-rc.7"
-      }
+      },
+      "specimen_type": {
+        "time": 1747560091290,
+        "blocks": [
+          {
+            "id": "XBhTn2O-qq",
+            "type": "paragraph",
+            "data": {
+              "text": "4mL heparin blood"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      },
+      "refId": "88888888888888888888"
     },
     {
       "id": 5,
@@ -1289,7 +1360,21 @@
           }
         ],
         "version": "2.31.0-rc.7"
-      }
+      },
+      "specimen_type": {
+        "time": 1747560136465,
+        "blocks": [
+          {
+            "id": "U8byBC0zTj",
+            "type": "paragraph",
+            "data": {
+              "text": "4mL clotted blood"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      },
+      "refId": "10101010101010101010"
     },
     {
       "id": 6,
@@ -1419,7 +1504,21 @@
           }
         ],
         "version": "2.31.0-rc.7"
-      }
+      },
+      "specimen_type": {
+        "time": 1747560152641,
+        "blocks": [
+          {
+            "id": "wtNsT_CgxD",
+            "type": "paragraph",
+            "data": {
+              "text": "4mL EDTA blood x2"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      },
+      "refId": "12121212121212121212"
     },
     {
       "id": 7,
@@ -1549,7 +1648,21 @@
           }
         ],
         "version": "2.31.0-rc.7"
-      }
+      },
+      "specimen_type": {
+        "time": 1747560165729,
+        "blocks": [
+          {
+            "id": "h6wTjiCuBA",
+            "type": "paragraph",
+            "data": {
+              "text": "4mL EDTA blood x2"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      },
+      "refId": "13131313131313131313"
     },
     {
       "id": 8,
@@ -1740,7 +1853,55 @@
         ],
         "version": "2.31.0-rc.7"
       },
-      "last_updated": "2023-10-01"
+      "last_updated": "2023-10-01",
+      "specimen_type": {
+        "time": 1747560192313,
+        "blocks": [
+          {
+            "id": "RZE86CeLQs",
+            "type": "paragraph",
+            "data": {
+              "text": "4mL heparin blood or 4mL clotted blood"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      },
+      "refId": "99999999999999999999"
+    },
+    {
+      "id": 9,
+      "full_name": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "data": {
+              "text": "New Test 9"
+            }
+          }
+        ]
+      },
+      "GCRS_name": {},
+      "label_name": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "data": {
+              "text": "New Test 9"
+            }
+          }
+        ]
+      },
+      "synonyms": {
+        "blocks": [
+          {
+            "type": "synonyms",
+            "data": {
+              "synonymList": []
+            }
+          }
+        ]
+      }
     }
   ]
 }

@@ -1,33 +1,29 @@
 <script>
+    import { goto } from '$app/navigation';
+
   let { data, children } = $props();
 
   // let rawTestData = data.rawTestData;
 
   import { base } from '$app/paths';
-  import { editedJSON } from './stores';
+  import { editedJSON, isCreateMode } from './stores';
   import { isAdmin } from './stores';
-  import { onMount } from "svelte";
+  import { isEditMode } from './stores';
+  import { pauseEditorRender } from './stores';
  
   import lunr from 'lunr';
-    import { tests } from './dataUtility';
 
-  // Initialize search
-  // const search = new JsSearch.Search('id');
-  // search.addIndex(['full_name', 'blocks[0]', 'data', 'text']);
-  // search.addIndex(['GCRS_name', 'blocks', 'data', 'text']);
-  // search.addIndex(['label_name', 'blocks', 'data', 'text']);
-  // search.addIndex(['synonyms', 'blocks', 'data', 'text']);
-  // search.addDocuments(data.tests);
-
-  // let searchInput = $state('');
-  // let searchResults = $derived(search.search(searchInput));
 
   let indexData = {}
 
-  const index_document = (type, category) => {
+  let testIdCap = Math.max(...data.completeJSON.testData.map(test => test.id)) + 50;
+  let formIdCap = Math.max(...data.completeJSON.formData.map(form => form.id)) + 50;
+  let containerIdCap = Math.max(...data.completeJSON.containerData.map(container => container.id)) + 50;
+
+  const index_document = (rawData, type, category) => {
     indexData = {
 
-      tests: data.tests.filter((test)=>{
+      tests: rawData.testData.filter((test)=>{
 
         if (type !== "allTypesSelected" && type !== "testSelected") {
           return false; // filter by type
@@ -55,12 +51,12 @@
         }
 
 
-        if (test.GCRS_name.blocks === undefined) {
+        if (!test.GCRS_name.blocks || test.GCRS_name.blocks.length === 0) {
           result.GCRS_name = "";
         } else {
-          result.GCRS_name = test.GCRS_name.blocks[0].data.text;
+          result.GCRS_name = test.GCRS_name.blocks[0].data.text || "";
         }
-        if (test.label_name.blocks === undefined) {
+        if (test.label_name.blocks === undefined || test.label_name.blocks.length === 0) {
           result.short_name = "";
         } else {
           result.short_name = test.label_name.blocks[0].data.text;
@@ -85,7 +81,7 @@
       }),
 
 
-      forms: data.forms.filter((form)=>{
+      forms: rawData.formData.filter((form)=>{
 
         if (type !== "allTypesSelected" && type !== "formSelected") {
           return false; // filter by type
@@ -126,7 +122,7 @@
         return result
       }),
 
-      containers: data.containers.filter(()=>{
+      containers: rawData.containerData.filter(()=>{
 
         if (type !== "allTypesSelected" && type !== "containerSelected") {
           return false; // filter by type
@@ -170,15 +166,28 @@
   let selectedType = $state('allTypesSelected');
 
   let idx = $derived.by(()=>{return lunr(function () {
+    
     this.field('full_name');
     this.field('GCRS_name');
     this.field('short_name');
     this.field('synonyms');
     this.ref('id');
 
-    index_document(selectedType, selectedCategory).forEach(function (doc) {
+
+    if (!$isAdmin) {
+
+    index_document(data.completeJSON, selectedType, selectedCategory).forEach(function (doc) {
       this.add(doc);
     }, this);
+
+
+    } else if (isAdmin) {
+
+      index_document($editedJSON, selectedType, selectedCategory).forEach(function (doc) {
+        this.add(doc);
+      }, this);
+
+    }
 
   })
   });
@@ -217,7 +226,13 @@
     }
   };
 
-  function exportListener() {
+
+
+  $effect(() => {
+
+    if($isAdmin) {
+
+      function exportListener() {
         const blob = new Blob([JSON.stringify($editedJSON, null, 2)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -227,25 +242,192 @@
         URL.revokeObjectURL(url);
       }
 
-  onMount(() => {
     const exportButton = document.getElementById("exportButton");
     if (exportButton) {
-      // Ensure no duplicate listeners are added
       exportButton.addEventListener("click", exportListener);
     }
-  });
 
-  // Reactive statement to update the event listener when editedJSON changes
-  $effect(() => {
-    const exportButton = document.getElementById("exportButton");
-    if (exportButton) {
+  }});
 
 
-      // Ensure no duplicate listeners are added
-      exportButton.removeEventListener("click", exportListener);
-      exportButton.addEventListener("click", exportListener);
-    }
-  });
+  function newTestListener() {
+
+  const testIdList = $editedJSON.testData.map((test) => test.id);
+  const newTestId = Math.max(...testIdList) + 1;
+
+  if(newTestId > testIdCap) {
+    alert("You have reached the maximum number of newly created tests (+50). Please commit the changes to the server before creating a new test.");
+    return;
+  }
+
+  // template the new test
+  const newTest = {
+    id: newTestId,
+    full_name: {
+      blocks: [
+        {
+          type: "paragraph",
+          data: {
+            text: "New Test " + newTestId,
+          },
+        },
+      ],
+    },
+
+    GCRS_name: {},
+
+    label_name: {
+      blocks: [
+        {
+          type: "paragraph",
+          data: {
+            text: "New Test " + newTestId,
+          },
+        },
+      ],
+    },
+
+    synonyms: {
+      blocks: [
+        {
+          type: "synonyms",
+          data: {
+            synonymList: [],
+          },
+        },
+      ],
+    },
+
+  }
+  
+  const newTestData = [...$editedJSON.testData, newTest];
+  const newEditedJSON = { ...$editedJSON, testData: newTestData };
+  isCreateMode.set(true);
+  pauseEditorRender.set(true);
+  editedJSON.set(newEditedJSON);
+  pauseEditorRender.set(false);
+  goto(`${base}/test/${newTestId}`);
+  }
+
+
+  function newFormListener() {
+
+  const formIdList = $editedJSON.formData.map((form) => form.id);
+  const newFormId = Math.max(...formIdList) + 1;
+
+  if(newFormId > formIdCap) {
+    alert("You have reached the maximum number of newly created forms (+50). Please commit the changes to the server before creating a new form.");
+    return;
+  }
+
+  // template the new form
+  const newForm = {
+    id: newFormId,
+    refId: Math.floor(Math.random() * 100000000),
+    form_name: {
+      blocks: [
+        {
+          type: "paragraph",
+          data: {
+            text: "New Form " + newFormId,
+          },
+        },
+      ],
+    },
+
+    form_link: {blocks: [
+      {
+        type: "form_link",
+        data: {
+          url: "",
+        },
+      },
+    ]},
+
+    form_code: {
+      blocks: [
+        {
+          type: "paragraph",
+          data: {
+            text: "New Form " + newFormId,
+          },
+        },
+      ],
+    },
+
+  }
+
+  const newFormData = [...$editedJSON.formData, newForm];
+  const newEditedJSON = { ...$editedJSON, formData: newFormData };
+  isCreateMode.set(true);
+  pauseEditorRender.set(true);
+  editedJSON.set(newEditedJSON);
+  pauseEditorRender.set(false);
+  goto(`${base}/form/${newFormId}`);
+
+  }
+
+
+  function newContainerListener() {
+
+  const containerIdList = $editedJSON.containerData.map((container) => container.id);
+  const newContainerId = Math.max(...containerIdList) + 1;
+
+  if(newContainerId > containerIdCap) {
+    alert("You have reached the maximum number of newly created containers (+50). Please commit the changes to the server before creating a new container.");
+    return;
+  }
+
+  // template the new test
+  const newContainer = {
+    id: newContainerId,
+    code: {
+      blocks: [
+        {
+          type: "paragraph",
+          data: {
+            text: "New_Container_" + newContainerId,
+          },
+        },
+      ],
+    },
+
+    name: {blocks: [
+      {
+        type: "paragraph",
+        data: {
+          text: "NewContainer " + newContainerId,
+        },
+      },
+    ]},
+
+    synonyms: {
+      blocks: [
+        {
+          type: "synonyms",
+          data: {
+            synonymList: [],
+          },
+        },
+      ],
+    },
+
+  imageSrc: {
+      blocks: [],
+    },
+
+  }
+
+  const newContainerData = [...$editedJSON.containerData, newContainer]
+  const newEditedJSON = { ...$editedJSON, containerData: newContainerData };
+  isCreateMode.set(true);
+  pauseEditorRender.set(true);
+  editedJSON.set(newEditedJSON);
+  pauseEditorRender.set(false);
+  goto(`${base}/container/${newContainerId}`);
+
+  }
+
 
 </script>
 
@@ -259,7 +441,17 @@
 
     <ul class="nav nav-pills">
       <li class="nav-item"><a href="{base}/" class="nav-link active" aria-current="page">Home</a></li>
-      <li class="nav-item"><button id="exportButton" class="nav-link">Export changes</button></li>
+
+      {#if $isEditMode}
+      <li class="nav-item ms-2"><button id="newTestButton" onclick={newTestListener} class="nav-link">New Test</button></li>
+      <li class="nav-item"><button id="newFormButton" onclick={newFormListener} class="nav-link">New Form</button></li>
+      <li class="nav-item"><button id="newContainerButton" onclick={newContainerListener} class="nav-link">New Container</button></li>
+      {/if}
+      
+      {#if $isAdmin}
+      <li class="nav-item"><button id="exportButton" class="nav-link">Export Changes</button></li>
+      {/if}
+      
     </ul>
   </header>
 </div>
@@ -305,7 +497,7 @@
     </div>
 
     <!-- Search Results -->
-    <div class="list-group list-group-flush border-bottom" style="height: calc(100vh - 143px); overflow-y: scroll">
+    <div class="list-group list-group-flush border-bottom" style="height: calc(100vh - 230px); overflow-y: scroll">
         <!-- Display search results -->
         {#each searchResultsDetails as resultDetails}
 

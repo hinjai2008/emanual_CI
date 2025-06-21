@@ -8,7 +8,11 @@ import { error } from '@sveltejs/kit';
 export async function load({ params }) {
     const container = containers.find((container) => container.id === parseInt(params.id));
 
-    if (!container) error(404);
+    if (!container) {
+    return {
+        entryData: null,
+    }
+    }
 
     return {
         entryData: container,
@@ -28,9 +32,19 @@ export function entries() {
         throw new Error("Duplicate IDs found in the containers array: " + duplicateIds + ". Please ensure all IDs are unique.");
     }
 
-    return containers.map((container) => {
-        return {
-                id: container.id.toString()
-            }
-        });
+       const maximumId = Math.max(...containers.map(container => container.id));
+   
+       const NUM_RESERVED_ID = 50;
+   
+       const idArray = []
+   
+       for (let i = 1; i <= maximumId + NUM_RESERVED_ID; i++) {
+   
+           // If the test is not found, we can still add an entry with a placeholder
+           idArray.push({
+               id: i.toString(),
+           });
+       }
+   
+       return idArray
     };

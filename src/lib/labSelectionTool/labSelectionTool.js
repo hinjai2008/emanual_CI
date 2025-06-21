@@ -3,7 +3,15 @@ export default class LabSelectionTool {
     static get toolbox() {
         return {
             title: 'Lab Selection',
-            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2l1.5 4.5h4.5l-3.5 2.5 1.5 4.5-3.5-2.5-3.5 2.5 1.5-4.5-3.5-2.5h4.5z"/></svg>'
+            // SVG: simple flask with blue liquid, easy to identify
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g>
+    <path d="M8 2h8v2h-1v6.586l4.293 4.293a1 1 0 0 1-.707 1.707H5.414a1 1 0 0 1-.707-1.707L9 10.586V4h-1V2z" fill="#2196f3" stroke="#1565c0" stroke-width="1"/>
+    <rect x="10" y="2" width="4" height="8" fill="#fff" stroke="#1565c0" stroke-width="1"/>
+    <ellipse cx="12" cy="17" rx="7" ry="3" fill="#bbdefb" stroke="#1565c0" stroke-width="1"/>
+    <ellipse cx="12" cy="17" rx="4" ry="1.5" fill="#2196f3" opacity="0.7"/>
+  </g>
+</svg>`
         };
     }
 

@@ -1,0 +1,9 @@
+#alert-editable [data-item-name="paragraph"],
+#container-editable [data-item-name="paragraph"],
+#form-editable [data-item-name="paragraph"],
+#form_link-editable [data-item-name="paragraph"],
+#lab_and_category-editable [data-item-name="paragraph"],
+#synonyms-editable [data-item-name="paragraph"]
+{
+  display: none;
+}
