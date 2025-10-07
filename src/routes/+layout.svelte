@@ -1,5 +1,6 @@
 <script>
     import { goto } from '$app/navigation';
+    import { page } from '$app/state';
 
   let { data, children } = $props();
 
@@ -428,6 +429,44 @@
 
   }
 
+  function removeEntryListener() {
+    if ($isEditMode) {
+      const pathSegments = page.url.pathname.split('/');
+      const entryType = pathSegments[pathSegments.length - 2]; // e.g., 'test', 'form', 'container'
+      const entryId = parseInt(pathSegments[pathSegments.length - 1]); // e.g., '123'
+
+      if (entryType !== 'test' && entryType !== 'form' && entryType !== 'container') {
+        alert('Removal failed. Please ensure you are on a valid test, form, or container page.');
+        return;
+      }
+
+      // Call the appropriate store action to remove the entry
+      switch (entryType) {
+        case 'test':
+          editedJSON.update((draft) => {
+            draft.testData = draft.testData.filter((test) => test.id !== entryId);
+            return draft
+          });
+          console.log($editedJSON)
+          goto(`${base}/test/${entryId}`);
+          break;
+        case 'form':
+          editedJSON.update((draft) => {
+            draft.formData = draft.formData.filter((form) => form.id !== entryId);
+            return draft
+          });
+          goto(`${base}/form/${entryId}`);
+          break;
+        case 'container':
+          editedJSON.update((draft) => {
+            draft.containerData = draft.containerData.filter((container) => container.id !== entryId);
+            return draft
+          });
+          goto(`${base}/container/${entryId}`);
+          break;
+      }
+    }
+  }
 
 </script>
 
@@ -446,10 +485,11 @@
       <li class="nav-item ms-2"><button id="newTestButton" onclick={newTestListener} class="nav-link">New Test</button></li>
       <li class="nav-item"><button id="newFormButton" onclick={newFormListener} class="nav-link">New Form</button></li>
       <li class="nav-item"><button id="newContainerButton" onclick={newContainerListener} class="nav-link">New Container</button></li>
+      <li class="nav-item"><button id="removeContainerButton" onclick={removeEntryListener} class="nav-link">Remove Current Entry</button></li>
       {/if}
       
       {#if $isAdmin}
-      <li class="nav-item"><button id="exportButton" class="nav-link">Export Changes</button></li>
+      <li class="nav-item"><button id="exportButton" class="nav-link active">Save Changes</button></li>
       {/if}
       
     </ul>

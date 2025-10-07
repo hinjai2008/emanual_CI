@@ -15,6 +15,7 @@ export interface Test {
     alert: string[];
     last_updated: string;
     lab_and_category: string;
+    lab_handling: string;
 }
 
 export interface Form {

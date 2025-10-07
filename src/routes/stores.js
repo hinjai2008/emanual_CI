@@ -12,3 +12,5 @@ export const isCreateMode = writable(false);
 export const concurrentEditLock = writable(false);
 
 export const pauseEditorRender = writable(false);
+
+export const isLabStaffMode = writable(false);

@@ -15,6 +15,7 @@
     import { afterNavigate, beforeNavigate, onNavigate } from "$app/navigation";
     import { concurrentEditLock } from "../routes/stores";
     import "$lib/hideParagraphTool.css";
+    import InlineCode from '@editorjs/inline-code';
 
 
     let { datatype, rowName, displayName, isEditable, entryData } = $props();
@@ -43,17 +44,35 @@
 
     async function initializeEditor() {
 
-        let loadedData = thisEntryEdit[rowName];
+        let loadedData;
 
-        if (!isEditable && entryData) {
+        if(thisEntryEdit && isEditable) {
+            loadedData = thisEntryEdit[rowName];
+        }
+
+        else if (!isEditable && entryData) {
             loadedData = entryData[rowName];
+        }
+
+        else {
+            return
         }
 
         const holder = isEditable ? rowName+"-editable" : rowName;
 
         let tools = {
-            paragraph: Paragraph,
-            header: Header,
+            paragraph: {
+                class: Paragraph,
+                inlineToolbar: true,
+            },
+            header: {
+                class: Header,
+                inlineToolbar: true,
+            },
+            inlineCode: {
+                class: InlineCode,
+                shortcut: 'CMD+SHIFT+L',
+    },
         };
 
 
@@ -175,6 +194,25 @@
         initializeEditor(); // Reinitialize the editor with the original data (editingData)
     }
 
+    function resetAction() {
+
+        if(!window.confirm("Confirm resetting? All current edits in this row will be lost.")){
+            return; 
+        }
+
+        editor.destroy();
+        let editedJSON_copy = $editedJSON;
+            editedJSON_copy[datatype].map((editedTest) => {
+                if (editedTest.id.toString() === page.params.id) {
+                    editedTest[rowName] = entryData[rowName];
+                    editedJSON.set(editedJSON_copy);
+                }
+            });
+        isEditing = false;
+        concurrentEditLock.set(false); // Release the lock
+        initializeEditor();
+    }
+
 
     function doneAction() {
         editor.save().then((outputData) => {
@@ -264,8 +302,9 @@
 
         <div class="position-relative">
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-sm btn-secondary ms-2 m-1" onclick={()=>cancelAction()}>Cancel</button>
-                <button type="button" class="btn btn-sm btn-primary m-1" onclick={()=>doneAction()}>Done</button>
+                <button type="button" class="btn btn-sm btn-secondary ms-2" style="margin-top: 150px;" onclick={()=>resetAction()}>Reset</button>
+                <button type="button" class="btn btn-sm btn-secondary ms-2" style="margin-top: 150px;" onclick={()=>cancelAction()}>Cancel</button>
+                <button type="button" class="btn btn-sm btn-primary ms-2" style="margin-top: 150px;" onclick={()=>doneAction()}>Done</button>
             </div>
         </div>
 

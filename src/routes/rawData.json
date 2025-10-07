@@ -1,5 +1,8 @@
 {
   "config": {
+    "flags":[
+
+    ],
     "category": [
       {
         "code": "CHEM",

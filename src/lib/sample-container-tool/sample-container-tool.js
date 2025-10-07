@@ -173,7 +173,9 @@ export default class SampleContainerTool {
             selectRegisteredContainerButton.innerText = 'Select Registered Container';
 
             buttonsWrapper.appendChild(selectImageButton);
+            if (!this.config.forContinerRegistration) {
             buttonsWrapper.appendChild(selectRegisteredContainerButton);
+            }
             cardBody.appendChild(buttonsWrapper);
             
 
