@@ -5,6 +5,7 @@
     import { onDestroy } from "svelte";
     import { isCreateMode } from "../../stores";
     import DataRow from "$lib/DataRow.svelte";
+    import { page } from "$app/state";
 
 
     let { data } = $props();
@@ -60,6 +61,17 @@
     });
     }
 
+
+    function checkNotExist() {
+    const entryId = parseInt(page.params.id); // e.g., '123'
+
+    return !entryData && $editedJSON.formData.every((editedForm) => {
+        return editedForm.id !== entryId;
+    });
+
+}
+
+
 </script>
 
 
@@ -97,7 +109,7 @@
 {#if adminlayout}
 <div class="w-50" style="height: calc(100vh - 105px); overflow-y: scroll">
 
-    {#if !entryData && !$isCreateMode}
+    {#if !entryData && !$isCreateMode || checkNotExist()}
 
     <h1>404 Page Not Found</h1>
 
@@ -108,7 +120,7 @@
         <input id="importJSONInput" type="file" accept="application/json" style="display: none;" onchange={importJSONHandler} />
     </div>
 
-    {:else if checkRemoved()}
+    {:else if entryData && checkRemoved()}
 
     <h1>This entry will be removed.</h1>
 

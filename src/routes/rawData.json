@@ -1,8 +1,16 @@
 {
   "config": {
-    "flags":[
-
-    ],
+    "editTrace": [
+      {
+        "timestamp": 1625251200000,
+        "editType": "edit",
+        "dataType": "testData",
+        "dataId": 1,
+        "refId": "55555555555555555555",
+        "field": "full_name",
+        "originalValue": ["Potassium"],
+        "newValue": ["Potassium 1"]
+      }],
     "category": [
       {
         "code": "CHEM",

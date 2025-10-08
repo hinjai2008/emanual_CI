@@ -440,6 +440,10 @@
         return;
       }
 
+      if (!window.confirm(`Confirm removing this ${entryType} entry (ID: ${entryId})?`)) {
+        return; // User cancelled the removal
+      }
+
       // Call the appropriate store action to remove the entry
       switch (entryType) {
         case 'test':
