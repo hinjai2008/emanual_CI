@@ -8,11 +8,154 @@
 
   import { base } from '$app/paths';
   import { editedJSON, isCreateMode } from './stores';
-  import { isAdmin } from './stores';
+  import { isAdmin , isStaff } from './stores';
   import { isEditMode } from './stores';
   import { pauseEditorRender } from './stores';
  
   import lunr from 'lunr';
+  import { setGlobalFunctions } from './stores';
+    import { form } from '$app/server';
+
+
+  function updateEditTrace(dataType, dataId, refId, editType, field, originalValue, newValue) {
+    if ($isAdmin) {
+      const timestamp = new Date().toISOString();
+
+      if (editType == "add") {
+        const newTrace = {
+          dataType,
+          dataId,
+          refId,
+          editType,
+          field: null,
+          originalValue: null,
+          newValue: null,
+          timestamp
+        };
+
+        editedJSON.update((draft) => {
+          draft.config.editTrace.push(newTrace);
+          return draft;
+        });
+        return;
+      }
+
+      if (editType == "remove") {
+        const existingEntryEditTraceIndex = $editedJSON.config.editTrace.findIndex(trace => 
+          trace.dataType === dataType &&
+          trace.dataId === dataId &&
+          trace.editType === "add"
+        );
+
+        if (existingEntryEditTraceIndex !== -1) {
+          // If the entry was newly added, remove the "add" trace instead of logging a "remove"
+          editedJSON.update((draft) => {
+            draft.config.editTrace.splice(existingEntryEditTraceIndex, 1);
+            return draft;
+          });
+          return;
+        } else {
+          const newTrace = {
+            dataType,
+            dataId,
+            refId,
+            editType,
+            field: null,
+            originalValue: null,
+            newValue: null,
+            timestamp
+          };
+
+          editedJSON.update((draft) => {
+            draft.config.editTrace.push(newTrace);
+            return draft;
+          });
+          return;
+        }
+
+      }
+
+
+      if(editType == "modify" && originalValue === newValue) {
+        return; // No change in value, do not log
+      }
+
+      if(editType == "modify") {
+
+        const existingEntryEditTraceIndex = $editedJSON.config.editTrace.findIndex(trace => 
+          trace.dataType === dataType &&
+          trace.dataId === dataId &&
+          trace.editType === "add"
+        );
+
+        if (existingEntryEditTraceIndex !== -1) {
+          // If the entry was newly added, no need to log modifications
+          return;
+        }
+        
+        const existingTraceIndex = $editedJSON.config.editTrace.findIndex(trace => 
+          trace.dataType === dataType &&
+          trace.dataId === dataId &&
+          trace.field === field &&
+          trace.editType === "modify"
+        );
+
+        if (existingTraceIndex !== -1) {
+          // Update the existing trace entry
+          editedJSON.update((draft) => {
+            draft.config.editTrace[existingTraceIndex].newValue = newValue;
+            draft.config.editTrace[existingTraceIndex].timestamp = timestamp;
+            return draft;
+          });
+          return; // Exit after updating existing trace
+        }
+
+        else { 
+          
+          const newTrace = {
+            dataType,
+            dataId,
+            refId,
+            editType,
+            field,
+            originalValue,
+            newValue,
+            timestamp
+          };
+
+          editedJSON.update((draft) => {
+            draft.config.editTrace.push(newTrace);
+            return draft;
+          });
+        }
+
+      };
+
+  }}
+
+  function removeEditTrace(dataType, dataId, field) {
+    if ($isAdmin) {
+      const traceIndex = $editedJSON.config.editTrace.findIndex(trace => 
+        trace.dataType === dataType &&
+        trace.dataId === dataId &&
+        trace.field === field &&
+        trace.editType === "modify"
+      );
+
+      if (traceIndex !== -1) {
+        editedJSON.update((draft) => {
+          draft.config.editTrace.splice(traceIndex, 1);
+          return draft;
+        });
+      }
+    }
+  }
+
+  setGlobalFunctions({
+    updateEditTrace,
+    removeEditTrace
+  });
+
 
 
   let indexData = {}
@@ -49,6 +192,7 @@
           GCRS_name: "",
           short_name: "",
           synonyms: "",
+          editType: "",
         }
 
 
@@ -106,6 +250,7 @@
           full_name: "",
           short_name: "",
           synonyms: "",
+          editType: "",
         }
 
         if (form.form_name.blocks === undefined) {
@@ -137,6 +282,7 @@
           id: "container/" + container.id,
           full_name: "",
           short_name: "",
+          editType: "",
         }
 
         if (container.name.blocks === undefined) {
@@ -160,6 +306,29 @@
         return result
       })
     };
+
+    if($isAdmin){
+
+    const editTrace = rawData.config.editTrace;
+
+    for (let i=0; i<editTrace.length; i++) {
+      const trace = editTrace[i];
+      const dataType = trace.dataType.replace("Data", "s"); // "tests", "forms", or "containers"
+      const entryId = trace.dataId;
+      const editType = trace.editType; // "add", "modify", "remove"
+
+      if (editType !== "add" && editType !== "modify" && editType !== "remove") {
+        continue; // skip invalid edit types
+      }
+
+      const toUpdate = indexData[dataType].find(item => item.id === trace.dataType.replace("Data", "/") + entryId);
+      if (toUpdate) {
+        console.log(toUpdate)
+        toUpdate.editType = editType;
+      }
+    }
+  }
+
     return indexData.tests.concat(indexData.forms).concat(indexData.containers);
   };
 
@@ -211,7 +380,7 @@
   });
 
 
-  async function checkadmin() {
+  async function checkStatus() {
     const encoder = new TextEncoder();
     const encodedSearchInput = encoder.encode(searchInput);
     const hashBuffer = await window.crypto.subtle.digest("SHA-256", encodedSearchInput);
@@ -221,9 +390,16 @@
       .join(""); // convert bytes to hex string
 
     const encryptedAdminPw = "2ca5161d5fd55633223b61a03cc51c4ce7e32383b480f3eb37b4f122f24e4c23";
+    const encryptedStaffPw = "c24d0b20eebe6e430aa4a366fec5ecc04fef3f48a245a9e98a391fdc9fe85e57";
 
     if (hashHex === encryptedAdminPw) {
       isAdmin.set(true);
+      searchInput = "";
+    }
+
+    if (hashHex === encryptedStaffPw) {
+      isStaff.set(true);
+      searchInput = "";
     }
   };
 
@@ -264,6 +440,7 @@
   // template the new test
   const newTest = {
     id: newTestId,
+    refId: Math.floor(Math.random() * 100000000),
     full_name: {
       blocks: [
         {
@@ -306,6 +483,7 @@
   isCreateMode.set(true);
   pauseEditorRender.set(true);
   editedJSON.set(newEditedJSON);
+  updateEditTrace("testData", newTestId, newTest.refId, "add", null, null, null);
   pauseEditorRender.set(false);
   goto(`${base}/test/${newTestId}`);
   }
@@ -363,6 +541,7 @@
   isCreateMode.set(true);
   pauseEditorRender.set(true);
   editedJSON.set(newEditedJSON);
+  updateEditTrace("formData", newFormId, newForm.refId, "add", null, null, null);
   pauseEditorRender.set(false);
   goto(`${base}/form/${newFormId}`);
 
@@ -382,6 +561,7 @@
   // template the new test
   const newContainer = {
     id: newContainerId,
+    refId: Math.floor(Math.random() * 100000000),
     code: {
       blocks: [
         {
@@ -424,6 +604,7 @@
   isCreateMode.set(true);
   pauseEditorRender.set(true);
   editedJSON.set(newEditedJSON);
+  updateEditTrace("containerData", newContainerId, newContainer.refId, "add", null, null, null);
   pauseEditorRender.set(false);
   goto(`${base}/container/${newContainerId}`);
 
@@ -537,7 +718,7 @@
     <!-- Search -->
     <div class="input-group" style="width: 97%;">
       <img class="input-group-text" src="{base}/search.svg" id="basic-addon1" style="width: 10%;" alt="search">
-      <input bind:value={searchInput} onkeydown={checkadmin} id="search_sideBar" type="text" class="form-control" placeholder="Type in test / form name..." tabindex="0">
+      <input bind:value={searchInput} onkeydown={checkStatus} id="search_sideBar" type="text" class="form-control" placeholder="Type in test / form name..." tabindex="0">
     </div>
 
     <!-- Search Results -->
@@ -548,8 +729,10 @@
           <a
             href="{base}/{resultDetails.id}"
             class="list-group-item list-group-item-action py-3 lh-tight"
+            style="background-color: {resultDetails.editType === 'add' ? '#d4edda' : resultDetails.editType === 'modify' ? '#fff3cd' : resultDetails.editType === 'remove' ? '#f8d7da' : 'transparent'}"
           >
-            <div class="d-flex w-100 align-items-center justify-content-between">
+            <div 
+              class="d-flex w-100 align-items-center justify-content-between">
               <strong class="mb-1">{resultDetails.full_name}</strong>
             </div>
             <div class="col-10 mb-1 small">{resultDetails.short_name}</div>

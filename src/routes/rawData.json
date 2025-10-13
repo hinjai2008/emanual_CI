@@ -1,16 +1,6 @@
 {
   "config": {
-    "editTrace": [
-      {
-        "timestamp": 1625251200000,
-        "editType": "edit",
-        "dataType": "testData",
-        "dataId": 1,
-        "refId": "55555555555555555555",
-        "field": "full_name",
-        "originalValue": ["Potassium"],
-        "newValue": ["Potassium 1"]
-      }],
+    "editTrace": [],
     "category": [
       {
         "code": "CHEM",
@@ -1090,7 +1080,7 @@
       "form": "GCRS",
       "hospital": "PMH Chem Lab",
       "requirement": {
-        "time": 1745692994292,
+        "time": 1760391403212,
         "blocks": [
           {
             "id": "QZEnuHSPDT",
@@ -1110,7 +1100,7 @@
             "id": "PV_kPedbmY",
             "type": "paragraph",
             "data": {
-              "text": "Do not freeze."
+              "text": "<b>Do not</b> freeze."
             }
           }
         ],
@@ -1230,7 +1220,20 @@
         ],
         "version": "2.31.0-rc.7"
       },
-      "refId": "88888888888888888888"
+      "refId": "88888888888888888888",
+      "test_handling": {
+        "time": 1760390432042,
+        "blocks": [
+          {
+            "id": "AUH4w5ErZW",
+            "type": "paragraph",
+            "data": {
+              "text": "Spin down at&nbsp;<b>4 degree C&nbsp;</b>and store plasma in&nbsp;<i>freezer</i>. And this is a&nbsp;<a href=\"http://www.google.com/\">test link</a>&nbsp;to google.&nbsp;&nbsp;"
+            }
+          }
+        ],
+        "version": "2.31.0-rc.7"
+      }
     },
     {
       "id": 5,

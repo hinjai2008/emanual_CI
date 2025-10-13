@@ -16,6 +16,7 @@
     import { concurrentEditLock } from "../routes/stores";
     import "$lib/hideParagraphTool.css";
     import InlineCode from '@editorjs/inline-code';
+    import { globalFunctions } from '../routes/stores';
 
 
     let { datatype, rowName, displayName, isEditable, entryData } = $props();
@@ -25,12 +26,34 @@
 
     let thisEntryEdit = $editedJSON[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
 
+    let modifyTraceExists = $state(false);
+
+    function checkModifyTrace() {        
+        const thisModifyTrace = $editedJSON["config"]["editTrace"].find(trace => 
+        trace.dataType === datatype && 
+        trace.dataId.toString() === page.params.id && 
+        trace.field === rowName && 
+        trace.editType === "modify");
+
+        if (thisModifyTrace) {
+            modifyTraceExists = true;
+        } else {
+            modifyTraceExists = false;
+        }
+}
+
+    if (isEditable) {
+        checkModifyTrace();
+    }
 
     editedJSON.subscribe((value) => {
+
+        checkModifyTrace();
 
         if (pauseEditorRender) { return; } // Skip rendering if pauseEditorRender is true
 
         thisEntryEdit = value[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
+
     });
 
     onMount(() => {
@@ -209,6 +232,7 @@
                 }
             });
         isEditing = false;
+        $globalFunctions.removeEditTrace(datatype, page.params.id, rowName);
         concurrentEditLock.set(false); // Release the lock
         initializeEditor();
     }
@@ -248,6 +272,9 @@
             });
             editor.readOnly.toggle();
             isEditing = false;
+            if(entryData) {
+                $globalFunctions.updateEditTrace(datatype, page.params.id, null, "modify", rowName, entryData[rowName], outputData);
+            }
             concurrentEditLock.set(false); // Release the lock
        
         }).catch((error) => {
@@ -257,6 +284,10 @@
 
 
     afterNavigate(() => {
+
+        if(isEditable) {
+            checkModifyTrace();
+        }
 
         if ($pauseEditorRender) { return; } // Skip rendering if pauseEditorRender is true
 
@@ -293,7 +324,7 @@
 </script>
 
 <tr>
-    <th scope="row">{displayName}</th>
+    <th scope="row" style="{modifyTraceExists ? 'background-color: #fff3cd;' : ''}">{displayName}</th>
     <td class="position-relative" style="width: 80%;">
 
         <div id="{rowName}{isEditable ? "-editable" : ""}"></div>
@@ -302,7 +333,9 @@
 
         <div class="position-relative">
             <div class="d-flex justify-content-end">
+                {#if entryData}
                 <button type="button" class="btn btn-sm btn-secondary ms-2" style="margin-top: 150px;" onclick={()=>resetAction()}>Reset</button>
+                {/if}
                 <button type="button" class="btn btn-sm btn-secondary ms-2" style="margin-top: 150px;" onclick={()=>cancelAction()}>Cancel</button>
                 <button type="button" class="btn btn-sm btn-primary ms-2" style="margin-top: 150px;" onclick={()=>doneAction()}>Done</button>
             </div>

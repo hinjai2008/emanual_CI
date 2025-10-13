@@ -1,7 +1,7 @@
 <script>
     import "../../global.css"; // Import global CSS
     import { isAdmin } from "../../stores";
-    import { isLabStaffMode } from "../../stores";
+    import { isStaff } from "../../stores";
     import { isEditMode } from "../../stores";
     import { isCreateMode } from "../../stores";
     import { onDestroy } from "svelte";
@@ -24,8 +24,8 @@
         }
     });
 
-    const unsubscribeIsLabStaffMode = isLabStaffMode.subscribe((isLabStaffMode) => {
-        if (isLabStaffMode) {
+    const unsubscribeIsStaff = isStaff.subscribe((isStaff) => {
+        if (isStaff) {
             LabStaffLayout = true;
         }
     });
@@ -109,7 +109,7 @@
         <DataRow datatype={"testData"} rowName={"indication"} displayName={"Indications"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"turn_around_time"} displayName={"Turnaround Time"} isEditable={false} entryData={entryData}/>
         {#if LabStaffLayout || adminlayout}
-        <DataRow datatype={"testData"} rowName={"lab_handling"} displayName={"Lab Handling"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"test_handling"} displayName={"Lab Handling"} isEditable={false} entryData={entryData}/>
         {/if}
         </tbody>
     </table>
