@@ -1,0 +1,91 @@
+================================================================================
+LAB AND CATEGORY MAPPING STATUS REPORT
+================================================================================
+
+SUMMARY:
+  - Confident mappings applied: 330 tests
+  - Problematic mappings (awaiting clarification): 98 tests
+  - Unmatched tests (New Test XXX entries): 170 tests
+  - TOTAL: 598 tests
+
+================================================================================
+PROBLEMATIC MAPPINGS REQUIRING USER CLARIFICATION
+================================================================================
+
+ISSUE 1: CMC Chem Lab (80 tests)
+--------------------------------------------------------------------------------
+Problem: 'CMC Chem Lab' abbreviation maps to 'CMC Core Lab' which handles
+         multiple categories (CHEM, HAEM, Blood Bank)
+
+Question: Should all 80 tests mapped to 'CMC Chem Lab' use:
+  A) CMC Core Lab with CHEM category?
+
+Affected tests (80):
+  - Alanine aminotransferase ( ALT)
+  - Albumin
+  - Albumin (ascitic fluid)
+  - Alkaline Phosphatase
+  - Alpha-feto protein
+  - Ammonia
+  - Amylase
+  - Amylase (Urine)
+  - Amylase (fluid)
+  - Aspartate aminoitransferase ,(AST)
+  ... and 70 more
+
+ISSUE 2: CMC Haem Lab (16 tests)
+--------------------------------------------------------------------------------
+Problem: 'CMC Haem Lab' abbreviation maps to 'CMC Core Lab' which handles
+         multiple categories (CHEM, HAEM, Blood Bank)
+
+Question: Should all 16 tests mapped to 'CMC Haem Lab' use:
+  A) CMC Core Lab with HAEM category?
+
+Affected tests (16):
+  - ABO & Rh(D) grouping
+  - Activated partial thromboplastin time (APTT)
+  - Bone marrow aspirate
+  - Cold agglutinin titre
+  - Complete blood count (CBC) Hb White cell count Platelet count Red cell index Differential count
+  - D-Dimer
+  - Direct antiglobulin test (Direct Coomb’s test)
+  - Erythrocyte sedimentation rate (ESR), automated
+  - G6PD activity (qualitative)
+  - Indirect Antiglobulin Test
+  - Malarial parasite
+  - Prothrombin time (PT) / INR
+  - Reticulocyte
+  - Semen analysis
+  - Type & screen
+  - Urine haemosiderin
+
+ISSUE 3: QEH Micro Lab (1 test)
+--------------------------------------------------------------------------------
+Problem: 'QEH Micro Lab' not found in config. No QEH Microbiology Lab exists
+         Only available: QEH Chemical Pathology Lab, QEH Haematology Lab
+
+Question: Should 'Endotoxin testing' be mapped to:
+  A) QEH Haematology Lab?
+  B) QEH Chemical Pathology Lab?
+  C) Or should a new QEH Virology Lab/Microbiology Lab be created?
+
+Affected test:
+  - Endotoxin testing
+
+ISSUE 4: NLTH Core Lab (1 test)
+--------------------------------------------------------------------------------
+Problem: 'NLTH Core Lab' abbreviation is ambiguous
+         Available: NLTH Chemical Pathology Lab, NLTH Haematology Lab
+
+Question: Should 'Adenosine Deaminase (ADA), body fluid' be mapped to:
+  A) NLTH Chemical Pathology Lab?
+  B) NLTH Haematology Lab?
+
+Affected test:
+  - Adenosine Deaminase (ADA), body fluid
+
+================================================================================
+NEXT STEPS:
+================================================================================
+Please provide clarification for the above 4 issues, and I will
+complete the mapping for the remaining 98 tests.
