@@ -1,6 +1,7 @@
 import "./test-form.css"
 import { formModules } from "$lib/form-link/form-link";
 import { base } from '$app/paths';
+import { form } from "$app/server";
 
 
 export default class TestFormTool {
@@ -31,15 +32,15 @@ export default class TestFormTool {
         if (this.data && this.data.form) {
             let formData = this.data.form
             if (!this.api.readOnly.isEnabled) {
-                return this._createCard(formData.form_id, formData.form_ref_id, formData.form_code, formData.form_name, formData.form_link, formData.formRequestOnly, true);
+                return this._createCard(formData.form_id, formData.form_ref_id, formData.form_code, formData.form_name, formData.form_link, formData.form_external_link, formData.formRequestOnly, true);
             }
-            return this._createCard(formData.form_id, formData.form_ref_id, formData.form_code, formData.form_name, formData.form_link, formData.formRequestOnly, false);
+            return this._createCard(formData.form_id, formData.form_ref_id, formData.form_code, formData.form_name, formData.form_link, formData.form_external_link, formData.formRequestOnly, false);
         } else {
             if (!this.api.readOnly.isEnabled) {
-                return this._createCard("", "", "", "", "", false, true);
+                return this._createCard("", "", "", "", "", "", false, true);
             } else {
-                return this._createCard("", "", "", "", "", false, false);
-            }  
+                return this._createCard("", "", "", "", "", "", false, false);
+            }
         }
     }
 
@@ -50,6 +51,7 @@ export default class TestFormTool {
         let form_ref_id = ""
         let form_name = ""
         let form_link = ""
+        let form_external_link = ""
         let formRequestOnly = false
 
         if (blockContent.tagName === 'DIV') {
@@ -62,6 +64,7 @@ export default class TestFormTool {
         form_ref_id = blockContent.getAttribute('data-form_ref_id');
         form_name = blockContent.getAttribute('data-form_name');
         form_link = blockContent.getAttribute('data-form_link');
+        form_external_link = blockContent.getAttribute('data-form_external_link');
         formRequestOnly = blockContent.getAttribute('data-formRequestOnly') === "true" ? true : false;
 
             } else {
@@ -70,6 +73,7 @@ export default class TestFormTool {
                 form_ref_id = blockContent.querySelector('.form-select').options[blockContent.querySelector('.form-select').selectedIndex].getAttribute('data-form_ref_id') || "";
                 form_name = blockContent.querySelector('.form-select').options[blockContent.querySelector('.form-select').selectedIndex].getAttribute('data-form_name') || "";
                 form_link = blockContent.querySelector('.form-select').options[blockContent.querySelector('.form-select').selectedIndex].getAttribute('data-form_link') || "";
+                form_external_link = blockContent.querySelector('.form-select').options[blockContent.querySelector('.form-select').selectedIndex].getAttribute('data-form_external_link') || "";
                 const inputs = blockContent.querySelectorAll('input');
                 inputs.forEach(input => {
                     if (input.checked) {
@@ -80,8 +84,6 @@ export default class TestFormTool {
 
         }
 
-        console.log(form_id, form_code, form_ref_id, form_name, form_link, formRequestOnly)
-
         return {
             form: {
                 form_id: form_id,
@@ -89,12 +91,13 @@ export default class TestFormTool {
                 form_code: form_code,
                 form_name: form_name,
                 form_link: form_link,
+                form_external_link: form_external_link,
                 formRequestOnly: formRequestOnly
         }
     }
     }
 
-    _createCard(form_id, form_ref_id, form_code, form_name, form_link, formRequestOnly=false, editable = false) {
+    _createCard(form_id, form_ref_id, form_code, form_name, form_link, form_external_link, formRequestOnly=false, editable = false) {
 
         const uniqueId = Math.floor(Math.random() * 10000000);
 
@@ -121,13 +124,16 @@ export default class TestFormTool {
                 const option_form_code = optionform.form_code.blocks[0].data.text;
                 const option_form_name = optionform.form_name.blocks[0].data.text;
                 const option_form_link = optionform.form_link.blocks[0].data.url;
-                
+                console.log(optionform);
+                const option_form_external_link = optionform.form_external_link.blocks[0].data.text;
+
                 option.value = optionform.id;
                 option.setAttribute('data-form_id', option_form_id.toString());
                 option.setAttribute('data-form_ref_id', option_form_ref_id.toString());
                 option.setAttribute('data-form_code', option_form_code);
                 option.setAttribute('data-form_name', option_form_name);
                 option.setAttribute('data-form_link', option_form_link);
+                option.setAttribute('data-form_external_link', option_form_external_link);
                 option.innerText = option_form_code + " - " + option_form_name
 
                 if (option_form_code === form_code) {
@@ -201,6 +207,7 @@ export default class TestFormTool {
         accordition.setAttribute('data-form_ref_id', form_ref_id.toString());
         accordition.setAttribute('data-form_name', form_name);
         accordition.setAttribute('data-form_link', form_link);
+        accordition.setAttribute('data-form_external_link', form_external_link);
         accordition.setAttribute('data-formRequestOnly', formRequestOnly.toString());
 
         const accorditonItem = document.createElement('div');
@@ -248,10 +255,23 @@ export default class TestFormTool {
                 window.open(buildUrl, '_blank');
             }
             accordionBody.appendChild(downloadButton);
+        } else if (form_external_link !== "") {
+            const downloadButton = document.createElement('button');
+            const buttonTone = formRequestOnly ? "btn-primary" : "btn-secondary";
+            downloadButton.classList.add('btn', buttonTone, 'btn-sm');
+            downloadButton.innerText = "Download Link";
+            downloadButton.onclick = () => {
+                // Ensure URL is absolute
+                const url = form_external_link.startsWith('http://') || form_external_link.startsWith('https://') 
+                    ? form_external_link 
+                    : 'https://' + form_external_link;
+                window.open(url, '_blank', 'noopener,noreferrer');
+            }
+            accordionBody.appendChild(downloadButton);
         } else {
             const noFormLinkMessage = document.createElement('p');
             noFormLinkMessage.classList.add('text-muted', 'mb-0');
-            noFormLinkMessage.innerText = "Please request the form (hard copy) from 8A Core Lab during office hours: 10:30 AM - 16:00 PM, weekdays only.";
+            noFormLinkMessage.innerText = "Please request the form (hard copy) from 8A Core Lab during office hours: Monday to Friday from 10:30 to 16:00 (closed at 13:00 -14:00);  Saturday from 10:00 a.m. to 12:00 noon) using PAT2198HO.";
             accordionBody.appendChild(noFormLinkMessage);
         }
 

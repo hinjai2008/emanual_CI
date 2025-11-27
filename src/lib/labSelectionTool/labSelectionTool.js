@@ -85,12 +85,11 @@ export default class LabSelectionTool {
                 span2.innerText = " - "
 
                 const span3 = document.createElement('span');
-                span3.classList.add('category-name');
+                span3.classList.add('category-name', 'd-none');
                 span3.setAttribute('data-category-code', this.data.categoryCode);
                 span3.innerText = this.data.categoryName;
 
                 wrapper.appendChild(span1);
-                wrapper.appendChild(span2);
                 wrapper.appendChild(span3);
 
                 return wrapper;

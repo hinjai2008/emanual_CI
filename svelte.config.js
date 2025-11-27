@@ -17,7 +17,7 @@ const config = {
 			fallback: null
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/emanual' : '' // Ensure this matches your GitHub repository name
+			base: process.env.NODE_ENV === 'production' ? '/emanual' : '' // set base path for production if needed
 		},
 		prerender: {
 			handleHttpError: 'fail',

@@ -332,6 +332,17 @@
     return indexData.tests.concat(indexData.forms).concat(indexData.containers);
   };
 
+
+  function ngramTokenizer(token) {
+  const str = token.toString(), n = 3, out = []
+  for (let i = 0; i <= str.length - n; i++)
+    out.push(new lunr.Token(str.substr(i, n), token.metadata))
+  if (str.length < n) out.push(token)
+  return out
+}
+  lunr.Pipeline.registerFunction(ngramTokenizer, 'ngramTokenizer')
+
+
   let selectedCategory = $state('');
   let selectedType = $state('allTypesSelected');
 
@@ -343,6 +354,10 @@
     this.field('synonyms');
     this.ref('id');
 
+    this.pipeline.reset();
+    this.pipeline.add(lunr.trimmer, ngramTokenizer);
+    this.searchPipeline.reset();
+    this.searchPipeline.add(lunr.trimmer, ngramTokenizer);
 
     if (!$isAdmin) {
 
@@ -519,6 +534,15 @@
         type: "form_link",
         data: {
           url: "",
+        },
+      },
+    ]},
+
+    form_external_link: {blocks: [
+      {
+        type: "paragraph",
+        data: {
+          text: "",
         },
       },
     ]},

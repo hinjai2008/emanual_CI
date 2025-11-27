@@ -73,9 +73,9 @@ export default class FormLinkTool {
         if (!editable) {
 
             if (url === "") {
-                const defaultText = document.createElement('span');
+                const defaultText = document.createElement('div');
                 defaultText.id = "defaultText";
-                defaultText.innerText = "Please request the form (hard copy) from 8A Core Lab during office hours: 10:30 AM - 16:00 PM, weekdays only.";
+                defaultText.innerText = "";
                 return defaultText;
             }
 

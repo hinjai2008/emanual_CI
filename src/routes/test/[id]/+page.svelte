@@ -97,7 +97,9 @@
     <table class="table table-striped table-bordered" style="width: 100%;">
         <tbody>
         <DataRow datatype={"testData"} rowName={"alert"} displayName={"Alert"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"full_name"} displayName={"Full Name"} isEditable={false} entryData={entryData}/>
+        {#if adminlayout}
+        <DataRow datatype={"testData"} rowName={"full_name"} displayName={"Full Name (To be removed)"} isEditable={false} entryData={entryData}/>
+        {/if}
         <DataRow datatype={"testData"} rowName={"GCRS_name"} displayName={"CMS Name"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"label_name"} displayName={"Label Name"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"requirement"} displayName={"Requirement"} isEditable={false} entryData={entryData}/>
@@ -140,7 +142,7 @@
         <table class="table table-striped table-bordered" style="width: 100%;">
             <tbody>
             <DataRow datatype={"testData"} rowName={"alert"} displayName={"Alert"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"full_name"} displayName={"Full Name"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"full_name"} displayName={"Full Name (To be removed)"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"GCRS_name"} displayName={"CMS Name"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"label_name"} displayName={"Label Name"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"requirement"} displayName={"Requirement"} isEditable={true} entryData={entryData}/>
