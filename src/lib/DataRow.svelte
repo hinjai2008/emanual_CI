@@ -12,6 +12,7 @@
     import FormLinkTool from './form-link/form-link';
     import TestFormTool from './test-form/test-form';
     import LabSelectionTool from './labSelectionTool/labSelectionTool';
+    import ReferToTool from './refer-to/refer-to';
     import { afterNavigate, beforeNavigate, onNavigate } from "$app/navigation";
     import { concurrentEditLock } from "../routes/stores";
     import "$lib/hideParagraphTool.css";
@@ -83,7 +84,7 @@
 
         const holder = isEditable ? rowName+"-editable" : rowName;
 
-        let tools = {
+        let tools = /** @type {Record<string, any>} */ ({
             paragraph: {
                 class: Paragraph,
                 inlineToolbar: true,
@@ -96,7 +97,7 @@
                 class: InlineCode,
                 shortcut: 'CMD+SHIFT+L',
     },
-        };
+        });
 
 
         if (rowName === "alert") {
@@ -182,6 +183,29 @@
             }
         }
 
+        if(rowName === "requirement") {
+            tools = {
+                paragraph: {
+                    class: Paragraph,
+                    inlineToolbar: true,
+                },
+                header: {
+                    class: Header,
+                    inlineToolbar: true,
+                },
+                inlineCode: {
+                    class: InlineCode,
+                    shortcut: 'CMD+SHIFT+L',
+                },
+                referTo: {
+                    class: ReferToTool,
+                    config: {
+                        labList: $editedJSON.config.laboratories,
+                    },
+                },
+            }
+        }
+
 
         // Dynamically import EditorJS to ensure it is only loaded in the browser
         const { default: EditorJS } = await import('@editorjs/editorjs');
@@ -240,6 +264,21 @@
 
     function doneAction() {
         editor.save().then((outputData) => {
+
+            if (rowName === "requirement" && outputData && outputData.blocks) {
+                outputData.blocks = outputData.blocks.map((block) => {
+                    if (block.type === 'referTo') {
+                        return {
+                            ...block,
+                            type: 'paragraph',
+                            data: {
+                                text: block.data?.text || '',
+                            },
+                        };
+                    }
+                    return block;
+                });
+            }
 
             //validation
             // The following fields cannot be empty as they will be indexed by the search

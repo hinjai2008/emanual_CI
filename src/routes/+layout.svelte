@@ -380,10 +380,118 @@
 
 
   let searchInput = $state('');
-  let searchResults = $derived(idx.search(searchInput));
+  let publishInProgress = $state(false);
+  let publishStatusMessage = $state('');
+  const defaultPublishEndpoint = 'https://emanual-publish-api.rayyt2020.workers.dev/publish';
+
+  function normalizePublishEndpoint(rawValue) {
+    if (!rawValue) {
+      return '';
+    }
+
+    let value = rawValue.trim();
+    if (!/^https?:\/\//i.test(value)) {
+      value = `https://${value}`;
+    }
+
+    if (!value.endsWith('/publish')) {
+      value = `${value.replace(/\/$/, '')}/publish`;
+    }
+
+    return value;
+  }
+
+  async function publishChangesListener() {
+    if (publishInProgress) {
+      return;
+    }
+
+    if (!$isAdmin) {
+      alert('Admin access is required to publish changes.');
+      return;
+    }
+
+    const defaultEndpoint = localStorage.getItem('publishApiUrl') || defaultPublishEndpoint;
+    const endpointInput = window.prompt(
+      'Enter the publish API endpoint URL (Cloudflare Worker URL or /publish endpoint):',
+      defaultEndpoint
+    );
+
+    if (!endpointInput) {
+      return;
+    }
+
+    const endpoint = normalizePublishEndpoint(endpointInput);
+    localStorage.setItem('publishApiUrl', endpoint);
+
+    const existingSecret = sessionStorage.getItem('publishApiSecret') || '';
+    const secretInput = window.prompt(
+      'Enter the publish API bearer secret. It will be kept only for this browser tab.',
+      existingSecret
+    );
+
+    if (!secretInput) {
+      return;
+    }
+
+    sessionStorage.setItem('publishApiSecret', secretInput);
+
+    if (!window.confirm('Publish the current edited JSON to GitHub Actions?')) {
+      return;
+    }
+
+    publishInProgress = true;
+    publishStatusMessage = 'Publishing...';
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${secretInput}`,
+        },
+        body: JSON.stringify({
+          editedJSON: $editedJSON,
+          commitMessage: `chore: publish editedJSON from UI (${new Date().toISOString()})`
+        })
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || !result.ok) {
+        const details = result?.details ? `\n\nDetails: ${result.details}` : '';
+        throw new Error((result?.error || `HTTP ${response.status}`) + details);
+      }
+
+      publishStatusMessage = 'Publish started.';
+
+      if (result.actionsUrl && window.confirm('Publish started successfully. Open GitHub Actions page in a new tab?')) {
+        window.open(result.actionsUrl, '_blank', 'noopener,noreferrer');
+      }
+    } catch (error) {
+      publishStatusMessage = 'Publish failed.';
+      alert(`Publish failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    } finally {
+      publishInProgress = false;
+    }
+  }
 
   let searchResultsDetails = $derived.by(() => {
-  
+    const keyword = (searchInput || '').trim();
+
+    // If no keyword is provided, show all filtered entries in alphabetical order
+    if (!keyword) {
+      const allEntries = $isAdmin
+        ? index_document($editedJSON, selectedType, selectedCategory)
+        : index_document(data.completeJSON, selectedType, selectedCategory);
+
+      return [...allEntries].sort((a, b) =>
+        (a.full_name || '').localeCompare((b.full_name || ''), undefined, { sensitivity: 'base' })
+      );
+    }
+
+    const searchResults = idx.search(keyword);
+
     return searchResults.map(result => {
       const resultType = result.ref.split('/')[0]; 
       const foundItem = indexData[resultType+"s"].find(item => item.id === result.ref);
@@ -699,10 +807,14 @@
       
       {#if $isAdmin}
       <li class="nav-item"><button id="exportButton" class="nav-link active">Save Changes</button></li>
+      <li class="nav-item"><button type="button" class="nav-link active ms-2" onclick={publishChangesListener} disabled={publishInProgress}>{publishInProgress ? 'Publishing...' : 'Publish Site'}</button></li>
       {/if}
       
     </ul>
   </header>
+  {#if publishStatusMessage}
+  <div class="small text-muted mb-2">{publishStatusMessage}</div>
+  {/if}
 </div>
 
 <!-- Sidebar and Content Wrapper -->
@@ -757,7 +869,7 @@
           >
             <div 
               class="d-flex w-100 align-items-center justify-content-between">
-              <strong class="mb-1">{resultDetails.full_name}</strong>
+              <strong class="mb-1">{resultDetails.id?.startsWith('test/') && resultDetails.GCRS_name ? resultDetails.GCRS_name : resultDetails.full_name}</strong>
             </div>
             <div class="col-10 mb-1 small">{resultDetails.short_name}</div>
           </a>

@@ -3,6 +3,27 @@ import { formModules } from "$lib/form-link/form-link";
 import { base } from '$app/paths';
 import { form } from "$app/server";
 
+const TIER_OPTION_LABELS = [
+    "Biochemistry Test Tier1",
+    "Biochemistry Test Tier2",
+    "Biochemistry Test Tier3",
+    "Haematology Test Tier1",
+    "Haematorlogy Test Tier 2",
+    "Haematology Test Tier 3",
+    "Microbiology Test Tier1",
+    "Microbiology Test Tier 2",
+    "Microbiology Test Tier 3",
+];
+
+function isTierOptionCode(form_code = "") {
+    return TIER_OPTION_LABELS.includes(form_code);
+}
+
+function getTierNoticeText(tierLabel = "") {
+    const contactNumber = tierLabel.includes("Microbiology") ? "29901851" : "34087740";
+    return `GCRS ordering was not specifically set up for this test, please order (${tierLabel}) in CMS and contact ${contactNumber} for authorization code.`;
+}
+
 
 export default class TestFormTool {
     static get toolbox() {
@@ -31,15 +52,16 @@ export default class TestFormTool {
     render() {
         if (this.data && this.data.form) {
             let formData = this.data.form
+            const specialTier = formData.specialTier === true || isTierOptionCode(formData.form_code);
             if (!this.api.readOnly.isEnabled) {
-                return this._createCard(formData.form_id, formData.form_ref_id, formData.form_code, formData.form_name, formData.form_link, formData.form_external_link, formData.formRequestOnly, true);
+                return this._createCard(formData.form_id, formData.form_ref_id, formData.form_code, formData.form_name, formData.form_link, formData.form_external_link, formData.formRequestOnly, true, specialTier);
             }
-            return this._createCard(formData.form_id, formData.form_ref_id, formData.form_code, formData.form_name, formData.form_link, formData.form_external_link, formData.formRequestOnly, false);
+            return this._createCard(formData.form_id, formData.form_ref_id, formData.form_code, formData.form_name, formData.form_link, formData.form_external_link, formData.formRequestOnly, false, specialTier);
         } else {
             if (!this.api.readOnly.isEnabled) {
-                return this._createCard("", "", "", "", "", "", false, true);
+                return this._createCard("", "", "", "", "", "", false, true, false);
             } else {
-                return this._createCard("", "", "", "", "", "", false, false);
+                return this._createCard("", "", "", "", "", "", false, false, false);
             }
         }
     }
@@ -53,6 +75,7 @@ export default class TestFormTool {
         let form_link = ""
         let form_external_link = ""
         let formRequestOnly = false
+        let specialTier = false
 
         if (blockContent.tagName === 'DIV') {
 
@@ -66,6 +89,7 @@ export default class TestFormTool {
         form_link = blockContent.getAttribute('data-form_link');
         form_external_link = blockContent.getAttribute('data-form_external_link');
         formRequestOnly = blockContent.getAttribute('data-formRequestOnly') === "true" ? true : false;
+        specialTier = blockContent.getAttribute('data-specialTier') === "true" ? true : false;
 
             } else {
                 form_id = blockContent.querySelector('.form-select').value
@@ -74,6 +98,7 @@ export default class TestFormTool {
                 form_name = blockContent.querySelector('.form-select').options[blockContent.querySelector('.form-select').selectedIndex].getAttribute('data-form_name') || "";
                 form_link = blockContent.querySelector('.form-select').options[blockContent.querySelector('.form-select').selectedIndex].getAttribute('data-form_link') || "";
                 form_external_link = blockContent.querySelector('.form-select').options[blockContent.querySelector('.form-select').selectedIndex].getAttribute('data-form_external_link') || "";
+                specialTier = blockContent.querySelector('.form-select').options[blockContent.querySelector('.form-select').selectedIndex].getAttribute('data-special_tier') === "true";
                 const inputs = blockContent.querySelectorAll('input');
                 inputs.forEach(input => {
                     if (input.checked) {
@@ -92,12 +117,13 @@ export default class TestFormTool {
                 form_name: form_name,
                 form_link: form_link,
                 form_external_link: form_external_link,
-                formRequestOnly: formRequestOnly
+                formRequestOnly: formRequestOnly,
+                specialTier: specialTier
         }
     }
     }
 
-    _createCard(form_id, form_ref_id, form_code, form_name, form_link, form_external_link, formRequestOnly=false, editable = false) {
+    _createCard(form_id, form_ref_id, form_code, form_name, form_link, form_external_link, formRequestOnly=false, editable = false, specialTier = false) {
 
         const uniqueId = Math.floor(Math.random() * 10000000);
 
@@ -114,7 +140,27 @@ export default class TestFormTool {
             const defaultOption = document.createElement('option');
             defaultOption.value = "";
             defaultOption.innerText = "GCRS only";
+            defaultOption.setAttribute('data-special_tier', "false");
             formSelect.appendChild(defaultOption);
+
+            TIER_OPTION_LABELS.forEach((tierLabel) => {
+                const tierOption = document.createElement('option');
+                tierOption.value = `tier:${tierLabel}`;
+                tierOption.setAttribute('data-form_id', "");
+                tierOption.setAttribute('data-form_ref_id', "");
+                tierOption.setAttribute('data-form_code', tierLabel);
+                tierOption.setAttribute('data-form_name', "");
+                tierOption.setAttribute('data-form_link', "");
+                tierOption.setAttribute('data-form_external_link', "");
+                tierOption.setAttribute('data-special_tier', "true");
+                tierOption.innerText = tierLabel;
+
+                if (form_code === tierLabel || (specialTier && form_code === tierLabel)) {
+                    tierOption.selected = true;
+                }
+
+                formSelect.appendChild(tierOption);
+            });
 
             this.config.formList.forEach(optionform => {
                 const option = document.createElement('option');
@@ -134,6 +180,7 @@ export default class TestFormTool {
                 option.setAttribute('data-form_name', option_form_name);
                 option.setAttribute('data-form_link', option_form_link);
                 option.setAttribute('data-form_external_link', option_form_external_link);
+                option.setAttribute('data-special_tier', "false");
                 option.innerText = option_form_code + " - " + option_form_name
 
                 if (option_form_code === form_code) {
@@ -189,6 +236,61 @@ export default class TestFormTool {
 
 
         if (!editable) {
+            const isTierSelection = specialTier || isTierOptionCode(form_code);
+
+            if (isTierSelection) {
+                const tierLabel = form_code || "Biochemistry Test Tier1";
+                const tierRefId = form_ref_id && form_ref_id !== "" ? form_ref_id : `tier_${uniqueId}`;
+
+                const accordition = document.createElement('div');
+                accordition.classList.add('accordion');
+                accordition.id = tierRefId;
+                accordition.setAttribute('data-form_id', form_id?.toString() || "");
+                accordition.setAttribute('data-form_code', tierLabel);
+                accordition.setAttribute('data-form_ref_id', tierRefId.toString());
+                accordition.setAttribute('data-form_name', "");
+                accordition.setAttribute('data-form_link', "");
+                accordition.setAttribute('data-form_external_link', "");
+                accordition.setAttribute('data-formRequestOnly', "true");
+                accordition.setAttribute('data-specialTier', "true");
+
+                const accorditonItem = document.createElement('div');
+                accorditonItem.classList.add('accordion-item');
+
+                const accorditionHeader = document.createElement('h2');
+                accorditionHeader.classList.add('accordion-header');
+
+                const accorditionHeaderBtn = document.createElement('button');
+                accorditionHeaderBtn.classList.add('accordion-button');
+                accorditionHeaderBtn.type = 'button';
+                accorditionHeaderBtn.setAttribute('data-bs-toggle', 'collapse');
+                accorditionHeaderBtn.setAttribute('data-bs-target', '#' + tierRefId + 'Content');
+                accorditionHeaderBtn.innerText = "Non specific GCRS test ordering - " + tierLabel;
+
+                const collapseWrapper = document.createElement('div');
+                collapseWrapper.classList.add('accordion-collapse', 'collapse', 'show');
+                collapseWrapper.id = tierRefId + 'Content';
+                collapseWrapper.setAttribute('data-bs-parent', '#' + tierRefId);
+
+                const accordionBody = document.createElement('div');
+                accordionBody.classList.add('accordion-body');
+                accordionBody.style.width = "100%";
+
+                const noFormLinkMessage = document.createElement('p');
+                noFormLinkMessage.classList.add('mb-0');
+                noFormLinkMessage.innerText = getTierNoticeText(tierLabel);
+                accordionBody.appendChild(noFormLinkMessage);
+
+                accorditionHeader.appendChild(accorditionHeaderBtn);
+                accorditonItem.appendChild(accorditionHeader);
+
+                collapseWrapper.appendChild(accordionBody);
+                accorditonItem.appendChild(collapseWrapper);
+
+                accordition.appendChild(accorditonItem);
+
+                return accordition;
+            }
             
             // form_link can be empty, but form_id, form_ref_id and form_name cannot be empty
             if (form_name === "" || form_id === "" || form_ref_id === "" || formRequestOnly === null) {

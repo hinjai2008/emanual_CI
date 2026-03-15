@@ -1,0 +1,13 @@
+name = "emanual-publish-api"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+[vars]
+GH_OWNER = "hinjai2008"
+GH_REPO = "emanual"
+GH_WORKFLOW_FILE = "deploy-pages.yml"
+GH_REF = "gh-pages"
+# For strict security, set your app origin instead of *
+ALLOWED_ORIGIN = "*"
+ 
