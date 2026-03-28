@@ -1,6 +1,59 @@
 {
 	"config": {
-		"editTrace": [],
+		"editTrace": [
+			{
+				"dataType": "testData",
+				"dataId": "128",
+				"refId": null,
+				"editType": "modify",
+				"field": "requirement",
+				"originalValue": {
+					"time": 1774728231865,
+					"blocks": [
+						{
+							"id": "_x5wmoHqiA",
+							"type": "paragraph",
+							"data": {
+								"text": "TEST"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1774730378947,
+					"blocks": [],
+					"version": "2.31.0-rc.7"
+				},
+				"timestamp": "2026-03-28T20:39:38.949Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "128",
+				"refId": null,
+				"editType": "modify",
+				"field": "test_handling",
+				"originalValue": {
+					"time": 1774728240760,
+					"blocks": [
+						{
+							"id": "IdFY8u8cIm",
+							"type": "paragraph",
+							"data": {
+								"text": "TEST1"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1774730383377,
+					"blocks": [],
+					"version": "2.31.0-rc.7"
+				},
+				"timestamp": "2026-03-28T20:39:43.378Z"
+			}
+		],
 		"category": [
 			{
 				"code": "CHEM",
@@ -23730,29 +23783,13 @@
 				"version": "2.31.0-rc.7"
 			},
 			"requirement": {
-				"time": 1774728231865,
-				"blocks": [
-					{
-						"id": "_x5wmoHqiA",
-						"type": "paragraph",
-						"data": {
-							"text": "TEST"
-						}
-					}
-				],
+				"time": 1774730378947,
+				"blocks": [],
 				"version": "2.31.0-rc.7"
 			},
 			"test_handling": {
-				"time": 1774728240760,
-				"blocks": [
-					{
-						"id": "IdFY8u8cIm",
-						"type": "paragraph",
-						"data": {
-							"text": "TEST1"
-						}
-					}
-				],
+				"time": 1774730383377,
+				"blocks": [],
 				"version": "2.31.0-rc.7"
 			}
 		},
