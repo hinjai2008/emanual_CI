@@ -1,0 +1,14 @@
+[
+  {
+    "versionId": "20260328T191249Z_req-1774725152506",
+    "publishedAt": "2026-03-28T19:12:49.571Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1774725152506",
+    "sourceRef": "main",
+    "summary": "test1",
+    "editTraceCount": 1,
+    "snapshotPath": "content-versions/snapshots/2026/20260328T191249Z_req-1774725152506.json",
+    "contentSha256": "5184d574a549b0f711285e3ec4c77d40d60b64adf204076afb6098a2831ce2cd",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23692349011"
+  }
+]
