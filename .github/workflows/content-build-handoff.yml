@@ -180,6 +180,66 @@ jobs:
           git commit -m "chore: archive editTrace and snapshot for request ${REQUEST_ID}"
           git push origin "HEAD:${SOURCE_REF}"
 
+      - name: Generate current content version marker
+        id: content_version
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          const crypto = require('crypto');
+
+          const staticDir = path.join(process.cwd(), 'static');
+          const rawDataPath = path.join(process.cwd(), 'src', 'routes', 'rawData.json');
+          const manifestPath = path.join(staticDir, 'content-versions', 'manifest.json');
+          const markerPath = path.join(staticDir, 'content-version.json');
+
+          const requestId = process.env.REQUEST_ID;
+          const adminId = process.env.ADMIN_ID;
+          const sourceRef = process.env.SOURCE_REF;
+          const publishSummary = process.env.PUBLISH_SUMMARY || '';
+          const runUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+
+          const rawDataContent = fs.readFileSync(rawDataPath, 'utf8');
+          const contentSha256 = crypto.createHash('sha256').update(rawDataContent).digest('hex');
+
+          let manifest = [];
+          if (fs.existsSync(manifestPath)) {
+            try {
+              const parsed = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+              if (Array.isArray(parsed)) {
+                manifest = parsed;
+              }
+            } catch {
+              manifest = [];
+            }
+          }
+
+          const latest = manifest.length > 0 ? manifest[manifest.length - 1] : null;
+          const fallbackVersionId = `${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z')}_${requestId}`;
+
+          const marker = {
+            versionId: latest?.versionId || fallbackVersionId,
+            requestId: latest?.requestId || requestId,
+            publishedAt: latest?.publishedAt || new Date().toISOString(),
+            publishedBy: latest?.publishedBy || adminId,
+            sourceRef: latest?.sourceRef || sourceRef,
+            summary: latest?.summary || publishSummary,
+            editTraceCount: typeof latest?.editTraceCount === 'number' ? latest.editTraceCount : 0,
+            snapshotPath: latest?.snapshotPath || '',
+            contentSha256,
+            buildRunUrl: runUrl,
+            environment: 'predeploy'
+          };
+
+          fs.mkdirSync(path.dirname(markerPath), { recursive: true });
+          fs.writeFileSync(markerPath, JSON.stringify(marker, null, 2) + '\n');
+
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `current_version_id=${marker.versionId}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `current_content_sha256=${marker.contentSha256}\n`);
+          EOF
+
       - name: Install dependencies
         run: npm ci
 
