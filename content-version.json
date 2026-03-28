@@ -1,0 +1,13 @@
+{
+  "versionId": "20260328T204008Z_req-1774730396675",
+  "requestId": "req-1774730396675",
+  "publishedAt": "2026-03-28T20:40:08.945Z",
+  "publishedBy": "Ray",
+  "sourceRef": "main",
+  "summary": "test3",
+  "editTraceCount": 2,
+  "snapshotPath": "content-versions/snapshots/2026/20260328T204008Z_req-1774730396675.json",
+  "contentSha256": "be55617ed3dbfe6753033f2714849d2249779397575cf0daff1821f49c927945",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23693876367",
+  "environment": "predeploy"
+}
