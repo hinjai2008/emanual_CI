@@ -94,9 +94,6 @@ jobs:
           node <<'EOF'
           const fs = require('fs');
           const path = require('path');
-
-          const fs = require('fs');
-          const path = require('path');
           const crypto = require('crypto');
 
           const rawDataPath = path.join(process.cwd(), 'src', 'routes', 'rawData.json');
