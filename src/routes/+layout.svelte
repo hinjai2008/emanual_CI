@@ -496,26 +496,6 @@
 
     sessionStorage.setItem('publishApiSecret', secretInput);
 
-    const existingRecipientEmail = localStorage.getItem('publishRecipientEmail') || '';
-    const recipientEmailInput = window.prompt(
-      'Enter recipient email address for notifications',
-      existingRecipientEmail
-    );
-
-    if (!recipientEmailInput && recipientEmailInput !== '') {
-      return;
-    }
-
-    const recipientEmail = recipientEmailInput.trim();
-    if (recipientEmail && !recipientEmail.includes('@')) {
-      alert('Invalid email address.');
-      return;
-    }
-
-    if (recipientEmail) {
-      localStorage.setItem('publishRecipientEmail', recipientEmail);
-    }
-
     if (!window.confirm('Publish the current edited JSON to GitHub Actions?')) {
       return;
     }
@@ -532,9 +512,7 @@
         },
         body: JSON.stringify({
           editedJSON: $editedJSON,
-          commitMessage: `chore: publish editedJSON from UI (${new Date().toISOString()})`,
-          adminEmail: recipientEmail,
-          notificationChannel: 'email-only'
+          commitMessage: `chore: publish editedJSON from UI (${new Date().toISOString()})`
         })
       });
 
@@ -547,7 +525,7 @@
 
       publishStatusMessage = 'Publish started.';
 
-      if (result.actionsUrl && window.confirm('Publish started successfully. Open GitHub Actions page in a new tab?')) {
+      if (result.actionsUrl) {
         window.open(result.actionsUrl, '_blank', 'noopener,noreferrer');
       }
     } catch (error) {

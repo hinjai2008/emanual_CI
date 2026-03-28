@@ -26,11 +26,6 @@ on:
         description: Optional sha256 checksum for downloaded snapshot
         required: false
         type: string
-      admin_email:
-        description: Optional admin email override for this run
-        required: false
-        type: string
-
 permissions:
   contents: read
   actions: read
@@ -49,14 +44,6 @@ jobs:
       SNAPSHOT_URL: ${{ github.event.client_payload.snapshot_url || github.event.inputs.snapshot_url }}
       SNAPSHOT_SHA256: ${{ github.event.client_payload.snapshot_sha256 || github.event.inputs.snapshot_sha256 }}
       SNAPSHOT_BEARER: ${{ secrets.CONTENT_SNAPSHOT_BEARER }}
-      EMAIL_TO_INPUT: ${{ github.event.client_payload.admin_email || github.event.inputs.admin_email }}
-      EMAIL_TO_SECRET: ${{ secrets.ADMIN_BUILD_EMAIL_TO }}
-      EMAIL_CC: ${{ secrets.ADMIN_BUILD_EMAIL_CC }}
-      SMTP_SERVER: ${{ secrets.ADMIN_SMTP_SERVER }}
-      SMTP_PORT: ${{ secrets.ADMIN_SMTP_PORT }}
-      SMTP_USERNAME: ${{ secrets.ADMIN_SMTP_USERNAME }}
-      SMTP_PASSWORD: ${{ secrets.ADMIN_SMTP_PASSWORD }}
-      SMTP_FROM: ${{ secrets.ADMIN_SMTP_FROM }}
 
     steps:
       - name: Checkout
@@ -138,61 +125,8 @@ jobs:
             core.setOutput('artifact_archive_url', artifact.archive_download_url);
             core.setOutput('run_url', `${context.serverUrl}/${owner}/${repo}/actions/runs/${run_id}`);
 
-      - name: Resolve email recipient
-        if: ${{ always() }}
-        id: email_recipient
-        shell: bash
-        run: |
-          set -euo pipefail
-          EMAIL_TO="${EMAIL_TO_INPUT}"
-          if [ -z "${EMAIL_TO}" ]; then
-            EMAIL_TO="${EMAIL_TO_SECRET}"
-          fi
-          echo "email_to=${EMAIL_TO}" >> "$GITHUB_OUTPUT"
-
-      - name: Notify admin by email (success)
-        if: ${{ success() && steps.email_recipient.outputs.email_to != '' && env.SMTP_SERVER != '' && env.SMTP_USERNAME != '' && env.SMTP_PASSWORD != '' && env.SMTP_FROM != '' }}
-        uses: dawidd6/action-send-mail@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3 # Use a standard action
         with:
-          server_address: ${{ env.SMTP_SERVER }}
-          server_port: ${{ env.SMTP_PORT != '' && env.SMTP_PORT || 587 }}
-          secure: false
-          username: ${{ env.SMTP_USERNAME }}
-          password: ${{ env.SMTP_PASSWORD }}
-          subject: "[Content Build] Success - Request ${{ env.REQUEST_ID }}"
-          from: ${{ env.SMTP_FROM }}
-          to: ${{ steps.email_recipient.outputs.email_to }}
-          cc: ${{ env.EMAIL_CC }}
-          body: |
-            Build completed successfully.
-
-            Request ID: ${{ env.REQUEST_ID }}
-            Admin ID: ${{ env.ADMIN_ID }}
-            Repository: ${{ github.repository }}
-            Run URL: ${{ steps.artifact_meta.outputs.run_url }}
-            Artifact Name: ${{ steps.artifact_meta.outputs.artifact_name }}
-            Artifact Archive URL: ${{ steps.artifact_meta.outputs.artifact_archive_url }}
-            Artifact SHA256: ${{ steps.package_artifact.outputs.build_sha256 }}
-            Commit SHA: ${{ github.sha }}
-
-      - name: Notify admin by email (failure)
-        if: ${{ failure() && steps.email_recipient.outputs.email_to != '' && env.SMTP_SERVER != '' && env.SMTP_USERNAME != '' && env.SMTP_PASSWORD != '' && env.SMTP_FROM != '' }}
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: ${{ env.SMTP_SERVER }}
-          server_port: ${{ env.SMTP_PORT != '' && env.SMTP_PORT || 587 }}
-          secure: false
-          username: ${{ env.SMTP_USERNAME }}
-          password: ${{ env.SMTP_PASSWORD }}
-          subject: "[Content Build] Failed - Request ${{ env.REQUEST_ID }}"
-          from: ${{ env.SMTP_FROM }}
-          to: ${{ steps.email_recipient.outputs.email_to }}
-          cc: ${{ env.EMAIL_CC }}
-          body: |
-            Build failed.
-
-            Request ID: ${{ env.REQUEST_ID }}
-            Admin ID: ${{ env.ADMIN_ID }}
-            Repository: ${{ github.repository }}
-            Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            Commit SHA: ${{ github.sha }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build

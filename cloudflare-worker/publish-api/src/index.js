@@ -7,7 +7,7 @@
  *   requestId?: string,
  *   adminId?: string,
  *   adminEmail?: string,
- *   notificationChannel?: 'email-only' (currently only email notifications supported)
+ *   commitMessage?: string
  * }
  * Header: Authorization: Bearer <PUBLISH_SHARED_SECRET>
  *
@@ -21,7 +21,7 @@
  *
  * Optional Worker Vars:
  * - GH_WORKFLOW_FILE       (default: content-build-handoff.yml)
- * - GH_REF                 (default: main)
+ * - GH_REF                 (default: gh-pages)
  * - ALLOWED_ORIGIN         (default: *)
  */
 
@@ -61,9 +61,7 @@ export default {
     const editedJSON = body?.editedJSON;
     const requestId = String(body?.requestId || `req-${Date.now()}`);
     const adminId = String(body?.adminId || 'ui-admin');
-    const callbackUrl = body?.callbackUrl ? String(body.callbackUrl) : '';
-    const adminEmail = body?.adminEmail ? String(body.adminEmail) : '';
-    const notificationChannel = String(body?.notificationChannel || 'both').toLowerCase();
+    const commitMessage = String(body?.commitMessage || `chore: update rawData.json (${requestId})`);  
 
     if (!editedJSON || typeof editedJSON !== 'object') {
       return json({ ok: false, error: 'editedJSON is required' }, 400, corsHeaders);
@@ -75,17 +73,6 @@ export default {
       if (!(key in editedJSON)) {
         return json({ ok: false, error: `editedJSON missing key: ${key}` }, 400, corsHeaders);
       }
-    }
-
-    if (!['both', 'webhook-only', 'email-only'].includes(notificationChannel)) {
-      return json(
-        {
-          ok: false,
-          error: 'notificationChannel must be one of: both, webhook-only, email-only'
-        },
-        400,
-        corsHeaders
-      );
     }
 
     // 3) Build workflow dispatch payload
@@ -108,6 +95,29 @@ export default {
     const raw = JSON.stringify(editedJSON, null, '\t');
     const contentBase64 = bytesToBase64(new TextEncoder().encode(raw));
 
+    // Avoid GitHub workflow input size limits by updating rawData.json in repo first.
+    const updateRawDataResp = await upsertRawDataFile(
+      env,
+      owner,
+      repo,
+      ref,
+      contentBase64,
+      commitMessage
+    );
+
+    if (!updateRawDataResp.ok) {
+      return json(
+        {
+          ok: false,
+          error: 'Failed to update src/routes/rawData.json before workflow dispatch',
+          status: updateRawDataResp.status,
+          details: updateRawDataResp.text
+        },
+        502,
+        corsHeaders
+      );
+    }
+
     const dispatchResp = await githubRequest(
       env,
       `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/dispatches`,
@@ -117,11 +127,7 @@ export default {
           ref,
           inputs: {
             request_id: requestId,
-            admin_id: adminId,
-            rawdata_base64: contentBase64,
-            callback_url: callbackUrl,
-            admin_email: adminEmail,
-            notification_channel: notificationChannel
+            admin_id: adminId
           }
         })
       }
@@ -192,6 +198,40 @@ async function githubRequest(env, url, init = {}) {
     status: resp.status,
     text: await safeText(resp)
   };
+}
+
+async function upsertRawDataFile(env, owner, repo, ref, contentBase64, commitMessage) {
+  const contentsUrl = `https://api.github.com/repos/${owner}/${repo}/contents/src/routes/rawData.json?ref=${encodeURIComponent(ref)}`;
+
+  const currentFileResp = await githubRequest(env, contentsUrl);
+  let currentSha;
+
+  if (currentFileResp.ok) {
+    try {
+      const fileData = JSON.parse(currentFileResp.text);
+      currentSha = fileData?.sha;
+    } catch {
+      return {
+        ok: false,
+        status: 502,
+        text: 'Could not parse current src/routes/rawData.json metadata from GitHub API'
+      };
+    }
+  } else if (currentFileResp.status !== 404) {
+    return currentFileResp;
+  }
+
+  const payload = {
+    message: commitMessage,
+    content: contentBase64,
+    branch: ref,
+    ...(currentSha ? { sha: currentSha } : {})
+  };
+
+  return githubRequest(env, `https://api.github.com/repos/${owner}/${repo}/contents/src/routes/rawData.json`, {
+    method: 'PUT',
+    body: JSON.stringify(payload)
+  });
 }
 
 function bytesToBase64(bytes) {

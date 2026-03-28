@@ -7,7 +7,7 @@ workers_dev = true
 GH_OWNER = "hinjai2008"
 GH_REPO = "emanual_CI"
 GH_WORKFLOW_FILE = "content-build-handoff.yml"
-GH_REF = "main"
+GH_REF = "gh-pages"
 # For strict security, set your app origin instead of *
 ALLOWED_ORIGIN = "*"
  
