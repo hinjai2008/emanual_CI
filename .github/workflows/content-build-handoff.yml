@@ -14,6 +14,10 @@ on:
         description: Optional admin id for tracing
         required: false
         type: string
+      publish_summary:
+        description: Optional summary describing this publish
+        required: false
+        type: string
       rawdata_base64:
         description: Optional base64 encoded src/routes/rawData.json payload
         required: false
@@ -41,6 +45,7 @@ jobs:
       SOURCE_REF: ${{ github.ref_name }}
       REQUEST_ID: ${{ github.event.client_payload.request_id || github.event.inputs.request_id || github.run_id }}
       ADMIN_ID: ${{ github.event.client_payload.admin_id || github.event.inputs.admin_id || 'unknown-admin' }}
+      PUBLISH_SUMMARY: ${{ github.event.client_payload.publish_summary || github.event.inputs.publish_summary || '' }}
       RAWDATA_BASE64: ${{ github.event.client_payload.rawdata_base64 || github.event.inputs.rawdata_base64 }}
       SNAPSHOT_URL: ${{ github.event.client_payload.snapshot_url || github.event.inputs.snapshot_url }}
       SNAPSHOT_SHA256: ${{ github.event.client_payload.snapshot_sha256 || github.event.inputs.snapshot_sha256 }}
@@ -90,26 +95,71 @@ jobs:
           const fs = require('fs');
           const path = require('path');
 
+          const fs = require('fs');
+          const path = require('path');
+          const crypto = require('crypto');
+
           const rawDataPath = path.join(process.cwd(), 'src', 'routes', 'rawData.json');
-          const logPath = path.join(process.cwd(), 'logs', 'edit-trace.jsonl');
+          const logPath = path.join(process.cwd(), 'static', 'edit-trace.jsonl');
+          const manifestPath = path.join(process.cwd(), 'static', 'content-versions', 'manifest.json');
+          const snapshotsBaseDir = path.join(process.cwd(), 'static', 'content-versions', 'snapshots');
+
           const requestId = process.env.REQUEST_ID;
           const adminId = process.env.ADMIN_ID;
           const sourceRef = process.env.SOURCE_REF;
+          const publishSummary = process.env.PUBLISH_SUMMARY || '';
+          const runUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
 
-          const rawData = JSON.parse(fs.readFileSync(rawDataPath, 'utf8'));
+          const rawDataContent = fs.readFileSync(rawDataPath, 'utf8');
+          const rawData = JSON.parse(rawDataContent);
           const traces = Array.isArray(rawData?.config?.editTrace) ? rawData.config.editTrace : [];
 
           fs.mkdirSync(path.dirname(logPath), { recursive: true });
 
+          const loggedAt = new Date().toISOString();
+
           if (traces.length > 0) {
             const lines = traces.map((trace) => JSON.stringify({
-              loggedAt: new Date().toISOString(),
+              loggedAt,
               requestId,
               adminId,
               sourceRef,
               trace
             }));
             fs.appendFileSync(logPath, `${lines.join('\n')}\n`);
+
+            // Write content snapshot
+            const now = new Date();
+            const year = now.getUTCFullYear().toString();
+            const ts = now.toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
+            const versionId = `${ts}_${requestId}`;
+            const snapshotDir = path.join(snapshotsBaseDir, year);
+            fs.mkdirSync(snapshotDir, { recursive: true });
+            const snapshotRelPath = `content-versions/snapshots/${year}/${versionId}.json`;
+            fs.writeFileSync(path.join(snapshotDir, `${versionId}.json`), rawDataContent);
+            const contentSha256 = crypto.createHash('sha256').update(rawDataContent).digest('hex');
+
+            // Append to manifest
+            let manifest = [];
+            if (fs.existsSync(manifestPath)) {
+              try { manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')); } catch {}
+            }
+            manifest.push({
+              versionId,
+              publishedAt: loggedAt,
+              publishedBy: adminId,
+              requestId,
+              sourceRef,
+              summary: publishSummary,
+              editTraceCount: traces.length,
+              snapshotPath: snapshotRelPath,
+              contentSha256,
+              buildRunUrl: runUrl
+            });
+            fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+            fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `version_id=${versionId}\n`);
           }
 
           if (!rawData.config) {
@@ -119,7 +169,7 @@ jobs:
           fs.writeFileSync(rawDataPath, JSON.stringify(rawData, null, '\t') + '\n');
 
           fs.appendFileSync(process.env.GITHUB_OUTPUT, `trace_count=${traces.length}\n`);
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `log_path=logs/edit-trace.jsonl\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `log_path=static/edit-trace.jsonl\n`);
           EOF
 
       - name: Commit editTrace log and clear source editTrace
@@ -129,8 +179,8 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/routes/rawData.json logs/edit-trace.jsonl
-          git commit -m "chore: archive editTrace for request ${REQUEST_ID}"
+          git add src/routes/rawData.json static/edit-trace.jsonl static/content-versions/
+          git commit -m "chore: archive editTrace and snapshot for request ${REQUEST_ID}"
           git push origin "HEAD:${SOURCE_REF}"
 
       - name: Install dependencies

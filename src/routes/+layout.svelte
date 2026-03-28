@@ -497,6 +497,27 @@
 
     sessionStorage.setItem('publishApiSecret', secretInput);
 
+    const existingPublisherName = localStorage.getItem('publishAdminName') || '';
+    const publisherNameInput = window.prompt(
+      'Input your name (required for publish log):',
+      existingPublisherName
+    );
+
+    if (publisherNameInput === null) {
+      return;
+    }
+
+    const publisherName = publisherNameInput.trim();
+    if (!publisherName) {
+      alert('Your name is required to publish the site.');
+      return;
+    }
+
+    localStorage.setItem('publishAdminName', publisherName);
+
+    const publishSummaryInput = window.prompt('Describe this publish (optional, press Cancel to skip):', '');
+    const publishSummary = publishSummaryInput !== null ? publishSummaryInput.trim() : '';
+
     if (!window.confirm('Publish the current edited JSON to GitHub Actions?')) {
       return;
     }
@@ -513,6 +534,8 @@
         },
         body: JSON.stringify({
           editedJSON: $editedJSON,
+          adminId: publisherName,
+          publishSummary,
           commitMessage: `chore: publish editedJSON from UI (${new Date().toISOString()})`
         })
       });
@@ -867,6 +890,7 @@
       {#if $isAdmin}
       <li class="nav-item"><button id="exportButton" class="nav-link active">Save Changes</button></li>
       <li class="nav-item"><button type="button" class="nav-link active ms-2" onclick={publishChangesListener} disabled={publishInProgress}>{publishInProgress ? 'Publishing...' : 'Publish Site'}</button></li>
+      <li class="nav-item"><a href="{base}/dashboard" class="nav-link active ms-2">Dashboard</a></li>
       {/if}
       
     </ul>

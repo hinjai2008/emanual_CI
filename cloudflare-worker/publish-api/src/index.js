@@ -6,7 +6,7 @@
  *   editedJSON: object,
  *   requestId?: string,
  *   adminId?: string,
- *   adminEmail?: string,
+ *   publishSummary?: string,
  *   commitMessage?: string
  * }
  * Header: Authorization: Bearer <PUBLISH_SHARED_SECRET>
@@ -61,6 +61,7 @@ export default {
     const editedJSON = body?.editedJSON;
     const requestId = String(body?.requestId || `req-${Date.now()}`);
     const adminId = String(body?.adminId || 'ui-admin');
+    const publishSummary = String(body?.publishSummary || '');
     const commitMessage = String(body?.commitMessage || `chore: update rawData.json (${requestId})`);  
 
     if (!editedJSON || typeof editedJSON !== 'object') {
@@ -127,7 +128,8 @@ export default {
           ref,
           inputs: {
             request_id: requestId,
-            admin_id: adminId
+            admin_id: adminId,
+            publish_summary: publishSummary
           }
         })
       }
