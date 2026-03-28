@@ -169,17 +169,6 @@ jobs:
           fs.appendFileSync(process.env.GITHUB_OUTPUT, `log_path=static/edit-trace.jsonl\n`);
           EOF
 
-      - name: Commit editTrace log and clear source editTrace
-        if: ${{ steps.edit_trace.outputs.trace_count != '0' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/routes/rawData.json static/edit-trace.jsonl static/content-versions/
-          git commit -m "chore: archive editTrace and snapshot for request ${REQUEST_ID}"
-          git push origin "HEAD:${SOURCE_REF}"
-
       - name: Generate current content version marker
         id: content_version
         shell: bash
@@ -239,6 +228,22 @@ jobs:
           fs.appendFileSync(process.env.GITHUB_OUTPUT, `current_version_id=${marker.versionId}\n`);
           fs.appendFileSync(process.env.GITHUB_OUTPUT, `current_content_sha256=${marker.contentSha256}\n`);
           EOF
+
+      - name: Commit source content tracking updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/routes/rawData.json static/edit-trace.jsonl static/content-versions/ static/content-version.json
+
+          if git diff --cached --quiet; then
+            echo "No source content tracking changes to commit"
+            exit 0
+          fi
+
+          git commit -m "chore: update content tracking for request ${REQUEST_ID}"
+          git push origin "HEAD:${SOURCE_REF}"
 
       - name: Install dependencies
         run: npm ci
