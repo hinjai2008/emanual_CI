@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store';
 import completeJSON from './rawData.json'
 
+export const initialJSON = completeJSON;
+
 export const isAdmin = writable(false);
 
 export const isStaff = writable(false);

@@ -9,7 +9,7 @@
     console.log("data in modalContainerImageSelection", targetImageElement);
     console.log("containerList", containerList);
 
-    const imageModules = import.meta.glob(
+    const imageModules = /** @type {Record<string, any>} */ (import.meta.glob(
         '$lib/containerImages/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
         {
             eager: true,
@@ -17,10 +17,53 @@
                 enhanced: false
             }
         }
-    )
+    ))
 
+    const placeholderKey = '/src/lib/containerImages/placeholder.jpg';
+    const placeholderDefault =
+        imageModules[placeholderKey]?.default || Object.values(imageModules)[0]?.default;
+
+    /** @param {string} src */
+    function normalizeImagePath(src) {
+        if (!src || typeof src !== 'string') {
+            return '/placeholder.jpg';
+        }
+
+        const withSlash = src.startsWith('/') ? src : `/${src}`;
+        try {
+            return decodeURIComponent(withSlash);
+        } catch {
+            return withSlash;
+        }
+    }
+
+    /** @param {string} src */
+    function resolveImageModule(src) {
+        const normalizedPath = normalizeImagePath(src);
+        const key = `/src/lib/containerImages${normalizedPath}`;
+        const module = imageModules[key];
+
+        if (module?.default) {
+            return {
+                asset: module.default,
+                path: normalizedPath,
+            };
+        }
+
+        return {
+            asset: placeholderDefault,
+            path: '/placeholder.jpg',
+        };
+    }
+
+    /** @param {string} src */
     function getModuleDefault(src) {
-        return imageModules["/src/lib/containerImages" + src.replace("%20", " ")].default;
+        return resolveImageModule(src).asset;
+    }
+
+    /** @param {string} src */
+    function getImageSrc(src) {
+        return resolveImageModule(src).asset?.img?.src || "";
     }
 </script>
 
@@ -34,7 +77,7 @@
             <div class="modal-body">
                 <div class="row">
                     {#each containerList as container}
-                        <button type="button" class="col-3 mb-3 btn p-1" onclick={() => { if(container.imageSrc.blocks && container.imageSrc.blocks.length>0) {targetImageElement.src = getModuleDefault(container.imageSrc.blocks[0].data.imageSrc).img.src; targetImageElement.id = container.imageSrc.blocks[0].data.imageSrc} else {targetImageElement.src= imageModules['/src/lib/containerImages/placeholder.jpg']?.default.img.src ||"" ; targetImageElement.id = "/placeholder.jpg"}; targetTextElement.innerText =  "##" + container.code.blocks[0].data.text +"##"; }} aria-label="Select image" data-bs-dismiss="modal">
+                        <button type="button" class="col-3 mb-3 btn p-1" onclick={() => { if(container.imageSrc.blocks && container.imageSrc.blocks.length>0) {const resolved = resolveImageModule(container.imageSrc.blocks[0].data.imageSrc); targetImageElement.src = resolved.asset?.img?.src || ""; targetImageElement.id = resolved.path;} else {targetImageElement.src = getImageSrc('/placeholder.jpg'); targetImageElement.id = "/placeholder.jpg"}; targetTextElement.innerText =  "##" + container.code.blocks[0].data.text +"##"; }} aria-label="Select image" data-bs-dismiss="modal">
                             <div class="card bg-primary-subtle">
                             <div class="card-body">
 

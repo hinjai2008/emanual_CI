@@ -2,11 +2,17 @@
  * Cloudflare Worker: Publish endpoint for eManual
  *
  * POST /publish
- * Body: { editedJSON: object, commitMessage?: string }
+ * Body: {
+ *   editedJSON: object,
+ *   requestId?: string,
+ *   adminId?: string,
+ *   adminEmail?: string,
+ *   notificationChannel?: 'email-only' (currently only email notifications supported)
+ * }
  * Header: Authorization: Bearer <PUBLISH_SHARED_SECRET>
  *
  * Required Worker Secrets:
- * - GH_TOKEN               (GitHub token with Actions write and Contents write)
+ * - GH_TOKEN               (GitHub token with Actions write)
  * - PUBLISH_SHARED_SECRET  (shared secret for caller)
  *
  * Required Worker Vars:
@@ -14,10 +20,9 @@
  * - GH_REPO                (e.g. emanual)
  *
  * Optional Worker Vars:
- * - GH_WORKFLOW_FILE       (default: deploy-pages.yml)
+ * - GH_WORKFLOW_FILE       (default: content-build-handoff.yml)
  * - GH_REF                 (default: main)
  * - ALLOWED_ORIGIN         (default: *)
- * - GH_RAWDATA_PATH        (default: src/routes/rawData.json)
  */
 
 export default {
@@ -54,9 +59,11 @@ export default {
     }
 
     const editedJSON = body?.editedJSON;
-    const commitMessage = String(
-      body?.commitMessage || 'chore: update rawData.json from publish API'
-    );
+    const requestId = String(body?.requestId || `req-${Date.now()}`);
+    const adminId = String(body?.adminId || 'ui-admin');
+    const callbackUrl = body?.callbackUrl ? String(body.callbackUrl) : '';
+    const adminEmail = body?.adminEmail ? String(body.adminEmail) : '';
+    const notificationChannel = String(body?.notificationChannel || 'both').toLowerCase();
 
     if (!editedJSON || typeof editedJSON !== 'object') {
       return json({ ok: false, error: 'editedJSON is required' }, 400, corsHeaders);
@@ -70,12 +77,22 @@ export default {
       }
     }
 
+    if (!['both', 'webhook-only', 'email-only'].includes(notificationChannel)) {
+      return json(
+        {
+          ok: false,
+          error: 'notificationChannel must be one of: both, webhook-only, email-only'
+        },
+        400,
+        corsHeaders
+      );
+    }
+
     // 3) Build workflow dispatch payload
     const owner = env.GH_OWNER;
     const repo = env.GH_REPO;
-    const workflowFile = env.GH_WORKFLOW_FILE || 'deploy-pages.yml';
-    const ref = env.GH_REF || 'main';
-    const rawDataPath = env.GH_RAWDATA_PATH || 'src/routes/rawData.json';
+    const workflowFile = env.GH_WORKFLOW_FILE || 'content-build-handoff.yml';
+    const ref = env.GH_REF || 'gh-pages';
 
     if (!owner || !repo || !env.GH_TOKEN) {
       return json(
@@ -91,72 +108,6 @@ export default {
     const raw = JSON.stringify(editedJSON, null, '\t');
     const contentBase64 = bytesToBase64(new TextEncoder().encode(raw));
 
-    const fileShaResult = await githubRequest(
-      env,
-      `https://api.github.com/repos/${owner}/${repo}/contents/${encodePath(rawDataPath)}?ref=${encodeURIComponent(ref)}`,
-      { method: 'GET' }
-    );
-
-    if (!fileShaResult.ok) {
-      return json(
-        {
-          ok: false,
-          error: 'Failed to read current rawData.json SHA from GitHub',
-          status: fileShaResult.status,
-          details: fileShaResult.text
-        },
-        502,
-        corsHeaders
-      );
-    }
-
-    let currentSha = '';
-    try {
-      const fileMeta = JSON.parse(fileShaResult.text || '{}');
-      currentSha = fileMeta.sha || '';
-    } catch {
-      currentSha = '';
-    }
-
-    if (!currentSha) {
-      return json(
-        {
-          ok: false,
-          error: 'Could not determine rawData.json SHA from GitHub response',
-          details: fileShaResult.text
-        },
-        502,
-        corsHeaders
-      );
-    }
-
-    const updateResp = await githubRequest(
-      env,
-      `https://api.github.com/repos/${owner}/${repo}/contents/${encodePath(rawDataPath)}`,
-      {
-        method: 'PUT',
-        body: JSON.stringify({
-          message: commitMessage,
-          content: contentBase64,
-          sha: currentSha,
-          branch: ref
-        })
-      }
-    );
-
-    if (!updateResp.ok) {
-      return json(
-        {
-          ok: false,
-          error: 'Failed to commit rawData.json to GitHub',
-          status: updateResp.status,
-          details: updateResp.text
-        },
-        502,
-        corsHeaders
-      );
-    }
-
     const dispatchResp = await githubRequest(
       env,
       `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/dispatches`,
@@ -165,7 +116,12 @@ export default {
         body: JSON.stringify({
           ref,
           inputs: {
-            commit_message: commitMessage
+            request_id: requestId,
+            admin_id: adminId,
+            rawdata_base64: contentBase64,
+            callback_url: callbackUrl,
+            admin_email: adminEmail,
+            notification_channel: notificationChannel
           }
         })
       }
@@ -175,7 +131,7 @@ export default {
       return json(
         {
           ok: false,
-          error: 'rawData.json committed, but failed to trigger GitHub workflow',
+          error: 'Failed to trigger GitHub workflow',
           status: dispatchResp.status,
           details: dispatchResp.text
         },
@@ -189,7 +145,9 @@ export default {
     return json(
       {
         ok: true,
-        message: 'Publish workflow dispatched',
+        message: 'Content build workflow dispatched',
+        workflow: workflowFile,
+        requestId,
         actionsUrl
       },
       202,
@@ -234,13 +192,6 @@ async function githubRequest(env, url, init = {}) {
     status: resp.status,
     text: await safeText(resp)
   };
-}
-
-function encodePath(path) {
-  return path
-    .split('/')
-    .map((segment) => encodeURIComponent(segment))
-    .join('/');
 }
 
 function bytesToBase64(bytes) {

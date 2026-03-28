@@ -5,9 +5,9 @@ workers_dev = true
 
 [vars]
 GH_OWNER = "hinjai2008"
-GH_REPO = "emanual"
-GH_WORKFLOW_FILE = "deploy-pages.yml"
-GH_REF = "gh-pages"
+GH_REPO = "emanual_CI"
+GH_WORKFLOW_FILE = "content-build-handoff.yml"
+GH_REF = "main"
 # For strict security, set your app origin instead of *
 ALLOWED_ORIGIN = "*"
  

@@ -1,0 +1,198 @@
+name: Content Build Handoff
+
+on:
+  repository_dispatch:
+    types:
+      - content_update_requested
+  workflow_dispatch:
+    inputs:
+      request_id:
+        description: Optional request id for tracing
+        required: false
+        type: string
+      admin_id:
+        description: Optional admin id for tracing
+        required: false
+        type: string
+      rawdata_base64:
+        description: Optional base64 encoded src/routes/rawData.json payload
+        required: false
+        type: string
+      snapshot_url:
+        description: Optional URL to fetch rawData.json snapshot
+        required: false
+        type: string
+      snapshot_sha256:
+        description: Optional sha256 checksum for downloaded snapshot
+        required: false
+        type: string
+      admin_email:
+        description: Optional admin email override for this run
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: content-build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-handoff:
+    runs-on: ubuntu-latest
+    env:
+      REQUEST_ID: ${{ github.event.client_payload.request_id || github.event.inputs.request_id || github.run_id }}
+      ADMIN_ID: ${{ github.event.client_payload.admin_id || github.event.inputs.admin_id || 'unknown-admin' }}
+      RAWDATA_BASE64: ${{ github.event.client_payload.rawdata_base64 || github.event.inputs.rawdata_base64 }}
+      SNAPSHOT_URL: ${{ github.event.client_payload.snapshot_url || github.event.inputs.snapshot_url }}
+      SNAPSHOT_SHA256: ${{ github.event.client_payload.snapshot_sha256 || github.event.inputs.snapshot_sha256 }}
+      SNAPSHOT_BEARER: ${{ secrets.CONTENT_SNAPSHOT_BEARER }}
+      EMAIL_TO_INPUT: ${{ github.event.client_payload.admin_email || github.event.inputs.admin_email }}
+      EMAIL_TO_SECRET: ${{ secrets.ADMIN_BUILD_EMAIL_TO }}
+      EMAIL_CC: ${{ secrets.ADMIN_BUILD_EMAIL_CC }}
+      SMTP_SERVER: ${{ secrets.ADMIN_SMTP_SERVER }}
+      SMTP_PORT: ${{ secrets.ADMIN_SMTP_PORT }}
+      SMTP_USERNAME: ${{ secrets.ADMIN_SMTP_USERNAME }}
+      SMTP_PASSWORD: ${{ secrets.ADMIN_SMTP_PASSWORD }}
+      SMTP_FROM: ${{ secrets.ADMIN_SMTP_FROM }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Apply updated content payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -n "${RAWDATA_BASE64}" ]; then
+            echo "Applying rawData.json from base64 payload"
+            printf '%s' "${RAWDATA_BASE64}" | base64 --decode > src/routes/rawData.json
+          elif [ -n "${SNAPSHOT_URL}" ]; then
+            echo "Fetching rawData.json from snapshot URL"
+            if [ -n "${SNAPSHOT_BEARER}" ]; then
+              curl -fsSL -H "Authorization: Bearer ${SNAPSHOT_BEARER}" "${SNAPSHOT_URL}" -o src/routes/rawData.json
+            else
+              curl -fsSL "${SNAPSHOT_URL}" -o src/routes/rawData.json
+            fi
+          else
+            echo "No payload supplied, using repository src/routes/rawData.json"
+          fi
+
+      - name: Validate snapshot checksum
+        if: ${{ env.SNAPSHOT_SHA256 != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "${SNAPSHOT_SHA256}  src/routes/rawData.json" | sha256sum -c -
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Package build artifact
+        id: package_artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          tar -czf site-build.tar.gz -C build .
+          BUILD_SHA256=$(sha256sum site-build.tar.gz | awk '{print $1}')
+          echo "${BUILD_SHA256}" > site-build.tar.gz.sha256
+          echo "build_sha256=${BUILD_SHA256}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload artifact
+        id: upload_artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-build-${{ github.run_id }}
+          path: |
+            site-build.tar.gz
+            site-build.tar.gz.sha256
+          retention-days: 14
+
+      - name: Resolve artifact metadata
+        id: artifact_meta
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const run_id = context.runId;
+            const expectedName = `site-build-${run_id}`;
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({ owner, repo, run_id });
+            const artifact = artifacts.data.artifacts.find((a) => a.name === expectedName);
+            if (!artifact) {
+              core.setFailed(`Artifact not found: ${expectedName}`);
+              return;
+            }
+            core.setOutput('artifact_id', String(artifact.id));
+            core.setOutput('artifact_name', artifact.name);
+            core.setOutput('artifact_archive_url', artifact.archive_download_url);
+            core.setOutput('run_url', `${context.serverUrl}/${owner}/${repo}/actions/runs/${run_id}`);
+
+      - name: Resolve email recipient
+        if: ${{ always() }}
+        id: email_recipient
+        shell: bash
+        run: |
+          set -euo pipefail
+          EMAIL_TO="${EMAIL_TO_INPUT}"
+          if [ -z "${EMAIL_TO}" ]; then
+            EMAIL_TO="${EMAIL_TO_SECRET}"
+          fi
+          echo "email_to=${EMAIL_TO}" >> "$GITHUB_OUTPUT"
+
+      - name: Notify admin by email (success)
+        if: ${{ success() && steps.email_recipient.outputs.email_to != '' && env.SMTP_SERVER != '' && env.SMTP_USERNAME != '' && env.SMTP_PASSWORD != '' && env.SMTP_FROM != '' }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ env.SMTP_SERVER }}
+          server_port: ${{ env.SMTP_PORT != '' && env.SMTP_PORT || 587 }}
+          secure: false
+          username: ${{ env.SMTP_USERNAME }}
+          password: ${{ env.SMTP_PASSWORD }}
+          subject: "[Content Build] Success - Request ${{ env.REQUEST_ID }}"
+          from: ${{ env.SMTP_FROM }}
+          to: ${{ steps.email_recipient.outputs.email_to }}
+          cc: ${{ env.EMAIL_CC }}
+          body: |
+            Build completed successfully.
+
+            Request ID: ${{ env.REQUEST_ID }}
+            Admin ID: ${{ env.ADMIN_ID }}
+            Repository: ${{ github.repository }}
+            Run URL: ${{ steps.artifact_meta.outputs.run_url }}
+            Artifact Name: ${{ steps.artifact_meta.outputs.artifact_name }}
+            Artifact Archive URL: ${{ steps.artifact_meta.outputs.artifact_archive_url }}
+            Artifact SHA256: ${{ steps.package_artifact.outputs.build_sha256 }}
+            Commit SHA: ${{ github.sha }}
+
+      - name: Notify admin by email (failure)
+        if: ${{ failure() && steps.email_recipient.outputs.email_to != '' && env.SMTP_SERVER != '' && env.SMTP_USERNAME != '' && env.SMTP_PASSWORD != '' && env.SMTP_FROM != '' }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ env.SMTP_SERVER }}
+          server_port: ${{ env.SMTP_PORT != '' && env.SMTP_PORT || 587 }}
+          secure: false
+          username: ${{ env.SMTP_USERNAME }}
+          password: ${{ env.SMTP_PASSWORD }}
+          subject: "[Content Build] Failed - Request ${{ env.REQUEST_ID }}"
+          from: ${{ env.SMTP_FROM }}
+          to: ${{ steps.email_recipient.outputs.email_to }}
+          cc: ${{ env.EMAIL_CC }}
+          body: |
+            Build failed.
+
+            Request ID: ${{ env.REQUEST_ID }}
+            Admin ID: ${{ env.ADMIN_ID }}
+            Repository: ${{ github.repository }}
+            Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Commit SHA: ${{ github.sha }}

@@ -4,13 +4,16 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
+		"predev": "node scripts/generate-search-index.mjs",
 		"dev": "vite dev",
+		"clean:build": "node -e \"try{require('node:fs').rmSync('build',{recursive:true,force:true,maxRetries:10,retryDelay:200});}catch(e){}\"",
+		"prebuild": "node scripts/generate-search-index.mjs",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"deploy": "npm run build && npx gh-pages -d build --repo https://github.com/hinjai2008/emanual.git --branch gh-pages --nojekyll --add"
+		"deploy": "npm run clean:build && npm run build && npx gh-pages -d build --repo https://github.com/hinjai2008/emanual.git --branch gh-pages --nojekyll --add"
 	},
 	"homepage": "https://hinjai2008.github.io/emanual",
 	"devDependencies": {

@@ -1,5 +1,6 @@
 <script>
     import { goto } from '$app/navigation';
+  import { onMount } from 'svelte';
     import { page } from '$app/state';
 
   let { data, children } = $props();
@@ -7,7 +8,7 @@
   // let rawTestData = data.rawTestData;
 
   import { base } from '$app/paths';
-  import { editedJSON, isCreateMode } from './stores';
+  import { editedJSON, initialJSON, isCreateMode } from './stores';
   import { isAdmin , isStaff } from './stores';
   import { isEditMode } from './stores';
   import { pauseEditorRender } from './stores';
@@ -157,12 +158,37 @@
   });
 
 
+  let publicIndexData = $state({
+    tests: [],
+    forms: [],
+    containers: []
+  });
+  let publicCategories = $state([]);
+
+  onMount(async () => {
+    try {
+      const response = await fetch(`${base}/search-index.json`, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`Failed to load search index: ${response.status}`);
+      }
+
+      const payload = await response.json();
+      publicIndexData = payload?.indexData || { tests: [], forms: [], containers: [] };
+      publicCategories = payload?.categories || [];
+    } catch (error) {
+      console.error('Unable to load static search index', error);
+      publicIndexData = { tests: [], forms: [], containers: [] };
+      publicCategories = [];
+    }
+  });
+
+
 
   let indexData = {}
 
-  let testIdCap = Math.max(...data.completeJSON.testData.map(test => test.id)) + 50;
-  let formIdCap = Math.max(...data.completeJSON.formData.map(form => form.id)) + 50;
-  let containerIdCap = Math.max(...data.completeJSON.containerData.map(container => container.id)) + 50;
+  let testIdCap = Math.max(...initialJSON.testData.map(test => test.id)) + 50;
+  let formIdCap = Math.max(...initialJSON.formData.map(form => form.id)) + 50;
+  let containerIdCap = Math.max(...initialJSON.containerData.map(container => container.id)) + 50;
 
   const index_document = (rawData, type, category) => {
     indexData = {
@@ -332,6 +358,40 @@
     return indexData.tests.concat(indexData.forms).concat(indexData.containers);
   };
 
+  const public_index_document = (type, category) => {
+    indexData = publicIndexData;
+
+    const tests = publicIndexData.tests.filter((test) => {
+      if (type !== "allTypesSelected" && type !== "testSelected") {
+        return false;
+      }
+
+      if (!category) {
+        return true;
+      }
+
+      return Array.isArray(test.categoryCodes) && test.categoryCodes.includes(category);
+    });
+
+    const forms = publicIndexData.forms.filter((form) => {
+      if (type !== "allTypesSelected" && type !== "formSelected") {
+        return false;
+      }
+
+      if (!category) {
+        return true;
+      }
+
+      return Array.isArray(form.categoryCodes) && form.categoryCodes.includes(category);
+    });
+
+    const containers = publicIndexData.containers.filter(() => {
+      return type === "allTypesSelected" || type === "containerSelected";
+    });
+
+    return tests.concat(forms).concat(containers);
+  };
+
 
   function ngramTokenizer(token) {
   const str = token.toString(), n = 3, out = []
@@ -360,8 +420,8 @@
     this.searchPipeline.add(lunr.trimmer, ngramTokenizer);
 
     if (!$isAdmin) {
-
-    index_document(data.completeJSON, selectedType, selectedCategory).forEach(function (doc) {
+    const publicDocs = public_index_document(selectedType, selectedCategory);
+    publicDocs.forEach(function (doc) {
       this.add(doc);
     }, this);
 
@@ -436,6 +496,26 @@
 
     sessionStorage.setItem('publishApiSecret', secretInput);
 
+    const existingRecipientEmail = localStorage.getItem('publishRecipientEmail') || '';
+    const recipientEmailInput = window.prompt(
+      'Enter recipient email address for notifications',
+      existingRecipientEmail
+    );
+
+    if (!recipientEmailInput && recipientEmailInput !== '') {
+      return;
+    }
+
+    const recipientEmail = recipientEmailInput.trim();
+    if (recipientEmail && !recipientEmail.includes('@')) {
+      alert('Invalid email address.');
+      return;
+    }
+
+    if (recipientEmail) {
+      localStorage.setItem('publishRecipientEmail', recipientEmail);
+    }
+
     if (!window.confirm('Publish the current edited JSON to GitHub Actions?')) {
       return;
     }
@@ -452,7 +532,9 @@
         },
         body: JSON.stringify({
           editedJSON: $editedJSON,
-          commitMessage: `chore: publish editedJSON from UI (${new Date().toISOString()})`
+          commitMessage: `chore: publish editedJSON from UI (${new Date().toISOString()})`,
+          adminEmail: recipientEmail,
+          notificationChannel: 'email-only'
         })
       });
 
@@ -483,7 +565,7 @@
     if (!keyword) {
       const allEntries = $isAdmin
         ? index_document($editedJSON, selectedType, selectedCategory)
-        : index_document(data.completeJSON, selectedType, selectedCategory);
+        : public_index_document(selectedType, selectedCategory);
 
       return [...allEntries].sort((a, b) =>
         (a.full_name || '').localeCompare((b.full_name || ''), undefined, { sensitivity: 'base' })
@@ -845,7 +927,7 @@
   <img class="input-group-text" src="{base}/filter.svg" id="basic-addon1" style="width: 10%;" alt="filter">
   <select bind:value={selectedCategory} class="form-select form-control" aria-label="Default select example">
   <option value="">All Categories</option>
-  {#each $editedJSON.config.category as category}
+  {#each ($isAdmin ? $editedJSON.config.category : publicCategories) as category}
     <option value={category.code}>{category.text}</option>
   {/each}
   </select>
