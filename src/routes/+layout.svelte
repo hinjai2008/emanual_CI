@@ -442,6 +442,7 @@
   let searchInput = $state('');
   let publishInProgress = $state(false);
   let publishStatusMessage = $state('');
+  let publishActionsUrl = $state('');
   const defaultPublishEndpoint = 'https://emanual-publish-api.rayyt2020.workers.dev/publish';
 
   function normalizePublishEndpoint(rawValue) {
@@ -524,13 +525,11 @@
       }
 
       publishStatusMessage = 'Publish started.';
-
-      if (result.actionsUrl) {
-        window.open(result.actionsUrl, '_blank', 'noopener,noreferrer');
-      }
+      publishActionsUrl = result.actionsUrl || '';
     } catch (error) {
       publishStatusMessage = 'Publish failed.';
-      alert(`Publish failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      publishActionsUrl = '';
+      alert(`Publish failed: ${error instanceof Error ? error.message : 'Unknown error'}`); 
     } finally {
       publishInProgress = false;
     }
@@ -873,7 +872,12 @@
     </ul>
   </header>
   {#if publishStatusMessage}
-  <div class="small text-muted mb-2">{publishStatusMessage}</div>
+  <div class="small text-muted mb-2">
+    {publishStatusMessage}
+    {#if publishActionsUrl}
+      — <a href={publishActionsUrl} target="_blank" rel="noopener noreferrer">View workflow run</a>
+    {/if}
+  </div>
   {/if}
 </div>
 
