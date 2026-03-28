@@ -1,0 +1,86 @@
+[
+  {
+    "versionId": "20260328T191249Z_req-1774725152506",
+    "publishedAt": "2026-03-28T19:12:49.571Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1774725152506",
+    "sourceRef": "main",
+    "summary": "test1",
+    "editTraceCount": 1,
+    "snapshotPath": "content-versions/snapshots/2026/20260328T191249Z_req-1774725152506.json",
+    "contentSha256": "5184d574a549b0f711285e3ec4c77d40d60b64adf204076afb6098a2831ce2cd",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23692349011"
+  },
+  {
+    "versionId": "20260328T200431Z_req-1774728258437",
+    "publishedAt": "2026-03-28T20:04:31.126Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1774728258437",
+    "sourceRef": "main",
+    "summary": "TEST2",
+    "editTraceCount": 2,
+    "snapshotPath": "content-versions/snapshots/2026/20260328T200431Z_req-1774728258437.json",
+    "contentSha256": "fcc3e7a060bf32fc6a8c1ee14860fb6321789444a8dc9b2ac6b562ec709a82b5",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23693256628"
+  },
+  {
+    "versionId": "20260328T204008Z_req-1774730396675",
+    "publishedAt": "2026-03-28T20:40:08.945Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1774730396675",
+    "sourceRef": "main",
+    "summary": "test3",
+    "editTraceCount": 2,
+    "snapshotPath": "content-versions/snapshots/2026/20260328T204008Z_req-1774730396675.json",
+    "contentSha256": "526191a8b72c90b28988947f4578b82abc9a0bb2e84f6678b11de84d18bb7138",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23693876367"
+  },
+  {
+    "versionId": "20260328T205205Z_req-1774731104702",
+    "publishedAt": "2026-03-28T20:52:05.240Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1774731104702",
+    "sourceRef": "main",
+    "summary": "testsync",
+    "editTraceCount": 1,
+    "snapshotPath": "content-versions/snapshots/2026/20260328T205205Z_req-1774731104702.json",
+    "contentSha256": "a08be50c974fd9c3538fe80c49951b03dc58c21a0614da9f8a47830a7deb886d",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23694079815"
+  },
+  {
+    "versionId": "20260328T210356Z_req-1774731805381",
+    "publishedAt": "2026-03-28T21:03:56.989Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1774731805381",
+    "sourceRef": "main",
+    "summary": "test5",
+    "editTraceCount": 1,
+    "snapshotPath": "content-versions/snapshots/2026/20260328T210356Z_req-1774731805381.json",
+    "contentSha256": "f7e84aa39dd733ce3fbf83ab811407c7b3d82e2277bf1b184503ae342c54ee42",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23694280781"
+  },
+  {
+    "versionId": "20260328T210737Z_req-1774732033957",
+    "publishedAt": "2026-03-28T21:07:37.727Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1774732033957",
+    "sourceRef": "main",
+    "summary": "testSync",
+    "editTraceCount": 1,
+    "snapshotPath": "content-versions/snapshots/2026/20260328T210737Z_req-1774732033957.json",
+    "contentSha256": "43ea792b13bb8603cb62c5c9649703d19427e2f9a544cc9c2395908ed0845a1a",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23694346195"
+  },
+  {
+    "versionId": "20260328T211715Z_req-1774732622468",
+    "publishedAt": "2026-03-28T21:17:15.428Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1774732622468",
+    "sourceRef": "main",
+    "summary": "testsync",
+    "editTraceCount": 1,
+    "snapshotPath": "content-versions/snapshots/2026/20260328T211715Z_req-1774732622468.json",
+    "contentSha256": "4d6bb7b6811ba5ffcfc29ab5d4af10ac7bf5b415bc297afcd582af33f1612302",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23694517177"
+  }
+]
