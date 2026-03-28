@@ -13,44 +13,11 @@
 					"version": "2.31.0-rc.7"
 				},
 				"newValue": {
-					"time": 1774717119685,
-					"blocks": [
-						{
-							"id": "ERHMus4hzy",
-							"type": "alertTag",
-							"data": {
-								"text": "On-Ice transport",
-								"background": "text-bg-primary"
-							}
-						},
-						{
-							"id": "v1U9ZKcXaG",
-							"type": "alertTag",
-							"data": {
-								"text": "Advance Booking/Consultation",
-								"background": "text-bg-info"
-							}
-						},
-						{
-							"id": "wv_tXAYEHD",
-							"type": "alertTag",
-							"data": {
-								"text": "Fresh specimen required",
-								"background": "text-bg-warning"
-							}
-						},
-						{
-							"id": "LNCNZrbXOU",
-							"type": "alertTag",
-							"data": {
-								"text": "Special container/collection",
-								"background": "text-bg-warning"
-							}
-						}
-					],
+					"time": 1774718654620,
+					"blocks": [],
 					"version": "2.31.0-rc.7"
 				},
-				"timestamp": "2026-03-28T16:58:39.686Z"
+				"timestamp": "2026-03-28T17:24:14.621Z"
 			}
 		],
 		"category": [
@@ -72507,41 +72474,8 @@
 				"version": "2.31.0-rc.7"
 			},
 			"alert": {
-				"time": 1774717119685,
-				"blocks": [
-					{
-						"id": "ERHMus4hzy",
-						"type": "alertTag",
-						"data": {
-							"text": "On-Ice transport",
-							"background": "text-bg-primary"
-						}
-					},
-					{
-						"id": "v1U9ZKcXaG",
-						"type": "alertTag",
-						"data": {
-							"text": "Advance Booking/Consultation",
-							"background": "text-bg-info"
-						}
-					},
-					{
-						"id": "wv_tXAYEHD",
-						"type": "alertTag",
-						"data": {
-							"text": "Fresh specimen required",
-							"background": "text-bg-warning"
-						}
-					},
-					{
-						"id": "LNCNZrbXOU",
-						"type": "alertTag",
-						"data": {
-							"text": "Special container/collection",
-							"background": "text-bg-warning"
-						}
-					}
-				],
+				"time": 1774718654620,
+				"blocks": [],
 				"version": "2.31.0-rc.7"
 			}
 		},
