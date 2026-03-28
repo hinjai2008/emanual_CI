@@ -38,6 +38,7 @@ jobs:
   build-and-handoff:
     runs-on: ubuntu-latest
     env:
+      SOURCE_REF: ${{ github.ref_name }}
       REQUEST_ID: ${{ github.event.client_payload.request_id || github.event.inputs.request_id || github.run_id }}
       ADMIN_ID: ${{ github.event.client_payload.admin_id || github.event.inputs.admin_id || 'unknown-admin' }}
       RAWDATA_BASE64: ${{ github.event.client_payload.rawdata_base64 || github.event.inputs.rawdata_base64 }}
@@ -79,6 +80,58 @@ jobs:
         run: |
           set -euo pipefail
           echo "${SNAPSHOT_SHA256}  src/routes/rawData.json" | sha256sum -c -
+
+      - name: Log and clear editTrace
+        id: edit_trace
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          const rawDataPath = path.join(process.cwd(), 'src', 'routes', 'rawData.json');
+          const logPath = path.join(process.cwd(), 'logs', 'edit-trace.jsonl');
+          const requestId = process.env.REQUEST_ID;
+          const adminId = process.env.ADMIN_ID;
+          const sourceRef = process.env.SOURCE_REF;
+
+          const rawData = JSON.parse(fs.readFileSync(rawDataPath, 'utf8'));
+          const traces = Array.isArray(rawData?.config?.editTrace) ? rawData.config.editTrace : [];
+
+          fs.mkdirSync(path.dirname(logPath), { recursive: true });
+
+          if (traces.length > 0) {
+            const lines = traces.map((trace) => JSON.stringify({
+              loggedAt: new Date().toISOString(),
+              requestId,
+              adminId,
+              sourceRef,
+              trace
+            }));
+            fs.appendFileSync(logPath, `${lines.join('\n')}\n`);
+          }
+
+          if (!rawData.config) {
+            rawData.config = {};
+          }
+          rawData.config.editTrace = [];
+          fs.writeFileSync(rawDataPath, JSON.stringify(rawData, null, '\t') + '\n');
+
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `trace_count=${traces.length}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `log_path=logs/edit-trace.jsonl\n`);
+          EOF
+
+      - name: Commit editTrace log and clear source editTrace
+        if: ${{ steps.edit_trace.outputs.trace_count != '0' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/routes/rawData.json logs/edit-trace.jsonl
+          git commit -m "chore: archive editTrace for request ${REQUEST_ID}"
+          git push origin "HEAD:${SOURCE_REF}"
 
       - name: Install dependencies
         run: npm ci
