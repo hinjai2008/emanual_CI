@@ -1,13 +1,13 @@
 {
-  "versionId": "20260329T142552Z_req-1774794338864",
-  "requestId": "req-1774794338864",
-  "publishedAt": "2026-03-29T14:25:52.430Z",
+  "versionId": "20260329T153544Z_req-1774798531092",
+  "requestId": "req-1774798531092",
+  "publishedAt": "2026-03-29T15:35:44.557Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "Version update",
-  "editTraceCount": 1,
-  "snapshotPath": "content-versions/snapshots/2026/20260329T142552Z_req-1774794338864.json",
-  "contentSha256": "74fbc678364a96d6d3709136db3569623773fe533bbb721c72392a0ac6da2d3a",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23711200528",
+  "summary": "Add containers",
+  "editTraceCount": 18,
+  "snapshotPath": "content-versions/snapshots/2026/20260329T153544Z_req-1774798531092.json",
+  "contentSha256": "5353d6350923b8a35cb258f502f984a10960d5e7ab6d5f19339d8d2612cd5062",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23712553138",
   "environment": "predeploy"
 }
