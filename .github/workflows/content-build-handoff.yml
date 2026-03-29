@@ -291,18 +291,27 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
 
-      - name: Commit build folder back to source branch
+      - name: Commit build folder and marker back to source branch
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add build/
+
+          if [ -f build/content-version.json ]; then
+            cp build/content-version.json static/content-version.json
+            mkdir -p src/static
+            cp build/content-version.json src/static/content-version.json
+          else
+            echo "build/content-version.json not found; skipping source marker replacement"
+          fi
+
+          git add build/ static/content-version.json src/static/content-version.json
 
           if git diff --cached --quiet; then
-            echo "No build folder changes to commit"
+            echo "No build/marker changes to commit"
             exit 0
           fi
 
-          git commit -m "chore: sync build folder for request ${REQUEST_ID}"
+          git commit -m "chore: sync build folder and marker for request ${REQUEST_ID}"
           git push origin "HEAD:${SOURCE_REF}"
