@@ -37,7 +37,7 @@ function toCategoryCodes(field) {
 }
 
 function buildIndex(rawData) {
-  const tests = (rawData.testData || []).map((test) => ({
+  const tests = (rawData.testData || []).filter((test) => test?.is_hidden !== true).map((test) => ({
     id: `test/${test.id}`,
     full_name: toTextBlocks(test.full_name),
     GCRS_name: toTextBlocks(test.GCRS_name),
@@ -47,7 +47,7 @@ function buildIndex(rawData) {
     categoryCodes: toCategoryCodes(test.lab_and_category)
   }));
 
-  const forms = (rawData.formData || []).map((form) => ({
+  const forms = (rawData.formData || []).filter((form) => form?.is_hidden !== true).map((form) => ({
     id: `form/${form.id}`,
     full_name: toTextBlocks(form.form_name),
     GCRS_name: '',
@@ -57,7 +57,7 @@ function buildIndex(rawData) {
     categoryCodes: toCategoryCodes(form.lab_and_category)
   }));
 
-  const containers = (rawData.containerData || []).map((container) => ({
+  const containers = (rawData.containerData || []).filter((container) => container?.is_hidden !== true).map((container) => ({
     id: `container/${container.id}`,
     full_name: toTextBlocks(container.name),
     GCRS_name: '',

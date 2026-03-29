@@ -70,7 +70,7 @@
 
         let loadedData;
 
-        if(thisEntryEdit && isEditable) {
+        if (thisEntryEdit && isEditable) {
             loadedData = thisEntryEdit[rowName];
         }
 
@@ -219,6 +219,27 @@
         });
     }
 
+    async function destroyEditorInstance() {
+        const currentEditor = editor;
+        editor = null;
+
+        if (!currentEditor) {
+            return;
+        }
+
+        try {
+            if (currentEditor.isReady && typeof currentEditor.isReady.then === 'function') {
+                await currentEditor.isReady.catch(() => {});
+            }
+
+            if (typeof currentEditor.destroy === 'function') {
+                currentEditor.destroy();
+            }
+        } catch (error) {
+            console.warn('Editor teardown skipped due to error:', error);
+        }
+    }
+
 
     function editButtonhandler() {
 
@@ -235,7 +256,7 @@
 
 
     function cancelAction() {
-        editor.destroy(); // Destroy the editor instance
+        void destroyEditorInstance(); // Destroy the editor instance
         isEditing = false; // Reset the editing state
         concurrentEditLock.set(false); // Release the lock
         initializeEditor(); // Reinitialize the editor with the original data (editingData)
@@ -247,7 +268,7 @@
             return; 
         }
 
-        editor.destroy();
+        void destroyEditorInstance();
         let editedJSON_copy = $editedJSON;
             editedJSON_copy[datatype].map((editedTest) => {
                 if (editedTest.id.toString() === page.params.id) {
@@ -334,7 +355,7 @@
         let currentPage = page.params.id; // Get the current page ID from the URL
         if (editor) {
 
-            editor.destroy();
+            void destroyEditorInstance();
             thisEntryEdit = $editedJSON[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
             initializeEditor()
 
@@ -344,13 +365,7 @@
 
 
     onDestroy(() => {
-        if (editor) {
-
-            editor.isReady.then(() => {
-
-                editor.destroy(); // Clean up the editor instance when the component is destroyed
-            });
-        }
+        void destroyEditorInstance(); // Clean up the editor instance when the component is destroyed
     });
 
     beforeNavigate(({cancel})=>{

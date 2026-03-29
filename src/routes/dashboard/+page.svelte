@@ -38,6 +38,14 @@
       return `Removed ${trace.dataType} #${trace.dataId}`;
     }
 
+    if (trace.editType === 'hide') {
+      return `Hid ${trace.dataType} #${trace.dataId}`;
+    }
+
+    if (trace.editType === 'unhide') {
+      return `Unhid ${trace.dataType} #${trace.dataId}`;
+    }
+
     const fieldLabel = trace.field || 'unknown field';
     return `Modified ${trace.dataType} #${trace.dataId} field ${fieldLabel}`;
   }
@@ -57,6 +65,8 @@
       add: 0,
       modify: 0,
       remove: 0,
+      hide: 0,
+      unhide: 0,
       other: 0
     };
     const touchedItems = new Set();
@@ -74,6 +84,10 @@
         counts.modify += 1;
       } else if (editType === 'remove') {
         counts.remove += 1;
+      } else if (editType === 'hide') {
+        counts.hide += 1;
+      } else if (editType === 'unhide') {
+        counts.unhide += 1;
       } else {
         counts.other += 1;
       }
@@ -87,6 +101,8 @@
     if (counts.add > 0) parts.push(`${counts.add} added`);
     if (counts.modify > 0) parts.push(`${counts.modify} modified`);
     if (counts.remove > 0) parts.push(`${counts.remove} removed`);
+    if (counts.hide > 0) parts.push(`${counts.hide} hidden`);
+    if (counts.unhide > 0) parts.push(`${counts.unhide} unhidden`);
     if (counts.other > 0) parts.push(`${counts.other} other`);
 
     if (parts.length === 0) {

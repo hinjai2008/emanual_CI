@@ -76,19 +76,35 @@
         return editedTest.id !== entryId;
     });
     }
+
+    function existsInEditedJSON() {
+        const entryId = parseInt(page.params.id); // e.g., '123'
+        return $editedJSON.testData.some((editedTest) => editedTest.id === entryId);
+    }
+
+    function isHiddenEntry() {
+        return entryData?.is_hidden === true;
+    }
     
 </script>
 
 <div class="m-2 {adminlayout ? 'w-50' : 'w-100'}" style="height: calc(100vh - 105px); overflow-y: scroll">
-    {#if !entryData && $isCreateMode}
+    {#if isHiddenEntry() && !adminlayout}
+
+    <h1>This entry is hidden.</h1>
+
+    {:else if !entryData && ($isCreateMode || existsInEditedJSON())}
 
     <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
         <div style="border: 2px solid #333; border-radius: 8px; padding: 2rem;">
             <h1>New Test Entry</h1>
+            {#if existsInEditedJSON() && !$isCreateMode}
+            <p class="mb-0">Imported from saved draft</p>
+            {/if}
         </div>
     </div>
 
-    {:else if !entryData && !$isCreateMode}
+    {:else if !entryData && !$isCreateMode && !existsInEditedJSON()}
 
     <h1>404 Page Not Found</h1>
 
@@ -120,7 +136,7 @@
 
 {#if adminlayout}
 <div class="w-50" style="height: calc(100vh - 105px); overflow-y: scroll">
-    {#if !entryData && !$isCreateMode || checkNotExist()}
+    {#if (!entryData && !$isCreateMode && !existsInEditedJSON()) || checkNotExist()}
     
     <h1>404 Page Not Found</h1>
 

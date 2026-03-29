@@ -71,21 +71,40 @@
 
 }
 
+    function existsInEditedJSON() {
+    const entryId = parseInt(page.params.id); // e.g., '123'
+
+    return $editedJSON.formData.some((editedForm) => {
+        return editedForm.id === entryId;
+    });
+}
+
+function isHiddenEntry() {
+    return entryData?.is_hidden === true;
+}
+
 
 </script>
 
 
 <div class="m-2 {adminlayout ? 'w-50' : 'w-100'}" style="height: calc(100vh - 105px); overflow-y: scroll">
 
-    {#if !entryData && $isCreateMode}
+    {#if isHiddenEntry() && !adminlayout}
+
+    <h1>This entry is hidden.</h1>
+
+    {:else if !entryData && ($isCreateMode || existsInEditedJSON())}
 
         <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
         <div style="border: 2px solid #333; border-radius: 8px; padding: 2rem;">
             <h1>New Form Entry</h1>
+            {#if existsInEditedJSON() && !$isCreateMode}
+            <p class="mb-0">Imported from saved draft</p>
+            {/if}
         </div>
     </div>
 
-    {:else if !entryData && !$isCreateMode}
+    {:else if !entryData && !$isCreateMode && !existsInEditedJSON()}
 
     <h1>404 Page Not Found</h1>
 
@@ -99,7 +118,6 @@
         <DataRow datatype={"formData"} rowName={"form_link"} displayName={"Form Link"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"formData"} rowName={"form_external_link"} displayName={"External Link"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"formData"} rowName={"lab_and_category"} displayName={"Laboratory"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"formData"} rowName={"last_updated"} displayName={"Last Updated"} isEditable={false} entryData={entryData}/>
 
         </tbody>
     </table>
@@ -110,7 +128,7 @@
 {#if adminlayout}
 <div class="w-50" style="height: calc(100vh - 105px); overflow-y: scroll">
 
-    {#if !entryData && !$isCreateMode || checkNotExist()}
+    {#if (!entryData && !$isCreateMode && !existsInEditedJSON()) || checkNotExist()}
 
     <h1>404 Page Not Found</h1>
 
@@ -135,7 +153,6 @@
                 <DataRow datatype={"formData"} rowName={"form_link"} displayName={"Form Link"} isEditable={true} entryData={entryData}/>
                 <DataRow datatype={"formData"} rowName={"form_external_link"} displayName={"External Link"} isEditable={true} entryData={entryData}/>
                 <DataRow datatype={"formData"} rowName={"lab_and_category"} displayName={"Laboratory"} isEditable={true} entryData={entryData}/>
-                <DataRow datatype={"formData"} rowName={"last_updated"} displayName={"Last Updated"} isEditable={true} entryData={entryData}/>
             </tbody>
         </table>
     </div>

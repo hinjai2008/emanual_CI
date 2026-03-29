@@ -22,6 +22,56 @@
     if ($isAdmin) {
       const timestamp = new Date().toISOString();
 
+      if (editType == "hide" || editType == "unhide") {
+        const sameActionIndex = $editedJSON.config.editTrace.findIndex(trace =>
+          trace.dataType === dataType &&
+          trace.dataId === dataId &&
+          trace.editType === editType
+        );
+
+        if (sameActionIndex !== -1) {
+          editedJSON.update((draft) => {
+            draft.config.editTrace[sameActionIndex].timestamp = timestamp;
+            draft.config.editTrace[sameActionIndex].field = field;
+            draft.config.editTrace[sameActionIndex].originalValue = originalValue;
+            draft.config.editTrace[sameActionIndex].newValue = newValue;
+            return draft;
+          });
+          return;
+        }
+
+        const oppositeEditType = editType === "hide" ? "unhide" : "hide";
+        const oppositeActionIndex = $editedJSON.config.editTrace.findIndex(trace =>
+          trace.dataType === dataType &&
+          trace.dataId === dataId &&
+          trace.editType === oppositeEditType
+        );
+
+        if (oppositeActionIndex !== -1) {
+          editedJSON.update((draft) => {
+            draft.config.editTrace.splice(oppositeActionIndex, 1);
+            return draft;
+          });
+        }
+
+        const newTrace = {
+          dataType,
+          dataId,
+          refId,
+          editType,
+          field,
+          originalValue,
+          newValue,
+          timestamp
+        };
+
+        editedJSON.update((draft) => {
+          draft.config.editTrace.push(newTrace);
+          return draft;
+        });
+        return;
+      }
+
       if (editType == "add") {
         const newTrace = {
           dataType,
@@ -219,6 +269,7 @@
           short_name: "",
           synonyms: "",
           editType: "",
+          hidden: Boolean(test.is_hidden),
         }
 
 
@@ -277,6 +328,7 @@
           short_name: "",
           synonyms: "",
           editType: "",
+          hidden: Boolean(form.is_hidden),
         }
 
         if (form.form_name.blocks === undefined) {
@@ -309,6 +361,7 @@
           full_name: "",
           short_name: "",
           editType: "",
+          hidden: Boolean(container.is_hidden),
         }
 
         if (container.name.blocks === undefined) {
@@ -341,9 +394,9 @@
       const trace = editTrace[i];
       const dataType = trace.dataType.replace("Data", "s"); // "tests", "forms", or "containers"
       const entryId = trace.dataId;
-      const editType = trace.editType; // "add", "modify", "remove"
+      const editType = trace.editType; // "add", "modify", "remove", "hide", "unhide"
 
-      if (editType !== "add" && editType !== "modify" && editType !== "remove") {
+      if (editType !== "add" && editType !== "modify" && editType !== "remove" && editType !== "hide" && editType !== "unhide") {
         continue; // skip invalid edit types
       }
 
@@ -1035,6 +1088,47 @@
     }
   }
 
+  function hideEntryListener() {
+    if (!$isEditMode) {
+      return;
+    }
+
+    const pathSegments = page.url.pathname.split('/');
+    const entryType = pathSegments[pathSegments.length - 2];
+    const entryId = parseInt(pathSegments[pathSegments.length - 1]);
+
+    if (entryType !== 'test' && entryType !== 'form' && entryType !== 'container') {
+      alert('Hide failed. Please ensure you are on a valid test, form, or container page.');
+      return;
+    }
+
+    const dataType = `${entryType}Data`;
+    const dataTypeKey = `${entryType}Data`;
+
+    const thisEntry = $editedJSON[dataTypeKey].find((entry) => entry.id === entryId);
+    if (!thisEntry) {
+      alert('Hide failed. Entry was not found in the current draft.');
+      return;
+    }
+
+    const currentlyHidden = thisEntry.is_hidden === true;
+    const willHide = !currentlyHidden;
+
+    if (!window.confirm(`${willHide ? 'Hide' : 'Unhide'} this ${entryType} entry (ID: ${entryId})?`)) {
+      return;
+    }
+
+    editedJSON.update((draft) => {
+      const target = draft[dataTypeKey].find((entry) => entry.id === entryId);
+      if (target) {
+        target.is_hidden = willHide;
+      }
+      return draft;
+    });
+
+    updateEditTrace(dataType, entryId, thisEntry.refId || null, willHide ? 'hide' : 'unhide', 'is_hidden', currentlyHidden, willHide);
+  }
+
 </script>
 
 <!-- NavBar -->
@@ -1052,6 +1146,7 @@
       <li class="nav-item ms-2"><button id="newTestButton" onclick={newTestListener} class="nav-link">New Test</button></li>
       <li class="nav-item"><button id="newFormButton" onclick={newFormListener} class="nav-link">New Form</button></li>
       <li class="nav-item"><button id="newContainerButton" onclick={newContainerListener} class="nav-link">New Container</button></li>
+      <li class="nav-item"><button id="hideEntryButton" onclick={hideEntryListener} class="nav-link">Hide/Unhide Current Entry</button></li>
       <li class="nav-item"><button id="removeContainerButton" onclick={removeEntryListener} class="nav-link">Remove Current Entry</button></li>
       {/if}
       
@@ -1143,11 +1238,14 @@
           <a
             href="{base}/{resultDetails.id}"
             class="list-group-item list-group-item-action py-3 lh-tight"
-            style="background-color: {resultDetails.editType === 'add' ? '#d4edda' : resultDetails.editType === 'modify' ? '#fff3cd' : resultDetails.editType === 'remove' ? '#f8d7da' : 'transparent'}"
+            style="background-color: {resultDetails.hidden ? '#e2e3e5' : resultDetails.editType === 'add' ? '#d4edda' : resultDetails.editType === 'modify' ? '#fff3cd' : resultDetails.editType === 'remove' ? '#f8d7da' : resultDetails.editType === 'hide' ? '#e2e3e5' : resultDetails.editType === 'unhide' ? '#d1e7dd' : 'transparent'}"
           >
             <div 
               class="d-flex w-100 align-items-center justify-content-between">
               <strong class="mb-1">{resultDetails.id?.startsWith('test/') && resultDetails.GCRS_name ? resultDetails.GCRS_name : resultDetails.full_name}</strong>
+              {#if resultDetails.hidden}
+              <span class="badge text-bg-secondary">Hidden</span>
+              {/if}
             </div>
             <div class="col-10 mb-1 small">{resultDetails.short_name}</div>
           </a>
