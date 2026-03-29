@@ -1,13 +1,13 @@
 {
-  "versionId": "20260329T051351Z_req-1774761218821",
-  "requestId": "req-1774761218821",
-  "publishedAt": "2026-03-29T05:13:51.788Z",
+  "versionId": "20260329T062918Z_req-1774765743451",
+  "requestId": "req-1774765743451",
+  "publishedAt": "2026-03-29T06:29:18.652Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "test sync polling",
+  "summary": "",
   "editTraceCount": 1,
-  "snapshotPath": "content-versions/snapshots/2026/20260329T051351Z_req-1774761218821.json",
-  "contentSha256": "542d2fb9b9271508e909758c9a7691a434770cab05b14b3c2b1692bf706c75d1",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23702065859",
+  "snapshotPath": "content-versions/snapshots/2026/20260329T062918Z_req-1774765743451.json",
+  "contentSha256": "353c040fd019684f3c68110afe4b2f4428bc16b1d89a76bff62f6ac4dc0f3cac",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23703196990",
   "environment": "predeploy"
 }
