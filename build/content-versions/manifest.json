@@ -142,5 +142,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260329T142552Z_req-1774794338864.json",
     "contentSha256": "87776b32b3d1cb7811aeadce33e8bd2b26dd5e9e63664423baa74c87eae7a033",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23711200528"
+  },
+  {
+    "versionId": "20260329T153544Z_req-1774798531092",
+    "publishedAt": "2026-03-29T15:35:44.557Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1774798531092",
+    "sourceRef": "main",
+    "summary": "Add containers",
+    "editTraceCount": 18,
+    "snapshotPath": "content-versions/snapshots/2026/20260329T153544Z_req-1774798531092.json",
+    "contentSha256": "69109ddf9e2ab5b0b83fa1a79d1a36d4ef27a9e3347d7cd08dcdb4b1f33d3698",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23712553138"
   }
 ]
