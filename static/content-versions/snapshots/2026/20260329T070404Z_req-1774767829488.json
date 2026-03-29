@@ -1,6 +1,34 @@
 {
 	"config": {
-		"editTrace": [],
+		"editTrace": [
+			{
+				"dataType": "testData",
+				"dataId": "436",
+				"refId": null,
+				"editType": "modify",
+				"field": "alert",
+				"originalValue": {
+					"time": 1774765727033,
+					"blocks": [
+						{
+							"id": "sb786OPJo9",
+							"type": "alertTag",
+							"data": {
+								"text": "On-Ice transport",
+								"background": "text-bg-primary"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1774767813220,
+					"blocks": [],
+					"version": "2.31.0-rc.7"
+				},
+				"timestamp": "2026-03-29T07:03:33.223Z"
+			}
+		],
 		"category": [
 			{
 				"code": "CHEM",
