@@ -40,6 +40,7 @@
 		"js-search": "^2.0.1",
 		"lunr": "^2.3.9",
 		"paragraph": "^0.0.1",
-		"porter-stemmer": "^0.9.1"
+		"porter-stemmer": "^0.9.1",
+		"xlsx": "^0.18.5"
 	}
 }

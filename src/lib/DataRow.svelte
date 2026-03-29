@@ -30,6 +30,11 @@
     let modifyTraceExists = $state(false);
 
     function checkModifyTrace() {        
+        if (!isEditable) {
+            modifyTraceExists = false;
+            return;
+        }
+
         const thisModifyTrace = $editedJSON["config"]["editTrace"].find(trace => 
         trace.dataType === datatype && 
         trace.dataId.toString() === page.params.id && 
@@ -219,6 +224,38 @@
         });
     }
 
+    function getCurrentLoadedData() {
+        if (thisEntryEdit && isEditable) {
+            return thisEntryEdit[rowName];
+        }
+
+        if (!isEditable && entryData) {
+            return entryData[rowName];
+        }
+
+        return null;
+    }
+
+    async function renderCurrentDataInEditor() {
+        const loadedData = getCurrentLoadedData();
+
+        if (!editor || !loadedData || typeof editor.render !== 'function') {
+            return false;
+        }
+
+        try {
+            if (editor.isReady && typeof editor.isReady.then === 'function') {
+                await editor.isReady;
+            }
+
+            await editor.render(loadedData);
+            return true;
+        } catch (error) {
+            console.warn('Editor rerender failed, will recreate editor instance:', error);
+            return false;
+        }
+    }
+
     async function destroyEditorInstance() {
         const currentEditor = editor;
         editor = null;
@@ -354,10 +391,14 @@
         // This effect will run whenever the page changes
         let currentPage = page.params.id; // Get the current page ID from the URL
         if (editor) {
-
-            void destroyEditorInstance();
             thisEntryEdit = $editedJSON[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
-            initializeEditor()
+            void (async () => {
+                const rendered = await renderCurrentDataInEditor();
+                if (!rendered) {
+                    await destroyEditorInstance();
+                    await initializeEditor();
+                }
+            })();
 
         }
 
@@ -378,7 +419,7 @@
 </script>
 
 <tr>
-    <th scope="row" style="{modifyTraceExists ? 'background-color: #fff3cd;' : ''}">{displayName}</th>
+    <th scope="row" style="{isEditable && modifyTraceExists ? 'background-color: #fff3cd;' : ''}">{displayName}</th>
     <td class="position-relative" style="width: 80%;">
 
         <div id="{rowName}{isEditable ? "-editable" : ""}"></div>

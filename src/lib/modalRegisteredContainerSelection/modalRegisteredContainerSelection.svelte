@@ -85,10 +85,10 @@
                             
                             {#if container.imageSrc.blocks && container.imageSrc.blocks.length>0}
 
-                            <enhanced:img src={getModuleDefault(container.imageSrc.blocks[0].data.imageSrc)} class="img-thumbnail" style="width: 100%; cursor: pointer;" />
+                            <enhanced:img src={getModuleDefault(container.imageSrc.blocks[0].data.imageSrc)} class="img-thumbnail" style="width: 100%; height: 170px; object-fit: contain; background-color: #ffffff; cursor: pointer;" />
                             
                             {:else}
-                            <enhanced:img src={getModuleDefault("/placeholder.jpg")} class="img-thumbnail" style="width: 100%; cursor: pointer;" />
+                            <enhanced:img src={getModuleDefault("/placeholder.jpg")} class="img-thumbnail" style="width: 100%; height: 170px; object-fit: contain; background-color: #ffffff; cursor: pointer;" />
                             
                             {/if}
                         

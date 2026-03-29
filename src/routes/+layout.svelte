@@ -458,6 +458,40 @@
 
   let selectedCategory = $state('');
   let selectedType = $state('allTypesSelected');
+  let selectedEditType = $state('allEditTypesSelected');
+  let selectedVisibility = $state('allVisibilitySelected');
+
+  function matchesSelectedEditType(entry) {
+    if (selectedEditType === 'allEditTypesSelected') {
+      return true;
+    }
+
+    if (selectedEditType === 'noEditTypeSelected') {
+      return !entry?.editType;
+    }
+
+    return entry?.editType === selectedEditType;
+  }
+
+  function matchesSelectedVisibility(entry) {
+    if (selectedVisibility === 'allVisibilitySelected') {
+      return true;
+    }
+
+    if (selectedVisibility === 'hiddenOnlySelected') {
+      return entry?.hidden === true;
+    }
+
+    if (selectedVisibility === 'visibleOnlySelected') {
+      return entry?.hidden !== true;
+    }
+
+    return true;
+  }
+
+  function matchesAdminFilters(entry) {
+    return matchesSelectedEditType(entry) && matchesSelectedVisibility(entry);
+  }
 
   let idx = $derived.by(()=>{return lunr(function () {
     
@@ -788,22 +822,193 @@
         ? index_document($editedJSON, selectedType, selectedCategory)
         : public_index_document(selectedType, selectedCategory);
 
-      return [...allEntries].sort((a, b) =>
+      const filteredEntries = $isAdmin
+        ? allEntries.filter((entry) => matchesAdminFilters(entry))
+        : allEntries;
+
+      return [...filteredEntries].sort((a, b) =>
         (a.full_name || '').localeCompare((b.full_name || ''), undefined, { sensitivity: 'base' })
       );
     }
 
     const searchResults = idx.search(keyword);
 
-    return searchResults.map(result => {
+    const mappedResults = searchResults.map(result => {
       const resultType = result.ref.split('/')[0]; 
       const foundItem = indexData[resultType+"s"].find(item => item.id === result.ref);
+      if (!foundItem) {
+        return null;
+      }
       return {
         ...foundItem,
         score: result.score
       };
     });
+
+    const validResults = mappedResults.filter((result) => result !== null);
+
+    return $isAdmin
+      ? validResults.filter((entry) => matchesAdminFilters(entry))
+      : validResults;
   });
+
+  function flattenForCell(value) {
+    if (value === null || value === undefined) {
+      return '';
+    }
+
+    if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+      return String(value);
+    }
+
+    if (Array.isArray(value)) {
+      return value
+        .map((item) => flattenForCell(item))
+        .filter((item) => item)
+        .join('; ');
+    }
+
+    if (typeof value === 'object') {
+      return Object.values(value)
+        .map((item) => flattenForCell(item))
+        .filter((item) => item)
+        .join('; ');
+    }
+
+    return '';
+  }
+
+  function editorJsFieldToText(fieldValue) {
+    if (!fieldValue) {
+      return '';
+    }
+
+    if (Array.isArray(fieldValue.blocks)) {
+      return fieldValue.blocks
+        .map((block) => {
+          const blockText = flattenForCell(block?.data);
+          return blockText || block?.type || '';
+        })
+        .filter((item) => item)
+        .join('\n');
+    }
+
+    return flattenForCell(fieldValue);
+  }
+
+  function buildEntrySheetRows(entries, preferredHeaders) {
+    const headerSet = new Set(preferredHeaders);
+
+    entries.forEach((entry) => {
+      Object.keys(entry || {}).forEach((key) => headerSet.add(key));
+    });
+
+    const headers = [...headerSet];
+
+    return entries.map((entry) => {
+      const row = {};
+
+      headers.forEach((header) => {
+        const rawValue = entry?.[header];
+
+        if (header === 'id' || header === 'refId') {
+          row[header] = rawValue ?? '';
+          return;
+        }
+
+        if (header === 'is_hidden') {
+          row[header] = rawValue === true;
+          return;
+        }
+
+        row[header] = editorJsFieldToText(rawValue);
+      });
+
+      return row;
+    });
+  }
+
+  async function exportReviewExcelListener() {
+    if (!$isAdmin) {
+      return;
+    }
+
+    try {
+      const XLSX = await import('xlsx');
+      const workbook = XLSX.utils.book_new();
+
+      const testsRows = buildEntrySheetRows($editedJSON.testData || [], [
+        'id',
+        'refId',
+        'is_hidden',
+        'full_name',
+        'GCRS_name',
+        'label_name',
+        'synonyms',
+        'lab_and_category',
+        'alert',
+        'requirement',
+        'container',
+        'form',
+        'indication',
+        'turn_around_time',
+        'test_handling'
+      ]);
+
+      const formsRows = buildEntrySheetRows($editedJSON.formData || [], [
+        'id',
+        'refId',
+        'is_hidden',
+        'form_name',
+        'form_code',
+        'remark',
+        'form_link',
+        'form_external_link',
+        'lab_and_category'
+      ]);
+
+      const containersRows = buildEntrySheetRows($editedJSON.containerData || [], [
+        'id',
+        'refId',
+        'is_hidden',
+        'name',
+        'code',
+        'remark',
+        'imageSrc',
+        'synonyms'
+      ]);
+
+      const editTraceRows = ($editedJSON.config?.editTrace || []).map((trace) => ({
+        timestamp: trace?.timestamp || '',
+        dataType: trace?.dataType || '',
+        dataId: trace?.dataId || '',
+        refId: trace?.refId || '',
+        editType: trace?.editType || '',
+        field: trace?.field || '',
+        originalValue: flattenForCell(trace?.originalValue),
+        newValue: flattenForCell(trace?.newValue)
+      }));
+
+      const summaryRows = [
+        { metric: 'Tests', count: ($editedJSON.testData || []).length },
+        { metric: 'Forms', count: ($editedJSON.formData || []).length },
+        { metric: 'Containers', count: ($editedJSON.containerData || []).length },
+        { metric: 'Edit Trace Records', count: ($editedJSON.config?.editTrace || []).length },
+        { metric: 'Generated At', count: new Date().toISOString() }
+      ];
+
+      XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(summaryRows), 'Summary');
+      XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(testsRows), 'Tests');
+      XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(formsRows), 'Forms');
+      XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(containersRows), 'Containers');
+      XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(editTraceRows), 'EditTrace');
+
+      const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+      XLSX.writeFile(workbook, `review-export-${stamp}.xlsx`);
+    } catch (error) {
+      alert(`Failed to export review workbook: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
 
 
   async function checkStatus() {
@@ -848,6 +1053,11 @@
     const exportButton = document.getElementById("exportButton");
     if (exportButton) {
       exportButton.addEventListener("click", exportListener);
+    }
+
+    const exportReviewExcelButton = document.getElementById("exportReviewExcelButton");
+    if (exportReviewExcelButton) {
+      exportReviewExcelButton.addEventListener("click", exportReviewExcelListener);
     }
 
   }});
@@ -1114,6 +1324,17 @@
     const currentlyHidden = thisEntry.is_hidden === true;
     const willHide = !currentlyHidden;
 
+    const isNewEntry = $editedJSON.config.editTrace.some((trace) =>
+      trace.dataType === dataType &&
+      trace.dataId === entryId &&
+      trace.editType === 'add'
+    );
+
+    if (willHide && isNewEntry) {
+      alert('New entries cannot be hidden before publish.');
+      return;
+    }
+
     if (!window.confirm(`${willHide ? 'Hide' : 'Unhide'} this ${entryType} entry (ID: ${entryId})?`)) {
       return;
     }
@@ -1127,6 +1348,54 @@
     });
 
     updateEditTrace(dataType, entryId, thisEntry.refId || null, willHide ? 'hide' : 'unhide', 'is_hidden', currentlyHidden, willHide);
+  }
+
+  function getCurrentEntryContext() {
+    const pathSegments = page.url.pathname.split('/').filter(Boolean);
+    const entryType = pathSegments[pathSegments.length - 2];
+    const entryId = parseInt(pathSegments[pathSegments.length - 1], 10);
+
+    if (
+      Number.isNaN(entryId) ||
+      (entryType !== 'test' && entryType !== 'form' && entryType !== 'container')
+    ) {
+      return null;
+    }
+
+    return { entryType, entryId };
+  }
+
+  function goToNextEntryIdListener() {
+    if (!$isAdmin) {
+      return;
+    }
+
+    const context = getCurrentEntryContext();
+    if (!context) {
+      alert('Please open a test, form, or container entry page first.');
+      return;
+    }
+
+    goto(`${base}/${context.entryType}/${context.entryId + 1}`);
+  }
+
+  function goToPreviousEntryIdListener() {
+    if (!$isAdmin) {
+      return;
+    }
+
+    const context = getCurrentEntryContext();
+    if (!context) {
+      alert('Please open a test, form, or container entry page first.');
+      return;
+    }
+
+    if (context.entryId <= 1) {
+      alert('This entry is already at the minimum ID.');
+      return;
+    }
+
+    goto(`${base}/${context.entryType}/${context.entryId - 1}`);
   }
 
 </script>
@@ -1143,18 +1412,37 @@
       <li class="nav-item"><a href="{base}/" class="nav-link active" aria-current="page">Home</a></li>
 
       {#if $isEditMode}
-      <li class="nav-item ms-2"><button id="newTestButton" onclick={newTestListener} class="nav-link">New Test</button></li>
-      <li class="nav-item"><button id="newFormButton" onclick={newFormListener} class="nav-link">New Form</button></li>
-      <li class="nav-item"><button id="newContainerButton" onclick={newContainerListener} class="nav-link">New Container</button></li>
-      <li class="nav-item"><button id="hideEntryButton" onclick={hideEntryListener} class="nav-link">Hide/Unhide Current Entry</button></li>
-      <li class="nav-item"><button id="removeContainerButton" onclick={removeEntryListener} class="nav-link">Remove Current Entry</button></li>
+      <li class="nav-item ms-2 nav-tools-wrapper">
+        <details class="nav-tools">
+          <summary class="nav-link">Entry Tools</summary>
+          <div class="nav-tools-menu">
+            <button id="newTestButton" type="button" onclick={newTestListener} class="btn btn-outline-secondary btn-sm w-100 mb-1">New Test</button>
+            <button id="newFormButton" type="button" onclick={newFormListener} class="btn btn-outline-secondary btn-sm w-100 mb-1">New Form</button>
+            <button id="newContainerButton" type="button" onclick={newContainerListener} class="btn btn-outline-secondary btn-sm w-100 mb-1">New Container</button>
+            <button id="hideEntryButton" type="button" onclick={hideEntryListener} class="btn btn-outline-secondary btn-sm w-100 mb-1">Hide/Unhide Current Entry</button>
+            <button id="removeContainerButton" type="button" onclick={removeEntryListener} class="btn btn-outline-danger btn-sm w-100">Remove Current Entry</button>
+          </div>
+        </details>
+      </li>
       {/if}
       
       {#if $isAdmin}
-      <li class="nav-item"><button id="exportButton" class="nav-link active">Save Changes</button></li>
-      <li class="nav-item"><button type="button" class="nav-link active ms-2" onclick={publishChangesListener} disabled={publishInProgress}>{publishInProgress ? 'Publishing...' : 'Publish Site'}</button></li>
+      <li class="nav-item ms-2 nav-tools-wrapper">
+        <details class="nav-tools">
+          <summary class="nav-link active">Admin Tools</summary>
+          <div class="nav-tools-menu">
+            <button id="exportButton" type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1">Save Changes</button>
+            <button id="exportReviewExcelButton" type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1">Export Review Excel</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={publishChangesListener} disabled={publishInProgress}>{publishInProgress ? 'Publishing...' : 'Publish Site'}</button>
+            {#if syncCheckEnabled}
+            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={configurePredeployVersionUrl}>Set Pre-deploy URL</button>
+            {/if}
+            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={goToPreviousEntryIdListener}>Previous ID</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm w-100" onclick={goToNextEntryIdListener}>Next ID</button>
+          </div>
+        </details>
+      </li>
       {#if syncCheckEnabled}
-      <li class="nav-item"><button type="button" class="nav-link active ms-2" onclick={configurePredeployVersionUrl}>Set Pre-deploy URL</button></li>
       <li class="nav-item ms-2 d-flex align-items-center">
         {#if syncStatus === 'in-sync'}
           <span class="badge text-bg-success">insync</span>
@@ -1224,6 +1512,30 @@
   </select>
   </div>
 
+  {#if $isAdmin}
+  <div class="input-group mb-1" style="width: 97%;">
+    <span class="input-group-text" style="width: 10%;">E</span>
+    <select bind:value={selectedEditType} class="form-select form-control" aria-label="Edit type filter">
+      <option value="allEditTypesSelected">All Edit Types</option>
+      <option value="add">New</option>
+      <option value="modify">Modified</option>
+      <option value="remove">Removed</option>
+      <option value="hide">Hide</option>
+      <option value="unhide">Unhide</option>
+      <option value="noEditTypeSelected">No Edit Type</option>
+    </select>
+  </div>
+
+  <div class="input-group mb-1" style="width: 97%;">
+    <span class="input-group-text" style="width: 10%;">V</span>
+    <select bind:value={selectedVisibility} class="form-select form-control" aria-label="Visibility filter">
+      <option value="allVisibilitySelected">All Visibility</option>
+      <option value="hiddenOnlySelected">Hidden Only</option>
+      <option value="visibleOnlySelected">Visible Only</option>
+    </select>
+  </div>
+  {/if}
+
     <!-- Search -->
     <div class="input-group" style="width: 97%;">
       <img class="input-group-text" src="{base}/search.svg" id="basic-addon1" style="width: 10%;" alt="search">
@@ -1243,9 +1555,17 @@
             <div 
               class="d-flex w-100 align-items-center justify-content-between">
               <strong class="mb-1">{resultDetails.id?.startsWith('test/') && resultDetails.GCRS_name ? resultDetails.GCRS_name : resultDetails.full_name}</strong>
-              {#if resultDetails.hidden}
-              <span class="badge text-bg-secondary">Hidden</span>
-              {/if}
+              <div class="d-flex align-items-center gap-1">
+                {#if resultDetails.editType === 'add'}
+                <span class="badge text-bg-success">New</span>
+                {/if}
+                {#if resultDetails.editType === 'unhide'}
+                <span class="badge text-bg-info">Unhide</span>
+                {/if}
+                {#if resultDetails.hidden}
+                <span class="badge text-bg-secondary">Hidden</span>
+                {/if}
+              </div>
             </div>
             <div class="col-10 mb-1 small">{resultDetails.short_name}</div>
           </a>
@@ -1257,3 +1577,35 @@
   <!-- Render Children -->
   {@render children()}
 </div>
+
+<style>
+  .nav-tools {
+    position: relative;
+  }
+
+  .nav-tools > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .nav-tools > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-tools-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.25rem);
+    min-width: 230px;
+    padding: 0.5rem;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.12);
+    z-index: 1060;
+  }
+
+  .nav-tools-wrapper {
+    position: relative;
+  }
+</style>

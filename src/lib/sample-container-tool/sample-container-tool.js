@@ -132,6 +132,10 @@ export default class SampleContainerTool {
 
         const image = document.createElement('img');
         image.classList.add('img-thumbnail');
+        image.style.width = '100%';
+        image.style.height = '180px';
+        image.style.objectFit = 'contain';
+        image.style.backgroundColor = '#ffffff';
 
         if (imageSrc && imageModules[`/src/lib/containerImages${imageSrc.replace("%20", " ")}`]) {
             image.id = imageSrc
