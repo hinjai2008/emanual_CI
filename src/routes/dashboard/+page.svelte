@@ -3,31 +3,11 @@
   import { onMount } from 'svelte';
   import { isAdmin } from '../stores';
 
-  /**
-   * @typedef {Object} ContentVersionMarker
-   * @property {string=} versionId
-   * @property {string=} requestId
-   * @property {string=} publishedAt
-   * @property {string=} publishedBy
-   * @property {string=} sourceRef
-   * @property {string=} summary
-   * @property {number=} editTraceCount
-   * @property {string=} snapshotPath
-   * @property {string=} contentSha256
-   * @property {string=} buildRunUrl
-   * @property {string=} environment
-   */
-
   let requestGroups = $state(/** @type {Array<any>} */ ([]));
   let selectedRequestId = $state('');
   let expandedEntryKeys = $state(new Set());
   let isLoading = $state(true);
   let loadError = $state('');
-  let productionVersionUrl = $state('');
-  let predeployVersion = $state(/** @type {ContentVersionMarker | null} */ (null));
-  let productionVersion = $state(/** @type {ContentVersionMarker | null} */ (null));
-  let syncStatus = $state('idle');
-  let syncStatusMessage = $state('');
 
   /**
    * @param {any} value
@@ -160,125 +140,6 @@
   }
 
   /**
-   * @param {string} input
-   */
-  function normalizeVersionUrl(input) {
-    return input.trim();
-  }
-
-  /**
-   * @param {string} url
-   */
-  function withCacheBuster(url) {
-    const parsedUrl = new URL(url, window.location.href);
-    parsedUrl.searchParams.set('ts', String(Date.now()));
-    return parsedUrl.toString();
-  }
-
-  /**
-   * @param {string} url
-   */
-  async function fetchVersionMarker(url) {
-    try {
-      const response = await fetch(withCacheBuster(url));
-      if (!response.ok) {
-        return {
-          ok: false,
-          error: `HTTP ${response.status}`
-        };
-      }
-
-      return {
-        ok: true,
-        data: await response.json()
-      };
-    } catch (error) {
-      return {
-        ok: false,
-        error: error instanceof Error ? error.message : 'Unknown network error'
-      };
-    }
-  }
-
-  function persistProductionVersionUrl() {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    const normalizedUrl = normalizeVersionUrl(productionVersionUrl);
-    productionVersionUrl = normalizedUrl;
-    localStorage.setItem('productionContentVersionUrl', normalizedUrl);
-  }
-
-  function clearSyncStatus() {
-    syncStatus = 'idle';
-    syncStatusMessage = '';
-    productionVersion = null;
-  }
-
-  /**
-   * @param {ContentVersionMarker | null} marker
-   * @param {'versionId' | 'publishedAt' | 'contentSha256'} key
-   * @param {string} fallback
-   */
-  function markerText(marker, key, fallback) {
-    const value = marker?.[key];
-    return typeof value === 'string' && value.trim() !== '' ? value : fallback;
-  }
-
-  async function checkProductionSync() {
-    const normalizedUrl = normalizeVersionUrl(productionVersionUrl);
-    productionVersionUrl = normalizedUrl;
-
-    if (!normalizedUrl) {
-      clearSyncStatus();
-      return;
-    }
-
-    syncStatus = 'checking';
-    syncStatusMessage = 'Checking production sync status...';
-
-    const [predeployResp, productionResp] = await Promise.all([
-      fetchVersionMarker(`${base}/content-version.json`),
-      fetchVersionMarker(normalizedUrl)
-    ]);
-
-    if (!predeployResp.ok) {
-      syncStatus = 'unknown';
-      syncStatusMessage = `Could not read pre-deployment version marker: ${predeployResp.error}`;
-      return;
-    }
-
-    predeployVersion = predeployResp.data;
-
-    if (!productionResp.ok) {
-      syncStatus = 'unknown';
-      syncStatusMessage = `Could not read production version marker: ${productionResp.error}`;
-      productionVersion = null;
-      return;
-    }
-
-    productionVersion = productionResp.data;
-
-    const preSha = predeployResp.data?.contentSha256;
-    const prodSha = productionResp.data?.contentSha256;
-
-    if (!preSha || !prodSha) {
-      syncStatus = 'unknown';
-      syncStatusMessage = 'Version markers are missing contentSha256, so sync cannot be confirmed.';
-      return;
-    }
-
-    if (preSha === prodSha) {
-      syncStatus = 'in-sync';
-      syncStatusMessage = `Production is in sync with pre-deployment (${predeployResp.data?.versionId || 'unknown version'}).`;
-    } else {
-      syncStatus = 'out-of-sync';
-      syncStatusMessage = `Production is out of sync. Pre-deployment=${predeployResp.data?.versionId || 'unknown'} Production=${productionResp.data?.versionId || 'unknown'}.`;
-    }
-  }
-
-  /**
    * @param {Array<any>} entries
    * @param {Map<string, any>} manifestByRequestId
    */
@@ -336,15 +197,10 @@
       return;
     }
 
-    if (typeof window !== 'undefined') {
-      productionVersionUrl = localStorage.getItem('productionContentVersionUrl') || '';
-    }
-
     try {
-      const [logResponse, manifestResponse, predeployVersionResponse] = await Promise.all([
+      const [logResponse, manifestResponse] = await Promise.all([
         fetch(`${base}/edit-trace.jsonl?ts=${Date.now()}`),
-        fetch(`${base}/content-versions/manifest.json?ts=${Date.now()}`),
-        fetch(`${base}/content-version.json?ts=${Date.now()}`)
+        fetch(`${base}/content-versions/manifest.json?ts=${Date.now()}`)
       ]);
 
       if (!logResponse.ok) {
@@ -366,10 +222,6 @@
             }
           }
         }
-      }
-
-      if (predeployVersionResponse.ok) {
-        predeployVersion = await predeployVersionResponse.json();
       }
 
       const text = await logResponse.text();
@@ -409,10 +261,6 @@
 
       requestGroups = toRequestGroups(entries, manifestByRequestId);
       selectedRequestId = requestGroups[0]?.requestId || '';
-
-      if (productionVersionUrl.trim()) {
-        await checkProductionSync();
-      }
     } catch (error) {
       loadError = `Failed to load edit log: ${error instanceof Error ? error.message : 'Unknown error'}`;
     } finally {
@@ -434,86 +282,6 @@
     <a href="{base}/" class="btn btn-outline-secondary">Back to Manual</a>
   </div>
 
-  <section class="card shadow-sm mb-3">
-    <div class="card-body">
-      <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-2">
-        <div>
-          <h2 class="h5 mb-1">Production Sync Check</h2>
-          <p class="small text-muted mb-0">Compare production against pre-deployment using content-version markers.</p>
-        </div>
-      </div>
-
-      <div class="row g-2 align-items-end">
-        <div class="col-lg-9">
-          <label class="form-label small mb-1" for="production-version-url">Production content-version URL</label>
-          <input
-            id="production-version-url"
-            type="url"
-            class="form-control"
-            placeholder="https://corporate-server.example.com/content-version.json"
-            value={productionVersionUrl}
-            oninput={(event) => {
-              productionVersionUrl = event.currentTarget.value;
-            }}
-            onblur={persistProductionVersionUrl}
-          />
-        </div>
-        <div class="col-lg-3 d-grid d-lg-flex gap-2">
-          <button type="button" class="btn btn-primary flex-fill" onclick={checkProductionSync} disabled={isLoading || syncStatus === 'checking'}>
-            {syncStatus === 'checking' ? 'Checking...' : 'Check Sync'}
-          </button>
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            onclick={() => {
-              productionVersionUrl = '';
-              persistProductionVersionUrl();
-              clearSyncStatus();
-            }}
-            disabled={syncStatus === 'checking'}
-          >
-            Clear
-          </button>
-        </div>
-      </div>
-
-      {#if syncStatusMessage}
-        <div class="mt-3">
-          {#if syncStatus === 'in-sync'}
-            <div class="alert alert-success mb-0">{syncStatusMessage}</div>
-          {:else if syncStatus === 'out-of-sync'}
-            <div class="alert alert-danger mb-0">{syncStatusMessage}</div>
-          {:else if syncStatus === 'unknown'}
-            <div class="alert alert-warning mb-0">{syncStatusMessage}</div>
-          {:else}
-            <div class="alert alert-secondary mb-0">{syncStatusMessage}</div>
-          {/if}
-        </div>
-      {/if}
-
-      {#if (predeployVersion || productionVersion) && syncStatus !== 'checking'}
-        <div class="row g-3 small mt-1">
-          <div class="col-md-6">
-            <div class="border rounded p-2 bg-light-subtle">
-              <div class="fw-semibold mb-1">Pre-deployment</div>
-              <div><strong>Version:</strong> {markerText(predeployVersion, 'versionId', 'Unknown')}</div>
-              <div><strong>Published:</strong> {markerText(predeployVersion, 'publishedAt', 'Unknown')}</div>
-              <div><strong>Hash:</strong> <span class="text-break">{markerText(predeployVersion, 'contentSha256', 'Unknown')}</span></div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="border rounded p-2 bg-light-subtle">
-              <div class="fw-semibold mb-1">Production</div>
-              <div><strong>Version:</strong> {markerText(productionVersion, 'versionId', 'Not loaded')}</div>
-              <div><strong>Published:</strong> {markerText(productionVersion, 'publishedAt', 'Not loaded')}</div>
-              <div><strong>Hash:</strong> <span class="text-break">{markerText(productionVersion, 'contentSha256', 'Not loaded')}</span></div>
-            </div>
-          </div>
-        </div>
-      {/if}
-    </div>
-  </section>
-
   {#if isLoading}
     <div class="alert alert-secondary">Loading edit log...</div>
   {:else if loadError}
@@ -521,10 +289,10 @@
   {:else if requestGroups.length === 0}
     <div class="alert alert-info">No archived edit log entries are available yet.</div>
   {:else}
-    <div class="row g-3 align-items-start">
+    <div class="row g-3 align-items-start dashboard-columns">
       <div class="col-lg-4">
         <div class="card shadow-sm sticky-lg-top dashboard-pane" style="top: 1rem;">
-          <div class="card-body p-0">
+          <div class="card-body p-0 dashboard-pane-body">
             <div class="border-bottom px-3 py-2">
               <h2 class="h5 mb-1">Publish Requests</h2>
               <div class="small text-muted">Select a request to inspect detailed modifications.</div>
@@ -649,7 +417,14 @@
     overflow: hidden;
   }
 
+  .dashboard-pane-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
   .dashboard-scroll-region {
+    flex: 1 1 auto;
     overflow-y: auto;
   }
 
@@ -688,7 +463,14 @@
   }
 
   @media (min-width: 992px) {
-    .dashboard-pane,
+    .dashboard-pane {
+      max-height: calc(100vh - 8rem);
+    }
+
+    .dashboard-scroll-region {
+      max-height: calc(100vh - 13rem);
+    }
+
     .dashboard-detail-scroll {
       max-height: calc(100vh - 8rem);
     }

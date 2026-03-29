@@ -1,6 +1,6 @@
 <script>
     import { goto } from '$app/navigation';
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
     import { page } from '$app/state';
 
   let { data, children } = $props();
@@ -443,7 +443,164 @@
   let publishInProgress = $state(false);
   let publishStatusMessage = $state('');
   let publishActionsUrl = $state('');
+  let syncCheckEnabled = $state(false);
+  let syncStatus = $state('idle');
+  let syncStatusMessage = $state('');
+  let predeployVersion = $state(null);
+  let productionVersion = $state(null);
+  let syncCheckTimer = null;
   const defaultPublishEndpoint = 'https://emanual-publish-api.rayyt2020.workers.dev/publish';
+
+  function normalizeVersionUrl(rawValue) {
+    return (rawValue || '').trim();
+  }
+
+  function defaultPredeployVersionUrl() {
+    return 'https://hinjai2008.github.io/emanual_CI/content-version.json';
+  }
+
+  function isSyncCheckHostEnabled() {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    const hostname = window.location.hostname.toLowerCase();
+    return !hostname.includes('github.io') && !hostname.includes('githubusercontent.com');
+  }
+
+  function withCacheBuster(url) {
+    const parsedUrl = new URL(url, window.location.href);
+    parsedUrl.searchParams.set('ts', String(Date.now()));
+    return parsedUrl.toString();
+  }
+
+  async function fetchVersionMarker(url) {
+    try {
+      const response = await fetch(withCacheBuster(url));
+      if (!response.ok) {
+        return { ok: false, error: `HTTP ${response.status}` };
+      }
+
+      return { ok: true, data: await response.json() };
+    } catch (error) {
+      return {
+        ok: false,
+        error: error instanceof Error ? error.message : 'Unknown network error'
+      };
+    }
+  }
+
+  /**
+   * @param {{ silent?: boolean }=} options
+   */
+  async function refreshSyncStatus(options = {}) {
+    if (!$isAdmin || typeof window === 'undefined' || !syncCheckEnabled) {
+      return;
+    }
+
+    const silent = options.silent === true;
+
+    const predeployVersionUrl = normalizeVersionUrl(
+      localStorage.getItem('predeployContentVersionUrl') || defaultPredeployVersionUrl()
+    );
+    if (!predeployVersionUrl) {
+      syncStatus = 'idle';
+      syncStatusMessage = '';
+      predeployVersion = null;
+      productionVersion = null;
+      return;
+    }
+
+    if (!silent) {
+      syncStatus = 'checking';
+    }
+
+    const [predeployResp, productionResp] = await Promise.all([
+      fetchVersionMarker(predeployVersionUrl),
+      fetchVersionMarker(`${base}/content-version.json`)
+    ]);
+
+    if (!predeployResp.ok) {
+      syncStatus = 'unknown';
+      syncStatusMessage = `Unable to read latest pre-deployment version: ${predeployResp.error}`;
+      return;
+    }
+
+    predeployVersion = predeployResp.data;
+
+    if (!productionResp.ok) {
+      syncStatus = 'unknown';
+      syncStatusMessage = `Unable to read production version: ${productionResp.error}`;
+      productionVersion = null;
+      return;
+    }
+
+    productionVersion = productionResp.data;
+
+    const preSha = predeployResp.data?.contentSha256;
+    const prodSha = productionResp.data?.contentSha256;
+
+    if (!preSha || !prodSha) {
+      syncStatus = 'unknown';
+      syncStatusMessage = 'Sync status is unavailable because the version marker is incomplete.';
+      return;
+    }
+
+    if (preSha === prodSha) {
+      syncStatus = 'in-sync';
+      syncStatusMessage = 'insync';
+    } else {
+      syncStatus = 'out-of-sync';
+      syncStatusMessage = 'out of sync';
+    }
+  }
+
+  async function configurePredeployVersionUrl() {
+    if (!$isAdmin || typeof window === 'undefined' || !syncCheckEnabled) {
+      return;
+    }
+
+    const existingUrl = localStorage.getItem('predeployContentVersionUrl') || defaultPredeployVersionUrl();
+    const input = window.prompt(
+      'Enter the pre-deployment (GitHub Pages) content-version URL:',
+      existingUrl
+    );
+
+    if (input === null) {
+      return;
+    }
+
+    const normalizedUrl = normalizeVersionUrl(input);
+
+    if (!normalizedUrl) {
+      localStorage.removeItem('predeployContentVersionUrl');
+      syncStatus = 'idle';
+      syncStatusMessage = '';
+      predeployVersion = null;
+      productionVersion = null;
+      return;
+    }
+
+    localStorage.setItem('predeployContentVersionUrl', normalizedUrl);
+    await refreshSyncStatus();
+  }
+
+  function startSyncPolling() {
+    if (typeof window === 'undefined' || !syncCheckEnabled || syncCheckTimer) {
+      return;
+    }
+
+    syncCheckTimer = window.setInterval(() => {
+      void refreshSyncStatus({ silent: true });
+    }, 10000);
+  }
+
+  function stopSyncPolling() {
+    if (syncCheckTimer) {
+      clearInterval(syncCheckTimer);
+      syncCheckTimer = null;
+    }
+  }
 
   function normalizePublishEndpoint(rawValue) {
     if (!rawValue) {
@@ -549,6 +706,7 @@
 
       publishStatusMessage = 'Publish started.';
       publishActionsUrl = result.actionsUrl || '';
+      await refreshSyncStatus();
     } catch (error) {
       publishStatusMessage = 'Publish failed.';
       publishActionsUrl = '';
@@ -557,6 +715,16 @@
       publishInProgress = false;
     }
   }
+
+  onMount(async () => {
+    syncCheckEnabled = isSyncCheckHostEnabled();
+    await refreshSyncStatus();
+    startSyncPolling();
+  });
+
+  onDestroy(() => {
+    stopSyncPolling();
+  });
 
   let searchResultsDetails = $derived.by(() => {
     const keyword = (searchInput || '').trim();
@@ -890,6 +1058,20 @@
       {#if $isAdmin}
       <li class="nav-item"><button id="exportButton" class="nav-link active">Save Changes</button></li>
       <li class="nav-item"><button type="button" class="nav-link active ms-2" onclick={publishChangesListener} disabled={publishInProgress}>{publishInProgress ? 'Publishing...' : 'Publish Site'}</button></li>
+      {#if syncCheckEnabled}
+      <li class="nav-item"><button type="button" class="nav-link active ms-2" onclick={configurePredeployVersionUrl}>Set Pre-deploy URL</button></li>
+      <li class="nav-item ms-2 d-flex align-items-center">
+        {#if syncStatus === 'in-sync'}
+          <span class="badge text-bg-success">insync</span>
+        {:else if syncStatus === 'out-of-sync'}
+          <span class="badge text-bg-danger">out of sync</span>
+        {:else if syncStatus === 'checking'}
+          <span class="badge text-bg-secondary">checking sync</span>
+        {:else if syncStatus === 'unknown'}
+          <span class="badge text-bg-warning">sync unknown</span>
+        {/if}
+      </li>
+      {/if}
       <li class="nav-item"><a href="{base}/dashboard" class="nav-link active ms-2">Dashboard</a></li>
       {/if}
       
@@ -900,6 +1082,14 @@
     {publishStatusMessage}
     {#if publishActionsUrl}
       — <a href={publishActionsUrl} target="_blank" rel="noopener noreferrer">View workflow run</a>
+    {/if}
+  </div>
+  {/if}
+  {#if $isAdmin && syncCheckEnabled && syncStatus === 'out-of-sync'}
+  <div class="alert alert-warning py-2 px-3 mb-2 small d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <span>Please download and deploy latest build. Pre-deployment version {predeployVersion?.versionId || 'unknown'} does not match production {productionVersion?.versionId || 'unknown'}.</span>
+    {#if predeployVersion?.buildRunUrl}
+      <a class="btn btn-sm btn-outline-dark" href={predeployVersion.buildRunUrl} target="_blank" rel="noopener noreferrer">Download Latest Build</a>
     {/if}
   </div>
   {/if}
