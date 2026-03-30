@@ -226,5 +226,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260330T191719Z_req-1774898219413.json",
     "contentSha256": "26f5e7848bca79978ad5b2e73efc572d79fab6cbd0752719f373654e1e7f012e",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23763051595"
+  },
+  {
+    "versionId": "20260330T203326Z_req-1774902789020",
+    "publishedAt": "2026-03-30T20:33:26.778Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1774902789020",
+    "sourceRef": "main",
+    "summary": "to 428",
+    "editTraceCount": 72,
+    "snapshotPath": "content-versions/snapshots/2026/20260330T203326Z_req-1774902789020.json",
+    "contentSha256": "4082c9daf7025d3942ee5a9e021be243c5c1fc9481e96bed6a9d1a6cee4d082f",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23766356431"
   }
 ]
