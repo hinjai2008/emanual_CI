@@ -118,7 +118,7 @@
         {/if}
         <DataRow datatype={"testData"} rowName={"GCRS_name"} displayName={"CMS Name"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"label_name"} displayName={"Label Name"} isEditable={false} entryData={entryData}/>
-        <DataRow datatype={"testData"} rowName={"requirement"} displayName={"Requirement"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"requirement"} displayName={"Special Requirement"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"container"} displayName={"Container"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"form"} displayName={"Form"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"synonyms"} displayName={"Synonyms"} isEditable={false} entryData={entryData}/>
@@ -160,7 +160,7 @@
             <DataRow datatype={"testData"} rowName={"full_name"} displayName={"Full Name (To be removed)"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"GCRS_name"} displayName={"CMS Name"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"label_name"} displayName={"Label Name"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"requirement"} displayName={"Requirement"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"requirement"} displayName={"Special Requirement"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"container"} displayName={"Container"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"form"} displayName={"Form"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"synonyms"} displayName={"Synonyms"} isEditable={true} entryData={entryData}/>

@@ -17,10 +17,152 @@
   import { setGlobalFunctions } from './stores';
     import { form } from '$app/server';
 
+  /**
+   * @param {any} value
+   */
+  function readEditorJsText(value) {
+    if (!value) {
+      return '';
+    }
+
+    if (typeof value === 'string') {
+      return value.trim();
+    }
+
+    const blockText = value?.blocks?.[0]?.data?.text;
+    if (typeof blockText === 'string') {
+      return blockText.trim();
+    }
+
+    return '';
+  }
+
+  /**
+   * @param {string} dataType
+   * @param {string|null|undefined} field
+   */
+  function isNameField(dataType, field) {
+    if (!field) {
+      return false;
+    }
+
+    if (dataType === 'testData') {
+      return field === 'GCRS_name' || field === 'full_name' || field === 'label_name';
+    }
+
+    if (dataType === 'formData') {
+      return field === 'form_name' || field === 'form_code';
+    }
+
+    if (dataType === 'containerData') {
+      return field === 'name' || field === 'code';
+    }
+
+    return false;
+  }
+
+  /**
+   * @param {any} source
+   * @param {string} dataType
+   * @param {string|number} dataId
+   */
+  function findEntryByTypeAndId(source, dataType, dataId) {
+    if (!source) {
+      return null;
+    }
+
+    const idText = String(dataId);
+
+    if (dataType === 'testData') {
+      const testEntries = Array.isArray(source.testData) ? source.testData : [];
+      for (const entry of testEntries) {
+        if (String(entry?.id) === idText) {
+          return entry;
+        }
+      }
+      return null;
+    }
+
+    if (dataType === 'formData') {
+      const formEntries = Array.isArray(source.formData) ? source.formData : [];
+      for (const entry of formEntries) {
+        if (String(entry?.id) === idText) {
+          return entry;
+        }
+      }
+      return null;
+    }
+
+    if (dataType === 'containerData') {
+      const containerEntries = Array.isArray(source.containerData) ? source.containerData : [];
+      for (const entry of containerEntries) {
+        if (String(entry?.id) === idText) {
+          return entry;
+        }
+      }
+      return null;
+    }
+
+    return null;
+  }
+
+  /**
+   * @param {string} dataType
+   * @param {any} entry
+   */
+  function getEntryNameSnapshot(dataType, entry) {
+    if (!entry) {
+      return '';
+    }
+
+    if (dataType === 'testData') {
+      return (
+        readEditorJsText(entry.GCRS_name) ||
+        readEditorJsText(entry.full_name) ||
+        readEditorJsText(entry.label_name)
+      );
+    }
+
+    if (dataType === 'formData') {
+      return readEditorJsText(entry.form_name) || readEditorJsText(entry.form_code);
+    }
+
+    if (dataType === 'containerData') {
+      return readEditorJsText(entry.name) || readEditorJsText(entry.code);
+    }
+
+    return '';
+  }
+
+  /**
+   * @param {string} dataType
+   * @param {string|number} dataId
+   * @param {string|null|undefined} field
+   * @param {any} newValue
+   */
+  function resolveNameSnapshot(dataType, dataId, field, newValue) {
+    if (isNameField(dataType, field)) {
+      const nameFromValue = readEditorJsText(newValue);
+      if (nameFromValue) {
+        return nameFromValue;
+      }
+    }
+
+    const editedEntry = findEntryByTypeAndId($editedJSON, dataType, dataId);
+    const editedName = getEntryNameSnapshot(dataType, editedEntry);
+    if (editedName) {
+      return editedName;
+    }
+
+    const initialEntry = findEntryByTypeAndId(initialJSON, dataType, dataId);
+    return getEntryNameSnapshot(dataType, initialEntry);
+  }
+
 
   function updateEditTrace(dataType, dataId, refId, editType, field, originalValue, newValue) {
     if ($isAdmin) {
       const timestamp = new Date().toISOString();
+      const nameSnapshot = resolveNameSnapshot(dataType, dataId, field, newValue);
 
       if (editType == "hide" || editType == "unhide") {
         const sameActionIndex = $editedJSON.config.editTrace.findIndex(trace =>
@@ -35,6 +177,7 @@
             draft.config.editTrace[sameActionIndex].field = field;
             draft.config.editTrace[sameActionIndex].originalValue = originalValue;
             draft.config.editTrace[sameActionIndex].newValue = newValue;
+            draft.config.editTrace[sameActionIndex].nameSnapshot = nameSnapshot;
             return draft;
           });
           return;
@@ -62,6 +205,7 @@
           field,
           originalValue,
           newValue,
+          nameSnapshot,
           timestamp
         };
 
@@ -81,6 +225,7 @@
           field: null,
           originalValue: null,
           newValue: null,
+          nameSnapshot,
           timestamp
         };
 
@@ -114,6 +259,7 @@
             field: null,
             originalValue: null,
             newValue: null,
+            nameSnapshot,
             timestamp
           };
 
@@ -156,6 +302,7 @@
           editedJSON.update((draft) => {
             draft.config.editTrace[existingTraceIndex].newValue = newValue;
             draft.config.editTrace[existingTraceIndex].timestamp = timestamp;
+            draft.config.editTrace[existingTraceIndex].nameSnapshot = nameSnapshot;
             return draft;
           });
           return; // Exit after updating existing trace
@@ -171,6 +318,7 @@
             field,
             originalValue,
             newValue,
+            nameSnapshot,
             timestamp
           };
 
@@ -1365,7 +1513,51 @@
     return { entryType, entryId };
   }
 
-  function goToNextEntryIdListener() {
+  function getEntryListByType(entryType) {
+    if (entryType === 'test') {
+      return Array.isArray($editedJSON.testData) ? $editedJSON.testData : [];
+    }
+
+    if (entryType === 'form') {
+      return Array.isArray($editedJSON.formData) ? $editedJSON.formData : [];
+    }
+
+    if (entryType === 'container') {
+      return Array.isArray($editedJSON.containerData) ? $editedJSON.containerData : [];
+    }
+
+    return [];
+  }
+
+  function findAdjacentExistingId(entryType, currentId, direction) {
+    const entries = getEntryListByType(entryType);
+    if (!entries.length) {
+      return null;
+    }
+
+    const ids = entries
+      .map((entry) => Number(entry?.id))
+      .filter((id) => Number.isFinite(id))
+      .sort((left, right) => left - right);
+
+    if (!ids.length) {
+      return null;
+    }
+
+    if (direction === 'next') {
+      return ids.find((id) => id > currentId) ?? null;
+    }
+
+    for (let index = ids.length - 1; index >= 0; index -= 1) {
+      if (ids[index] < currentId) {
+        return ids[index];
+      }
+    }
+
+    return null;
+  }
+
+  function goToAdjacentExistingEntry(direction) {
     if (!$isAdmin) {
       return;
     }
@@ -1376,26 +1568,25 @@
       return;
     }
 
-    goto(`${base}/${context.entryType}/${context.entryId + 1}`);
+    const targetId = findAdjacentExistingId(context.entryType, context.entryId, direction);
+    if (targetId === null) {
+      if (direction === 'next') {
+        alert('No higher existing ID was found in the current edited JSON.');
+      } else {
+        alert('No lower existing ID was found in the current edited JSON.');
+      }
+      return;
+    }
+
+    goto(`${base}/${context.entryType}/${targetId}`);
+  }
+
+  function goToNextEntryIdListener() {
+    goToAdjacentExistingEntry('next');
   }
 
   function goToPreviousEntryIdListener() {
-    if (!$isAdmin) {
-      return;
-    }
-
-    const context = getCurrentEntryContext();
-    if (!context) {
-      alert('Please open a test, form, or container entry page first.');
-      return;
-    }
-
-    if (context.entryId <= 1) {
-      alert('This entry is already at the minimum ID.');
-      return;
-    }
-
-    goto(`${base}/${context.entryType}/${context.entryId - 1}`);
+    goToAdjacentExistingEntry('previous');
   }
 
 </script>
@@ -1427,6 +1618,9 @@
       {/if}
       
       {#if $isAdmin}
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <button type="button" class="btn btn-primary btn-sm" onclick={goToNextEntryIdListener}>Next Existing ID</button>
+      </li>
       <li class="nav-item ms-2 nav-tools-wrapper">
         <details class="nav-tools">
           <summary class="nav-link active">Admin Tools</summary>

@@ -8,6 +8,100 @@
   let expandedEntryKeys = $state(new Set());
   let isLoading = $state(true);
   let loadError = $state('');
+  const entryNameByKey = new Map();
+
+  /**
+   * @param {string} dataType
+   */
+  function toEntryPrefix(dataType) {
+    if (dataType === 'testData') return 'test';
+    if (dataType === 'formData') return 'form';
+    if (dataType === 'containerData') return 'container';
+    return '';
+  }
+
+  /**
+   * @param {string} dataType
+   * @param {string|number} dataId
+   */
+  function toLookupKey(dataType, dataId) {
+    const prefix = toEntryPrefix(dataType);
+    return prefix ? `${prefix}/${dataId}` : '';
+  }
+
+  /**
+   * @param {string} dataType
+   */
+  function toPrettyDataType(dataType) {
+    if (dataType === 'testData') return 'Test';
+    if (dataType === 'formData') return 'Form';
+    if (dataType === 'containerData') return 'Container';
+    return dataType || 'Entry';
+  }
+
+  /**
+   * @param {any} trace
+   */
+  function toTraceTargetLabel(trace) {
+    const prettyType = toPrettyDataType(trace.dataType);
+    const defaultLabel = `${prettyType} #${trace.dataId}`;
+    const snapshotName = typeof trace?.nameSnapshot === 'string' ? trace.nameSnapshot.trim() : '';
+    if (snapshotName) {
+      return `${prettyType}: ${snapshotName}`;
+    }
+
+    const lookupKey = toLookupKey(trace.dataType, trace.dataId);
+    if (!lookupKey) {
+      return defaultLabel;
+    }
+
+    const entryName = entryNameByKey.get(lookupKey);
+    return entryName ? `${prettyType}: ${entryName}` : defaultLabel;
+  }
+
+  /**
+   * @param {string|undefined} editType
+   */
+  function toEditBadgeClass(editType) {
+    if (editType === 'add') return 'badge edit-badge edit-badge-add';
+    if (editType === 'remove') return 'badge edit-badge edit-badge-remove';
+    if (editType === 'modify') return 'badge edit-badge edit-badge-modify';
+    if (editType === 'hide') return 'badge edit-badge edit-badge-hide';
+    if (editType === 'unhide') return 'badge edit-badge edit-badge-unhide';
+    return 'badge text-bg-secondary';
+  }
+
+  /**
+   * @param {any} payload
+   */
+  function updateEntryNameLookup(payload) {
+    entryNameByKey.clear();
+
+    const tests = payload?.indexData?.tests || [];
+    const forms = payload?.indexData?.forms || [];
+    const containers = payload?.indexData?.containers || [];
+
+    for (const test of tests) {
+      const name = test?.GCRS_name || test?.full_name || test?.short_name || '';
+      if (test?.id && name) {
+        entryNameByKey.set(test.id, name);
+      }
+    }
+
+    for (const form of forms) {
+      const name = form?.full_name || form?.short_name || '';
+      if (form?.id && name) {
+        entryNameByKey.set(form.id, name);
+      }
+    }
+
+    for (const container of containers) {
+      const name = container?.full_name || container?.short_name || '';
+      if (container?.id && name) {
+        entryNameByKey.set(container.id, name);
+      }
+    }
+  }
 
   /**
    * @param {any} value
@@ -29,25 +123,26 @@
    */
   function toEntrySummary(entry) {
     const trace = entry.trace;
+    const targetLabel = toTraceTargetLabel(trace);
 
     if (trace.editType === 'add') {
-      return `Added ${trace.dataType} #${trace.dataId}`;
+      return `Added ${targetLabel}`;
     }
 
     if (trace.editType === 'remove') {
-      return `Removed ${trace.dataType} #${trace.dataId}`;
+      return `Removed ${targetLabel}`;
     }
 
     if (trace.editType === 'hide') {
-      return `Hid ${trace.dataType} #${trace.dataId}`;
+      return `Hid ${targetLabel}`;
     }
 
     if (trace.editType === 'unhide') {
-      return `Unhid ${trace.dataType} #${trace.dataId}`;
+      return `Unhid ${targetLabel}`;
     }
 
     const fieldLabel = trace.field || 'unknown field';
-    return `Modified ${trace.dataType} #${trace.dataId} field ${fieldLabel}`;
+    return `Modified ${targetLabel} field ${fieldLabel}`;
   }
 
   /**
@@ -94,7 +189,7 @@
 
       const dataType = entry.trace?.dataType || 'unknown';
       const dataId = entry.trace?.dataId || 'unknown';
-      touchedItems.add(`${dataType} #${dataId}`);
+      touchedItems.add(toTraceTargetLabel({ dataType, dataId }));
     }
 
     const parts = [];
@@ -214,9 +309,10 @@
     }
 
     try {
-      const [logResponse, manifestResponse] = await Promise.all([
+      const [logResponse, manifestResponse, indexResponse] = await Promise.all([
         fetch(`${base}/edit-trace.jsonl?ts=${Date.now()}`),
-        fetch(`${base}/content-versions/manifest.json?ts=${Date.now()}`)
+        fetch(`${base}/content-versions/manifest.json?ts=${Date.now()}`),
+        fetch(`${base}/search-index.json?ts=${Date.now()}`)
       ]);
 
       if (!logResponse.ok) {
@@ -238,6 +334,11 @@
             }
           }
         }
+      }
+
+      if (indexResponse && indexResponse.ok) {
+        const indexPayload = await indexResponse.json();
+        updateEntryNameLookup(indexPayload);
       }
 
       const text = await logResponse.text();
@@ -384,7 +485,7 @@
                             <div class="small text-muted">Logged: {entry.loggedAt || 'Unknown'}</div>
                           </div>
                           <div class="d-flex align-items-center gap-2">
-                            <span class="badge text-bg-secondary">{entry.trace?.editType || 'unknown'}</span>
+                            <span class={toEditBadgeClass(entry.trace?.editType)}>{entry.trace?.editType || 'unknown'}</span>
                             <span class="entry-chevron" aria-hidden="true">{expandedEntryKeys.has(entry.entryKey) ? '−' : '+'}</span>
                           </div>
                         </div>
@@ -476,6 +577,41 @@
     border-radius: 999px;
     font-size: 1rem;
     line-height: 1;
+  }
+
+  .edit-badge {
+    text-transform: capitalize;
+    border: 1px solid transparent;
+  }
+
+  .edit-badge-add {
+    color: #0f5132;
+    background: rgba(25, 135, 84, 0.18);
+    border-color: rgba(25, 135, 84, 0.35);
+  }
+
+  .edit-badge-modify {
+    color: #664d03;
+    background: rgba(255, 193, 7, 0.28);
+    border-color: rgba(255, 193, 7, 0.45);
+  }
+
+  .edit-badge-remove {
+    color: #842029;
+    background: rgba(220, 53, 69, 0.2);
+    border-color: rgba(220, 53, 69, 0.38);
+  }
+
+  .edit-badge-hide {
+    color: #1f2f5e;
+    background: rgba(13, 110, 253, 0.2);
+    border-color: rgba(13, 110, 253, 0.35);
+  }
+
+  .edit-badge-unhide {
+    color: #0a4b5a;
+    background: rgba(13, 202, 240, 0.24);
+    border-color: rgba(13, 202, 240, 0.38);
   }
 
   @media (min-width: 992px) {
