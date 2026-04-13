@@ -1,1 +1,1 @@
-{"type":"data","nodes":[{"type":"data","data":[null],"uses":{}},{"type":"data","data":[{"entryData":1},null],"uses":{"params":["id"]}}]}
+{"type":"data","nodes":[{"type":"data","data":[null],"uses":{}},{"type":"data","data":[{"entryData":1},{"id":2,"refId":3,"full_name":4,"GCRS_name":10,"label_name":11,"synonyms":15},951,19548163,{"blocks":5},[6],{"type":7,"data":8},"paragraph",{"text":9},"New Test 951",{},{"blocks":12},[13],{"type":7,"data":14},{"text":9},{"blocks":16},[17],{"type":18,"data":19},"synonyms",{"synonymList":20},[]],"uses":{"params":["id"]}}]}

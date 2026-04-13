@@ -1,13 +1,13 @@
 {
-  "versionId": "20260331T010308Z_req-1774918972868",
-  "requestId": "req-1774918972868",
-  "publishedAt": "2026-03-31T01:03:08.272Z",
+  "versionId": "20260413T222127Z_req-1776118868950",
+  "requestId": "req-1776118868950",
+  "publishedAt": "2026-04-13T22:21:27.194Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "First round review",
-  "editTraceCount": 497,
-  "snapshotPath": "content-versions/snapshots/2026/20260331T010308Z_req-1774918972868.json",
-  "contentSha256": "12f9996f20bb2f1f00e2c2dd372a248bba1965ef72d28df135d6694e73f56f45",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23775409371",
+  "summary": "Add haem test",
+  "editTraceCount": 79,
+  "snapshotPath": "content-versions/snapshots/2026/20260413T222127Z_req-1776118868950.json",
+  "contentSha256": "dffeccd9360d3ad9eaba8808b90bad5760c184f21cc89ebcded2af25af6206a2",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24369892611",
   "environment": "predeploy"
 }
