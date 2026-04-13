@@ -262,5 +262,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260413T222127Z_req-1776118868950.json",
     "contentSha256": "8b13358a802ffacec957250efd89dfdda61e90f24f6c016e48ecb827d6eda35b",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24369892611"
+  },
+  {
+    "versionId": "20260413T230210Z_req-1776121312501",
+    "publishedAt": "2026-04-13T23:02:10.394Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1776121312501",
+    "sourceRef": "main",
+    "summary": "update haem label",
+    "editTraceCount": 4,
+    "snapshotPath": "content-versions/snapshots/2026/20260413T230210Z_req-1776121312501.json",
+    "contentSha256": "5d3911437e6254ec5621a7a9154aeba5c085849dad18124e1dd625c30de49121",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24371332536"
   }
 ]
