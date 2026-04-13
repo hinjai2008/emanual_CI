@@ -250,5 +250,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260331T010308Z_req-1774918972868.json",
     "contentSha256": "f4f4dd08e8ae753818bbfb54560f96c5aa76cc01845e34c84463b89b7c83860e",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/23775409371"
+  },
+  {
+    "versionId": "20260413T222127Z_req-1776118868950",
+    "publishedAt": "2026-04-13T22:21:27.194Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1776118868950",
+    "sourceRef": "main",
+    "summary": "Add haem test",
+    "editTraceCount": 79,
+    "snapshotPath": "content-versions/snapshots/2026/20260413T222127Z_req-1776118868950.json",
+    "contentSha256": "8b13358a802ffacec957250efd89dfdda61e90f24f6c016e48ecb827d6eda35b",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24369892611"
   }
 ]
