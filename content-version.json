@@ -1,13 +1,13 @@
 {
-  "versionId": "20260414T183033Z_req-1776191418758",
-  "requestId": "req-1776191418758",
-  "publishedAt": "2026-04-14T18:30:33.651Z",
+  "versionId": "20260414T183447Z_req-1776191666775",
+  "requestId": "req-1776191666775",
+  "publishedAt": "2026-04-14T18:34:47.653Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "update",
-  "editTraceCount": 2,
-  "snapshotPath": "content-versions/snapshots/2026/20260414T183033Z_req-1776191418758.json",
-  "contentSha256": "8bad5980f043b26eb48d620b6e6453072b4c7f461f78440b9f755060293ac35e",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24416157729",
+  "summary": "Unhide amylase",
+  "editTraceCount": 1,
+  "snapshotPath": "content-versions/snapshots/2026/20260414T183447Z_req-1776191666775.json",
+  "contentSha256": "4983222d2dde23c58d652c0bbc6b61fb532ac040a1296efa603f96aa0395c5cf",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24416340539",
   "environment": "predeploy"
 }
