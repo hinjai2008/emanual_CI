@@ -1,13 +1,13 @@
 {
-  "versionId": "20260413T230210Z_req-1776121312501",
-  "requestId": "req-1776121312501",
-  "publishedAt": "2026-04-13T23:02:10.394Z",
+  "versionId": "20260414T160624Z_req-1776182768741",
+  "requestId": "req-1776182768741",
+  "publishedAt": "2026-04-14T16:06:24.350Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "update haem label",
-  "editTraceCount": 4,
-  "snapshotPath": "content-versions/snapshots/2026/20260413T230210Z_req-1776121312501.json",
-  "contentSha256": "019b92bf7f5828fc099b0a827586413fd08d48a441e197bed7c4f0e7d5a07914",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24371332536",
+  "summary": "T&I lab",
+  "editTraceCount": 25,
+  "snapshotPath": "content-versions/snapshots/2026/20260414T160624Z_req-1776182768741.json",
+  "contentSha256": "d83e80326daddb035f682d2ea0005e57cd6d5b1499ffb3557b86ae201c42eaf3",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24409708450",
   "environment": "predeploy"
 }
