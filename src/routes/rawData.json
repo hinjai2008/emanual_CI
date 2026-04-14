@@ -54,7 +54,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "3408 7739",
 				"fax": "",
-				"intranet_link": "https://cvpneeshxpoh5vu7lkxlt6b327rwhn7r6mb5a.remote.ha.org.hk/knowledge/group/cmc-path/"
+				"intranet_link": "https://cmcpath/"
 			},
 			{
 				"labName": "CMC Core Lab",
@@ -62,7 +62,7 @@
 				"categoryName": "Haematology",
 				"telephone": "3408 7738",
 				"fax": "",
-				"intranet_link": "https://cvpneeshxpoh5vu7lkxlt6b327rwhn7r6mb5a.remote.ha.org.hk/knowledge/group/cmc-path/"
+				"intranet_link": "https://cmcpath/"
 			},
 			{
 				"labName": "CMC Core Lab",
@@ -70,7 +70,7 @@
 				"categoryName": "Blood Bank",
 				"telephone": "3408 7740",
 				"fax": "",
-				"intranet_link": "https://cvpneeshxpoh5vu7lkxlt6b327rwhn7r6mb5a.remote.ha.org.hk/knowledge/group/cmc-path/"
+				"intranet_link": "https://cmcpath/"
 			},
 			{
 				"labName": "CMC Anatomical Pathology Lab",
@@ -78,7 +78,7 @@
 				"categoryName": "Anatomical Pathology",
 				"telephone": "3408 7763",
 				"fax": "",
-				"intranet_link": "https://cvpneeshxpoh5vu7lkxlt6b327rwhn7r6mb5a.remote.ha.org.hk/knowledge/group/cmc-path/"
+				"intranet_link": "https://cmcpath/"
 			},
 			{
 				"labName": "PMH Chem Lab",
@@ -86,7 +86,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "2990 1867",
 				"fax": "",
-				"intranet_link": "https://cvpneeshxpoh5vu7lkxlt6b327rwhn7r6mb5a.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/"
+				"intranet_link": "https://hateams.home/knowledge/group/pmh-pathology/usefulforms/"
 			},
 			{
 				"labName": "PMH Haematology Lab",
@@ -94,7 +94,7 @@
 				"categoryName": "Haematology",
 				"telephone": "2990 1888",
 				"fax": "",
-				"intranet_link": "https://cvpneeshxpoh5vu7lkxlt6b327rwhn7r6mb5a.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/"
+				"intranet_link": "https://hateams.home/knowledge/group/pmh-pathology/usefulforms/"
 			},
 			{
 				"labName": "PMH Microbiology Lab",
@@ -102,7 +102,7 @@
 				"categoryName": "Microbiology & Virology",
 				"telephone": "2990 1851",
 				"fax": "",
-				"intranet_link": "https://cvpneeshxpoh5vu7lkxlt6b327rwhn7r6mb5a.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/"
+				"intranet_link": "https://hateams.home/knowledge/group/pmh-pathology/usefulforms/"
 			},
 			{
 				"labName": "QMH Chemical Pathology Lab",
@@ -5645,7 +5645,7 @@
 						"id": "RfWKl_kbXe",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxtr45z33w4eoa.remote.ha.org.hk/labmanual\" target=\"_blank\" rel=\"noopener noreferrer\">QEH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -5887,7 +5887,7 @@
 						"id": "U7dBLhYBTQ",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -5988,7 +5988,7 @@
 						"id": "cgUHj-VO8H",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6162,7 +6162,7 @@
 						"id": "wbkfBTC3kD",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6451,7 +6451,7 @@
 						"id": "FuFe9zRk90",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6612,7 +6612,7 @@
 						"id": "gy7rmrJi0Q",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation and specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation and specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6662,7 +6662,7 @@
 						"id": "M13JaK5UkS",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample on ice. Centrifuge at 4¢XC. Aliquot plasma in two tubes and keep at -20¢XC."
+							"text": "Collect sample on ice. Centrifuge at 4°C. Aliquot plasma in two tubes and keep at -20¢XC."
 						}
 					}
 				],
@@ -6793,7 +6793,7 @@
 						"id": "2y2YwcV9T4",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -6868,7 +6868,7 @@
 						"id": "_Hrly3YzRm",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6886,7 +6886,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 17,
@@ -7141,7 +7142,7 @@
 						"id": "5_7YpWVIaj",
 						"type": "paragraph",
 						"data": {
-							"text": "Send specimen in 4¢XC ice pack"
+							"text": "Send specimen in 4°C ice pack"
 						}
 					}
 				],
@@ -7183,7 +7184,7 @@
 						"id": "qsL-a59fuv",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form and on ice. Centrifuge at 4¢XC."
+							"text": "Collect sample with request form and on ice. Centrifuge at 4°C."
 						}
 					},
 					{
@@ -7251,7 +7252,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 19,
@@ -7339,7 +7341,7 @@
 						"id": "f_kzNX9clj",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -8976,7 +8978,7 @@
 						"id": "W9VjNGHk4g",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -9386,7 +9388,7 @@
 						"id": "vBwkbVUl8W",
 						"type": "paragraph",
 						"data": {
-							"text": "Aliquot serum on a special acid washed 4 mL tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4¢XC"
+							"text": "Aliquot serum on a special acid washed 4 mL tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4°C"
 						}
 					}
 				],
@@ -9625,7 +9627,7 @@
 						"id": "7Kltts2JLy",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -10031,12 +10033,13 @@
 						"id": "pDAjCNktxH",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form. Centrifuge at 4¢XC. Aliquot and keep plasma at -20¢XC"
+							"text": "Collect sample with request form. Centrifuge at 4°C. Aliquot and keep plasma at -20¢XC"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 35,
@@ -10373,7 +10376,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 37,
@@ -10838,7 +10842,8 @@
 				"time": 1773568778576,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 40,
@@ -10996,12 +11001,13 @@
 						"id": "ru40I-myMj",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 41,
@@ -11152,7 +11158,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 42,
@@ -11279,7 +11286,7 @@
 						"id": "IkezU1vk5C",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -11302,7 +11309,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 43,
@@ -11431,7 +11439,7 @@
 						"id": "JN1BN0Ke5S",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -11482,7 +11490,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 44,
@@ -11609,7 +11618,7 @@
 						"id": "gCS5lXqCs2",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -11632,7 +11641,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 45,
@@ -11914,7 +11924,7 @@
 						"id": "yqDYCKPjB9",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -11924,7 +11934,8 @@
 				"time": 1773568778576,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 47,
@@ -12083,7 +12094,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 48,
@@ -12842,7 +12854,7 @@
 						"id": "zNr1ceJAiZ",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -12912,7 +12924,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 53,
@@ -13245,7 +13258,7 @@
 						"id": "b6OlEzLSwS",
 						"type": "paragraph",
 						"data": {
-							"text": "Aliquot serum on a special acid washed 4 mL tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4¢XC"
+							"text": "Aliquot serum on a special acid washed 4 mL tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4°C"
 						}
 					}
 				],
@@ -13667,7 +13680,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 57,
@@ -13830,7 +13844,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 58,
@@ -14947,7 +14962,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 65,
@@ -15105,7 +15121,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 66,
@@ -15979,7 +15996,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 71,
@@ -16884,7 +16902,7 @@
 						"id": "ssf_Qa_yQn",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -17069,7 +17087,7 @@
 						"id": "QyZ3OYAfQL",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -17260,7 +17278,7 @@
 						"id": "wwUwxN3cLG",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -17290,7 +17308,8 @@
 				"time": 1773568778576,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 79,
@@ -17508,7 +17527,7 @@
 						"id": "ptGhsli7Ir",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -17566,7 +17585,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 81,
@@ -17652,7 +17672,7 @@
 						"id": "oECoRS4aca",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form. Store at 4¢XC. Registration done in Counter"
+							"text": "Collect sample with request form. Store at 4°C. Registration done in Counter"
 						}
 					}
 				],
@@ -17749,7 +17769,8 @@
 				"time": 1773568778576,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 82,
@@ -18045,7 +18066,7 @@
 						"id": "NLI7xqSo_e",
 						"type": "paragraph",
 						"data": {
-							"text": "Store the sample at 4¢XC"
+							"text": "Store the sample at 4°C"
 						}
 					}
 				],
@@ -18515,7 +18536,7 @@
 						"id": "gaqt3Wa2Cq",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if send out within 24 hours; otherwise aliquot and keep at 4¢XC"
+							"text": "No aliquot and keep at 4°C if send out within 24 hours; otherwise aliquot and keep at 4°C"
 						}
 					}
 				],
@@ -18833,7 +18854,7 @@
 						"id": "yvr8y3xr8V",
 						"type": "paragraph",
 						"data": {
-							"text": "URGENT sendout. Send specimen to core lab immediately on 4¢XC ice pack."
+							"text": "URGENT sendout. Send specimen to core lab immediately on 4°C ice pack."
 						}
 					}
 				],
@@ -18890,7 +18911,7 @@
 						"id": "6pMZGd1a-0",
 						"type": "paragraph",
 						"data": {
-							"text": "Centrifuge at 4¢XC. Aliquot plasma and keep at -20¢XC"
+							"text": "Centrifuge at 4°C. Aliquot plasma and keep at -20¢XC"
 						}
 					}
 				],
@@ -19477,7 +19498,7 @@
 						"id": "H-guab6el3",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -19774,7 +19795,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 94,
@@ -19852,7 +19874,7 @@
 						"id": "thgMY8gNkY",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -19940,7 +19962,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 95,
@@ -20447,7 +20470,7 @@
 						"id": "pMHMmzCmxd",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -20490,7 +20513,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 98,
@@ -20911,7 +20935,7 @@
 						"id": "zpIrpwD25m",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if send out within 24 hours; otherwise aliquot and keep at 4¢XC"
+							"text": "No aliquot and keep at 4°C if send out within 24 hours; otherwise aliquot and keep at 4°C"
 						}
 					}
 				],
@@ -21063,7 +21087,7 @@
 						"id": "ce0aobFNKe",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if send out within 24 hours; otherwise aliquot and keep at 4¢XC"
+							"text": "No aliquot and keep at 4°C if send out within 24 hours; otherwise aliquot and keep at 4°C"
 						}
 					}
 				],
@@ -21702,7 +21726,7 @@
 						"id": "guxWC1MNLQ",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -21887,7 +21911,7 @@
 						"id": "BufQ2ZXXrE",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -22087,7 +22111,7 @@
 						"id": "EDseSYC9Bm",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample on ice. No need to acknowledge. Centrifuge at 4¢XC."
+							"text": "Collect sample on ice. No need to acknowledge. Centrifuge at 4°C."
 						}
 					},
 					{
@@ -23230,7 +23254,7 @@
 						"id": "dShmTQfNt0",
 						"type": "paragraph",
 						"data": {
-							"text": "Centrifuge at 4¢XC. Aliquot plasma and keep at -20¢XC. Send with request form"
+							"text": "Centrifuge at 4°C. Aliquot plasma and keep at -20¢XC. Send with request form"
 						}
 					}
 				],
@@ -23240,7 +23264,8 @@
 				"time": 1773568778578,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 115,
@@ -23350,7 +23375,7 @@
 						"id": "LsuwvyMjoM",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -23551,7 +23576,7 @@
 						"id": "sTb_0ixiSn",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -23926,7 +23951,7 @@
 						"id": "zyriAgcsU3",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if send out within 24 hours; otherwise aliquot and keep at 4¢XC"
+							"text": "No aliquot and keep at 4°C if send out within 24 hours; otherwise aliquot and keep at 4°C"
 						}
 					}
 				],
@@ -24066,7 +24091,7 @@
 						"id": "g3EOGEtmEE",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -24251,7 +24276,7 @@
 						"id": "COKk7Rqd5J",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -24601,7 +24626,8 @@
 				"time": 1773568778578,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 123,
@@ -25766,7 +25792,7 @@
 						"id": "vej2qkb5PO",
 						"type": "paragraph",
 						"data": {
-							"text": "Aliquot serum on a 15 mL metal free tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4¢XC"
+							"text": "Aliquot serum on a 15 mL metal free tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4°C"
 						}
 					}
 				],
@@ -25959,7 +25985,7 @@
 						"id": "XDaxjdf2Ri",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -26096,7 +26122,7 @@
 						"id": "gHhPNcwD0h",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -26278,7 +26304,7 @@
 						"id": "4kS6jyeC4n",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -26789,7 +26815,7 @@
 						"id": "EisiTkwBsK",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -26850,7 +26876,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 139,
@@ -26975,7 +27002,7 @@
 						"id": "N4KYpBtv36",
 						"type": "paragraph",
 						"data": {
-							"text": "No need to acknowledge. Store at 4¢XC. Registration done in Counter"
+							"text": "No need to acknowledge. Store at 4°C. Registration done in Counter"
 						}
 					}
 				],
@@ -27206,7 +27233,8 @@
 				"time": 1774863227913,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 141,
@@ -27331,7 +27359,7 @@
 						"id": "t8XfSqlgJ9",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -27508,7 +27536,7 @@
 						"id": "GNdPiI4xjc",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -27672,7 +27700,7 @@
 						"id": "N3WTd4Gsoq",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -27730,7 +27758,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 144,
@@ -28390,7 +28419,7 @@
 						"id": "gS7TtGpycU",
 						"type": "paragraph",
 						"data": {
-							"text": "Aliquot serum on a 15 mL metal free tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4¢XC"
+							"text": "Aliquot serum on a 15 mL metal free tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4°C"
 						}
 					}
 				],
@@ -28575,7 +28604,7 @@
 						"id": "pt7CLY0fCM",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -30387,7 +30416,7 @@
 						"id": "hlNxIyBKdC",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -30476,7 +30505,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 160,
@@ -30562,7 +30592,7 @@
 						"id": "nfrbrv0Ouk",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -30642,7 +30672,8 @@
 				"time": 1773568778580,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 161,
@@ -30736,7 +30767,7 @@
 						"id": "M3REa1436a",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -30816,12 +30847,13 @@
 						"id": "-eNdt_leDP",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 162,
@@ -31341,7 +31373,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 165,
@@ -31479,7 +31512,8 @@
 				"time": 1774864899312,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 166,
@@ -31575,7 +31609,8 @@
 				"time": 1773568778580,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 167,
@@ -31919,7 +31954,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 169,
@@ -32062,7 +32098,7 @@
 						"id": "g9Tlze58PI",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form and on ice. Centrifuge at 4¢XC."
+							"text": "Collect sample with request form and on ice. Centrifuge at 4°C."
 						}
 					},
 					{
@@ -32862,7 +32898,7 @@
 						"id": "SmbNqnfYj2",
 						"type": "paragraph",
 						"data": {
-							"text": "Toxicology specimen. Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Toxicology specimen. Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -33038,7 +33074,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 176,
@@ -33158,7 +33195,7 @@
 						"id": "zghIgpdPP9",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -33262,7 +33299,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 177,
@@ -33429,7 +33467,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 178,
@@ -33784,7 +33823,7 @@
 						"id": "3bwCHi5wu6",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -34394,7 +34433,8 @@
 				"time": 1773568778581,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 184,
@@ -34695,7 +34735,7 @@
 						"id": "4MZ2XB1mz4",
 						"type": "paragraph",
 						"data": {
-							"text": "FRESH sample so MUST be received before 9:30 am on Mon to Fri. Collect sample and inform counter. Acknowledge and store at 4¢XC. Send primary sample."
+							"text": "FRESH sample so MUST be received before 9:30 am on Mon to Fri. Collect sample and inform counter. Acknowledge and store at 4°C. Send primary sample."
 						}
 					}
 				],
@@ -34832,7 +34872,7 @@
 						"id": "TNk1dDGr-i",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if send out within 24 hours; otherwise aliquot and keep at 4¢XC"
+							"text": "No aliquot and keep at 4°C if send out within 24 hours; otherwise aliquot and keep at 4°C"
 						}
 					}
 				],
@@ -35746,7 +35786,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 193,
@@ -35934,7 +35975,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 194,
@@ -36116,7 +36158,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 195,
@@ -36471,7 +36514,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 197,
@@ -36646,7 +36690,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 198,
@@ -36821,7 +36866,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 199,
@@ -37009,7 +37055,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 200,
@@ -37183,7 +37230,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 201,
@@ -37941,7 +37989,7 @@
 						"id": "-k4TdJUdXo",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -38006,7 +38054,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 206,
@@ -38101,7 +38150,7 @@
 						"id": "lMYVL_ULl5",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -39197,7 +39246,7 @@
 						"id": "8FtDNbFSf3",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -39297,7 +39346,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 214,
@@ -39718,7 +39768,7 @@
 						"id": "07uZA3DvxU",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -39925,7 +39975,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 218,
@@ -40194,7 +40245,7 @@
 						"id": "jP7XRGrrHv",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -40217,7 +40268,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 220,
@@ -40338,7 +40390,7 @@
 						"id": "yHvH4GEhxC",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -40361,7 +40413,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 221,
@@ -40501,7 +40554,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 223,
@@ -40670,7 +40724,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 224,
@@ -40764,7 +40819,7 @@
 						"id": "jaxnr0_WXn",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -40829,7 +40884,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 225,
@@ -40969,7 +41025,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 227,
@@ -41127,7 +41184,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 228,
@@ -41218,7 +41276,7 @@
 						"id": "Hk3iFjo6P4",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -41276,7 +41334,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 229,
@@ -41409,12 +41468,13 @@
 						"id": "xA0aj52Gko",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and place at 4¢XC. Send primary sample"
+							"text": "Acknowledge and place at 4°C. Send primary sample"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 230,
@@ -41547,12 +41607,13 @@
 						"id": "BCAL97iMYS",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and place at 4¢XC. Send primary sample"
+							"text": "Acknowledge and place at 4°C. Send primary sample"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 231,
@@ -41648,7 +41709,7 @@
 						"id": "UdQ-5OHkbz",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and place at 4¢XC. Send primary sample"
+							"text": "Acknowledge and place at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -41687,7 +41748,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 232,
@@ -43180,7 +43242,7 @@
 						"id": "ZLQLLOm2it",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -43254,7 +43316,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 242,
@@ -43347,7 +43410,7 @@
 						"id": "xdHLJ2r_FU",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -43404,7 +43467,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 243,
@@ -43510,7 +43574,7 @@
 						"id": "w6GiuYemuS",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -43589,7 +43653,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 244,
@@ -43790,7 +43855,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 245,
@@ -44453,7 +44519,7 @@
 						"id": "GeD1tHpqI1",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -44513,12 +44579,13 @@
 						"id": "44bzihiZ_S",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 249,
@@ -44779,7 +44846,7 @@
 						"id": "05hqVnuMVB",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -44794,7 +44861,8 @@
 				"time": 1773568778584,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 251,
@@ -44893,7 +44961,7 @@
 						"id": "yYqrlTDYbe",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -45102,7 +45170,7 @@
 						"id": "HLq6TZyRtL",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Registration done in Counter"
+							"text": "Store at 4°C. Registration done in Counter"
 						}
 					}
 				],
@@ -45271,7 +45339,8 @@
 				"time": 1773568778584,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 254,
@@ -45367,7 +45436,7 @@
 						"id": "s3_bWpXxgo",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -46381,7 +46450,7 @@
 						"id": "mR2X-pu3rm",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -46554,7 +46623,7 @@
 						"id": "0K6QxXd3tO",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -46731,7 +46800,7 @@
 						"id": "LIFyvxzgAv",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -46809,7 +46878,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 263,
@@ -46964,7 +47034,8 @@
 				"time": 1773568778584,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 264,
@@ -47773,7 +47844,7 @@
 						"id": "dtrG_E_bgn",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -48295,7 +48366,7 @@
 						"id": "YGhzYskwsr",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -48648,7 +48719,7 @@
 						"id": "p46U-hwAcg",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -48833,7 +48904,7 @@
 						"id": "H1OUmMKLKG",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -49013,7 +49084,7 @@
 						"id": "sHshjrJ0nf",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -49028,7 +49099,8 @@
 				"time": 1773568778585,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 277,
@@ -49142,7 +49214,7 @@
 						"id": "SkEe4W547Z",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge. Store at 4¢XC. Registration done in Counter."
+							"text": "Acknowledge. Store at 4°C. Registration done in Counter."
 						}
 					},
 					{
@@ -49208,7 +49280,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 278,
@@ -49526,7 +49599,7 @@
 						"id": "8kR17-EaLe",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -49700,7 +49773,7 @@
 						"id": "UYimzNgs5Y",
 						"type": "paragraph",
 						"data": {
-							"text": "Centrifuge at 4¢XC. Aliquot and keep plasma at -20¢XC"
+							"text": "Centrifuge at 4°C. Aliquot and keep plasma at -20¢XC"
 						}
 					}
 				],
@@ -49737,7 +49810,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 281,
@@ -49826,7 +49900,7 @@
 						"id": "ixXBc7VFmt",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -50105,7 +50179,7 @@
 						"id": "c6zRJp7RSe",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form and store at 4¢XC. Send FRESH primary sample.&nbsp;"
+							"text": "Collect sample with request form and store at 4°C. Send FRESH primary sample.&nbsp;"
 						}
 					}
 				],
@@ -50115,7 +50189,8 @@
 				"time": 1774886182361,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 283,
@@ -50578,7 +50653,7 @@
 						"id": "FJMqeZg5zU",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -50653,12 +50728,13 @@
 						"id": "bxs4Pvxtsc",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 286,
@@ -51047,7 +51123,7 @@
 						"id": "_oePpldGuh",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -51154,7 +51230,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 289,
@@ -51250,7 +51327,7 @@
 						"id": "4uNV7d0UFg",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -51332,7 +51409,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 290,
@@ -51500,7 +51578,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 291,
@@ -51586,7 +51665,7 @@
 						"id": "Wy4ljSDGre",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if arrive at PMH within 48 hours; otherwise aliquot and keep at -20¢XC"
+							"text": "No aliquot and keep at 4°C if arrive at PMH within 48 hours; otherwise aliquot and keep at -20¢XC"
 						}
 					}
 				],
@@ -51827,7 +51906,7 @@
 						"id": "xBtYWhDfO4",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form and store at 4¢XC. Send FRESH primary sample. OVERNIGHT SAMPLE is not preferred"
+							"text": "Collect sample with request form and store at 4°C. Send FRESH primary sample. OVERNIGHT SAMPLE is not preferred"
 						}
 					}
 				],
@@ -51845,7 +51924,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 293,
@@ -51954,7 +52034,7 @@
 						"id": "gbbz5K1qaS",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -52028,7 +52108,8 @@
 				"time": 1773568778586,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 294,
@@ -52177,7 +52258,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 295,
@@ -52266,7 +52348,7 @@
 						"id": "vdb0_JJfUs",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://cvpnhweg5vcopoemymzjfbrnngm5tf3mgo2rsdeiobgvockv44ejw4yma.remote.ha.org.hk/chempath/wp-content/uploads/2022/01/PI-1394-Effecitve-1-Feb-2022-Sampling-guide-of-Neurotransmitters-in-cerebrospinal-fluids-WI-CCP-SAM-GSEND-NT.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">http://pmhlis-cbut061/chempath/wp-content/uploads/2022/01/PI-1394-Effecitve-1-Feb-2022-Sampling-guide-of-Neurotransmitters-in-cerebrospinal-fluids-WI-CCP-SAM-GSEND-NT.pdf</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz6ny6bq63ftxa.remote.ha.org.hk/webapps/Dept/CBIO/pages/Main.aspx\" target=\"_blank\" rel=\"noopener noreferrer\">QMH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -52560,7 +52642,7 @@
 						"id": "dulgEBltZ8",
 						"type": "paragraph",
 						"data": {
-							"text": "Aliquot serum on a 15 mL metal free tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4¢XC"
+							"text": "Aliquot serum on a 15 mL metal free tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4°C"
 						}
 					}
 				],
@@ -52732,7 +52814,7 @@
 						"id": "RNFjihXZqG",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -52883,7 +52965,7 @@
 						"id": "rl6Sxnj1wI",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -52980,7 +53062,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 299,
@@ -53105,7 +53188,8 @@
 				"time": 1773568778586,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 300,
@@ -53365,7 +53449,7 @@
 						"id": "CFFHV92B0a",
 						"type": "paragraph",
 						"data": {
-							"text": "Centrifuge and store plasma at 4¢XC"
+							"text": "Centrifuge and store plasma at 4°C"
 						}
 					}
 				],
@@ -53569,7 +53653,7 @@
 						"id": "shjxZzzDTs",
 						"type": "paragraph",
 						"data": {
-							"text": "Make sure PAIRED samples are received before acknowledge.\nFor CSF, acknowledge and print 1 specimen lable. Place it into the designated box. Store the sample at 4¢XC\nFor blood, acknowledge and print 2 specimen lables. Place one label into the designated box. Aliquot serum and keep at -20¢XC"
+							"text": "Make sure PAIRED samples are received before acknowledge.\nFor CSF, acknowledge and print 1 specimen lable. Place it into the designated box. Store the sample at 4°C\nFor blood, acknowledge and print 2 specimen lables. Place one label into the designated box. Aliquot serum and keep at -20¢XC"
 						}
 					}
 				],
@@ -53982,7 +54066,7 @@
 						"id": "uDALpFYQvW",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -54018,7 +54102,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 306,
@@ -54145,7 +54230,7 @@
 						"id": "VyGiH3N44c",
 						"type": "paragraph",
 						"data": {
-							"text": "No need to acknowledge. Store at 4¢XC. Registration done in Counter. Send primary sample."
+							"text": "No need to acknowledge. Store at 4°C. Registration done in Counter. Send primary sample."
 						}
 					}
 				],
@@ -54646,7 +54731,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 310,
@@ -54818,7 +54904,7 @@
 						"id": "Qg14fevoEJ",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample on ice. Centrifuge at 4¢XC. Aliquot serum into 1 tube and keep at -20¢XC"
+							"text": "Collect sample on ice. Centrifuge at 4°C. Aliquot serum into 1 tube and keep at -20¢XC"
 						}
 					}
 				],
@@ -55260,7 +55346,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 314,
@@ -56091,7 +56178,7 @@
 						"id": "6pNsjXedqv",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -56643,7 +56730,7 @@
 						"id": "4m_a9LLij_",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -56783,7 +56870,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 323,
@@ -56869,7 +56957,7 @@
 						"id": "sxY_wYLDSB",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -56940,7 +57028,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 324,
@@ -57039,7 +57128,7 @@
 						"id": "Wx1h6CY7pW",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -57104,7 +57193,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 325,
@@ -57265,7 +57355,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 326,
@@ -57406,7 +57497,7 @@
 						"id": "b7FxGPgn_j",
 						"type": "paragraph",
 						"data": {
-							"text": "LIGHT-SHIELDED sample is collected. Acknowledge and store at 4¢XC."
+							"text": "LIGHT-SHIELDED sample is collected. Acknowledge and store at 4°C."
 						}
 					},
 					{
@@ -57661,7 +57752,7 @@
 						"id": "cL60uE028B",
 						"type": "paragraph",
 						"data": {
-							"text": "LIGHT-SHIELDED sample is collected. Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "LIGHT-SHIELDED sample is collected. Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -58651,7 +58742,7 @@
 						"id": "AhKPXftk2j",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -58803,7 +58894,7 @@
 						"id": "knACu9xERO",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if send out within 2 days; otherwise aliquot and keep at 4¢XC"
+							"text": "No aliquot and keep at 4°C if send out within 2 days; otherwise aliquot and keep at 4°C"
 						}
 					}
 				],
@@ -59316,7 +59407,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 339,
@@ -59503,7 +59595,8 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": true,
+			"is_simple_layout": true
 		},
 		{
 			"id": 340,
@@ -60361,7 +60454,7 @@
 						"id": "AbZqU3BOHP",
 						"type": "paragraph",
 						"data": {
-							"text": "Special collection kit, send specimen on 4¢XC ice pack (paired with lactate)"
+							"text": "Special collection kit, send specimen on 4°C ice pack (paired with lactate)"
 						}
 					},
 					{
@@ -60448,7 +60541,7 @@
 						"id": "zuKLAYSwAC",
 						"type": "paragraph",
 						"data": {
-							"text": "Mark down the weight on a tube. Centrifuge at 4¢XC."
+							"text": "Mark down the weight on a tube. Centrifuge at 4°C."
 						}
 					},
 					{
@@ -60668,7 +60761,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 347,
@@ -60764,7 +60858,7 @@
 						"id": "s8hDJ7-hpQ",
 						"type": "paragraph",
 						"data": {
-							"text": "No need to acknowledge. Store at 4¢XC. Registration done in Counter."
+							"text": "No need to acknowledge. Store at 4°C. Registration done in Counter."
 						}
 					},
 					{
@@ -61229,7 +61323,7 @@
 						"id": "MnCRHSC1TQ",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if arrive at PMH within 48 hours; otherwise aliquot and keep at -20¢XC"
+							"text": "No aliquot and keep at 4°C if arrive at PMH within 48 hours; otherwise aliquot and keep at -20¢XC"
 						}
 					}
 				],
@@ -61360,7 +61454,7 @@
 						"id": "sBZW0DDXX6",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -61425,7 +61519,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 352,
@@ -61765,7 +61860,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 354,
@@ -61869,7 +61965,7 @@
 						"id": "s2BZJ8nLtX",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -61934,7 +62030,8 @@
 				"time": 1773568778588,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 355,
@@ -62082,7 +62179,7 @@
 						"id": "wO5xUZt7-u",
 						"type": "paragraph",
 						"data": {
-							"text": "Aliquot serum on a 15 mL metal free tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4¢XC"
+							"text": "Aliquot serum on a 15 mL metal free tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4°C"
 						}
 					}
 				],
@@ -62259,7 +62356,7 @@
 						"id": "5fHoN1ByAn",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -62971,7 +63068,7 @@
 						"id": "srmHGdEdB8",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -62994,7 +63091,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 361,
@@ -63163,7 +63261,7 @@
 						"id": "jIY6DFqogL",
 						"type": "paragraph",
 						"data": {
-							"text": "For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4¢XC"
+							"text": "For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4°C"
 						}
 					}
 				],
@@ -63362,7 +63460,7 @@
 						"id": "I-0m5YxZV0",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -63504,7 +63602,7 @@
 						"id": "6XAd1nT9U4",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -64263,7 +64361,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 369,
@@ -64349,7 +64448,7 @@
 						"id": "AHHzYpmO_O",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -64401,7 +64500,8 @@
 				"time": 1773568778589,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 370,
@@ -64487,7 +64587,7 @@
 						"id": "codDf5mDU-",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -64574,7 +64674,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 371,
@@ -64700,7 +64801,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 372,
@@ -64826,7 +64928,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 373,
@@ -64917,7 +65020,7 @@
 						"id": "31U15ZRwSS",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -64975,7 +65078,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 374,
@@ -65294,7 +65398,7 @@
 						"id": "g-_Migjsnf",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -65515,7 +65619,7 @@
 						"id": "6UTcsHT4Wq",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC"
+							"text": "Acknowledge and store at 4°C"
 						}
 					}
 				],
@@ -65716,7 +65820,7 @@
 						"id": "TsftFD-6Ph",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if send out within 24 hours; otherwise aliquot and keep at 4¢XC"
+							"text": "No aliquot and keep at 4°C if send out within 24 hours; otherwise aliquot and keep at 4°C"
 						}
 					}
 				],
@@ -65913,7 +66017,7 @@
 						"id": "VEjLZZFSgi",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -66108,7 +66212,7 @@
 						"id": "yzyPCkWLgF",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -66969,7 +67073,7 @@
 						"id": "QwU-SEJYc8",
 						"type": "paragraph",
 						"data": {
-							"text": "Toxicology specimen. Acknowledge and store at 4¢XC."
+							"text": "Toxicology specimen. Acknowledge and store at 4°C."
 						}
 					},
 					{
@@ -67131,7 +67235,7 @@
 						"id": "7yOZx34fzi",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -67588,7 +67692,7 @@
 						"id": "JW0z-l-CWi",
 						"type": "paragraph",
 						"data": {
-							"text": "For clotted blood, aliquot serum in one tube and store at -20¢XC For fluid, store at 4¢XC."
+							"text": "For clotted blood, aliquot serum in one tube and store at -20¢XC For fluid, store at 4°C."
 						}
 					},
 					{
@@ -68378,7 +68482,7 @@
 						"id": "P5ATRlmlaz",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -69193,7 +69297,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 402,
@@ -69360,7 +69465,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 403,
@@ -69446,7 +69552,7 @@
 						"id": "JhaXUu6cvD",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -69491,7 +69597,8 @@
 				"time": 1773568778590,
 				"blocks": [],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 404,
@@ -69717,7 +69824,7 @@
 						"id": "cLRFFQf5mD",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -69809,7 +69916,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 406,
@@ -69905,7 +70013,7 @@
 						"id": "yqN59h8WiJ",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -70461,7 +70569,7 @@
 						"id": "aJDf3Fco4Y",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -70479,7 +70587,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 410,
@@ -70911,7 +71020,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 414,
@@ -71063,7 +71173,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 415,
@@ -71259,7 +71370,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 416,
@@ -71379,7 +71491,7 @@
 						"id": "V4iIEP_qos",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -71470,7 +71582,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 417,
@@ -72073,7 +72186,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 421,
@@ -72413,7 +72527,7 @@
 						"id": "mzz4gBXfeV",
 						"type": "paragraph",
 						"data": {
-							"text": "whole blood, the sample is required to store at 4¢XC within 24 hours and freeze if it will keep for longer than 24 hours."
+							"text": "whole blood, the sample is required to store at 4°C within 24 hours and freeze if it will keep for longer than 24 hours."
 						}
 					},
 					{
@@ -72820,7 +72934,7 @@
 						"id": "YEHKlM6O88",
 						"type": "paragraph",
 						"data": {
-							"text": "whole blood, the sample is required to store at 4¢XC within 24 hours and freeze if it will keep for longer than 24 hours.\nsend to HKCH within 3 days. Keep in dark"
+							"text": "whole blood, the sample is required to store at 4°C within 24 hours and freeze if it will keep for longer than 24 hours.\nsend to HKCH within 3 days. Keep in dark"
 						}
 					}
 				],
@@ -73016,7 +73130,7 @@
 						"id": "S509uF6xvM",
 						"type": "paragraph",
 						"data": {
-							"text": "whole blood, the sample is required to store at 4¢XC within 24 hours and freeze if it will keep for longer than 24 hours.\nsend to HKCH within 3 days. Keep in dark"
+							"text": "whole blood, the sample is required to store at 4°C within 24 hours and freeze if it will keep for longer than 24 hours.\nsend to HKCH within 3 days. Keep in dark"
 						}
 					}
 				],
@@ -73584,7 +73698,7 @@
 						"id": "9csKV2Hv4O",
 						"type": "paragraph",
 						"data": {
-							"text": "Aliquot serum on a 15 mL metal free tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4¢XC"
+							"text": "Aliquot serum on a 15 mL metal free tube. For details, please refer to \"Instrctions for Specimen processing for heavy metal/ trace element analysis\" (P2021007) Store both primary tube and aliquot at 4°C"
 						}
 					}
 				],
@@ -73784,7 +73898,7 @@
 						"id": "g5F40Nr36B",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -76332,7 +76446,7 @@
 						"id": "AfTk7jV57D",
 						"type": "paragraph",
 						"data": {
-							"text": "No need to acknowledge. Store at 4¢XC. Registration done in Counter"
+							"text": "No need to acknowledge. Store at 4°C. Registration done in Counter"
 						}
 					}
 				],
@@ -80952,7 +81066,7 @@
 						"id": "PS4RP2GhOK",
 						"type": "paragraph",
 						"data": {
-							"text": "Make sure sample arrive at PMH within 12 hours after collection. Acknowledge, aliquot and store at 4¢XC"
+							"text": "Make sure sample arrive at PMH within 12 hours after collection. Acknowledge, aliquot and store at 4°C"
 						}
 					}
 				],
@@ -82348,7 +82462,7 @@
 						"id": "6ZiA5HLcV7",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if send out within 24 hours; otherwise aliquot and keep at 4¢XC"
+							"text": "No aliquot and keep at 4°C if send out within 24 hours; otherwise aliquot and keep at 4°C"
 						}
 					}
 				],
@@ -83419,7 +83533,7 @@
 						"id": "AygPWhJdsZ",
 						"type": "paragraph",
 						"data": {
-							"text": "Special collection kit stored at 4¢XC.\nNeisseria gonorrhea PCR is simultaneously performed"
+							"text": "Special collection kit stored at 4°C.\nNeisseria gonorrhea PCR is simultaneously performed"
 						}
 					}
 				],
@@ -83447,7 +83561,7 @@
 						"id": "axct2I8sOS",
 						"type": "paragraph",
 						"data": {
-							"text": "No need to acknowledge. Store at 4¢XC. Registration done in Counter"
+							"text": "No need to acknowledge. Store at 4°C. Registration done in Counter"
 						}
 					}
 				],
@@ -83582,7 +83696,7 @@
 						"id": "uyQ3fIxBlj",
 						"type": "paragraph",
 						"data": {
-							"text": "Special collection kit stored at 4¢XC.\nNeisseria gonorrhea PCR is simultaneously performed"
+							"text": "Special collection kit stored at 4°C.\nNeisseria gonorrhea PCR is simultaneously performed"
 						}
 					}
 				],
@@ -83610,7 +83724,7 @@
 						"id": "5X8XTdYQjZ",
 						"type": "paragraph",
 						"data": {
-							"text": "No need to acknowledge. Store at 4¢XC. Registration done in Counter"
+							"text": "No need to acknowledge. Store at 4°C. Registration done in Counter"
 						}
 					}
 				],
@@ -85108,7 +85222,7 @@
 						"id": "ATh4FOiXw8",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -85334,7 +85448,7 @@
 						"id": "bFA6g2GbT0",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -85567,7 +85681,7 @@
 						"id": "2hel6qiLm-",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -85800,7 +85914,7 @@
 						"id": "5nPYJi2aEU",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -86844,7 +86958,7 @@
 						"id": "v6QzM3E0Ki",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample  on ice. <b>Centrifuge at 4¢XC</b>. Aliquot serum in one tube and store at -20¢XC."
+							"text": "Collect sample  on ice. <b>Centrifuge at 4°C</b>. Aliquot serum in one tube and store at -20¢XC."
 						}
 					}
 				],
@@ -90553,7 +90667,7 @@
 						"id": "sjJDEmEaYK",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -90581,7 +90695,7 @@
 						"id": "KEOfQl7jk4",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC"
+							"text": "Acknowledge and store at 4°C"
 						}
 					}
 				],
@@ -90922,7 +91036,7 @@
 						"id": "0VHCLhjgL2",
 						"type": "paragraph",
 						"data": {
-							"text": "No aliquot and keep at 4¢XC if send out within 24 hours; otherwise aliquot and keep at 4¢XC"
+							"text": "No aliquot and keep at 4°C if send out within 24 hours; otherwise aliquot and keep at 4°C"
 						}
 					}
 				],
@@ -91674,7 +91788,7 @@
 						"id": "ohLs5oYXxQ",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -92149,7 +92263,7 @@
 						"id": "XQIdyhx9Vu",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -96144,7 +96258,7 @@
 						"id": "QQy61V8NRw",
 						"type": "paragraph",
 						"data": {
-							"text": "Aliquot plasma in one tube and store at 4¢XC."
+							"text": "Aliquot plasma in one tube and store at 4°C."
 						}
 					}
 				],
@@ -97613,7 +97727,7 @@
 						"id": "3MRjgcLsrn",
 						"type": "paragraph",
 						"data": {
-							"text": "#1 Send specimen in 4¢XC ice pack"
+							"text": "#1 Send specimen in 4°C ice pack"
 						}
 					}
 				],
@@ -97641,7 +97755,7 @@
 						"id": "kM6ZAoqV9M",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form and on ice. Centrifuge at 4¢XC. Aliquot plasma and keep at 4¢XC."
+							"text": "Collect sample with request form and on ice. Centrifuge at 4°C. Aliquot plasma and keep at 4°C."
 						}
 					}
 				],
@@ -99536,7 +99650,7 @@
 						"id": "yYb95J6ltP",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -99738,7 +99852,7 @@
 						"id": "HguMYQym2r",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk/\" target=\"_blank\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -99961,7 +100075,7 @@
 						"id": "hwBCLruINz",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk/\" target=\"_blank\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -100024,14 +100138,14 @@
 						"id": "KfyrMSmaSf",
 						"type": "paragraph",
 						"data": {
-							"text": "Guideline for DBS collection: <a href=\"https://cvpnh3e4nnkbhxgxphjsoeeayi22eqirg3iacg5lgvfef2dlsfdqbpmna.remote.ha.org.hk/~XXR5S\">https://hateams.home/~XXR5S</a>"
+							"text": "Guideline for DBS collection: <a href=\"https://hateams.home/~XXR5S\">https://hateams.home/~XXR5S</a>"
 						}
 					},
 					{
 						"id": "PmSgoiPSvG",
 						"type": "paragraph",
 						"data": {
-							"text": "Details: <a href=\"https://cvpnhbw4q3qvxhmpyfol5gg53w7wiv5fgyqtv7oaeheokh5lcu7w7gfbq.remote.ha.org.hk/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\">https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25</a>"
+							"text": "Details: <a href=\"https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\">https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25</a>"
 						}
 					}
 				],
@@ -100176,7 +100290,7 @@
 						"id": "oDCWHdLLCC",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk/\" target=\"_blank\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -100399,7 +100513,7 @@
 						"id": "xFNyfHOk6c",
 						"type": "paragraph",
 						"data": {
-							"text": "Send primary sample to QMH within 2hr at 4¢XC"
+							"text": "Send primary sample to QMH within 2hr at 4°C"
 						}
 					}
 				],
@@ -101057,7 +101171,7 @@
 						"id": "WgTowAF1Gi",
 						"type": "paragraph",
 						"data": {
-							"text": "Toxicology specimen. Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Toxicology specimen. Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -101224,7 +101338,7 @@
 						"id": "fsLJkXSsZG",
 						"type": "paragraph",
 						"data": {
-							"text": "Toxicology specimen. Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Toxicology specimen. Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -101390,7 +101504,7 @@
 						"id": "z0aE1HOJ0Y",
 						"type": "paragraph",
 						"data": {
-							"text": "Toxicology specimen. Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Toxicology specimen. Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -102107,7 +102221,7 @@
 						"id": "m1qGQnf0Cz",
 						"type": "paragraph",
 						"data": {
-							"text": " Acknowledge and print 3 specimen lables. Place one label into the designated box.  Centrifuge at 4¢XC. Aliquot plasma on two 1.5 mL specimen containers and keep at -20 ¢XC.\n"
+							"text": " Acknowledge and print 3 specimen lables. Place one label into the designated box.  Centrifuge at 4°C. Aliquot plasma on two 1.5 mL specimen containers and keep at -20 ¢XC.\n"
 						}
 					},
 					{
@@ -102453,7 +102567,7 @@
 						"id": "O8YhnDPo5U",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link:&nbsp;<a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk/\" target=\"_blank\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link:&nbsp;<a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -102629,7 +102743,7 @@
 						"id": "qHGT6K6U68",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link:&nbsp;<a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk/\" target=\"_blank\">www.google.com</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link:&nbsp;<a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					},
 					{
@@ -103032,7 +103146,7 @@
 						"id": "a34W6iWpRM",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and store at 4¢XC. Send primary sample"
+							"text": "Acknowledge and store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -103352,7 +103466,7 @@
 						"id": "QWVmPOIHL0",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect fresh sample. Store at 4¢XC and send primary sample on the day of collection. OVERNIGHT SAMPLE should be stored at -20¢XC."
+							"text": "Collect fresh sample. Store at 4°C and send primary sample on the day of collection. OVERNIGHT SAMPLE should be stored at -20¢XC."
 						}
 					}
 				],
@@ -103526,7 +103640,7 @@
 						"id": "EJIvB8B2Ne",
 						"type": "paragraph",
 						"data": {
-							"text": "Store at 4¢XC. Send primary sample"
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
@@ -103830,7 +103944,7 @@
 						"id": "JRPcm8Uzjc",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample and store at 4¢XC. Send FRESH primary sample. OVERNIGHT SAMPLE is not preferred"
+							"text": "Collect sample and store at 4°C. Send FRESH primary sample. OVERNIGHT SAMPLE is not preferred"
 						}
 					}
 				],
@@ -105822,7 +105936,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 925,
@@ -106019,7 +106134,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": true
 		},
 		{
 			"id": 926,
@@ -106796,7 +106912,7 @@
 						"id": "leCytggT4F",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -106960,7 +107076,7 @@
 						"id": "mpeXqMwW31",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -108621,7 +108737,7 @@
 						"id": "sUoQo8j3yC",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -109150,7 +109266,7 @@
 						"id": "67KZxf1SSv",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -109424,7 +109540,7 @@
 						"id": "y_je2UBfCS",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -110004,7 +110120,7 @@
 						"id": "SKDnkzd8ty",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Genetic and Genomic Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -111501,7 +111617,7 @@
 						"id": "rhV22P5yxv",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -111985,7 +112101,7 @@
 						"id": "PaD9LYwkNU",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhim5jv2k73xofkcwjbfgxidjmtseh6jin53gfrmyagfycwghiwdja.remote.ha.org.hk\" target=\"_blank\" rel=\"noopener noreferrer\">www.google.com</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -114089,7 +114205,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 978,
@@ -114219,7 +114336,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 979,
@@ -114349,7 +114467,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 980,
@@ -114493,7 +114612,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		},
 		{
 			"id": 981,
@@ -114637,7 +114757,8 @@
 					}
 				],
 				"version": "2.31.0-rc.7"
-			}
+			},
+			"is_simple_layout": false
 		}
 	]
 }

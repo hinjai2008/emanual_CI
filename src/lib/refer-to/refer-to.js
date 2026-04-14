@@ -19,13 +19,13 @@ function normalizeUrl(url) {
     return `https://${trimmed}`;
 }
 
-function buildReferToText(infoOptions, intranetLink) {
+function buildReferToText(infoOptions, intranetLink, displayLabel) {
     const selected = (infoOptions && infoOptions.length > 0) ? infoOptions : INFO_OPTIONS;
     const infoText = joinInfoOptions(selected);
-    const displayLink = intranetLink || 'www.google.com';
-    const href = normalizeUrl(displayLink);
+    const href = normalizeUrl(intranetLink || 'www.google.com');
+    const label = displayLabel || intranetLink || 'www.google.com';
 
-    return `Additional information and guidelines on ${infoText} are avaiable in the following link: <a href="${href}" target="_blank" rel="noopener noreferrer">${displayLink}</a>`;
+    return `Additional information and guidelines on ${infoText} are avaiable in the following link: <a href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`;
 }
 
 export default class ReferToTool {
@@ -107,6 +107,7 @@ export default class ReferToTool {
         labs.forEach((lab) => {
             const option = document.createElement('option');
             option.value = lab.intranet_link || 'www.google.com';
+            option.dataset.labName = lab.labName;
             option.innerText = `${lab.labName} - ${lab.categoryName}`;
             labSelect.appendChild(option);
         });
@@ -142,8 +143,19 @@ export default class ReferToTool {
             const selectedOptions = Array.from(wrapper.querySelectorAll('.refer-to-option:checked'))
                 .map((el) => el.value);
             const customLink = customLinkInput.value.trim();
-            const link = customLink || labSelect.value || 'www.google.com';
-            preview.innerHTML = buildReferToText(selectedOptions, link);
+            let link, displayLabel;
+            if (customLink) {
+                link = customLink;
+                displayLabel = customLink;
+            } else if (labSelect.value) {
+                link = labSelect.value;
+                const selectedOption = labSelect.options[labSelect.selectedIndex];
+                displayLabel = (selectedOption.dataset.labName || link) + ' Website / Lab Manual';
+            } else {
+                link = 'www.google.com';
+                displayLabel = 'www.google.com';
+            }
+            preview.innerHTML = buildReferToText(selectedOptions, link, displayLabel);
         };
 
         wrapper.querySelectorAll('.refer-to-option').forEach((el) => {
@@ -172,7 +184,16 @@ export default class ReferToTool {
         const customLinkInput = blockContent.querySelector('.refer-to-custom-link');
         const customLink = customLinkInput ? customLinkInput.value.trim() : '';
         const intranetLink = customLink || (labSelect ? (labSelect.value || 'www.google.com') : 'www.google.com');
-        const text = buildReferToText(selectedOptions, intranetLink);
+        let displayLabel;
+        if (customLink) {
+            displayLabel = customLink;
+        } else if (labSelect && labSelect.value) {
+            const selectedOption = labSelect.options[labSelect.selectedIndex];
+            displayLabel = (selectedOption.dataset.labName || intranetLink) + ' Website / Lab Manual';
+        } else {
+            displayLabel = intranetLink;
+        }
+        const text = buildReferToText(selectedOptions, intranetLink, displayLabel);
 
         return {
             infoOptions: selectedOptions,

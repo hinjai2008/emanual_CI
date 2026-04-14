@@ -16,6 +16,7 @@
     import { afterNavigate, beforeNavigate, onNavigate } from "$app/navigation";
     import { concurrentEditLock } from "../routes/stores";
     import "$lib/hideParagraphTool.css";
+    import "$lib/labSelectionTool/labSelectionTool.css";
     import InlineCode from '@editorjs/inline-code';
     import { globalFunctions } from '../routes/stores';
 

@@ -675,6 +675,7 @@
 
 
   let searchInput = $state('');
+  let goToIdInput = $state('');
   let publishInProgress = $state(false);
   let publishStatusMessage = $state('');
   let publishActionsUrl = $state('');
@@ -1589,6 +1590,15 @@
     goToAdjacentExistingEntry('previous');
   }
 
+  function goToIdListener() {
+    const id = parseInt(String(goToIdInput).trim(), 10);
+    if (!Number.isFinite(id) || id <= 0) {
+      return;
+    }
+    goToIdInput = '';
+    goto(`${base}/test/${id}`);
+  }
+
 </script>
 
 <!-- NavBar -->
@@ -1601,6 +1611,21 @@
 
     <ul class="nav nav-pills">
       <li class="nav-item"><a href="{base}/" class="nav-link active" aria-current="page">Home</a></li>
+
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <div class="input-group input-group-sm">
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            style="width: 70px;"
+            placeholder="ID"
+            bind:value={goToIdInput}
+            onkeydown={(e) => { if (e.key === 'Enter') goToIdListener(); }}
+            aria-label="Go to test ID"
+          />
+          <button class="btn btn-outline-secondary btn-sm" type="button" onclick={goToIdListener}>Go</button>
+        </div>
+      </li>
 
       {#if $isEditMode}
       <li class="nav-item ms-2 nav-tools-wrapper">

@@ -6,7 +6,7 @@
     import { isCreateMode } from "../../stores";
     import { onDestroy } from "svelte";
     import DataRow from "$lib/DataRow.svelte";
-    import { editedJSON } from "../../stores";
+    import { editedJSON, globalFunctions } from "../../stores";
     import { page } from "$app/state";
 
 
@@ -85,7 +85,33 @@
     function isHiddenEntry() {
         return entryData?.is_hidden === true;
     }
-    
+
+    // Simple layout: reactive — reads from $editedJSON in admin mode so toggle reflects immediately
+    let isSimpleLayout = $derived.by(() => {
+        if (adminlayout) {
+            const entryId = parseInt(page.params.id);
+            const liveEntry = $editedJSON.testData.find(t => t.id === entryId);
+            return liveEntry?.is_simple_layout === true;
+        }
+        return entryData?.is_simple_layout === true;
+    });
+
+    function toggleSimpleLayoutListener() {
+        const entryId = parseInt(page.params.id);
+        const currentEntry = $editedJSON.testData.find(t => t.id === entryId);
+        if (!currentEntry) return;
+        const currentValue = currentEntry.is_simple_layout === true;
+        const newValue = !currentValue;
+        editedJSON.update((draft) => {
+            const target = draft.testData.find(t => t.id === entryId);
+            if (target) {
+                target.is_simple_layout = newValue;
+            }
+            return draft;
+        });
+        $globalFunctions.updateEditTrace?.('testData', entryId, currentEntry.refId || null, 'modify', 'is_simple_layout', currentValue, newValue);
+    }
+
 </script>
 
 <div class="m-2 {adminlayout ? 'w-50' : 'w-100'}" style="height: calc(100vh - 105px); overflow-y: scroll">
@@ -116,8 +142,10 @@
         {#if adminlayout}
         <DataRow datatype={"testData"} rowName={"full_name"} displayName={"Full Name (To be removed)"} isEditable={false} entryData={entryData}/>
         {/if}
-        <DataRow datatype={"testData"} rowName={"GCRS_name"} displayName={"CMS Name"} isEditable={false} entryData={entryData}/>
+        <DataRow datatype={"testData"} rowName={"GCRS_name"} displayName={isSimpleLayout ? "Test Name" : "CMS Name"} isEditable={false} entryData={entryData}/>
+        {#if !isSimpleLayout}
         <DataRow datatype={"testData"} rowName={"label_name"} displayName={"Label Name"} isEditable={false} entryData={entryData}/>
+        {/if}
         <DataRow datatype={"testData"} rowName={"requirement"} displayName={"Special Requirement"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"container"} displayName={"Container"} isEditable={false} entryData={entryData}/>
         <DataRow datatype={"testData"} rowName={"form"} displayName={"Form"} isEditable={false} entryData={entryData}/>
@@ -158,8 +186,8 @@
             <tbody>
             <DataRow datatype={"testData"} rowName={"alert"} displayName={"Alert"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"full_name"} displayName={"Full Name (To be removed)"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"GCRS_name"} displayName={"CMS Name"} isEditable={true} entryData={entryData}/>
-            <DataRow datatype={"testData"} rowName={"label_name"} displayName={"Label Name"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"GCRS_name"} displayName={isSimpleLayout ? "Test Name (Simple Layout)" : "CMS Name"} isEditable={true} entryData={entryData}/>
+            <DataRow datatype={"testData"} rowName={"label_name"} displayName={isSimpleLayout ? "Label Name ⚠ hidden in Simple Layout" : "Label Name"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"requirement"} displayName={"Special Requirement"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"container"} displayName={"Container"} isEditable={true} entryData={entryData}/>
             <DataRow datatype={"testData"} rowName={"form"} displayName={"Form"} isEditable={true} entryData={entryData}/>
@@ -170,6 +198,14 @@
             <DataRow datatype={"testData"} rowName={"test_handling"} displayName={"Lab Handling"} isEditable={true} entryData={entryData}/>
             </tbody>
         </table>
+        <div class="d-flex align-items-center gap-2 mt-2 mb-3">
+            <button type="button" onclick={toggleSimpleLayoutListener} class="btn btn-sm {isSimpleLayout ? 'btn-warning' : 'btn-outline-secondary'}">
+                {isSimpleLayout ? '⚠ Simple Layout ON' : 'Simple Layout OFF'}
+            </button>
+            {#if isSimpleLayout}
+            <span class="text-muted small">CMS Name field shown as "Test Name"; Label Name row hidden from public view.</span>
+            {/if}
+        </div>
     </div>
     {/if}
 </div>
