@@ -1,6 +1,619 @@
 {
 	"config": {
-		"editTrace": [],
+		"editTrace": [
+			{
+				"dataType": "testData",
+				"dataId": 940,
+				"refId": 56946940,
+				"editType": "hide",
+				"field": "is_hidden",
+				"originalValue": false,
+				"newValue": true,
+				"nameSnapshot": "CD34 Assay",
+				"timestamp": "2026-04-14T15:20:14.733Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "950",
+				"refId": null,
+				"editType": "modify",
+				"field": "lab_and_category",
+				"originalValue": {
+					"time": 1776065503853,
+					"blocks": [],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1776180044421,
+					"blocks": [
+						{
+							"id": "tBkyVcWVUU",
+							"type": "lab_and_category",
+							"data": {
+								"labName": "HKCH Haematology Lab",
+								"categoryCode": "HAEM",
+								"categoryName": "Haematology"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "Globin Genotyping",
+				"timestamp": "2026-04-14T15:20:44.422Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "952",
+				"refId": null,
+				"editType": "modify",
+				"field": "lab_and_category",
+				"newValue": {
+					"time": 1776180314644,
+					"blocks": [
+						{
+							"id": "fwrsELE0x-",
+							"type": "lab_and_category",
+							"data": {
+								"labName": "HKCH Genetic and Genomic Pathology Lab",
+								"categoryCode": "GENE",
+								"categoryName": "Genetics"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "Hereditary Blood Disease Panel",
+				"timestamp": "2026-04-14T15:25:14.646Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "960",
+				"refId": null,
+				"editType": "modify",
+				"field": "lab_and_category",
+				"newValue": {
+					"time": 1776180365180,
+					"blocks": [
+						{
+							"id": "NWnBsKyWEU",
+							"type": "lab_and_category",
+							"data": {
+								"labName": "HKCH Haematology Lab",
+								"categoryCode": "HAEM",
+								"categoryName": "Haematology"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "Lymphocyte Subset Assay (HKCH NBSSCID)",
+				"timestamp": "2026-04-14T15:26:05.181Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "967",
+				"refId": null,
+				"editType": "modify",
+				"field": "lab_and_category",
+				"newValue": {
+					"time": 1776180384188,
+					"blocks": [
+						{
+							"id": "GpuDz_iYzh",
+							"type": "lab_and_category",
+							"data": {
+								"labName": "HKCH Haematology Lab",
+								"categoryCode": "HAEM",
+								"categoryName": "Haematology"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "Red Cell Enzyme Assay",
+				"timestamp": "2026-04-14T15:26:24.189Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "968",
+				"refId": null,
+				"editType": "modify",
+				"field": "lab_and_category",
+				"newValue": {
+					"time": 1776180402548,
+					"blocks": [
+						{
+							"id": "joegrYJMq3",
+							"type": "lab_and_category",
+							"data": {
+								"labName": "HKCH Haematology Lab",
+								"categoryCode": "HAEM",
+								"categoryName": "Haematology"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "Red Cell Membrane Protein Analysis",
+				"timestamp": "2026-04-14T15:26:42.551Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 977,
+				"refId": 71137489,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 977",
+				"timestamp": "2026-04-14T15:29:02.212Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "940",
+				"refId": null,
+				"editType": "modify",
+				"field": "lab_and_category",
+				"newValue": {
+					"time": 1776180737692,
+					"blocks": [
+						{
+							"id": "HBXpHMqMuf",
+							"type": "lab_and_category",
+							"data": {
+								"labName": "PMH Haematology Lab",
+								"categoryCode": "HAEM",
+								"categoryName": "Haematology"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "CD34 Assay",
+				"timestamp": "2026-04-14T15:32:17.693Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "940",
+				"refId": null,
+				"editType": "modify",
+				"field": "container",
+				"newValue": {
+					"time": 1776180756861,
+					"blocks": [
+						{
+							"id": "WGdrILDjnR",
+							"type": "container",
+							"data": {
+								"text": "##EDTA_TUBE##",
+								"imageSrc": "/EDTA blood.webp"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "CD34 Assay",
+				"timestamp": "2026-04-14T15:32:36.862Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "940",
+				"refId": null,
+				"editType": "modify",
+				"field": "alert",
+				"newValue": {
+					"time": 1776180775149,
+					"blocks": [
+						{
+							"id": "J69EP2yIw0",
+							"type": "alertTag",
+							"data": {
+								"text": "Advance Booking/Consultation",
+								"background": "text-bg-info"
+							}
+						},
+						{
+							"id": "RVWbgubaBv",
+							"type": "alertTag",
+							"data": {
+								"text": "Accept only in specific time period",
+								"background": "text-bg-warning"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "CD34 Assay",
+				"timestamp": "2026-04-14T15:32:55.150Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "940",
+				"refId": null,
+				"editType": "modify",
+				"field": "requirement",
+				"newValue": {
+					"time": 1776180840284,
+					"blocks": [
+						{
+							"id": "JvKaix2r5q",
+							"type": "paragraph",
+							"data": {
+								"text": "1. Prior consultation with haematologist is required.&nbsp;"
+							}
+						},
+						{
+							"id": "PrhrO9j6Nf",
+							"type": "paragraph",
+							"data": {
+								"text": "2. Blood sample should reach CMC Core Lab before 10:30 a.m. from Monday to Friday"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "CD34 Assay",
+				"timestamp": "2026-04-14T15:34:00.286Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "940",
+				"refId": null,
+				"editType": "modify",
+				"field": "test_handling",
+				"newValue": {
+					"time": 1776180791844,
+					"blocks": [
+						{
+							"id": "VmQe-SxOHA",
+							"type": "paragraph",
+							"data": {
+								"text": "Blood sample should reach Haematology lab before 12:00 noon from Monday to Friday"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "CD34 Assay",
+				"timestamp": "2026-04-14T15:33:11.845Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "940",
+				"refId": null,
+				"editType": "modify",
+				"field": "form",
+				"newValue": {
+					"time": 1776180844892,
+					"blocks": [
+						{
+							"id": "gGukmAHaT6",
+							"type": "form",
+							"data": {
+								"form": {
+									"form_id": "",
+									"form_ref_id": "",
+									"form_code": "",
+									"form_name": "",
+									"form_link": "",
+									"form_external_link": "",
+									"formRequestOnly": false,
+									"specialTier": false
+								}
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "CD34 Assay",
+				"timestamp": "2026-04-14T15:34:04.893Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "940",
+				"refId": null,
+				"editType": "modify",
+				"field": "turn_around_time",
+				"newValue": {
+					"time": 1776180856221,
+					"blocks": [
+						{
+							"id": "XXzHBeYxy9",
+							"type": "paragraph",
+							"data": {
+								"text": "1 day"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "CD34 Assay",
+				"timestamp": "2026-04-14T15:34:16.222Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "940",
+				"refId": null,
+				"editType": "modify",
+				"field": "synonyms",
+				"originalValue": {
+					"blocks": [
+						{
+							"type": "synonyms",
+							"data": {
+								"synonymList": []
+							}
+						}
+					]
+				},
+				"newValue": {
+					"time": 1776180895989,
+					"blocks": [
+						{
+							"id": "aer6x6VmH4",
+							"type": "synonyms",
+							"data": {
+								"synonymList": [
+									"Enumeration of CD34+",
+									"Haematopoietic Stem Cells"
+								]
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "CD34 Assay",
+				"timestamp": "2026-04-14T15:34:55.990Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 978,
+				"refId": 4018300,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 978",
+				"timestamp": "2026-04-14T15:39:12.574Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 979,
+				"refId": 27476848,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 979",
+				"timestamp": "2026-04-14T15:43:39.428Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "229",
+				"refId": null,
+				"editType": "modify",
+				"field": "full_name",
+				"originalValue": {
+					"blocks": [
+						{
+							"type": "paragraph",
+							"data": {
+								"text": "HLA -B*57:01; HLA-B*58:01; HLA-B*15:02"
+							}
+						}
+					]
+				},
+				"newValue": {
+					"time": 1776181593078,
+					"blocks": [
+						{
+							"id": "oTAQ0J3vIG",
+							"type": "paragraph",
+							"data": {
+								"text": "HLA-B*58:01"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "HLA-B*58:01",
+				"timestamp": "2026-04-14T15:46:33.080Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "229",
+				"refId": null,
+				"editType": "modify",
+				"field": "GCRS_name",
+				"originalValue": {
+					"time": 1761232990462,
+					"blocks": [
+						{
+							"id": "cms_229",
+							"type": "paragraph",
+							"data": {
+								"text": "HLA -B*57:01; HLA-B*58:01; HLA-B*15:02"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1776181595796,
+					"blocks": [
+						{
+							"id": "cms_229",
+							"type": "paragraph",
+							"data": {
+								"text": "HLA-B*58:01"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "HLA-B*58:01",
+				"timestamp": "2026-04-14T15:46:35.797Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "229",
+				"refId": null,
+				"editType": "modify",
+				"field": "label_name",
+				"originalValue": {
+					"time": 1761232990462,
+					"blocks": [
+						{
+							"id": "label_229",
+							"type": "paragraph",
+							"data": {
+								"text": "HLA -B*57:01; HLA-B*58:01; HLA-B*15:02"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1776181599357,
+					"blocks": [
+						{
+							"id": "label_229",
+							"type": "paragraph",
+							"data": {
+								"text": "HLA-B*58:01"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "HLA-B*58:01",
+				"timestamp": "2026-04-14T15:46:39.358Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "230",
+				"refId": null,
+				"editType": "modify",
+				"field": "full_name",
+				"originalValue": {
+					"blocks": [
+						{
+							"type": "paragraph",
+							"data": {
+								"text": "HLA-B27 and other single HLA antigen typing"
+							}
+						}
+					]
+				},
+				"newValue": {
+					"time": 1776181635932,
+					"blocks": [
+						{
+							"id": "hFJOrlqEN_",
+							"type": "paragraph",
+							"data": {
+								"text": "HLA-B27"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "HLA-B27",
+				"timestamp": "2026-04-14T15:47:15.933Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "230",
+				"refId": null,
+				"editType": "modify",
+				"field": "GCRS_name",
+				"originalValue": {
+					"time": 1761232990462,
+					"blocks": [
+						{
+							"id": "cms_230",
+							"type": "paragraph",
+							"data": {
+								"text": "HLA-B27 and other single HLA antigen typing"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1776181642012,
+					"blocks": [
+						{
+							"id": "cms_230",
+							"type": "paragraph",
+							"data": {
+								"text": "HLA-B27"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "HLA-B27",
+				"timestamp": "2026-04-14T15:47:22.013Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "230",
+				"refId": null,
+				"editType": "modify",
+				"field": "label_name",
+				"originalValue": {
+					"time": 1761232990462,
+					"blocks": [
+						{
+							"id": "label_230",
+							"type": "paragraph",
+							"data": {
+								"text": "HLA-B27 and other single HLA antigen typing"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1776181645420,
+					"blocks": [
+						{
+							"id": "label_230",
+							"type": "paragraph",
+							"data": {
+								"text": "HLA-B27"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "HLA-B27",
+				"timestamp": "2026-04-14T15:47:25.421Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 980,
+				"refId": 12712289,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 980",
+				"timestamp": "2026-04-14T15:47:49.655Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 981,
+				"refId": 59081219,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 981",
+				"timestamp": "2026-04-14T15:57:29.568Z"
+			}
+		],
 		"category": [
 			{
 				"code": "CHEM",
