@@ -1,13 +1,13 @@
 {
-  "versionId": "20260413T222127Z_req-1776118868950",
-  "requestId": "req-1776118868950",
-  "publishedAt": "2026-04-13T22:21:27.194Z",
+  "versionId": "20260413T230210Z_req-1776121312501",
+  "requestId": "req-1776121312501",
+  "publishedAt": "2026-04-13T23:02:10.394Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "Add haem test",
-  "editTraceCount": 79,
-  "snapshotPath": "content-versions/snapshots/2026/20260413T222127Z_req-1776118868950.json",
-  "contentSha256": "dffeccd9360d3ad9eaba8808b90bad5760c184f21cc89ebcded2af25af6206a2",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24369892611",
+  "summary": "update haem label",
+  "editTraceCount": 4,
+  "snapshotPath": "content-versions/snapshots/2026/20260413T230210Z_req-1776121312501.json",
+  "contentSha256": "019b92bf7f5828fc099b0a827586413fd08d48a441e197bed7c4f0e7d5a07914",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24371332536",
   "environment": "predeploy"
 }
