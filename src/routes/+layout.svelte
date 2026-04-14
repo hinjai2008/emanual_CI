@@ -919,13 +919,14 @@
     publishStatusMessage = 'Publishing...';
 
     try {
+      // Send as text/plain to avoid CORS preflight; secret goes in body as _secret
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${secretInput}`,
+          'Content-Type': 'text/plain',
         },
         body: JSON.stringify({
+          _secret: secretInput,
           editedJSON: $editedJSON,
           adminId: publisherName,
           publishSummary,
@@ -1559,22 +1560,19 @@
   }
 
   function goToAdjacentExistingEntry(direction) {
-    if (!$isAdmin) {
-      return;
-    }
-
     const context = getCurrentEntryContext();
     if (!context) {
-      alert('Please open a test, form, or container entry page first.');
-      return;
+      return; // not on an entry page, silently do nothing
     }
 
     const targetId = findAdjacentExistingId(context.entryType, context.entryId, direction);
     if (targetId === null) {
-      if (direction === 'next') {
-        alert('No higher existing ID was found in the current edited JSON.');
-      } else {
-        alert('No lower existing ID was found in the current edited JSON.');
+      if ($isAdmin) {
+        if (direction === 'next') {
+          alert('No higher existing ID was found in the current edited JSON.');
+        } else {
+          alert('No lower existing ID was found in the current edited JSON.');
+        }
       }
       return;
     }
@@ -1627,6 +1625,13 @@
         </div>
       </li>
 
+      <li class="nav-item ms-1 d-flex align-items-center">
+        <div class="btn-group btn-group-sm">
+          <button type="button" class="btn btn-outline-secondary" onclick={goToPreviousEntryIdListener} title="Previous existing entry">&#8592; Prev</button>
+          <button type="button" class="btn btn-outline-secondary" onclick={goToNextEntryIdListener} title="Next existing entry">Next &#8594;</button>
+        </div>
+      </li>
+
       {#if $isEditMode}
       <li class="nav-item ms-2 nav-tools-wrapper">
         <details class="nav-tools">
@@ -1643,9 +1648,6 @@
       {/if}
       
       {#if $isAdmin}
-      <li class="nav-item ms-2 d-flex align-items-center">
-        <button type="button" class="btn btn-primary btn-sm" onclick={goToNextEntryIdListener}>Next Existing ID</button>
-      </li>
       <li class="nav-item ms-2 nav-tools-wrapper">
         <details class="nav-tools">
           <summary class="nav-link active">Admin Tools</summary>
