@@ -298,5 +298,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260414T183033Z_req-1776191418758.json",
     "contentSha256": "5b02ea57da8ee022aa264a403ab19565332677c6017cbda9647731e125c96f08",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24416157729"
+  },
+  {
+    "versionId": "20260414T184220Z_req-1776192125522",
+    "publishedAt": "2026-04-14T18:42:20.454Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1776192125522",
+    "sourceRef": "main",
+    "summary": "Unhide amylase",
+    "editTraceCount": 1,
+    "snapshotPath": "content-versions/snapshots/2026/20260414T184220Z_req-1776192125522.json",
+    "contentSha256": "d2e306c5bfb61166a7b286536f7c5529f0df12b16191fd3610e7fac3bed30452",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24416682665"
   }
 ]
