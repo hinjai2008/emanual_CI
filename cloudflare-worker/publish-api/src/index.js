@@ -43,19 +43,22 @@ export default {
       return json({ ok: false, error: 'Not found' }, 404, corsHeaders);
     }
 
-    // 1) Auth check
-    const auth = request.headers.get('Authorization') || '';
-    const token = auth.startsWith('Bearer ') ? auth.slice(7).trim() : '';
-    if (!token || token !== env.PUBLISH_SHARED_SECRET) {
-      return json({ ok: false, error: 'Unauthorized' }, 401, corsHeaders);
-    }
-
-    // 2) Parse body
+    // 2) Parse body — accept both application/json and text/plain (preflight-free)
     let body;
     try {
-      body = await request.json();
+      const raw = await request.text();
+      body = JSON.parse(raw);
     } catch {
       return json({ ok: false, error: 'Invalid JSON body' }, 400, corsHeaders);
+    }
+
+    // 1) Auth check — accept secret from Authorization header or body._secret
+    const auth = request.headers.get('Authorization') || '';
+    const headerToken = auth.startsWith('Bearer ') ? auth.slice(7).trim() : '';
+    const bodyToken = typeof body?._secret === 'string' ? body._secret.trim() : '';
+    const token = headerToken || bodyToken;
+    if (!token || token !== env.PUBLISH_SHARED_SECRET) {
+      return json({ ok: false, error: 'Unauthorized' }, 401, corsHeaders);
     }
 
     const editedJSON = body?.editedJSON;
@@ -168,7 +171,8 @@ function buildCorsHeaders(allowedOrigin) {
   return {
     'Access-Control-Allow-Origin': allowedOrigin,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Credentials': 'false'
   };
 }
 
