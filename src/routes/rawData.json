@@ -1,6 +1,18 @@
 {
 	"config": {
-		"editTrace": [],
+		"editTrace": [
+			{
+				"dataType": "testData",
+				"dataId": 436,
+				"refId": 41998807,
+				"editType": "unhide",
+				"field": "is_hidden",
+				"originalValue": true,
+				"newValue": false,
+				"nameSnapshot": "Amylase, spot urine",
+				"timestamp": "2026-04-14T18:41:49.685Z"
+			}
+		],
 		"category": [
 			{
 				"code": "CHEM",
@@ -74370,7 +74382,7 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true
+			"is_hidden": false
 		},
 		{
 			"id": 437,
