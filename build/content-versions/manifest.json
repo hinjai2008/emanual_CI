@@ -274,5 +274,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260413T230210Z_req-1776121312501.json",
     "contentSha256": "5d3911437e6254ec5621a7a9154aeba5c085849dad18124e1dd625c30de49121",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24371332536"
+  },
+  {
+    "versionId": "20260414T160624Z_req-1776182768741",
+    "publishedAt": "2026-04-14T16:06:24.350Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1776182768741",
+    "sourceRef": "main",
+    "summary": "T&I lab",
+    "editTraceCount": 25,
+    "snapshotPath": "content-versions/snapshots/2026/20260414T160624Z_req-1776182768741.json",
+    "contentSha256": "1e19a1d0d1e013383d90f9a3725716db11da66bff4ca2cc567bc37ffda8d2a52",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24409708450"
   }
 ]
