@@ -1,13 +1,13 @@
 {
-  "versionId": "20260414T160624Z_req-1776182768741",
-  "requestId": "req-1776182768741",
-  "publishedAt": "2026-04-14T16:06:24.350Z",
+  "versionId": "20260414T183033Z_req-1776191418758",
+  "requestId": "req-1776191418758",
+  "publishedAt": "2026-04-14T18:30:33.651Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "T&I lab",
-  "editTraceCount": 25,
-  "snapshotPath": "content-versions/snapshots/2026/20260414T160624Z_req-1776182768741.json",
-  "contentSha256": "d83e80326daddb035f682d2ea0005e57cd6d5b1499ffb3557b86ae201c42eaf3",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24409708450",
+  "summary": "update",
+  "editTraceCount": 2,
+  "snapshotPath": "content-versions/snapshots/2026/20260414T183033Z_req-1776191418758.json",
+  "contentSha256": "8bad5980f043b26eb48d620b6e6453072b4c7f461f78440b9f755060293ac35e",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24416157729",
   "environment": "predeploy"
 }
