@@ -7,7 +7,7 @@
   "summary": "Unhide amylase",
   "editTraceCount": 1,
   "snapshotPath": "content-versions/snapshots/2026/20260414T184220Z_req-1776192125522.json",
-  "contentSha256": "9206068889015a71b6b5a9bfe83fb6aedc345c80ec724a61eeedcc3ad794aefd",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24483144770",
+  "contentSha256": "7ce78d845a5a29e274b04e1cc058be7f541db0edc6a3c8d9e9e7d9d9aa4de741",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24539155209",
   "environment": "predeploy"
 }
