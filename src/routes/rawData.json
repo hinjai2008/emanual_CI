@@ -28,7 +28,7 @@
 			},
 			{
 				"code": "T&I",
-				"text": "Transplantation and Immunogenetics"
+				"text": "Transplation and Immunogenetics"
 			},
 			{
 				"code": "GENE",
@@ -42,7 +42,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "3408 7739",
 				"fax": "22426295",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/cmc-path/"
+				"intranet_link": "https://hateams.home/knowledge/group/cmc-path/"
 			},
 			{
 				"labName": "CMC Core Lab",
@@ -50,7 +50,7 @@
 				"categoryName": "Haematology",
 				"telephone": "3408 7738",
 				"fax": "2742 7474",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/cmc-path/"
+				"intranet_link": "https://hateams.home/knowledge/group/cmc-path/"
 			},
 			{
 				"labName": "CMC Core Lab",
@@ -58,7 +58,7 @@
 				"categoryName": "Blood Bank",
 				"telephone": "3408 7740",
 				"fax": "2742 7474",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/cmc-path/"
+				"intranet_link": "https://hateams.home/knowledge/group/cmc-path/"
 			},
 			{
 				"labName": "CMC Anatomical Pathology Lab",
@@ -66,7 +66,7 @@
 				"categoryName": "Anatomical Pathology",
 				"telephone": "3408 7763",
 				"fax": "2745 1804",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/cmc-path/"
+				"intranet_link": "https://hateams.home/knowledge/group/cmc-path/"
 			},
 			{
 				"labName": "PMH Chem Lab",
@@ -74,7 +74,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "2990 1867",
 				"fax": "2990 1878",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/"
+				"intranet_link": "https://hateams.home/knowledge/group/pmh-pathology/usefulforms/"
 			},
 			{
 				"labName": "PMH Toxicology Reference Lab",
@@ -82,7 +82,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "2990 1941",
 				"fax": "2990 1942",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7iax53jiiaojiu.remote.ha.org.hk/Test.Menu.htm"
+				"intranet_link": "https://trl.home/Test.Menu.htm"
 			},
 			{
 				"labName": "PMH Haematology Lab",
@@ -90,7 +90,7 @@
 				"categoryName": "Haematology",
 				"telephone": "2990 1888",
 				"fax": "2990 1887",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/"
+				"intranet_link": "https://hateams.home/knowledge/group/pmh-pathology/usefulforms/"
 			},
 			{
 				"labName": "PMH Microbiology Lab",
@@ -98,7 +98,7 @@
 				"categoryName": "Microbiology & Virology",
 				"telephone": "2990 1851",
 				"fax": "2990 1850",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/"
+				"intranet_link": "https://hateams.home/knowledge/group/pmh-pathology/usefulforms/"
 			},
 			{
 				"labName": "QMH Chemical Pathology Lab",
@@ -106,7 +106,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "2255 3175 (General Office/General Enquiry); 2255 3702 (Counter)",
 				"fax": "2819 4179",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pao6wp4ebwljw7a.remote.ha.org.hk/webapps/Dept/CBIO/pages/labmanual.html"
+				"intranet_link": "https://hkwc.home/webapps/Dept/CBIO/pages/labmanual.html"
 			},
 			{
 				"labName": "QMH Haematology Lab",
@@ -114,7 +114,7 @@
 				"categoryName": "Haematology",
 				"telephone": "Main Laboratory (24 hours): 2255 3166; General Office: 2255 3152",
 				"fax": "22553736",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pao6wp4ebwljw7a.remote.ha.org.hk/webapps/dept/haem/"
+				"intranet_link": "https://hkwc.home/webapps/dept/haem/"
 			},
 			{
 				"labName": "QMH Microbiology Lab",
@@ -122,7 +122,7 @@
 				"categoryName": "Microbiology & Virology",
 				"telephone": "22552379 (office hours); 22552387 (non-office hours)",
 				"fax": "28724555",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pao6wp4ebwljw7a.remote.ha.org.hk/webapps/Dept/micbio/index.html"
+				"intranet_link": "https://hkwc.home/webapps/Dept/micbio/index.html"
 			},
 			{
 				"labName": "QMH Immunology Lab",
@@ -130,15 +130,15 @@
 				"categoryName": "Immunology",
 				"telephone": "2255 2327",
 				"fax": "2818 1104",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pao6wp4ebwljw7a.remote.ha.org.hk/webapps/Dept/CIMM/SerologyLab.aspx"
+				"intranet_link": "https://hkwc.home/webapps/Dept/CIMM/SerologyLab.aspx"
 			},
 			{
 				"labName": "QMH Transplant & Immunogenetics Lab",
 				"categoryCode": "T&I",
-				"categoryName": "Transplantation and Immunogenetics",
+				"categoryName": "Transplant and Immunogenetics",
 				"telephone": "2255 2536",
 				"fax": "2527 9122",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pao6wp4ebwljw7a.remote.ha.org.hk/webapps/Dept/CIMM/TI.aspx"
+				"intranet_link": "https://hkwc.home/webapps/Dept/CIMM/TI.aspx"
 			},
 			{
 				"labName": "PWH Chemical Pathology Lab",
@@ -146,7 +146,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "3505 2363 (Reception); 3505 2331 (office)",
 				"fax": "3505 4723",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7oqr46py2hwuclxn4ddpq43q.remote.ha.org.hk/iHospR/webs/ihosp/PWH/CP/Public/Process/Guideline_Protocol/Menu/main.htm"
+				"intranet_link": "https://ntecapp25.home/iHospR/webs/ihosp/PWH/CP/Public/Process/Guideline_Protocol/Menu/main.htm"
 			},
 			{
 				"labName": "PWH Virology Lab",
@@ -154,7 +154,7 @@
 				"categoryName": "Microbiology & Virology",
 				"telephone": "3505 2315 (Microbiology Specimen Reception); 3505 3347 (EIA lab)",
 				"fax": "2645 1256",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7oqr46py2hwuclxn4ddpq43q.remote.ha.org.hk/ihospr/home/public/ihosp/pwh/micro"
+				"intranet_link": "https://ntecapp25.home/ihospr/home/public/ihosp/pwh/micro"
 			},
 			{
 				"labName": "HKCH Chemical Pathology Lab",
@@ -162,7 +162,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "Chemical Pathology: 3513 3033; Newborn screening Lab: 3513 3139",
 				"fax": "",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pao4gki2hwu.remote.ha.org.hk/labmanual/?nw=1&nw=1"
+				"intranet_link": "https://hkchapp/labmanual/?nw=1&nw=1"
 			},
 			{
 				"labName": "NLTH Chemical Pathology Lab",
@@ -170,7 +170,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "3467 7055 (Core Lab Reception)",
 				"fax": "3467 7056",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/nlthpathology/labtestinformation/"
+				"intranet_link": "https://hateams.home/knowledge/group/nlthpathology/labtestinformation/"
 			},
 			{
 				"labName": "NLTH Haematology Lab",
@@ -178,7 +178,7 @@
 				"categoryName": "Haematology",
 				"telephone": "3467 7055 (Core Lab Reception)",
 				"fax": "3467 7056",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/nlthpathology/labtestinformation/"
+				"intranet_link": "https://hateams.home/knowledge/group/nlthpathology/labtestinformation/"
 			},
 			{
 				"labName": "KWH Microbiology Lab",
@@ -186,7 +186,7 @@
 				"categoryName": "Microbiology & Virology",
 				"telephone": "Sample Reception: 4658 2723, Microbiology Lab: 4658 2711, Mycobacteriology Lab: 4658 2722",
 				"fax": "3517 2717",
-				"intranet_link": "https://cvpne4h5vbolgldymxiyn6kozqbwfkcvygvbryq5or7hj.remote.ha.org.hk/labmanual/"
+				"intranet_link": "http://kwhpathapps01.home/labmanual/"
 			},
 			{
 				"labName": "QEH Chemical Pathology Lab",
@@ -194,7 +194,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "3506 6768 (24hr Core Lab)",
 				"fax": "27719258",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pyg4goz6huuce.remote.ha.org.hk/labmanual"
+				"intranet_link": "https://kccasp01/labmanual"
 			},
 			{
 				"labName": "QEH Haematology Lab",
@@ -202,7 +202,7 @@
 				"categoryName": "Haematology",
 				"telephone": "Special Haematology: 3506 6786; 24-hr Haematology: 3506 6776",
 				"fax": "35066899",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pyg4goz6huuce.remote.ha.org.hk/labmanual"
+				"intranet_link": "https://kccasp01/labmanual"
 			},
 			{
 				"labName": "QEH Microbiology Lab",
@@ -210,7 +210,7 @@
 				"categoryName": "Microbiology & Virology",
 				"telephone": "3506 6840 (Microbiology)",
 				"fax": "35066896",
-				"intranet_link": "https://cvpnhp5o3rcfobkvy3xcrwjo3yltwz5b43rchkozrhapr72gni4yrd3gq.remote.ha.org.hk/labmanual"
+				"intranet_link": "https://cvpneeshxpoh5vu7lkxtr45z33w4eoa.remote.ha.org.hk/labmanual"
 			},
 			{
 				"labName": "DH PHLC Virology Lab",
@@ -218,7 +218,7 @@
 				"categoryName": "Microbiology & Virology",
 				"telephone": "2319 8239 (Virus unit); 2319 8352 (Microbiology)",
 				"fax": "2319 5989",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7iys6xji6bwub26j6eroqi4q.remote.ha.org.hk/en/healthprofessionals/30/index.html#PHL"
+				"intranet_link": "https://www.chp.gov.hk/en/healthprofessionals/30/index.html#PHL"
 			},
 			{
 				"labName": "DH PHLC Chemical Pathology Lab",
@@ -226,7 +226,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "2319 8472 (General enquiry); 2319 8474 (Chem Path)",
 				"fax": "",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7iys6xji6bwub26j6eroqi4q.remote.ha.org.hk/en/healthprofessionals/30/index.html#PHL"
+				"intranet_link": "https://www.chp.gov.hk/en/healthprofessionals/30/index.html#PHL"
 			},
 			{
 				"labName": "DH PHLC Haematology Lab",
@@ -234,7 +234,7 @@
 				"categoryName": "Haematology",
 				"telephone": "2319 8472 (General enquiry); 2319 8470 (Haematology bench)",
 				"fax": "",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7iys6xji6bwub26j6eroqi4q.remote.ha.org.hk/en/healthprofessionals/30/index.html#PHL"
+				"intranet_link": "https://www.chp.gov.hk/en/healthprofessionals/30/index.html#PHL"
 			},
 			{
 				"labName": "TMH Chemical Pathology Lab",
@@ -242,7 +242,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "2468 5295",
 				"fax": "2468 5296",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/NTWCPI/ManualforClinicaLWardStaff/"
+				"intranet_link": "https://hateams.home/knowledge/group/NTWCPI/ManualforClinicaLWardStaff/"
 			},
 			{
 				"labName": "POH Chemical Pathology Lab",
@@ -250,7 +250,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "2486 8222 (Biochem)",
 				"fax": "2486 8517",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/NTWCPI/ManualforClinicaLWardStaff/"
+				"intranet_link": "https://hateams.home/knowledge/group/NTWCPI/ManualforClinicaLWardStaff/"
 			},
 			{
 				"labName": "PYNEH Chemical Pathology Lab",
@@ -258,7 +258,7 @@
 				"categoryName": "Chemical Pathology",
 				"telephone": "2595 5113 (Chem Path Lab); 2595 5112 (Reception)",
 				"fax": "2515 3591",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pao46pz6b4kjc2j2ai.remote.ha.org.hk/dept/News.aspx?hosp=hkec&dept=356"
+				"intranet_link": "https://hkecsi.home/dept/News.aspx?hosp=hkec&dept=356"
 			},
 			{
 				"labName": "HKCH Haematology Lab",
@@ -266,7 +266,7 @@
 				"categoryName": "Haematology",
 				"telephone": "3513 3138",
 				"fax": "3512 7527",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pao4gki2hwu.remote.ha.org.hk/labmanual/?nw=1&nw=1"
+				"intranet_link": "https://hkchapp/labmanual/?nw=1&nw=1"
 			},
 			{
 				"labName": "HKCH Genetic and Genomic Pathology Lab",
@@ -274,7 +274,7 @@
 				"categoryName": "Genetics",
 				"telephone": "35133096",
 				"fax": "35127505",
-				"intranet_link": "https://cvpne4h5vbojpjxyi7pao4gki2hwu.remote.ha.org.hk/labmanual/?nw=1&nw=1"
+				"intranet_link": "https://hkchapp/labmanual/?nw=1&nw=1"
 			}
 		],
 		"alertTag": [
@@ -789,7 +789,7 @@
 						"id": "iCDtpnRBUz",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;"
+							"text": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;"
 						}
 					}
 				],
@@ -857,7 +857,7 @@
 						"id": "eGxhu81l2o",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;"
+							"text": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;"
 						}
 					}
 				],
@@ -925,7 +925,7 @@
 						"id": "Ul0VYaM6WA",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F"
+							"text": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F"
 						}
 					}
 				],
@@ -993,7 +993,7 @@
 						"id": "J94wlJOITx",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhe5ygld4dfkibq2p4nhzmpeqxlvpvujr3fu6j7youx7atwvy5ta2q.remote.ha.org.hk/labmanual/upload/Forms/MR2031_KW.pdf"
+							"text": "https://cvpnhpdh6nj2wl45job3dehbkrv65r6unnboqqdjcdjivfwef3jpfkjxq.remote.ha.org.hk/labmanual/upload/Forms/MR2031_KW.pdf"
 						}
 					}
 				],
@@ -1061,7 +1061,7 @@
 						"id": "Gi9RxBtRiM",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhaosuwgw2pcpnztxi66jsp4kooakqz6fdvrtbnz3d4454sbraoisa.remote.ha.org.hk/clinical/mro/Public/MR2071-QE.pdf"
+							"text": "https://cvpnhswn63vzyhakakxki27gcdtqj5rkxhcdqemirfcpvgeftxpsoua2q.remote.ha.org.hk/clinical/mro/Public/MR2071-QE.pdf"
 						}
 					}
 				],
@@ -1338,7 +1338,7 @@
 						"id": "e7Rk07qd22",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;"
+							"text": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;"
 						}
 					}
 				],
@@ -1406,7 +1406,7 @@
 						"id": "WAhBpwm-sk",
 						"type": "paragraph",
 						"data": {
-							"text": "<a href=\"https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/904a41b19609082de225018105387ecb/default/?&amp;\">https://hateams.home/docs/pub/904a41b19609082de225018105387ecb/default/?&amp;</a>"
+							"text": "<a href=\"https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/904a41b19609082de225018105387ecb/default/?&amp;\">https://hateams.home/docs/pub/904a41b19609082de225018105387ecb/default/?&amp;</a>"
 						}
 					}
 				],
@@ -1474,7 +1474,7 @@
 						"id": "I8BL7liL_J",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/ec07374234dab06615d8ce9f1731ee53/default/?&amp;"
+							"text": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/ec07374234dab06615d8ce9f1731ee53/default/?&amp;"
 						}
 					}
 				],
@@ -1527,7 +1527,7 @@
 						"id": "W2rpTcX1j_",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F"
+							"text": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F"
 						}
 					}
 				],
@@ -1595,7 +1595,7 @@
 						"id": "MFQV0GidlQ",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FCoagulopathy+Genetics+Lab+Forms%2F"
+							"text": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FCoagulopathy+Genetics+Lab+Forms%2F"
 						}
 					}
 				],
@@ -1663,7 +1663,7 @@
 						"id": "xiNikjkl2z",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhxfwalq7c3uhpbinneiui2x2tw5gmucrk7iyxd7q2bsdv3t4yxmza.remote.ha.org.hk/Lab.Form/PM710.TRL.request.form.June2022.pdf"
+							"text": "https://cvpnhjqiqynoko3zvkk4hpsy5js3kxprgoqs2z67vpqy6qugzz5naiqqq.remote.ha.org.hk/Lab.Form/PM710.TRL.request.form.June2022.pdf"
 						}
 					}
 				],
@@ -2111,7 +2111,7 @@
 						"id": "EJKbxudRh3",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhdmf7ky5v56dn7wqisb56i4amvdszlxhsm6xciup6r7ymjnc6f7ja.remote.ha.org.hk/labmanual/upload/Forms/Chemical%20Pathology%20Request%20Form.pdf"
+							"text": "https://cvpnh34tjgs2o5k5n3rox52vpf4phue65qzqsr2uqi2i2pbe3q64omkna.remote.ha.org.hk/labmanual/upload/Forms/Chemical%20Pathology%20Request%20Form.pdf"
 						}
 					}
 				],
@@ -2179,7 +2179,7 @@
 						"id": "SJ50tb2qyH",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F"
+							"text": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F"
 						}
 					}
 				],
@@ -2247,7 +2247,7 @@
 						"id": "yRKcq2lQZn",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F"
+							"text": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F"
 						}
 					}
 				],
@@ -2315,7 +2315,7 @@
 						"id": "JatHSbTptO",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhxfwalq7c3uhpbinneiui2x2tw5gmucrk7iyxd7q2bsdv3t4yxmza.remote.ha.org.hk/Lab.Form/TRL.Request.Form.TDM_PM797.V3.pdf"
+							"text": "https://cvpnhjqiqynoko3zvkk4hpsy5js3kxprgoqs2z67vpqy6qugzz5naiqqq.remote.ha.org.hk/Lab.Form/TRL.Request.Form.TDM_PM797.V3.pdf"
 						}
 					}
 				],
@@ -2383,7 +2383,7 @@
 						"id": "0ksOu2WEk3",
 						"type": "paragraph",
 						"data": {
-							"text": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F"
+							"text": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F"
 						}
 					}
 				],
@@ -5641,7 +5641,7 @@
 						"id": "RfWKl_kbXe",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpnhp5o3rcfobkvy3xcrwjo3yltwz5b43rchkozrhapr72gni4yrd3gq.remote.ha.org.hk/labmanual\" target=\"_blank\" rel=\"noopener noreferrer\">QEH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxtr45z33w4eoa.remote.ha.org.hk/labmanual\" target=\"_blank\" rel=\"noopener noreferrer\">QEH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -5984,7 +5984,7 @@
 						"id": "cgUHj-VO8H",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6158,7 +6158,7 @@
 						"id": "wbkfBTC3kD",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6447,7 +6447,7 @@
 						"id": "FuFe9zRk90",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6608,7 +6608,7 @@
 						"id": "gy7rmrJi0Q",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation and specimen collection are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation and specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6844,7 +6844,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -6864,7 +6864,7 @@
 						"id": "_Hrly3YzRm",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -7337,7 +7337,7 @@
 						"id": "f_kzNX9clj",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -7398,7 +7398,7 @@
 								"form_code": "PM874",
 								"form_name": "ADAMTS13 Assay Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
 								"formRequestOnly": false,
 								"specialTier": false
 							}
@@ -8974,7 +8974,7 @@
 						"id": "W9VjNGHk4g",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -10365,7 +10365,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -10813,7 +10813,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -10964,7 +10964,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -10997,7 +10997,7 @@
 						"id": "ru40I-myMj",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -11109,7 +11109,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -11267,7 +11267,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -11420,7 +11420,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -11599,7 +11599,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -11905,7 +11905,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -17259,7 +17259,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -17556,7 +17556,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -19494,7 +19494,7 @@
 						"id": "H-guab6el3",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -19870,7 +19870,7 @@
 						"id": "thgMY8gNkY",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -19938,7 +19938,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -20451,7 +20451,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -23371,7 +23371,7 @@
 						"id": "LsuwvyMjoM",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -23572,7 +23572,7 @@
 						"id": "sTb_0ixiSn",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -24589,7 +24589,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -26118,7 +26118,7 @@
 						"id": "gHhPNcwD0h",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -26851,7 +26851,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -27729,7 +27729,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -30412,7 +30412,7 @@
 						"id": "hlNxIyBKdC",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -30481,7 +30481,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -30643,7 +30643,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -30803,7 +30803,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -30843,7 +30843,7 @@
 						"id": "-eNdt_leDP",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -32586,7 +32586,7 @@
 								"form_code": "PM862",
 								"form_name": "LMWH and DOAC Study Request form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
 								"formRequestOnly": true
 							}
 						}
@@ -32729,7 +32729,7 @@
 								"form_code": "PM862",
 								"form_name": "LMWH and DOAC Study Request form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
 								"formRequestOnly": true
 							}
 						}
@@ -33023,7 +33023,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -33275,7 +33275,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -33819,7 +33819,7 @@
 						"id": "3bwCHi5wu6",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -35774,7 +35774,7 @@
 								"form_code": "HA1887/PM",
 								"form_name": "PMH Haematology Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
 								"formRequestOnly": true
 							}
 						}
@@ -35963,7 +35963,7 @@
 								"form_code": "HA1887/PM",
 								"form_name": "PMH Haematology Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
 								"formRequestOnly": true
 							}
 						}
@@ -36146,7 +36146,7 @@
 								"form_code": "HA1887/PM",
 								"form_name": "PMH Haematology Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
 								"formRequestOnly": true
 							}
 						}
@@ -36678,7 +36678,7 @@
 								"form_code": "HA1887/PM",
 								"form_name": "PMH Haematology Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
 								"formRequestOnly": true
 							}
 						}
@@ -36854,7 +36854,7 @@
 								"form_code": "HA1887/PM",
 								"form_name": "PMH Haematology Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
 								"formRequestOnly": true
 							}
 						}
@@ -37043,7 +37043,7 @@
 								"form_code": "HA1887/PM",
 								"form_name": "PMH Haematology Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
 								"formRequestOnly": true
 							}
 						}
@@ -37398,7 +37398,7 @@
 						"id": "PEB29H9LNR",
 						"type": "paragraph",
 						"data": {
-							"text": "Please refer to the “Instruction for Faecal Occult Blood Testing” available at <a href=\"https://cvpnh3jnr2dr5jbs7qvoqfketfxlwo6zjei6mxg4i4nuoestywvnwiabq.remote.ha.org.hk/Chempath\">http://kwcpath.home/Chempath</a> for details."
+							"text": "Please refer to the “Instruction for Faecal Occult Blood Testing” available at <a href=\"https://cvpnhd7jme6efg6v6qcgnsrdqsnhunyqp4cmm3bvmxvfrw77hdob7ru2a.remote.ha.org.hk/Chempath\">http://kwcpath.home/Chempath</a> for details."
 						}
 					}
 				],
@@ -38018,7 +38018,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -38146,7 +38146,7 @@
 						"id": "lMYVL_ULl5",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -39242,7 +39242,7 @@
 						"id": "8FtDNbFSf3",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -39322,7 +39322,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -40226,7 +40226,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -40371,7 +40371,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -40529,7 +40529,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -40699,7 +40699,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -40855,7 +40855,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -41305,7 +41305,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -43278,7 +43278,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -43610,7 +43610,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -44555,7 +44555,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -44575,7 +44575,7 @@
 						"id": "44bzihiZ_S",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -44827,7 +44827,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -46465,7 +46465,7 @@
 								"form_code": "HA1873/PM",
 								"form_name": "PMH Chemical Pathology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;",
 								"formRequestOnly": false,
 								"specialTier": false
 							}
@@ -46638,7 +46638,7 @@
 								"form_code": "HA1873/PM",
 								"form_name": "PMH Chemical Pathology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;",
 								"formRequestOnly": false,
 								"specialTier": false
 							}
@@ -46836,7 +46836,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -47840,7 +47840,7 @@
 						"id": "dtrG_E_bgn",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -49896,7 +49896,7 @@
 						"id": "ixXBc7VFmt",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -50520,7 +50520,7 @@
 								"form_code": "HA1873/PM",
 								"form_name": "PMH Chemical Pathology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;",
 								"formRequestOnly": false,
 								"specialTier": false
 							}
@@ -50649,7 +50649,7 @@
 						"id": "FJMqeZg5zU",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -50688,7 +50688,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -51174,7 +51174,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -51385,7 +51385,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -51887,7 +51887,7 @@
 								"form_code": "PM676",
 								"form_name": "Request for Laboratory Investigation of Inherited Metabolic Diseases",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/290c6657c6f8ea1693aed1488ce3bc05/default/?&amp;",
 								"formRequestOnly": true
 							}
 						}
@@ -52092,7 +52092,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -52344,7 +52344,7 @@
 						"id": "vdb0_JJfUs",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://cvpnhieirx5nqkpzgduefyglrgzzv7ablkgg7tllsva2pveoefxym52uq.remote.ha.org.hk/webapps/Dept/CBIO/pages/Main.aspx\" target=\"_blank\" rel=\"noopener noreferrer\">QMH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz6ny6bq63ftxa.remote.ha.org.hk/webapps/Dept/CBIO/pages/Main.aspx\" target=\"_blank\" rel=\"noopener noreferrer\">QMH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -53038,7 +53038,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -53172,7 +53172,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -54047,7 +54047,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -54707,7 +54707,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -56726,7 +56726,7 @@
 						"id": "4m_a9LLij_",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -56845,7 +56845,7 @@
 								"form_code": "HA1887/PM",
 								"form_name": "PMH Haematology Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/726a61f7b858f9facc339c750d2d4863/default/?path=%2FHaematology+Lab+form%2F",
 								"formRequestOnly": false,
 								"specialTier": false
 							}
@@ -56986,7 +56986,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -57164,7 +57164,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": true
 							}
 						}
@@ -58601,7 +58601,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -61483,7 +61483,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -61785,7 +61785,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -62001,7 +62001,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -64484,7 +64484,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -64623,7 +64623,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -65049,7 +65049,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -68255,7 +68255,7 @@
 						"id": "odTL2Z--jb",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7nyi4ggi2gwm.remote.ha.org.hk/\" target=\"_blank\" rel=\"noopener noreferrer\">CMC Core Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://cmcpath/\" target=\"_blank\" rel=\"noopener noreferrer\">CMC Core Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -69293,7 +69293,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -69588,7 +69588,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -69867,7 +69867,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -70557,7 +70557,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -71138,7 +71138,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -71308,7 +71308,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -71578,7 +71578,7 @@
 								"form_code": "HA1884/PM",
 								"form_name": "PMH Microbiology Laboratory Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhyxgyfsi7p6yc7xuffxiyu6w2l3jrmp5ylw4gkjlerr3x4wi2ktyq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
+								"form_external_link": "https://cvpnhuhbexgwiktdz6ykcolnwpgzk2xic72lha2xmr2k4wfrgnbfpvleq.remote.ha.org.hk/docs/pub/a9e1442295e64e6e810083da6529471b/default/?&amp;",
 								"formRequestOnly": false
 							}
 						}
@@ -85225,7 +85225,7 @@
 						"id": "ATh4FOiXw8",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -85451,7 +85451,7 @@
 						"id": "bFA6g2GbT0",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -85684,7 +85684,7 @@
 						"id": "2hel6qiLm-",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -85917,7 +85917,7 @@
 						"id": "5nPYJi2aEU",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -90670,7 +90670,7 @@
 						"id": "sjJDEmEaYK",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -91219,7 +91219,7 @@
 								"form_code": "RF-CP001",
 								"form_name": "HKCH Chemical Pathology Test Request Form",
 								"form_link": "",
-								"form_external_link": "https://cvpnhdmf7ky5v56dn7wqisb56i4amvdszlxhsm6xciup6r7ymjnc6f7ja.remote.ha.org.hk/labmanual/upload/Forms/Chemical%20Pathology%20Request%20Form.pdf",
+								"form_external_link": "https://cvpnh34tjgs2o5k5n3rox52vpf4phue65qzqsr2uqi2i2pbe3q64omkna.remote.ha.org.hk/labmanual/upload/Forms/Chemical%20Pathology%20Request%20Form.pdf",
 								"formRequestOnly": false,
 								"specialTier": false
 							}
@@ -91791,7 +91791,7 @@
 						"id": "ohLs5oYXxQ",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -92266,7 +92266,7 @@
 						"id": "XQIdyhx9Vu",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -99653,7 +99653,7 @@
 						"id": "yYb95J6ltP",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -99702,7 +99702,7 @@
 						"id": "ZZ-t6kPwIB",
 						"type": "paragraph",
 						"data": {
-							"text": " Acknowledge\n  and store at 4°C. Send primary sample (whole blood).\n    Send to HKCH within 3 working days.\n    \n    Details: <a href=\"https://cvpnhocffbnk7wfj2zi54zsh67kvsqw4rgetz6ixjcbnlfldlec6tt2xa.remote.ha.org.hk/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\">https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\n</a>\n \n\n\n\n\n\n&nbsp; &nbsp; &nbsp; &nbsp;"
+							"text": " Acknowledge\n  and store at 4°C. Send primary sample (whole blood).\n    Send to HKCH within 3 working days.\n    \n    Details: <a href=\"https://cvpnhbw4q3qvxhmpyfol5gg53w7wiv5fgyqtv7oaeheokh5lcu7w7gfbq.remote.ha.org.hk/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\">https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\n</a>\n \n\n\n\n\n\n&nbsp; &nbsp; &nbsp; &nbsp;"
 						}
 					}
 				],
@@ -99855,7 +99855,7 @@
 						"id": "HguMYQym2r",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -99925,7 +99925,7 @@
 						"id": "2q8Ck7_yfD",
 						"type": "paragraph",
 						"data": {
-							"text": "Details: <a href=\"https://cvpnhocffbnk7wfj2zi54zsh67kvsqw4rgetz6ixjcbnlfldlec6tt2xa.remote.ha.org.hk/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\">https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25</a>"
+							"text": "Details: <a href=\"https://cvpnhbw4q3qvxhmpyfol5gg53w7wiv5fgyqtv7oaeheokh5lcu7w7gfbq.remote.ha.org.hk/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\">https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25</a>"
 						}
 					}
 				],
@@ -100078,7 +100078,7 @@
 						"id": "hwBCLruINz",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -100141,14 +100141,14 @@
 						"id": "KfyrMSmaSf",
 						"type": "paragraph",
 						"data": {
-							"text": "Guideline for DBS collection: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/~XXR5S\">https://hateams.home/~XXR5S</a>"
+							"text": "Guideline for DBS collection: <a href=\"https://hateams.home/~XXR5S\">https://hateams.home/~XXR5S</a>"
 						}
 					},
 					{
 						"id": "PmSgoiPSvG",
 						"type": "paragraph",
 						"data": {
-							"text": "Details: <a href=\"https://cvpne4h5vbojpjxyi7pao4gki2hwu.remote.ha.org.hk/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\">https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25</a>"
+							"text": "Details: <a href=\"https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\">https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25</a>"
 						}
 					}
 				],
@@ -100293,7 +100293,7 @@
 						"id": "oDCWHdLLCC",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -100356,7 +100356,7 @@
 						"id": "Zdq9lHIlPX",
 						"type": "paragraph",
 						"data": {
-							"text": "Details: <a href=\"https://cvpnhocffbnk7wfj2zi54zsh67kvsqw4rgetz6ixjcbnlfldlec6tt2xa.remote.ha.org.hk/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\">https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25</a>"
+							"text": "Details: <a href=\"https://cvpnhbw4q3qvxhmpyfol5gg53w7wiv5fgyqtv7oaeheokh5lcu7w7gfbq.remote.ha.org.hk/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25\">https://hkchapp/labmanual/?lab=&amp;keyword=sids&amp;gvTests_length=25</a>"
 						}
 					}
 				],
@@ -102570,7 +102570,7 @@
 						"id": "O8YhnDPo5U",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link:&nbsp;<a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link:&nbsp;<a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -102746,7 +102746,7 @@
 						"id": "qHGT6K6U68",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link:&nbsp;<a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation are avaiable in the following link:&nbsp;<a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					},
 					{
@@ -106915,7 +106915,7 @@
 						"id": "leCytggT4F",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -107079,7 +107079,7 @@
 						"id": "mpeXqMwW31",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -108740,7 +108740,7 @@
 						"id": "sUoQo8j3yC",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -109269,7 +109269,7 @@
 						"id": "67KZxf1SSv",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -109543,7 +109543,7 @@
 						"id": "y_je2UBfCS",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -110123,7 +110123,7 @@
 						"id": "SKDnkzd8ty",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Genetic and Genomic Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Genetic and Genomic Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -111620,7 +111620,7 @@
 						"id": "rhV22P5yxv",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpnhccfq26qzorf2722a2crf324d5fmaq3mofiqkoap73b4yxgchapiq.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://cvpneeshxpoh5vu7lkxlz455k7w6e.remote.ha.org.hk/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -112104,7 +112104,7 @@
 						"id": "PaD9LYwkNU",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://cvpne4h5vbojpjxyi7pae62my2a6xb2zz6clf.remote.ha.org.hk/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
