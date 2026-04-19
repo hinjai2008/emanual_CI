@@ -310,5 +310,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260414T184220Z_req-1776192125522.json",
     "contentSha256": "d2e306c5bfb61166a7b286536f7c5529f0df12b16191fd3610e7fac3bed30452",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24416682665"
+  },
+  {
+    "versionId": "20260419T205141Z_req-1776631880755",
+    "publishedAt": "2026-04-19T20:51:41.210Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1776631880755",
+    "sourceRef": "main",
+    "summary": "Changed EDTA name, QMH IMM synonyms",
+    "editTraceCount": 75,
+    "snapshotPath": "content-versions/snapshots/2026/20260419T205141Z_req-1776631880755.json",
+    "contentSha256": "067b4cd17b5b796e1c06a9ef8b02a0b0a8cde72850357c52b67d0c343f2cda4c",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24638850606"
   }
 ]

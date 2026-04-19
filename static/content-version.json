@@ -1,13 +1,13 @@
 {
-  "versionId": "20260414T184220Z_req-1776192125522",
-  "requestId": "req-1776192125522",
-  "publishedAt": "2026-04-14T18:42:20.454Z",
+  "versionId": "20260419T205141Z_req-1776631880755",
+  "requestId": "req-1776631880755",
+  "publishedAt": "2026-04-19T20:51:41.210Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "Unhide amylase",
-  "editTraceCount": 1,
-  "snapshotPath": "content-versions/snapshots/2026/20260414T184220Z_req-1776192125522.json",
-  "contentSha256": "7ce78d845a5a29e274b04e1cc058be7f541db0edc6a3c8d9e9e7d9d9aa4de741",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24539155209",
+  "summary": "Changed EDTA name, QMH IMM synonyms",
+  "editTraceCount": 75,
+  "snapshotPath": "content-versions/snapshots/2026/20260419T205141Z_req-1776631880755.json",
+  "contentSha256": "68765a927197997d0e1b0761ea91c1f8a0ec00ef8d29296a7a0a08b4e0fa1087",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24638850606",
   "environment": "predeploy"
 }
