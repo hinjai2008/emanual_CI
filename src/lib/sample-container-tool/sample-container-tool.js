@@ -203,7 +203,71 @@ export default class SampleContainerTool {
         };
 
         cardBody.appendChild(cardText);
-        cardBody.appendChild(image);
+
+        if (!editable && !image.classList.contains('d-none')) {
+            const modalId = 'containerEnlargeModal' + Math.floor(Math.random() * 10000000);
+
+            const modal = document.createElement('div');
+            modal.classList.add('modal', 'fade');
+            modal.id = modalId;
+            modal.tabIndex = -1;
+            modal.setAttribute('aria-hidden', 'true');
+
+            const modalDialog = document.createElement('div');
+            modalDialog.classList.add('modal-dialog', 'modal-dialog-centered', 'modal-lg');
+
+            const modalContent = document.createElement('div');
+            modalContent.classList.add('modal-content');
+
+            const modalHeader = document.createElement('div');
+            modalHeader.classList.add('modal-header', 'border-0', 'pb-0');
+
+            const closeButton = document.createElement('button');
+            closeButton.type = 'button';
+            closeButton.classList.add('btn-close');
+            closeButton.setAttribute('data-bs-dismiss', 'modal');
+            closeButton.setAttribute('aria-label', 'Close');
+
+            modalHeader.appendChild(closeButton);
+
+            const modalBody = document.createElement('div');
+            modalBody.classList.add('modal-body', 'text-center', 'p-3');
+
+            const enlargedImage = document.createElement('img');
+            enlargedImage.src = image.src;
+            enlargedImage.style.maxWidth = '100%';
+            enlargedImage.style.maxHeight = '80vh';
+            enlargedImage.style.objectFit = 'contain';
+            enlargedImage.alt = image.alt || 'Container image';
+
+            modalBody.appendChild(enlargedImage);
+            modalContent.appendChild(modalHeader);
+            modalContent.appendChild(modalBody);
+            modalDialog.appendChild(modalContent);
+            modal.appendChild(modalDialog);
+            document.body.appendChild(modal);
+
+            const imageWrapper = document.createElement('div');
+            imageWrapper.style.position = 'relative';
+            imageWrapper.style.display = 'block';
+
+            const enlargeButton = document.createElement('button');
+            enlargeButton.type = 'button';
+            enlargeButton.classList.add('btn', 'btn-sm', 'btn-light', 'position-absolute', 'top-0', 'end-0', 'm-1');
+            enlargeButton.style.opacity = '0.85';
+            enlargeButton.style.zIndex = '2';
+            enlargeButton.title = 'Enlarge image';
+            enlargeButton.setAttribute('data-bs-toggle', 'modal');
+            enlargeButton.setAttribute('data-bs-target', '#' + modalId);
+            enlargeButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><g id="Complete"><g id="expand"><g><polyline data-name="Right" fill="none" id="Right-2" points="3 17.3 3 21 6.7 21" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="10" x2="3.8" y1="14" y2="20.2"/><line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="14" x2="20.2" y1="10" y2="3.8"/><polyline data-name="Right" fill="none" id="Right-3" points="21 6.7 21 3 17.3 3" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g></g></svg>`;
+
+            imageWrapper.appendChild(image);
+            imageWrapper.appendChild(enlargeButton);
+            cardBody.appendChild(imageWrapper);
+        } else {
+            cardBody.appendChild(image);
+        }
+
         card.appendChild(cardBody);
 
         return card;

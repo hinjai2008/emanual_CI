@@ -26,6 +26,15 @@ function toSynonyms(field) {
   return list.join(' ');
 }
 
+function toSynonymsList(field) {
+  if (!field || !Array.isArray(field.blocks) || field.blocks.length === 0) {
+    return [];
+  }
+
+  const list = field.blocks[0]?.data?.synonymList;
+  return Array.isArray(list) ? list : [];
+}
+
 function toCategoryCodes(field) {
   if (!field || !Array.isArray(field.blocks)) {
     return [];
@@ -43,6 +52,7 @@ function buildIndex(rawData) {
     GCRS_name: toTextBlocks(test.GCRS_name),
     short_name: toTextBlocks(test.label_name),
     synonyms: toSynonyms(test.synonyms),
+    synonymsList: toSynonymsList(test.synonyms),
     editType: '',
     categoryCodes: toCategoryCodes(test.lab_and_category)
   }));
@@ -63,6 +73,7 @@ function buildIndex(rawData) {
     GCRS_name: '',
     short_name: toTextBlocks(container.code),
     synonyms: toSynonyms(container.synonyms),
+    synonymsList: toSynonymsList(container.synonyms),
     editType: '',
     categoryCodes: []
   }));

@@ -438,6 +438,7 @@
           
             
           result.synonyms = synonymsList.join(' ');
+          result.synonymsList = synonymsList;
 
         }
         if (test.full_name.blocks === undefined) {
@@ -528,6 +529,7 @@
         } else {
           let synonymsList = container.synonyms.blocks[0].data.synonymList;
           result.synonyms = synonymsList.join(' ');
+          result.synonymsList = synonymsList;
         }
 
         return result
@@ -989,9 +991,21 @@
       if (!foundItem) {
         return null;
       }
+
+      const synonymTokens = Object.keys(result.matchData.metadata).filter(
+        token => 'synonyms' in result.matchData.metadata[token]
+      );
+      let matchedSynonym = null;
+      if (synonymTokens.length > 0 && Array.isArray(foundItem.synonymsList) && foundItem.synonymsList.length > 0) {
+        matchedSynonym = foundItem.synonymsList.find(syn =>
+          synonymTokens.some(token => syn.toLowerCase().includes(token.toLowerCase()))
+        ) || null;
+      }
+
       return {
         ...foundItem,
-        score: result.score
+        score: result.score,
+        matchedSynonym
       };
     });
 
@@ -1789,6 +1803,9 @@
               </div>
             </div>
             <div class="col-10 mb-1 small">{resultDetails.short_name}</div>
+            {#if resultDetails.matchedSynonym}
+            <div class="col-10 mb-1 small text-muted fst-italic">Synonym: <u>{resultDetails.matchedSynonym}</u></div>
+            {/if}
           </a>
           
         {/each}
