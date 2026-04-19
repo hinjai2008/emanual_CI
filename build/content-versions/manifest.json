@@ -322,5 +322,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260419T205141Z_req-1776631880755.json",
     "contentSha256": "067b4cd17b5b796e1c06a9ef8b02a0b0a8cde72850357c52b67d0c343f2cda4c",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24638850606"
+  },
+  {
+    "versionId": "20260419T214050Z_req-1776634835788",
+    "publishedAt": "2026-04-19T21:40:50.925Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1776634835788",
+    "sourceRef": "main",
+    "summary": "synonyms in search bar, enlarge container images; added TSHR",
+    "editTraceCount": 2,
+    "snapshotPath": "content-versions/snapshots/2026/20260419T214050Z_req-1776634835788.json",
+    "contentSha256": "c898a4ac2ace2d14519523c49912cd6de376eb0a4d2bec52fffb0ba377235285",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24639783308"
   }
 ]
