@@ -7,7 +7,7 @@
   "summary": "synonyms in search bar, enlarge container images; added TSHR",
   "editTraceCount": 2,
   "snapshotPath": "content-versions/snapshots/2026/20260419T214050Z_req-1776634835788.json",
-  "contentSha256": "ddafd155fe5f1407c45de8aac0325a81ef84de608d83c220aa814aec78323558",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24639783308",
+  "contentSha256": "d8b9fb6e2e32e94072f47022b727914e453581328e2ce4f8440e8669679ef568",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/24640638252",
   "environment": "predeploy"
 }
