@@ -13,6 +13,7 @@
     import TestFormTool from './test-form/test-form';
     import LabSelectionTool from './labSelectionTool/labSelectionTool';
     import ReferToTool from './refer-to/refer-to';
+    import { formChangePropagation, containerChangePropagation } from './changePropagation.js';
     import { afterNavigate, beforeNavigate, onNavigate } from "$app/navigation";
     import { concurrentEditLock } from "../routes/stores";
     import "$lib/hideParagraphTool.css";
@@ -360,6 +361,19 @@
             }
 
 
+            const FORM_PROPAGATED_FIELDS = ['form_link', 'form_external_link', 'form_name', 'form_code'];
+            const CONTAINER_PROPAGATED_FIELDS = ['imageSrc'];
+            const willPropagate =
+                (datatype === 'formData' && entryData?.refId && FORM_PROPAGATED_FIELDS.includes(rowName)) ||
+                (datatype === 'containerData' && entryData?.refId && CONTAINER_PROPAGATED_FIELDS.includes(rowName));
+
+            if (willPropagate) {
+                const entityLabel = datatype === 'formData' ? 'form' : 'container';
+                if (!window.confirm(`Saving "${rowName}" will automatically update this field in all test entries that reference this ${entityLabel}. Proceed?`)) {
+                    return; // abort save, editor stays in editing mode
+                }
+            }
+
             let editedJSON_copy = $editedJSON;
             editedJSON_copy[datatype].map((editedTest) => {
                 if (editedTest.id.toString() === page.params.id) {
@@ -370,6 +384,12 @@
             });
             editor.readOnly.toggle();
             isEditing = false;
+            if (datatype === 'formData' && entryData?.refId && FORM_PROPAGATED_FIELDS.includes(rowName)) {
+                formChangePropagation(entryData.refId, rowName, outputData);
+            }
+            if (datatype === 'containerData' && entryData?.refId && CONTAINER_PROPAGATED_FIELDS.includes(rowName)) {
+                containerChangePropagation(entryData.refId, rowName, outputData);
+            }
             if(entryData) {
                 $globalFunctions.updateEditTrace(datatype, page.params.id, null, "modify", rowName, entryData[rowName], outputData);
             }
