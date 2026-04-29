@@ -346,5 +346,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260429T215510Z_req-1777499694715.json",
     "contentSha256": "87b50b7a080ab11b4b9be568663c10deecfd5f92632a556ee3bf6ccb12d8483c",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/25135912280"
+  },
+  {
+    "versionId": "20260429T225907Z_req-1777503527354",
+    "publishedAt": "2026-04-29T22:59:07.535Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1777503527354",
+    "sourceRef": "main",
+    "summary": "CTNG",
+    "editTraceCount": 2,
+    "snapshotPath": "content-versions/snapshots/2026/20260429T225907Z_req-1777503527354.json",
+    "contentSha256": "7cc0c88f507a019b487560173471b57bda8b9f40a90200a51cab78499f8c4bb6",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/25138220668"
   }
 ]
