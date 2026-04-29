@@ -1,6 +1,53 @@
 {
 	"config": {
-		"editTrace": [],
+		"editTrace": [
+			{
+				"dataType": "containerData",
+				"dataId": "34",
+				"refId": null,
+				"editType": "modify",
+				"field": "imageSrc",
+				"originalValue": {
+					"time": 1773555519477,
+					"blocks": [
+						{
+							"id": "2RXlbDYtr2",
+							"type": "imageSrc",
+							"data": {
+								"imageSrc": ""
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1777503169395,
+					"blocks": [
+						{
+							"id": "gdLDDuovEJ",
+							"type": "imageSrc",
+							"data": {
+								"imageSrc": "/salivary cortisol container.jpg"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "Sarstedt Salivette Cortisol (Saliva Collection)",
+				"timestamp": "2026-04-29T22:52:50.675Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 983,
+				"refId": 36553272,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 983",
+				"timestamp": "2026-04-29T22:53:24.650Z"
+			}
+		],
 		"category": [
 			{
 				"code": "CHEM",
