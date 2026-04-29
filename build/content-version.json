@@ -7,7 +7,7 @@
   "summary": "CTNG",
   "editTraceCount": 2,
   "snapshotPath": "content-versions/snapshots/2026/20260429T225907Z_req-1777503527354.json",
-  "contentSha256": "5d3c832f2b6051282e96b6863754a4905975fd1a237492af70e70aefaf9db5d5",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/25138220668",
+  "contentSha256": "101508a7d33ae67bc227382f4dc6db185035d3c89d6821671073fe8fee006e35",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/25138469817",
   "environment": "predeploy"
 }
