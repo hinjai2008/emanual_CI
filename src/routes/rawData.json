@@ -1,6 +1,53 @@
 {
 	"config": {
-		"editTrace": [],
+		"editTrace": [
+			{
+				"dataType": "containerData",
+				"dataId": "34",
+				"refId": null,
+				"editType": "modify",
+				"field": "imageSrc",
+				"originalValue": {
+					"time": 1773555519477,
+					"blocks": [
+						{
+							"id": "2RXlbDYtr2",
+							"type": "imageSrc",
+							"data": {
+								"imageSrc": ""
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1777503169395,
+					"blocks": [
+						{
+							"id": "gdLDDuovEJ",
+							"type": "imageSrc",
+							"data": {
+								"imageSrc": "/salivary cortisol container.jpg"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "Sarstedt Salivette Cortisol (Saliva Collection)",
+				"timestamp": "2026-04-29T22:52:50.675Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 983,
+				"refId": 36553272,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 983",
+				"timestamp": "2026-04-29T22:53:24.650Z"
+			}
+		],
 		"category": [
 			{
 				"code": "CHEM",
@@ -4435,13 +4482,13 @@
 				"version": "2.31.0-rc.7"
 			},
 			"imageSrc": {
-				"time": 1773555519477,
+				"time": 1777503169395,
 				"blocks": [
 					{
-						"id": "2RXlbDYtr2",
+						"id": "gdLDDuovEJ",
 						"type": "imageSrc",
 						"data": {
-							"imageSrc": ""
+							"imageSrc": "/salivary cortisol container.jpg"
 						}
 					}
 				],
@@ -5352,7 +5399,7 @@
 						"id": "p8QyO8Mgl0",
 						"type": "paragraph",
 						"data": {
-							"text": "Keep at 4 degree C"
+							"text": "Keep at 4 °C"
 						}
 					}
 				],
@@ -5641,7 +5688,7 @@
 						"id": "RfWKl_kbXe",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://kccasp01/labmanual\" target=\"_blank\" rel=\"noopener noreferrer\">QEH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are available  in the following link: <a href=\"https://kccasp01/labmanual\" target=\"_blank\" rel=\"noopener noreferrer\">QEH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -5984,7 +6031,7 @@
 						"id": "cgUHj-VO8H",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6165,7 +6212,7 @@
 						"id": "o1CwamZPaO",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&\" target=\"_blank\" rel=\"noopener noreferrer\">https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&</a>"
+							"text": "Additional information and guidelines on patient preparation are available  in the following link: <a href=\"https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&\" target=\"_blank\" rel=\"noopener noreferrer\">https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&</a>"
 						}
 					}
 				],
@@ -6454,7 +6501,7 @@
 						"id": "FuFe9zRk90",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6615,7 +6662,7 @@
 						"id": "gy7rmrJi0Q",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation and specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation and specimen collection are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -6871,7 +6918,7 @@
 						"id": "_Hrly3YzRm",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -7352,7 +7399,7 @@
 						"id": "f_kzNX9clj",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton & endorsement are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -8550,7 +8597,7 @@
 						"id": "76Hk0ML46r",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -8754,7 +8801,7 @@
 						"id": "AKwQLjP9cw",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -8991,7 +9038,7 @@
 						"id": "W9VjNGHk4g",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -9033,7 +9080,7 @@
 						"id": "0x56VzxSuJ",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknoledge and store at room temperature. DO NOT REFRIGERATE OR FREEZE"
+							"text": "Acknowledge and store at room temperature. DO NOT REFRIGERATE OR FREEZE"
 						}
 					}
 				],
@@ -10122,7 +10169,7 @@
 						"id": "JhScur1-bT",
 						"type": "paragraph",
 						"data": {
-							"text": "Send specimen to core lab immediately (on 4 degree C ice pack)."
+							"text": "Send specimen to core lab immediately (on 4 °C ice pack)."
 						}
 					}
 				],
@@ -10289,7 +10336,7 @@
 						"id": "foCkdzwYbu",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -10495,7 +10542,7 @@
 						"id": "JkCrBF4VJ0",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -10691,7 +10738,7 @@
 						"id": "I1t3j6mONP",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -11018,7 +11065,7 @@
 						"id": "ru40I-myMj",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -12296,7 +12343,7 @@
 						"id": "ese66VWTYb",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -12410,7 +12457,7 @@
 						"id": "9rJ7OFerHb",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -12569,7 +12616,7 @@
 						"id": "s5TKr6MNJ3",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
 						}
 					}
 				],
@@ -12746,7 +12793,7 @@
 						"id": "SSne2QppHc",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -13079,7 +13126,7 @@
 						"id": "v1JPtpRDhO",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -13861,7 +13908,7 @@
 						"id": "Ih80Hi1y2b",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -14207,7 +14254,7 @@
 						"id": "bbYj7Uf3AA",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 1 specimen lablel. Place it into the designated box. Store the sample at 4°C"
+							"text": "Acknowledge and print 1 specimen labell. Place it into the designated box. Store the sample at 4°C"
 						}
 					}
 				],
@@ -14363,7 +14410,7 @@
 						"id": "8t9IiT8Ozg",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge\n  and print 2 specimen lables. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;"
+							"text": "Acknowledge\n  and print 2 specimen labels. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;"
 						}
 					}
 				],
@@ -14526,7 +14573,7 @@
 						"id": "-mYP_d6aDX",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge\n  and print 2 specimen lables. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;"
+							"text": "Acknowledge\n  and print 2 specimen labels. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;"
 						}
 					}
 				],
@@ -14689,7 +14736,7 @@
 						"id": "JgNTCTyxhU",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge\n  and print 2 specimen lables. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;"
+							"text": "Acknowledge\n  and print 2 specimen labels. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;"
 						}
 					}
 				],
@@ -15175,7 +15222,7 @@
 						"id": "pRlMopM5KJ",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
 						}
 					}
 				],
@@ -15297,7 +15344,7 @@
 						"id": "UU3qK6YZMr",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -15471,7 +15518,7 @@
 						"id": "wJG13JhlxZ",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -15652,7 +15699,7 @@
 						"id": "Tmg8HTjc3e",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -16044,7 +16091,7 @@
 						"id": "WMPFeGRdke",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
 						}
 					}
 				],
@@ -16214,7 +16261,7 @@
 						"id": "6lvLUjUo5P",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -16323,7 +16370,7 @@
 						"id": "91_KMRihKT",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -17800,7 +17847,7 @@
 						"id": "L9G_HKcNS2",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -17978,7 +18025,7 @@
 						"id": "2IMwuFP5gK",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 1 specimen lable. Place it into the designated box."
+							"text": "Acknowledge and print 1 specimen label. Place it into the designated box."
 						}
 					},
 					{
@@ -18618,7 +18665,7 @@
 						"id": "3brbyGX1ya",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -18776,7 +18823,7 @@
 						"id": "QZEnuHSPDT",
 						"type": "paragraph",
 						"data": {
-							"text": "Send specimen to core lab immediately (on 4C°ice pack)."
+							"text": "Send specimen to core lab immediately (on 4°Cice pack)."
 						}
 					},
 					{
@@ -19389,7 +19436,7 @@
 						"id": "H-guab6el3",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -19422,7 +19469,7 @@
 						"id": "h3Yl2SSOcT",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknoledge and store at room temperature. DO NOT REFRIGERATE OR FREEZE"
+							"text": "Acknowledge and store at room temperature. DO NOT REFRIGERATE OR FREEZE"
 						}
 					}
 				],
@@ -19646,7 +19693,7 @@
 						"id": "jsd311phMT",
 						"type": "paragraph",
 						"data": {
-							"text": "FRESH sample so MUST be received before 9:30 am on Mon to Fri. Collect sample with request form and inform counter. Acknowledge and send primary sample"
+							"text": "FRESH sample so MUST be received before 9:30 am on Mon to Fri.Inform counter. Acknowledge and send primary sample"
 						}
 					}
 				],
@@ -19765,7 +19812,7 @@
 						"id": "thgMY8gNkY",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -19969,7 +20016,7 @@
 						"id": "ABC123DEF4",
 						"type": "paragraph",
 						"data": {
-							"text": "Wrap with 4 degree C ice-pack and send to lab immediately"
+							"text": "Wrap with 4 °C ice-pack and send to lab immediately"
 						}
 					}
 				],
@@ -20659,7 +20706,7 @@
 						"id": "WA_OV4ddBz",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -21253,7 +21300,7 @@
 						"id": "-5E5zMO611",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -22203,7 +22250,7 @@
 						"id": "jTLuUzuKtB",
 						"type": "paragraph",
 						"data": {
-							"text": "Send specimen to core lab immediately (on 4 degree C ice pack)."
+							"text": "Send specimen to core lab immediately (on 4 °C ice pack)."
 						}
 					},
 					{
@@ -22751,7 +22798,7 @@
 						"id": "NT4-yZflGE",
 						"type": "paragraph",
 						"data": {
-							"text": "Wrap with 4 degree C ice-pack and send to lab immediately"
+							"text": "Wrap with 4 °C ice-pack and send to lab immediately"
 						}
 					}
 				],
@@ -23039,7 +23086,7 @@
 						"id": "LsuwvyMjoM",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -23127,7 +23174,7 @@
 						"id": "Wzf69cB44_",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and send primary sample at 4 degree C&nbsp;&nbsp;"
+							"text": "Acknowledge and send primary sample at 4 °C&nbsp;&nbsp;"
 						}
 					}
 				],
@@ -23240,7 +23287,7 @@
 						"id": "sTb_0ixiSn",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -23315,7 +23362,7 @@
 						"id": "jLSKVIAlkA",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and send primary sample at 4 degree C"
+							"text": "Acknowledge and send primary sample at 4 °C"
 						}
 					}
 				],
@@ -24218,7 +24265,7 @@
 						"id": "30qdPqhmvA",
 						"type": "paragraph",
 						"data": {
-							"text": "The average TAT of direct detection tests (including microscopy, antigen detection and nucleic acid detection) is 1 working working day and the frequency of testing is twice per week.}."
+							"text": "The average TAT of direct detection tests (including microscopy, antigen detection and nucleic acid detection) is 1 working day and the frequency of testing is twice per week.}."
 						}
 					}
 				],
@@ -25631,14 +25678,14 @@
 						"id": "QZEnuHSPDT",
 						"type": "paragraph",
 						"data": {
-							"text": "Test available to MG, Surgical, Oncology, Paediatric."
+							"text": "Test availabel to MG, Surgical, Oncology, Paediatric."
 						}
 					},
 					{
 						"id": "gHhPNcwD0h",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -28716,7 +28763,7 @@
 						"id": "O5d0QPP2E5",
 						"type": "paragraph",
 						"data": {
-							"text": "Send specimen to core lab immediately (on 4C°ice pack). (Book test with Duty Biochemist for prolonged fasting test)"
+							"text": "Send specimen to core lab immediately (on 4°Cice pack). (Book test with Duty Biochemist for prolonged fasting test)"
 						}
 					}
 				],
@@ -29835,7 +29882,7 @@
 						"id": "hlNxIyBKdC",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -30266,7 +30313,7 @@
 						"id": "-eNdt_leDP",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -30551,7 +30598,7 @@
 						"id": "QZEnuHSPDT",
 						"type": "paragraph",
 						"data": {
-							"text": "\"Cystatin C and eGFR cystatin C” or “Cystatin C and eGFR Cr-CysC” is also available"
+							"text": "\"Cystatin C and eGFR cystatin C” or “Cystatin C and eGFR Cr-CysC” is also availabel"
 						}
 					}
 				],
@@ -33262,7 +33309,7 @@
 						"id": "3bwCHi5wu6",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -36841,7 +36888,7 @@
 						"id": "PEB29H9LNR",
 						"type": "paragraph",
 						"data": {
-							"text": "Please refer to the “Instruction for Faecal Occult Blood Testing” available at <a href=\"https://cvpnhd7jme6efg6v6qcgnsrdqsnhunyqp4cmm3bvmxvfrw77hdob7ru2a.remote.ha.org.hk/Chempath\">http://kwcpath.home/Chempath</a> for details."
+							"text": "Please refer to the “Instruction for Faecal Occult Blood Testing” availabel at <a href=\"https://cvpnhd7jme6efg6v6qcgnsrdqsnhunyqp4cmm3bvmxvfrw77hdob7ru2a.remote.ha.org.hk/Chempath\">http://kwcpath.home/Chempath</a> for details."
 						}
 					}
 				],
@@ -37589,7 +37636,7 @@
 						"id": "lMYVL_ULl5",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -37622,7 +37669,7 @@
 						"id": "h-Gh668LBc",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknoledge and store at room temperature. DO NOT REFRIGERATE OR FREEZE"
+							"text": "Acknowledge and store at room temperature. DO NOT REFRIGERATE OR FREEZE"
 						}
 					}
 				],
@@ -38685,7 +38732,7 @@
 						"id": "8FtDNbFSf3",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -39022,7 +39069,7 @@
 						"id": "30qdPqhmvA",
 						"type": "paragraph",
 						"data": {
-							"text": "4 working working days"
+							"text": "4 working days"
 						}
 					}
 				],
@@ -41616,7 +41663,7 @@
 						"id": "_N4KBdsVUK",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -41773,7 +41820,7 @@
 						"id": "hiqYqRRDJi",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -42076,7 +42123,7 @@
 						"id": "y_KqeqgE7L",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -43761,7 +43808,7 @@
 						"id": "30qdPqhmvA",
 						"type": "paragraph",
 						"data": {
-							"text": "14 working working days"
+							"text": "14 working days"
 						}
 					}
 				],
@@ -44022,7 +44069,7 @@
 						"id": "44bzihiZ_S",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -47289,7 +47336,7 @@
 						"id": "dtrG_E_bgn",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -49345,7 +49392,7 @@
 						"id": "ixXBc7VFmt",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -49509,7 +49556,7 @@
 						"id": "QZEnuHSPDT",
 						"type": "paragraph",
 						"data": {
-							"text": "Send on 4C°ice pack"
+							"text": "Send on 4°Cice pack"
 						}
 					},
 					{
@@ -49743,7 +49790,7 @@
 						"id": "W0zD9gq-Q8",
 						"type": "paragraph",
 						"data": {
-							"text": "Wrap with 4 degree C ice-pack and send to lab immediately"
+							"text": "Wrap with 4 °C ice-pack and send to lab immediately"
 						}
 					}
 				],
@@ -50098,7 +50145,7 @@
 						"id": "FJMqeZg5zU",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -51793,7 +51840,7 @@
 						"id": "vdb0_JJfUs",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://hkwc.home/webapps/Dept/CBIO/pages/labmanual.html\" target=\"_blank\" rel=\"noopener noreferrer\">QMH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are available  in the following link: <a href=\"https://hkwc.home/webapps/Dept/CBIO/pages/labmanual.html\" target=\"_blank\" rel=\"noopener noreferrer\">QMH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -53098,7 +53145,7 @@
 						"id": "shjxZzzDTs",
 						"type": "paragraph",
 						"data": {
-							"text": "Make sure PAIRED samples are received before acknowledge.\nFor CSF, acknowledge and print 1 specimen label. Place it into the designated box. Store the sample at 4°C\nFor blood, acknowledge and print 2 specimen lables. Place one label into the designated box. Aliquot serum and keep at -20°C"
+							"text": "Make sure PAIRED samples are received before acknowledge.\nFor CSF, acknowledge and print 1 specimen label. Place it into the designated box. Store the sample at 4°C\nFor blood, acknowledge and print 2 specimen labels. Place one label into the designated box. Aliquot serum and keep at -20°C"
 						}
 					}
 				],
@@ -53965,7 +54012,7 @@
 						"id": "vMo3qoDda-",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box."
 						}
 					},
 					{
@@ -54916,7 +54963,7 @@
 						"id": "VQlPCWozOq",
 						"type": "paragraph",
 						"data": {
-							"text": "Wrap with 4 degree C ice-pack and send to lab immediately"
+							"text": "Wrap with 4 °C ice-pack and send to lab immediately"
 						}
 					}
 				],
@@ -55926,7 +55973,7 @@
 						"id": "GlcgIV0xJV",
 						"type": "paragraph",
 						"data": {
-							"text": "Centrifuge the specimen, aliquot serum and keep the serum frozen (-20 degree Celsius)"
+							"text": "Centrifuge the specimen, aliquot serum and keep the serum frozen (-20 °Celsius)"
 						}
 					}
 				],
@@ -56192,7 +56239,7 @@
 						"id": "4m_a9LLij_",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton &amp; endorsement are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -58483,7 +58530,7 @@
 						"id": "30qdPqhmvA",
 						"type": "paragraph",
 						"data": {
-							"text": "10 working working days"
+							"text": "10 working days"
 						}
 					}
 				],
@@ -58503,7 +58550,7 @@
 						"id": "NzHQ_KV99M",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation and specimen collection are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation and specimen collection are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -62196,7 +62243,7 @@
 						"id": "ZLhZsnkhP0",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge\n  and print 2 specimen lables. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C\n    \n\n \n\n\n\n\n\n"
+							"text": "Acknowledge\n  and print 2 specimen labels. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C\n    \n\n \n\n\n\n\n\n"
 						}
 					}
 				],
@@ -67753,7 +67800,7 @@
 						"id": "odTL2Z--jb",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/cmc-path/\" target=\"_blank\" rel=\"noopener noreferrer\">CMC Core Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, and test requirements are available  in the following link: <a href=\"https://hateams.home/knowledge/group/cmc-path/\" target=\"_blank\" rel=\"noopener noreferrer\">CMC Core Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -74936,7 +74983,7 @@
 						"id": "Xyb-NZNeho",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge\n  and print 2 specimen lables. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  plasma to 5ml tube nd keep at -20 °C.\n"
+							"text": "Acknowledge\n  and print 2 specimen labels. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  plasma to 5ml tube nd keep at -20 °C.\n"
 						}
 					},
 					{
@@ -75978,7 +76025,7 @@
 						"id": "kp5NqFsd68",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -76445,7 +76492,7 @@
 						"id": "C1KANav1i8",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -76597,7 +76644,7 @@
 						"id": "IAqRWcLrtY",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -76744,7 +76791,7 @@
 						"id": "6spOk97fdz",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -77074,7 +77121,7 @@
 						"id": "ClUn2LRqXs",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -77226,7 +77273,7 @@
 						"id": "4F0gE4IuN_",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
 						}
 					}
 				],
@@ -77413,7 +77460,7 @@
 						"id": "lihXHRMLsp",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -77580,7 +77627,7 @@
 						"id": "VWjolijdYt",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge\n  and print 2 specimen lables. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;"
+							"text": "Acknowledge\n  and print 2 specimen labels. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;"
 						}
 					}
 				],
@@ -78079,7 +78126,7 @@
 						"id": "TISYdMxBOO",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -78231,7 +78278,7 @@
 						"id": "kXQa0ELg8C",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
 						}
 					}
 				],
@@ -78548,7 +78595,7 @@
 						"id": "NNHTZAWzg6",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -78700,7 +78747,7 @@
 						"id": "8UoNu0o87O",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -78852,7 +78899,7 @@
 						"id": "P7JGYOX4la",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -79004,7 +79051,7 @@
 						"id": "YF74N8m7cN",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -79163,7 +79210,7 @@
 						"id": "a88fF3t6fJ",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -80352,7 +80399,7 @@
 						"id": "l4FNA2aA3y",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge\n  and print 2 specimen lables. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;"
+							"text": "Acknowledge\n  and print 2 specimen labels. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;"
 						}
 					}
 				],
@@ -81468,7 +81515,7 @@
 						"id": "1gyF2Rx8xw",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -81620,7 +81667,7 @@
 						"id": "KFiBSFXyJL",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -81772,7 +81819,7 @@
 						"id": "YnJQvFfaj3",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -82076,7 +82123,7 @@
 						"id": "roALpxSmHg",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -82228,7 +82275,7 @@
 						"id": "nrhHzTN12Q",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -83378,7 +83425,7 @@
 						"id": "4sazcTbKl1",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 1 specimen label for aliquoting. Store at -20 degree C"
+							"text": "Acknowledge and print 1 specimen label for aliquoting. Store at -20 °C"
 						}
 					}
 				],
@@ -84675,7 +84722,7 @@
 						"id": "ATh4FOiXw8",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -84901,7 +84948,7 @@
 						"id": "bFA6g2GbT0",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -85127,7 +85174,7 @@
 						"id": "2hel6qiLm-",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -85353,7 +85400,7 @@
 						"id": "5nPYJi2aEU",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\">PMH Chem Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on patient preparation, specimen collection, test requirements, and consultaiton &amp; endorsement are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\">PMH Chem Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -85607,7 +85654,7 @@
 						"id": "gClcKqAvO4",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form. May request in conjuction with the test, P1NP. Aliquot serum in tube. Registsration done in Counter."
+							"text": "May request in conjunction with the test, P1NP. Aliquot serum in tube. Registsration done in Counter."
 						}
 					}
 				],
@@ -85735,7 +85782,7 @@
 						"id": "0ZpgorINFW",
 						"type": "paragraph",
 						"data": {
-							"text": "“Cystatin C and eGFR cystatin C” or “Cystatin C and eGFR Cr-CysC” is also available"
+							"text": "“Cystatin C and eGFR cystatin C” or “Cystatin C and eGFR Cr-CysC” is also availabel"
 						}
 					},
 					{
@@ -85902,7 +85949,7 @@
 						"id": "Gdr547LkyG",
 						"type": "paragraph",
 						"data": {
-							"text": "\"Cystatin C and eGFR cystatin C” or “Cystatin C and eGFR Cr-CysC” is also available"
+							"text": "\"Cystatin C and eGFR cystatin C” or “Cystatin C and eGFR Cr-CysC” is also availabel"
 						}
 					}
 				],
@@ -86095,7 +86142,7 @@
 						"id": "xaQUccUBMB",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -86249,7 +86296,7 @@
 						"id": "L-TkbneaOq",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge\n  and print 2 specimen lables. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C."
+							"text": "Acknowledge\n  and print 2 specimen labels. Place one label into the designated box.&nbsp; Affix the other label on one tube. Aliquot\n  serum and keep at -20 °C."
 						}
 					}
 				],
@@ -86578,7 +86625,7 @@
 						"id": "jPLL3RELhN",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -86730,7 +86777,7 @@
 						"id": "yJzprsSVzl",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -87214,7 +87261,7 @@
 						"id": "k0witHTQMn",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -87366,7 +87413,7 @@
 						"id": "SFIJgDwpwm",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -87518,7 +87565,7 @@
 						"id": "Y3poyju5LM",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -87670,7 +87717,7 @@
 						"id": "h4aLmxpaIC",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -87822,7 +87869,7 @@
 						"id": "EDB6dzXTgJ",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box. Affix the other label on one tube. Aliquot serum and keep at -20 °C."
 						}
 					}
 				],
@@ -87974,7 +88021,7 @@
 						"id": "9LSXV2Fn3k",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -88126,7 +88173,7 @@
 						"id": "uPgvhYfgOI",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -88278,7 +88325,7 @@
 						"id": "uOW1Z0WwCv",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -88430,7 +88477,7 @@
 						"id": "DW7ZOvnVPS",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -88582,7 +88629,7 @@
 						"id": "OQgGqrb8n7",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -88734,7 +88781,7 @@
 						"id": "ZHNcDE3uTI",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -88886,7 +88933,7 @@
 						"id": "H6uSnEFi0d",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -89038,7 +89085,7 @@
 						"id": "qpdnaefGHb",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -89190,7 +89237,7 @@
 						"id": "snhU51pdPE",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -89342,7 +89389,7 @@
 						"id": "hVuYacePvt",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -89494,7 +89541,7 @@
 						"id": "1dwhON4CLR",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -89646,7 +89693,7 @@
 						"id": "jCpoluyxCI",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -89798,7 +89845,7 @@
 						"id": "kfOjyEzyvg",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -89950,7 +89997,7 @@
 						"id": "b0gxYMupeb",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -90102,7 +90149,7 @@
 						"id": "RLojdOF2Re",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -90228,7 +90275,7 @@
 						"id": "sjJDEmEaYK",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are available in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&amp;nw=1\" target=\"_blank\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are availabel in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&amp;nw=1\" target=\"_blank\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -91349,7 +91396,7 @@
 						"id": "ohLs5oYXxQ",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -91824,7 +91871,7 @@
 						"id": "XQIdyhx9Vu",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -93165,7 +93212,7 @@
 						"id": "dW0L43E6m7",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -93312,7 +93359,7 @@
 						"id": "JSLTqjXnm9",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -93464,7 +93511,7 @@
 						"id": "MZ40CYweRY",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -93778,7 +93825,7 @@
 						"id": "S9UfFPh2kG",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -95063,7 +95110,7 @@
 						"id": "X6TPAPjumv",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -95215,7 +95262,7 @@
 						"id": "Kx3ol4GPcj",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -96024,7 +96071,7 @@
 						"id": "EjkuGixdJv",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -96745,7 +96792,7 @@
 						"id": "cUN52JrKsA",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -96892,7 +96939,7 @@
 						"id": "wIGrtFgILL",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknowledge and print 2 specimen lables. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
+							"text": "Acknowledge and print 2 specimen labels. Place one label into the designated box.  Affix the other label on one tube. Aliquot serum and keep at -20 °C"
 						}
 					}
 				],
@@ -97058,7 +97105,7 @@
 						"id": "9EADC3kKHv",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form. May request in conjuction with the test, CTX. Aliquot serum in tube. Registsration done in Counter."
+							"text": "May request in conjunction with the test, CTX. Aliquot serum in tube. Registsration done in Counter."
 						}
 					}
 				],
@@ -97371,7 +97418,7 @@
 						"id": "kM6ZAoqV9M",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form and on ice. Centrifuge at 4°C. Aliquot plasma and keep at 4°C."
+							"text": "Collect sample on ice. Centrifuge at 4°C. Aliquot plasma and keep at 4°C."
 						}
 					}
 				],
@@ -98328,7 +98375,7 @@
 						"type": "container",
 						"data": {
 							"text": "##SALIVETTE_CORTISOL##",
-							"imageSrc": ""
+							"imageSrc": "/salivary cortisol container.jpg"
 						}
 					}
 				],
@@ -98491,7 +98538,7 @@
 						"type": "container",
 						"data": {
 							"text": "##SALIVETTE_CORTISOL##",
-							"imageSrc": ""
+							"imageSrc": "/salivary cortisol container.jpg"
 						}
 					}
 				],
@@ -98646,7 +98693,7 @@
 						"type": "container",
 						"data": {
 							"text": "##SALIVETTE_CORTISOL##",
-							"imageSrc": ""
+							"imageSrc": "/salivary cortisol container.jpg"
 						}
 					}
 				],
@@ -98809,7 +98856,7 @@
 						"type": "container",
 						"data": {
 							"text": "##SALIVETTE_CORTISOL##",
-							"imageSrc": ""
+							"imageSrc": "/salivary cortisol container.jpg"
 						}
 					}
 				],
@@ -99266,7 +99313,7 @@
 						"id": "yYb95J6ltP",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are availabel in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -99468,7 +99515,7 @@
 						"id": "HguMYQym2r",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are availabel in the following link:&nbsp;<a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -99691,7 +99738,7 @@
 						"id": "hwBCLruINz",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are availabel in the following link:&nbsp;<a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -99740,7 +99787,7 @@
 						"id": "MlEMWBiOmj",
 						"type": "paragraph",
 						"data": {
-							"text": "Acknoledge and store at room temperature. DO NOT REFRIGERATE OR FREEZE."
+							"text": "Acknowledge and store at room temperature. DO NOT REFRIGERATE OR FREEZE."
 						}
 					},
 					{
@@ -99906,7 +99953,7 @@
 						"id": "oDCWHdLLCC",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection and test requirements are available in the following link:&nbsp;<a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection and test requirements are availabel in the following link:&nbsp;<a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -100211,7 +100258,7 @@
 						"id": "gen_69576597",
 						"type": "paragraph",
 						"data": {
-							"text": "Free and bioavailable testosterone"
+							"text": "Free and bioavailabel testosterone"
 						}
 					}
 				],
@@ -100251,7 +100298,7 @@
 						"type": "synonyms",
 						"data": {
 							"synonymList": [
-								"Free and bioavailable testosterone"
+								"Free and bioavailabel testosterone"
 							]
 						}
 					}
@@ -100368,7 +100415,7 @@
 						"id": "pGMlqCSt0r",
 						"type": "paragraph",
 						"data": {
-							"text": "Free and bioavailable testosterone are calculated values based on serum total testosterone, sex hormone binding globulin (SHBG) and albumin levels. For assessment of androgen status when borderline levels of serum total testosterone is found or when alteration in SHBG concentration is suspected."
+							"text": "Free and bioavailabel testosterone are calculated values based on serum total testosterone, sex hormone binding globulin (SHBG) and albumin levels. For assessment of androgen status when borderline levels of serum total testosterone is found or when alteration in SHBG concentration is suspected."
 						}
 					}
 				],
@@ -100385,7 +100432,7 @@
 						"id": "gen_69576597",
 						"type": "paragraph",
 						"data": {
-							"text": "Free and bioavailable testosterone"
+							"text": "Free and bioavailabel testosterone"
 						}
 					}
 				],
@@ -100425,7 +100472,7 @@
 						"type": "synonyms",
 						"data": {
 							"synonymList": [
-								"Free and bioavailable testosterone"
+								"Free and bioavailabel testosterone"
 							]
 						}
 					}
@@ -100542,7 +100589,7 @@
 						"id": "F-2ftZUKn4",
 						"type": "paragraph",
 						"data": {
-							"text": "Free and bioavailable testosterone are calculated values based on serum total testosterone, sex hormone binding globulin (SHBG) and albumin levels. For assessment of androgen status when borderline levels of serum total testosterone is found or when alteration in SHBG concentration is suspected."
+							"text": "Free and bioavailabel testosterone are calculated values based on serum total testosterone, sex hormone binding globulin (SHBG) and albumin levels. For assessment of androgen status when borderline levels of serum total testosterone is found or when alteration in SHBG concentration is suspected."
 						}
 					}
 				],
@@ -101854,7 +101901,7 @@
 						"id": "m1qGQnf0Cz",
 						"type": "paragraph",
 						"data": {
-							"text": " Acknowledge and print 3 specimen lables. Place one label into the designated box.  Centrifuge at 4°C. Aliquot plasma on two 1.5 mL specimen containers and keep at -20 °C.\n"
+							"text": " Acknowledge and print 3 specimen labels. Place one label into the designated box.  Centrifuge at 4°C. Aliquot plasma on two 1.5 mL specimen containers and keep at -20 °C.\n"
 						}
 					},
 					{
@@ -102207,7 +102254,7 @@
 						"id": "rEMQqHvd5J",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&amp;\" target=\"_blank\">https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&amp;</a>"
+							"text": "Additional information and guidelines on patient preparation are available  in the following link: <a href=\"https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&amp;\" target=\"_blank\">https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&amp;</a>"
 						}
 					}
 				],
@@ -102390,7 +102437,7 @@
 						"id": "-B2adYP2X0",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on patient preparation are avaiable in the following link: <a href=\"https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&\" target=\"_blank\" rel=\"noopener noreferrer\">https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&</a>"
+							"text": "Additional information and guidelines on patient preparation are available  in the following link: <a href=\"https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&\" target=\"_blank\" rel=\"noopener noreferrer\">https://hateams.home/docs/pub/7bd0dbbdb35714a49ac0cd7b634bc2e0/default/?&</a>"
 						}
 					},
 					{
@@ -105579,7 +105626,7 @@
 						"id": "l_cmKFnSll",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form and store at 4°C. Send FRESH primary sample. OVERNIGHT SAMPLE is not preferred"
+							"text": "Store at 4°C. Send FRESH primary sample. OVERNIGHT SAMPLE is not preferred"
 						}
 					}
 				],
@@ -105723,7 +105770,7 @@
 						"id": "NVXk7prg23",
 						"type": "paragraph",
 						"data": {
-							"text": "Collect sample with request form and store at 4°C. Send primary sample."
+							"text": "Store at 4°C. Send primary sample."
 						}
 					},
 					{
@@ -106567,7 +106614,7 @@
 						"id": "leCytggT4F",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -106731,7 +106778,7 @@
 						"id": "mpeXqMwW31",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -108414,7 +108461,7 @@
 						"id": "sUoQo8j3yC",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -108943,7 +108990,7 @@
 						"id": "67KZxf1SSv",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -109217,7 +109264,7 @@
 						"id": "y_je2UBfCS",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -109797,7 +109844,7 @@
 						"id": "SKDnkzd8ty",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton &amp; endorsement are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&amp;nw=1\" target=\"_blank\">HKCH Genetic and Genomic Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton &amp; endorsement are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&amp;nw=1\" target=\"_blank\">HKCH Genetic and Genomic Pathology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -111301,7 +111348,7 @@
 						"id": "rhV22P5yxv",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on test requirements are avaiable in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on test requirements are available  in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&nw=1\" target=\"_blank\" rel=\"noopener noreferrer\">HKCH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -111785,7 +111832,7 @@
 						"id": "PaD9LYwkNU",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are available  in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Haematology Lab Website / Lab Manual</a>"
 						}
 					}
 				],
@@ -113655,7 +113702,7 @@
 						"id": "VjWSg39CMF",
 						"type": "paragraph",
 						"data": {
-							"text": "GCRS for FXIII will no longer available, please order through “Abnormal Coagulation Profile”."
+							"text": "GCRS for FXIII will no longer availabel, please order through “Abnormal Coagulation Profile”."
 						}
 					}
 				],
@@ -113747,7 +113794,7 @@
 						"id": "44w38Btwak",
 						"type": "paragraph",
 						"data": {
-							"text": "Send samples with PM865 page 2 <b>if available</b>, or fax the form to PMH Hae lab (2990 1887)"
+							"text": "Send samples with PM865 page 2 <b>if availabel</b>, or fax the form to PMH Hae lab (2990 1887)"
 						}
 					}
 				],
@@ -114581,6 +114628,198 @@
 						"type": "paragraph",
 						"data": {
 							"text": "Request form placed in basket next to pneumatic tube. Aliquot serum and keep at -20 °C. Registration done by Counter"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			}
+		},
+		{
+			"id": 983,
+			"refId": 36553272,
+			"full_name": {
+				"time": 1777503222971,
+				"blocks": [
+					{
+						"id": "67AhvI8Jus",
+						"type": "paragraph",
+						"data": {
+							"text": "Chlamydia trachomatis + Neisseria gonorrhoeae (CT/NG) (PCR)"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"GCRS_name": {
+				"time": 1777503225458,
+				"blocks": [
+					{
+						"id": "yRAL4XYJap",
+						"type": "paragraph",
+						"data": {
+							"text": "Chlamydia trachomatis + Neisseria gonorrhoeae (CT/NG) (PCR)"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"label_name": {
+				"time": 1777503227580,
+				"blocks": [
+					{
+						"id": "EmBMkHWDuE",
+						"type": "paragraph",
+						"data": {
+							"text": "Chlamydia trachomatis + Neisseria gonorrhoeae (CT/NG) (PCR)"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"synonyms": {
+				"time": 1777503380222,
+				"blocks": [
+					{
+						"id": "BEbeXVAJi1",
+						"type": "synonyms",
+						"data": {
+							"synonymList": [
+								"CTNG"
+							]
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"is_simple_layout": true,
+			"alert": {
+				"time": 1777503238796,
+				"blocks": [
+					{
+						"id": "4FyepMTKqJ",
+						"type": "alertTag",
+						"data": {
+							"text": "Special container/collection",
+							"background": "text-bg-warning"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"requirement": {
+				"time": 1777503503059,
+				"blocks": [
+					{
+						"id": "e3eMavPpCW",
+						"type": "paragraph",
+						"data": {
+							"text": "Special collection kit. Test is available to O&amp;G, urology, paediatric patients or on request from SOPD room 55 ONLY."
+						}
+					},
+					{
+						"id": "t5OIzhOS4f",
+						"type": "paragraph",
+						"data": {
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hateams.home/knowledge/group/pmh-pathology/usefulforms/\" target=\"_blank\" rel=\"noopener noreferrer\">PMH Microbiology Lab Website / Lab Manual</a>"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"turn_around_time": {
+				"time": 1777503467420,
+				"blocks": [
+					{
+						"id": "LhRZkPuvKx",
+						"type": "paragraph",
+						"data": {
+							"text": "Same day if reaches PMH before 3 pm\n    during weekdays&nbsp; &nbsp; &nbsp;&nbsp;"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"form": {
+				"time": 1777503268034,
+				"blocks": [
+					{
+						"id": "7oWM1z1vQz",
+						"type": "form",
+						"data": {
+							"form": {
+								"form_id": "",
+								"form_ref_id": "",
+								"form_code": "",
+								"form_name": "",
+								"form_link": "",
+								"form_external_link": "",
+								"formRequestOnly": false,
+								"specialTier": false
+							}
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"container": {
+				"time": 1777503359112,
+				"blocks": [
+					{
+						"id": "ZsVG_PCJYV",
+						"type": "paragraph",
+						"data": {
+							"text": "Eendocervical\n  or high vaginal (O&amp;G) in Xpert vaginal/Endocervical specimen\n    collection kit"
+						}
+					},
+					{
+						"id": "6WwMoWMWqO",
+						"type": "container",
+						"data": {
+							"text": "##CT/NG_KIT##",
+							"imageSrc": "/CTNG.png"
+						}
+					},
+					{
+						"id": "UYslxJQIfM",
+						"type": "paragraph",
+						"data": {
+							"text": "First catch urine (Urology, for male patients only) in\n  sterile container&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"
+						}
+					},
+					{
+						"id": "0b_czc5PzY",
+						"type": "container",
+						"data": {
+							"text": "##CULTURE_BOTTLE##",
+							"imageSrc": "/CULTURE_BOTTLE.png"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"lab_and_category": {
+				"time": 1777503389148,
+				"blocks": [
+					{
+						"id": "ySPFELTf4R",
+						"type": "lab_and_category",
+						"data": {
+							"labName": "PMH Microbiology Lab",
+							"categoryCode": "MIC",
+							"categoryName": "Microbiology & Virology"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"test_handling": {
+				"time": 1777503396750,
+				"blocks": [
+					{
+						"id": "LBAj30LZUI",
+						"type": "paragraph",
+						"data": {
+							"text": "Store at 4°C. Send primary sample"
 						}
 					}
 				],
