@@ -382,5 +382,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260616T023649Z_req-1781577388438.json",
     "contentSha256": "c6aa9664209411f882b3d953365b7727c868e729c07fe6fae3d3549e580ecdc3",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/27590273111"
+  },
+  {
+    "versionId": "20260622T091050Z_req-1782119426991",
+    "publishedAt": "2026-06-22T09:10:50.635Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1782119426991",
+    "sourceRef": "main",
+    "summary": "lipase and anti-liver cytosol 1",
+    "editTraceCount": 6,
+    "snapshotPath": "content-versions/snapshots/2026/20260622T091050Z_req-1782119426991.json",
+    "contentSha256": "492bb0eff2e120684767bf53edd7c517c0993c1771feed5d05b76dd47918c32d",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/27941957642"
   }
 ]
