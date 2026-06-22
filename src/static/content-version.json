@@ -1,13 +1,13 @@
 {
-  "versionId": "20260616T023649Z_req-1781577388438",
-  "requestId": "req-1781577388438",
-  "publishedAt": "2026-06-16T02:36:49.652Z",
+  "versionId": "20260622T091050Z_req-1782119426991",
+  "requestId": "req-1782119426991",
+  "publishedAt": "2026-06-22T09:10:50.635Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "Fob",
-  "editTraceCount": 1,
-  "snapshotPath": "content-versions/snapshots/2026/20260616T023649Z_req-1781577388438.json",
-  "contentSha256": "663ad2b042364c21a54b17eab7be1fe0f7bfe59f0cbb6078dc46d600ca47b06c",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/27590273111",
+  "summary": "lipase and anti-liver cytosol 1",
+  "editTraceCount": 6,
+  "snapshotPath": "content-versions/snapshots/2026/20260622T091050Z_req-1782119426991.json",
+  "contentSha256": "d9894d572022c3a09d5d584ff74cf7ebf20418f9012cf96e91c59d14caa12b93",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/27941957642",
   "environment": "predeploy"
 }
