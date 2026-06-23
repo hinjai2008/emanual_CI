@@ -7,7 +7,7 @@
   "summary": "lipase and anti-liver cytosol 1",
   "editTraceCount": 6,
   "snapshotPath": "content-versions/snapshots/2026/20260622T091050Z_req-1782119426991.json",
-  "contentSha256": "d9894d572022c3a09d5d584ff74cf7ebf20418f9012cf96e91c59d14caa12b93",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/27941957642",
+  "contentSha256": "5fd7492d6a6bb284f094af62d421f62ba184793b53c5d5648d74d6e9e7d9c066",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/27997036224",
   "environment": "predeploy"
 }
