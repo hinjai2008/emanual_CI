@@ -1,6 +1,188 @@
 {
 	"config": {
-		"editTrace": [],
+		"editTrace": [
+			{
+				"dataType": "testData",
+				"dataId": 989,
+				"refId": 29035993,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 989",
+				"timestamp": "2026-06-25T01:09:12.307Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "680",
+				"refId": null,
+				"editType": "modify",
+				"field": "requirement",
+				"originalValue": {
+					"time": 1777415427646,
+					"blocks": [
+						{
+							"id": "zdL1t_xtyZ",
+							"type": "paragraph",
+							"data": {
+								"text": "Restricted to &lt; 18y"
+							}
+						},
+						{
+							"id": "sjJDEmEaYK",
+							"type": "paragraph",
+							"data": {
+								"text": "Additional information and guidelines on specimen collection are available in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&amp;nw=1\" target=\"_blank\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1782350469119,
+					"blocks": [
+						{
+							"id": "zdL1t_xtyZ",
+							"type": "paragraph",
+							"data": {
+								"text": "Restricted to &lt; 18y"
+							}
+						},
+						{
+							"id": "09kGd-hVlC",
+							"type": "paragraph",
+							"data": {
+								"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"http://kwclgs_s2/wordpress/wp-content/uploads/2026/01/PI-1598-Effective-20-Jan-2026-Patient-Instructions-for-Faecal-Calprotectin-FCAL-Test-WI-CCP-SAM-GSEND-L10.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">http://kwclgs_s2/wordpress/wp-content/uploads/2026/01/PI-1598-Effective-20-Jan-2026-Patient-Instructions-for-Faecal-Calprotectin-FCAL-Test-WI-CCP-SAM-GSEND-L10.pdf</a>"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "Faecal calprotectin (HKCH)",
+				"timestamp": "2026-06-25T01:21:09.120Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": "680",
+				"refId": null,
+				"editType": "modify",
+				"field": "GCRS_name",
+				"originalValue": {
+					"time": 1774910452851,
+					"blocks": [
+						{
+							"id": "gen_69576595",
+							"type": "paragraph",
+							"data": {
+								"text": "Faecal calprotectin (HKCH)"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1782350590159,
+					"blocks": [
+						{
+							"id": "gen_69576595",
+							"type": "paragraph",
+							"data": {
+								"text": "Faecal Calprotectin (Paed)"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "Faecal Calprotectin (Paed)",
+				"timestamp": "2026-06-25T01:23:10.161Z"
+			},
+			{
+				"dataType": "containerData",
+				"dataId": "40",
+				"refId": null,
+				"editType": "modify",
+				"field": "remark",
+				"originalValue": {
+					"time": 1774796990970,
+					"blocks": [
+						{
+							"id": "rPKCaUKgRS",
+							"type": "paragraph",
+							"data": {
+								"text": "For faecal calprotectin test (&gt;18y patient only)"
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"newValue": {
+					"time": 1782350611567,
+					"blocks": [
+						{
+							"id": "rPKCaUKgRS",
+							"type": "paragraph",
+							"data": {
+								"text": "For faecal calprotectin test (&gt;18y patient only)"
+							}
+						},
+						{
+							"id": "0L6dORi_lN",
+							"type": "paragraph",
+							"data": {
+								"text": "FCAL containers (PYNEH) are obtain from PMH Chem Lab."
+							}
+						}
+					],
+					"version": "2.31.0-rc.7"
+				},
+				"nameSnapshot": "Faecal Calprotectin Container (PYNEH)",
+				"timestamp": "2026-06-25T01:23:31.568Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 990,
+				"refId": 67148239,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 990",
+				"timestamp": "2026-06-25T01:28:02.366Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 991,
+				"refId": 90394880,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 991",
+				"timestamp": "2026-06-25T01:40:28.596Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 992,
+				"refId": 19336133,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 992",
+				"timestamp": "2026-06-25T01:57:26.271Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 993,
+				"refId": 19047183,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 993",
+				"timestamp": "2026-06-25T02:13:39.979Z"
+			}
+		],
 		"category": [
 			{
 				"code": "CHEM",
@@ -4823,13 +5005,20 @@
 				"version": "2.31.0-rc.7"
 			},
 			"remark": {
-				"time": 1774796990970,
+				"time": 1782350611567,
 				"blocks": [
 					{
 						"id": "rPKCaUKgRS",
 						"type": "paragraph",
 						"data": {
 							"text": "For faecal calprotectin test (&gt;18y patient only)"
+						}
+					},
+					{
+						"id": "0L6dORi_lN",
+						"type": "paragraph",
+						"data": {
+							"text": "FCAL containers (PYNEH) are obtain from PMH Chem Lab."
 						}
 					}
 				],
@@ -90580,13 +90769,13 @@
 				"version": "2.31.0-rc.7"
 			},
 			"GCRS_name": {
-				"time": 1774910452851,
+				"time": 1782350590159,
 				"blocks": [
 					{
 						"id": "gen_69576595",
 						"type": "paragraph",
 						"data": {
-							"text": "Faecal calprotectin (HKCH)"
+							"text": "Faecal Calprotectin (Paed)"
 						}
 					}
 				],
@@ -90629,7 +90818,7 @@
 				"version": "2.31.0-rc.7"
 			},
 			"requirement": {
-				"time": 1777415427646,
+				"time": 1782350469119,
 				"blocks": [
 					{
 						"id": "zdL1t_xtyZ",
@@ -90639,10 +90828,10 @@
 						}
 					},
 					{
-						"id": "sjJDEmEaYK",
+						"id": "09kGd-hVlC",
 						"type": "paragraph",
 						"data": {
-							"text": "Additional information and guidelines on specimen collection are available in the following link: <a href=\"https://hkchapp/labmanual/?nw=1&amp;nw=1\" target=\"_blank\">HKCH Chemical Pathology Lab Website / Lab Manual</a>"
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"http://kwclgs_s2/wordpress/wp-content/uploads/2026/01/PI-1598-Effective-20-Jan-2026-Patient-Instructions-for-Faecal-Calprotectin-FCAL-Test-WI-CCP-SAM-GSEND-L10.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">http://kwclgs_s2/wordpress/wp-content/uploads/2026/01/PI-1598-Effective-20-Jan-2026-Patient-Instructions-for-Faecal-Calprotectin-FCAL-Test-WI-CCP-SAM-GSEND-L10.pdf</a>"
 						}
 					}
 				],
@@ -115842,6 +116031,826 @@
 						"type": "paragraph",
 						"data": {
 							"text": "(QMH Immunology Miscellaneous Test Tier 1)"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			}
+		},
+		{
+			"id": 989,
+			"refId": 29035993,
+			"full_name": {
+				"time": 1782349785707,
+				"blocks": [
+					{
+						"id": "P4XEQLQIEJ",
+						"type": "paragraph",
+						"data": {
+							"text": "Faecal Calprotectin (Adult)"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"GCRS_name": {
+				"time": 1782349787803,
+				"blocks": [
+					{
+						"id": "ezYpYQVPQm",
+						"type": "paragraph",
+						"data": {
+							"text": "Faecal Calprotectin (Adult)"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"label_name": {
+				"time": 1782350497488,
+				"blocks": [
+					{
+						"id": "pQqvYGjv_h",
+						"type": "paragraph",
+						"data": {
+							"text": "Calprotectin(&gt;=18y)"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"synonyms": {
+				"blocks": [
+					{
+						"type": "synonyms",
+						"data": {
+							"synonymList": []
+						}
+					}
+				]
+			},
+			"container": {
+				"time": 1782349921499,
+				"blocks": [
+					{
+						"id": "2eAlo_CIE5",
+						"type": "paragraph",
+						"data": {
+							"text": "FCAL container (blue ring)"
+						}
+					},
+					{
+						"id": "mnC-4U25Ev",
+						"type": "container",
+						"data": {
+							"text": "##FCAL_PYNEH##",
+							"imageSrc": "/FCAL_PYNEH.jpeg"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"requirement": {
+				"time": 1782350438696,
+				"blocks": [
+					{
+						"id": "q83Q4_m3Ho",
+						"type": "paragraph",
+						"data": {
+							"text": "Restricted to &gt;= 18y"
+						}
+					},
+					{
+						"id": "gqtm1LL38n",
+						"type": "paragraph",
+						"data": {
+							"text": "Tube for Faecal Calprotectin (Adult) should be stored at 2 to 8 °C before use, and at room temperature after sample collection"
+						}
+					},
+					{
+						"id": "SynVUxteki",
+						"type": "paragraph",
+						"data": {
+							"text": "<b>Different sample collection tubes for \"Faecal Calprotectin (Adult)\" and \"Faecal Calprotectin (Paed)\".</b>"
+						}
+					},
+					{
+						"id": "z-ix33Qrrh",
+						"type": "paragraph",
+						"data": {
+							"text": "Storage after sampling for patients: Room temperature up to 3 days."
+						}
+					},
+					{
+						"id": "techUpDjXk",
+						"type": "paragraph",
+						"data": {
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"http://kwclgs_s2/wordpress/wp-content/uploads/2026/01/Patient-Instructions-for-Faecal-Calprotectin-Adult.pdf\" target=\"_blank\">http://kwclgs_s2/wordpress/wp-content/uploads/2026/01/Patient-Instructions-for-Faecal-Calprotectin-Adult.pdf</a>"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"alert": {
+				"time": 1782350132825,
+				"blocks": [
+					{
+						"id": "8j6aHqAyRQ",
+						"type": "alertTag",
+						"data": {
+							"text": "Special container/collection",
+							"background": "text-bg-warning"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"form": {
+				"time": 1782350209145,
+				"blocks": [
+					{
+						"id": "MxAslbAD07",
+						"type": "form",
+						"data": {
+							"form": {
+								"form_id": "",
+								"form_ref_id": "",
+								"form_code": "",
+								"form_name": "",
+								"form_link": "",
+								"form_external_link": "",
+								"formRequestOnly": false,
+								"specialTier": false
+							}
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"lab_and_category": {
+				"time": 1782350220969,
+				"blocks": [
+					{
+						"id": "3zg-ZEkgHB",
+						"type": "lab_and_category",
+						"data": {
+							"labName": "PYNEH Chemical Pathology Lab",
+							"categoryCode": "CHEM",
+							"categoryName": "Chemical Pathology"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"turn_around_time": {
+				"time": 1782350345247,
+				"blocks": [
+					{
+						"id": "PSP2roYl5b",
+						"type": "paragraph",
+						"data": {
+							"text": "Weekly."
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"test_handling": {
+				"time": 1782350404535,
+				"blocks": [
+					{
+						"id": "riinKAiJ8V",
+						"type": "paragraph",
+						"data": {
+							"text": "Acknowledge and store at 4°C."
+						}
+					},
+					{
+						"id": "xMpGwKDmy-",
+						"type": "paragraph",
+						"data": {
+							"text": "FCAL containers (PYNEH) are obtain from PMH Chem Lab."
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"indication": {
+				"time": 1782350418200,
+				"blocks": [
+					{
+						"id": "PF72Ew1Teh",
+						"type": "paragraph",
+						"data": {
+							"text": "For diagnosis and monitoring of inflammatory bowel disease."
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			}
+		},
+		{
+			"id": 990,
+			"refId": 67148239,
+			"full_name": {
+				"time": 1782350884454,
+				"blocks": [
+					{
+						"id": "CutZhrAtXW",
+						"type": "paragraph",
+						"data": {
+							"text": "Asparaginase"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"GCRS_name": {
+				"time": 1782350886302,
+				"blocks": [
+					{
+						"id": "KWNSWlGkUi",
+						"type": "paragraph",
+						"data": {
+							"text": "Asparaginase"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"label_name": {
+				"time": 1782350888014,
+				"blocks": [
+					{
+						"id": "CWg7okSOXq",
+						"type": "paragraph",
+						"data": {
+							"text": "Asparaginase"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"synonyms": {
+				"blocks": [
+					{
+						"type": "synonyms",
+						"data": {
+							"synonymList": []
+						}
+					}
+				]
+			},
+			"lab_and_category": {
+				"time": 1782350905302,
+				"blocks": [
+					{
+						"id": "OCV0Tjmput",
+						"type": "lab_and_category",
+						"data": {
+							"labName": "HKCH Chemical Pathology Lab",
+							"categoryCode": "CHEM",
+							"categoryName": "Chemical Pathology"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"container": {
+				"time": 1782350941869,
+				"blocks": [
+					{
+						"id": "NQzD1CQ0kk",
+						"type": "container",
+						"data": {
+							"text": "##CLOT_BLOOD_TUBE##",
+							"imageSrc": "/clot_blood_x1.webp"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"form": {
+				"time": 1782350963101,
+				"blocks": [
+					{
+						"id": "wME00oLRZg",
+						"type": "form",
+						"data": {
+							"form": {
+								"form_id": "",
+								"form_ref_id": "",
+								"form_code": "",
+								"form_name": "",
+								"form_link": "",
+								"form_external_link": "",
+								"formRequestOnly": false,
+								"specialTier": false
+							}
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"requirement": {
+				"time": 1782351096828,
+				"blocks": [
+					{
+						"id": "7Iwy5_w0yz",
+						"type": "paragraph",
+						"data": {
+							"text": "The specimens should be <b>sent to the laboratory within 3 hours after collection.</b>"
+						}
+					},
+					{
+						"id": "OQmv6odiTx",
+						"type": "paragraph",
+						"data": {
+							"text": "Additional information and guidelines on specimen collection are avaiable in the following link: <a href=\"https://hkchapp/labmanual/Tests/Details?testId=656\" target=\"_blank\" rel=\"noopener noreferrer\">https://hkchapp/labmanual/Tests/Details?testId=656</a>"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"turn_around_time": {
+				"time": 1782350985573,
+				"blocks": [
+					{
+						"id": "CnJf80z-iB",
+						"type": "paragraph",
+						"data": {
+							"text": "7 working days"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"test_handling": {
+				"time": 1782351014541,
+				"blocks": [
+					{
+						"id": "BEQmKc6Q13",
+						"type": "paragraph",
+						"data": {
+							"text": "Acknowledge. Centrifuge and aliquot serum. Store in HKCH screw-cap microtube and transport frozen serum."
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			}
+		},
+		{
+			"id": 991,
+			"refId": 90394880,
+			"full_name": {
+				"time": 1782351858098,
+				"blocks": [
+					{
+						"id": "J7Fvk0ubOQ",
+						"type": "paragraph",
+						"data": {
+							"text": "TDM for Psychotropic Drugs"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"GCRS_name": {
+				"time": 1782351860099,
+				"blocks": [
+					{
+						"id": "208oT1c7J-",
+						"type": "paragraph",
+						"data": {
+							"text": "TDM for Psychotropic Drugs"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"label_name": {
+				"time": 1782351878762,
+				"blocks": [
+					{
+						"id": "lytBkU6lUb",
+						"type": "paragraph",
+						"data": {
+							"text": "TDM for Psycho. Drug"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"synonyms": {
+				"time": 1782352012978,
+				"blocks": [
+					{
+						"id": "xrThuXA3cR",
+						"type": "synonyms",
+						"data": {
+							"synonymList": [
+								"Clozapine",
+								"Clomipramine",
+								"Amitriptyline",
+								"Nortriptyline",
+								"Imipramine"
+							]
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"requirement": {
+				"time": 1782352105482,
+				"blocks": [
+					{
+						"id": "OFwn-hzWr6",
+						"type": "paragraph",
+						"data": {
+							"text": "Clozapine, Clomipramine, Amitriptyline, Nortriptyline, Imipramine."
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"container": {
+				"time": 1782352086579,
+				"blocks": [
+					{
+						"id": "SReFg9hdJh",
+						"type": "container",
+						"data": {
+							"text": "##CLOT_BLOOD_TUBE##",
+							"imageSrc": "/clot_blood_x1.webp"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"form": {
+				"time": 1782352090362,
+				"blocks": [
+					{
+						"id": "QtEczcfMsJ",
+						"type": "form",
+						"data": {
+							"form": {
+								"form_id": "",
+								"form_ref_id": "",
+								"form_code": "",
+								"form_name": "",
+								"form_link": "",
+								"form_external_link": "",
+								"formRequestOnly": false,
+								"specialTier": false
+							}
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"lab_and_category": {
+				"time": 1782352095394,
+				"blocks": [
+					{
+						"id": "eUp8rHLhKz",
+						"type": "lab_and_category",
+						"data": {
+							"labName": "PMH Toxicology Reference Lab",
+							"categoryCode": "CHEM",
+							"categoryName": "Chemical Pathology"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"turn_around_time": {
+				"time": 1782352139322,
+				"blocks": [
+					{
+						"id": "XPYrbw-VLp",
+						"type": "paragraph",
+						"data": {
+							"text": "Weekly"
+						}
+					},
+					{
+						"id": "zH6kf83Yzd",
+						"type": "paragraph",
+						"data": {
+							"text": "(1 – 2 working days for urgent cases if clinically indicated)"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"test_handling": {
+				"time": 1782352158730,
+				"blocks": [
+					{
+						"id": "E_bCyYWAl_",
+						"type": "paragraph",
+						"data": {
+							"text": "Acknowledge and centrifuge, aliquot serum. Store serum at -20ºC and transport to TRL on ice within one week."
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			}
+		},
+		{
+			"id": 992,
+			"refId": 19336133,
+			"full_name": {
+				"time": 1782353153756,
+				"blocks": [
+					{
+						"id": "Ti3iEaOu1-",
+						"type": "paragraph",
+						"data": {
+							"text": "Sulphocysteine"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"GCRS_name": {
+				"time": 1782353144493,
+				"blocks": [
+					{
+						"id": "7hh_FUesoK",
+						"type": "paragraph",
+						"data": {
+							"text": "Sulphocysteine"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"label_name": {
+				"time": 1782353146756,
+				"blocks": [
+					{
+						"id": "ZH8La1jBO9",
+						"type": "paragraph",
+						"data": {
+							"text": "Sulphocysteine"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"synonyms": {
+				"blocks": [
+					{
+						"type": "synonyms",
+						"data": {
+							"synonymList": []
+						}
+					}
+				]
+			},
+			"is_simple_layout": true,
+			"alert": {
+				"time": 1782353480203,
+				"blocks": [
+					{
+						"id": "N52eEOKyYK",
+						"type": "alertTag",
+						"data": {
+							"text": "Advance Booking/Consultation",
+							"background": "text-bg-info"
+						}
+					},
+					{
+						"id": "CHGmmC49Ks",
+						"type": "alertTag",
+						"data": {
+							"text": "Send to lab immediately",
+							"background": "text-bg-danger"
+						}
+					},
+					{
+						"id": "b8nuWViTQD",
+						"type": "alertTag",
+						"data": {
+							"text": "Fresh specimen required",
+							"background": "text-bg-warning"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"requirement": {
+				"time": 1782353435035,
+				"blocks": [
+					{
+						"id": "-NY8jSQIU2",
+						"type": "paragraph",
+						"data": {
+							"text": "Prior arrangement with the laboratory is required for immediate deproteinization of the sample. Please contact us at 3513 3033 during office hours.&nbsp;&nbsp;"
+						}
+					},
+					{
+						"id": "trLRMKDKHn",
+						"type": "paragraph",
+						"data": {
+							"text": "Additional information and guidelines on specimen collection, test requirements, and consultaiton & endorsement are avaiable in the following link: <a href=\"https://hkchapp/labmanual/Tests/Details?testId=1837#\" target=\"_blank\" rel=\"noopener noreferrer\">https://hkchapp/labmanual/Tests/Details?testId=1837#</a>"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"test_handling": {
+				"time": 1782353474929,
+				"blocks": [
+					{
+						"id": "L_qS3Maj3f",
+						"type": "paragraph",
+						"data": {
+							"text": "Rare test. <b>Contact 3513 3033 for proper handling.</b>"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"form": {
+				"time": 1782353320132,
+				"blocks": [
+					{
+						"id": "-D0hpfDdXq",
+						"type": "form",
+						"data": {
+							"form": {
+								"form_id": "tier:Biochemistry Test Tier2",
+								"form_ref_id": "",
+								"form_code": "Biochemistry Test Tier2",
+								"form_name": "",
+								"form_link": "",
+								"form_external_link": "",
+								"formRequestOnly": false,
+								"specialTier": true
+							}
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"container": {
+				"time": 1782353326604,
+				"blocks": [
+					{
+						"id": "2tdQkzyPWC",
+						"type": "container",
+						"data": {
+							"text": "##HEP_TUBE##",
+							"imageSrc": "/heparin blood.webp"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"lab_and_category": {
+				"time": 1782353357876,
+				"blocks": [
+					{
+						"id": "m400osiqj0",
+						"type": "lab_and_category",
+						"data": {
+							"labName": "HKCH Chemical Pathology Lab",
+							"categoryCode": "CHEM",
+							"categoryName": "Chemical Pathology"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			}
+		},
+		{
+			"id": 993,
+			"refId": 19047183,
+			"full_name": {
+				"time": 1782353648984,
+				"blocks": [
+					{
+						"id": "E5iwv7iPuq",
+						"type": "paragraph",
+						"data": {
+							"text": "Genetic Test, Family Screening"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"GCRS_name": {
+				"time": 1782353650872,
+				"blocks": [
+					{
+						"id": "1-E5Qs5a4i",
+						"type": "paragraph",
+						"data": {
+							"text": "Genetic Test, Family Screening"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"label_name": {
+				"time": 1782353678857,
+				"blocks": [
+					{
+						"id": "N6amhYDgzW",
+						"type": "paragraph",
+						"data": {
+							"text": "Family Screen (Gene)"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"synonyms": {
+				"blocks": [
+					{
+						"type": "synonyms",
+						"data": {
+							"synonymList": []
+						}
+					}
+				]
+			},
+			"container": {
+				"time": 1782353774811,
+				"blocks": [
+					{
+						"id": "SQm3F-KhmD",
+						"type": "container",
+						"data": {
+							"text": "##EDTA_TUBE## (for blood specimen)",
+							"imageSrc": "/EDTA blood.webp"
+						}
+					},
+					{
+						"id": "YQ5V6N8AIf",
+						"type": "paragraph",
+						"data": {
+							"text": "OR"
+						}
+					},
+					{
+						"id": "m5JHbrwSJw",
+						"type": "paragraph",
+						"data": {
+							"text": "Appropriate sterile container for other non-blood specimen types"
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"form": {
+				"time": 1782353783786,
+				"blocks": [
+					{
+						"id": "shy0EeBCL7",
+						"type": "form",
+						"data": {
+							"form": {
+								"form_id": "",
+								"form_ref_id": "",
+								"form_code": "",
+								"form_name": "",
+								"form_link": "",
+								"form_external_link": "",
+								"formRequestOnly": false,
+								"specialTier": false
+							}
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"requirement": {
+				"time": 1782353829530,
+				"blocks": [
+					{
+						"id": "gQYNuwprfc",
+						"type": "paragraph",
+						"data": {
+							"text": "Send the specimen with GCRS label at room temperature and <b>a copy of the signed consent form</b> to the Core Laboratory, 8/F, Wai Shun Block."
+						}
+					}
+				],
+				"version": "2.31.0-rc.7"
+			},
+			"lab_and_category": {
+				"time": 1782353840707,
+				"blocks": [
+					{
+						"id": "X3gahjaLMR",
+						"type": "lab_and_category",
+						"data": {
+							"labName": "PMH Chem Lab",
+							"categoryCode": "CHEM",
+							"categoryName": "Chemical Pathology"
 						}
 					}
 				],
