@@ -1,13 +1,13 @@
 {
-  "versionId": "20260625T034536Z_req-1782359112605",
-  "requestId": "req-1782359112605",
-  "publishedAt": "2026-06-25T03:45:36.042Z",
-  "publishedBy": "added pyneh fecal cal",
+  "versionId": "20260626T085945Z_req-1782464364210",
+  "requestId": "req-1782464364210",
+  "publishedAt": "2026-06-26T08:59:45.004Z",
+  "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "added pyneh faecal cal",
-  "editTraceCount": 8,
-  "snapshotPath": "content-versions/snapshots/2026/20260625T034536Z_req-1782359112605.json",
-  "contentSha256": "6bb8e774f0306b5d9e9b2e81ba907c3dcafbe902bfc116d2863f098aa496326f",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/28145413553",
+  "summary": "GB Genotyping",
+  "editTraceCount": 2,
+  "snapshotPath": "content-versions/snapshots/2026/20260626T085945Z_req-1782464364210.json",
+  "contentSha256": "e800172aa9e25e0d4dfa8244bee6c0d6aeb4d4f74a347bf171dfe6b70e4ce764",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/28228102918",
   "environment": "predeploy"
 }
