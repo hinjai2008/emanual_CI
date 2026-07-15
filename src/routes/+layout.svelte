@@ -197,33 +197,6 @@
         }
 
         const newTrace = {
-          dataType,
-          dataId,
-          refId,
-          editType,
-          field,
-          originalValue,
-          newValue,
-          nameSnapshot,
-          timestamp
-        };
-
-        editedJSON.update((draft) => {
-          draft.config.editTrace.push(newTrace);
-          return draft;
-        });
-        return;
-      }
-
-      if (editType == "add") {
-        const newTrace = {
-          dataType,
-          dataId,
-          refId,
-          editType,
-          field: null,
-          originalValue: null,
-          newValue: null,
           nameSnapshot,
           timestamp
         };
@@ -675,13 +648,23 @@
   })
   });
 
-
+  const defaultPublishEndpoint = 'https://emanual-publish-api.rayyt2020.workers.dev/publish';
 
   let searchInput = $state('');
   let goToIdInput = $state('');
   let publishInProgress = $state(false);
   let publishStatusMessage = $state('');
   let publishActionsUrl = $state('');
+  let showAdminLogin = $state(false);
+  let showStaffLogin = $state(false);
+  let adminLoginName = $state('');
+  let adminLoginSecret = $state('');
+  let adminLoginApiUrl = $state(defaultPublishEndpoint);
+  let adminLoginInProgress = $state(false);
+  let adminLoginError = $state('');
+  let staffLoginPasskey = $state('');
+  let staffLoginInProgress = $state(false);
+  let staffLoginError = $state('');
   let draftStatusMessage = $state('');
   let draftRevision = $state(0);
   let draftSaveInProgress = $state(false);
@@ -691,13 +674,16 @@
   let draftLastUpdatedAt = $state('');
   let draftLastUpdatedBy = $state('');
   let draftAutosaveTimer = null;
+  let draftStoreUnsubscribe = null;
+  let hasObservedInitialDraftValue = false;
+  let pendingDraftAutosave = false;
+  const draftEditSaveDelayMs = 400;
   let syncCheckEnabled = $state(false);
   let syncStatus = $state('idle');
   let syncStatusMessage = $state('');
   let predeployVersion = $state(null);
   let productionVersion = $state(null);
   let syncCheckTimer = null;
-  const defaultPublishEndpoint = 'https://emanual-publish-api.rayyt2020.workers.dev/publish';
 
   function deepCloneJSON(value) {
     return JSON.parse(JSON.stringify(value));
@@ -726,6 +712,10 @@
   }
 
   function getSavedApiBase() {
+    if (typeof window === 'undefined') {
+      return normalizeApiBase(defaultPublishEndpoint);
+    }
+
     const directBase = localStorage.getItem('publishApiBase') || '';
     if (directBase) {
       return normalizeApiBase(directBase);
@@ -897,6 +887,11 @@
   }
 
   async function ensureApiBaseInteractive() {
+    const savedApiBase = getSavedApiBase();
+    if (savedApiBase) {
+      return savedApiBase;
+    }
+
     const defaultEndpoint = localStorage.getItem('publishApiUrl') || defaultPublishEndpoint;
     const endpointInput = window.prompt(
       'Enter the publish API endpoint URL (Cloudflare Worker URL or /publish endpoint):',
@@ -918,6 +913,10 @@
 
   async function ensureSecretInteractive() {
     const existingSecret = sessionStorage.getItem('publishApiSecret') || '';
+    if (existingSecret) {
+      return existingSecret;
+    }
+
     const secretInput = window.prompt(
       'Enter the publish API bearer secret. It will be kept only for this browser tab.',
       existingSecret
@@ -933,6 +932,142 @@
 
   function getPublisherName() {
     return (localStorage.getItem('publishAdminName') || '').trim();
+  }
+
+  function openAdminLogin() {
+    showAdminLogin = true;
+    showStaffLogin = false;
+    adminLoginError = '';
+    adminLoginName = localStorage.getItem('publishAdminName') || '';
+    adminLoginSecret = sessionStorage.getItem('publishApiSecret') || '';
+    adminLoginApiUrl = localStorage.getItem('publishApiUrl') || defaultPublishEndpoint;
+  }
+
+  function closeAdminLogin() {
+    showAdminLogin = false;
+    adminLoginError = '';
+  }
+
+  function openStaffLogin() {
+    showStaffLogin = true;
+    showAdminLogin = false;
+    staffLoginError = '';
+    staffLoginPasskey = '';
+  }
+
+  function closeStaffLogin() {
+    showStaffLogin = false;
+    staffLoginError = '';
+    staffLoginPasskey = '';
+  }
+
+  async function submitAdminLogin() {
+    const displayName = adminLoginName.trim();
+    const sharedToken = adminLoginSecret.trim();
+    const apiBase = normalizeApiBase(adminLoginApiUrl);
+
+    if (!displayName) {
+      adminLoginError = 'Display name is required.';
+      return;
+    }
+
+    if (!sharedToken) {
+      adminLoginError = 'Shared token is required.';
+      return;
+    }
+
+    if (!apiBase) {
+      adminLoginError = 'Publish API URL is required.';
+      return;
+    }
+
+    adminLoginInProgress = true;
+    adminLoginError = '';
+
+    try {
+      const response = await fetch(endpointFromBase(apiBase, '/draft/load'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({ _secret: sharedToken })
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        const details = result?.details ? ` ${result.details}` : '';
+        throw new Error((result?.error || `HTTP ${response.status}`) + details);
+      }
+
+      localStorage.setItem('publishAdminName', displayName);
+      sessionStorage.setItem('publishApiSecret', sharedToken);
+      persistApiBase(apiBase);
+
+      isStaff.set(false);
+      isAdmin.set(true);
+      closeAdminLogin();
+      publishStatusMessage = '';
+      draftStatusMessage = 'Admin login verified. Start a new edit to load the remote draft.';
+    } catch (error) {
+      adminLoginError = error instanceof Error ? error.message : 'Admin login failed.';
+    } finally {
+      adminLoginInProgress = false;
+    }
+  }
+
+  async function submitStaffLogin() {
+    const passkey = staffLoginPasskey.trim();
+
+    if (!passkey) {
+      staffLoginError = 'Staff passkey is required.';
+      return;
+    }
+
+    staffLoginInProgress = true;
+    staffLoginError = '';
+
+    try {
+      const encoder = new TextEncoder();
+      const encodedPasskey = encoder.encode(passkey);
+      const hashBuffer = await window.crypto.subtle.digest('SHA-256', encodedPasskey);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map((byte) => byte.toString(16).padStart(2, '0')).join('');
+      const encryptedStaffPw = 'c24d0b20eebe6e430aa4a366fec5ecc04fef3f48a245a9e98a391fdc9fe85e57';
+
+      if (hashHex !== encryptedStaffPw) {
+        throw new Error('Invalid staff passkey.');
+      }
+
+      isAdmin.set(false);
+      isStaff.set(true);
+      isEditMode.set(false);
+      closeStaffLogin();
+      draftStatusMessage = '';
+      publishStatusMessage = '';
+    } catch (error) {
+      staffLoginError = error instanceof Error ? error.message : 'Staff login failed.';
+    } finally {
+      staffLoginInProgress = false;
+    }
+  }
+
+  function logoutUser() {
+    isEditMode.set(false);
+    isAdmin.set(false);
+    isStaff.set(false);
+    draftReady = false;
+    draftRevision = 0;
+    draftLastUpdatedAt = '';
+    draftLastUpdatedBy = '';
+    draftStatusMessage = '';
+    publishStatusMessage = '';
+    publishActionsUrl = '';
+    sessionStorage.removeItem('publishApiSecret');
+    localStorage.removeItem('publishAdminName');
+    showAdminLogin = false;
+    showStaffLogin = false;
+    adminLoginError = '';
+    staffLoginError = '';
   }
 
   function getDraftLoadEndpoint() {
@@ -1011,12 +1146,31 @@
     }
   }
 
+  function clearDraftAutosaveTimer() {
+    if (draftAutosaveTimer) {
+      clearTimeout(draftAutosaveTimer);
+      draftAutosaveTimer = null;
+    }
+  }
+
+  function scheduleDraftAutosave() {
+    if (typeof window === 'undefined' || !$isAdmin || !$isEditMode || !draftReady || suppressDraftAutosave) {
+      return;
+    }
+
+    clearDraftAutosaveTimer();
+    draftAutosaveTimer = window.setTimeout(() => {
+      void saveRemoteDraft('autosave', { interactive: false, showAlertOnError: false });
+    }, draftEditSaveDelayMs);
+  }
+
   async function saveRemoteDraft(reason = 'autosave', options = {}) {
     if (!$isAdmin || !$isEditMode || !draftReady) {
       return false;
     }
 
     if (draftSaveInProgress && reason === 'autosave') {
+      pendingDraftAutosave = true;
       return false;
     }
 
@@ -1090,6 +1244,10 @@
       return false;
     } finally {
       draftSaveInProgress = false;
+      if (pendingDraftAutosave) {
+        pendingDraftAutosave = false;
+        scheduleDraftAutosave();
+      }
     }
   }
 
@@ -1185,41 +1343,32 @@
   }
 
   onMount(async () => {
+    adminLoginName = localStorage.getItem('publishAdminName') || '';
+    adminLoginSecret = sessionStorage.getItem('publishApiSecret') || '';
+    adminLoginApiUrl = localStorage.getItem('publishApiUrl') || defaultPublishEndpoint;
+    draftStoreUnsubscribe = editedJSON.subscribe(() => {
+      if (!hasObservedInitialDraftValue) {
+        hasObservedInitialDraftValue = true;
+        return;
+      }
+
+      if (suppressDraftAutosave) {
+        return;
+      }
+
+      scheduleDraftAutosave();
+    });
     syncCheckEnabled = isSyncCheckHostEnabled();
     await refreshSyncStatus();
     startSyncPolling();
   });
 
-  $effect(() => {
-    const draftSnapshot = $editedJSON;
-
-    if (!$isAdmin || !$isEditMode || !draftReady || suppressDraftAutosave) {
-      if (draftAutosaveTimer) {
-        clearTimeout(draftAutosaveTimer);
-        draftAutosaveTimer = null;
-      }
-      return;
-    }
-
-    if (draftAutosaveTimer) {
-      clearTimeout(draftAutosaveTimer);
-      draftAutosaveTimer = null;
-    }
-
-    if (!draftSnapshot || draftSaveInProgress) {
-      return;
-    }
-
-    draftAutosaveTimer = window.setTimeout(() => {
-      void saveRemoteDraft('autosave', { interactive: false, showAlertOnError: false });
-    }, 20000);
-  });
-
   onDestroy(() => {
     stopSyncPolling();
-    if (draftAutosaveTimer) {
-      clearTimeout(draftAutosaveTimer);
-      draftAutosaveTimer = null;
+    clearDraftAutosaveTimer();
+    if (draftStoreUnsubscribe) {
+      draftStoreUnsubscribe();
+      draftStoreUnsubscribe = null;
     }
   });
 
@@ -1431,31 +1580,6 @@
       alert(`Failed to export review workbook: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
-
-
-  async function checkStatus() {
-    const encoder = new TextEncoder();
-    const encodedSearchInput = encoder.encode(searchInput);
-    const hashBuffer = await window.crypto.subtle.digest("SHA-256", encodedSearchInput);
-    const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
-    const hashHex = hashArray
-      .map((b) => b.toString(16).padStart(2, "0"))
-      .join(""); // convert bytes to hex string
-
-    const encryptedAdminPw = "2ca5161d5fd55633223b61a03cc51c4ce7e32383b480f3eb37b4f122f24e4c23";
-    const encryptedStaffPw = "c24d0b20eebe6e430aa4a366fec5ecc04fef3f48a245a9e98a391fdc9fe85e57";
-
-    if (hashHex === encryptedAdminPw) {
-      isAdmin.set(true);
-      searchInput = "";
-    }
-
-    if (hashHex === encryptedStaffPw) {
-      isStaff.set(true);
-      searchInput = "";
-    }
-  };
-
 
 
   $effect(() => {
@@ -1904,6 +2028,15 @@
         </div>
       </li>
 
+      {#if !$isAdmin && !$isStaff}
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick={openAdminLogin}>Admin login</button>
+      </li>
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick={openStaffLogin}>Staff login</button>
+      </li>
+      {/if}
+
       {#if $isEditMode}
       <li class="nav-item ms-2 nav-tools-wrapper">
         <details class="nav-tools">
@@ -1920,6 +2053,9 @@
       {/if}
       
       {#if $isAdmin}
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <span class="badge text-bg-primary">Admin: {getPublisherName() || 'signed in'}</span>
+      </li>
       <li class="nav-item ms-2 nav-tools-wrapper">
         <details class="nav-tools">
           <summary class="nav-link active">Admin Tools</summary>
@@ -1951,9 +2087,65 @@
       {/if}
       <li class="nav-item"><a href="{base}/dashboard" class="nav-link active ms-2">Dashboard</a></li>
       {/if}
+      {#if $isStaff && !$isAdmin}
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <span class="badge text-bg-secondary">Staff mode</span>
+      </li>
+      {/if}
+      {#if $isAdmin || $isStaff}
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <button type="button" class="btn btn-outline-danger btn-sm" onclick={logoutUser}>Logout</button>
+      </li>
+      {/if}
       
     </ul>
   </header>
+  {#if showAdminLogin}
+  <div class="card border-primary mb-2">
+    <div class="card-body py-3">
+      <div class="row g-2 align-items-end">
+        <div class="col-md-3">
+          <label class="form-label form-label-sm mb-1" for="admin-display-name">Display name</label>
+          <input id="admin-display-name" class="form-control form-control-sm" bind:value={adminLoginName} placeholder="Your name">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label form-label-sm mb-1" for="admin-shared-token">Shared token</label>
+          <input id="admin-shared-token" class="form-control form-control-sm" bind:value={adminLoginSecret} type="password" placeholder="Worker shared token">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label form-label-sm mb-1" for="admin-api-url">Publish API URL</label>
+          <input id="admin-api-url" class="form-control form-control-sm" bind:value={adminLoginApiUrl} placeholder={defaultPublishEndpoint}>
+        </div>
+        <div class="col-md-2 d-flex gap-2">
+          <button type="button" class="btn btn-primary btn-sm w-100" onclick={submitAdminLogin} disabled={adminLoginInProgress}>{adminLoginInProgress ? 'Signing in...' : 'Sign in'}</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm" onclick={closeAdminLogin}>Cancel</button>
+        </div>
+      </div>
+      {#if adminLoginError}
+      <div class="small text-danger mt-2">{adminLoginError}</div>
+      {/if}
+    </div>
+  </div>
+  {/if}
+  {#if showStaffLogin}
+  <div class="card border-secondary mb-2">
+    <div class="card-body py-3">
+      <div class="row g-2 align-items-end">
+        <div class="col-md-6">
+          <label class="form-label form-label-sm mb-1" for="staff-passkey">Staff passkey</label>
+          <input id="staff-passkey" class="form-control form-control-sm" bind:value={staffLoginPasskey} type="password" placeholder="Staff passkey">
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+          <button type="button" class="btn btn-secondary btn-sm w-100" onclick={submitStaffLogin} disabled={staffLoginInProgress}>{staffLoginInProgress ? 'Signing in...' : 'Sign in'}</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm" onclick={closeStaffLogin}>Cancel</button>
+        </div>
+      </div>
+      {#if staffLoginError}
+      <div class="small text-danger mt-2">{staffLoginError}</div>
+      {/if}
+    </div>
+  </div>
+  {/if}
   {#if draftStatusMessage}
   <div class="small text-muted mb-1">
     {draftStatusMessage}
@@ -2041,7 +2233,7 @@
     <!-- Search -->
     <div class="input-group" style="width: 97%;">
       <img class="input-group-text" src="{base}/search.svg" id="basic-addon1" style="width: 10%;" alt="search">
-      <input bind:value={searchInput} onkeydown={checkStatus} id="search_sideBar" type="text" class="form-control" placeholder="Type in test / form name..." tabindex="0">
+      <input bind:value={searchInput} id="search_sideBar" type="text" class="form-control" placeholder="Type in test / form name..." tabindex="0">
     </div>
 
     <!-- Search Results -->

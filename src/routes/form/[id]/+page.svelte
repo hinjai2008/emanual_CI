@@ -1,6 +1,6 @@
 <script>
     import "../../global.css"; // Import global CSS
-    import { beginEditSession, isAdmin } from "../../stores";
+    import { beginEditSession, editedJSON, isAdmin } from "../../stores";
     import { isEditMode } from "../../stores";
     import { onDestroy } from "svelte";
     import { isCreateMode } from "../../stores";
@@ -38,24 +38,6 @@
             return;
         }
         isEditMode.set(true);
-    }
-
-    import { editedJSON } from "../../stores";
-    function importJSONHandler(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            try {
-                const imported = JSON.parse(e.target.result);
-                editedJSON.set(imported);
-                setEditMode();
-                alert("Imported successfully!");
-            } catch (err) {
-                alert("Invalid JSON file.");
-            }
-        };
-        reader.readAsText(file);
     }
 
     function checkRemoved(){
@@ -138,9 +120,7 @@ function isHiddenEntry() {
 
     {:else if !editModeLayout}
     <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
-        <button type="button" onclick={setEditMode} class="btn btn-primary">Start new edit</button>
-        <button type="button" class="btn btn-outline-secondary ms-2" onclick={() => document.getElementById('importJSONInput').click()}>Import from save</button>
-        <input id="importJSONInput" type="file" accept="application/json" style="display: none;" onchange={importJSONHandler} />
+        <button type="button" onclick={setEditMode} class="btn btn-primary">Start editing</button>
     </div>
 
     {:else if entryData && checkRemoved()}
