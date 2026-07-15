@@ -1,13 +1,13 @@
 {
-  "versionId": "20260626T085945Z_req-1782464364210",
-  "requestId": "req-1782464364210",
-  "publishedAt": "2026-06-26T08:59:45.004Z",
+  "versionId": "20260715T171700Z_req-1784135798879",
+  "requestId": "req-1784135798879",
+  "publishedAt": "2026-07-15T17:17:00.930Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "GB Genotyping",
-  "editTraceCount": 2,
-  "snapshotPath": "content-versions/snapshots/2026/20260626T085945Z_req-1782464364210.json",
-  "contentSha256": "e800172aa9e25e0d4dfa8244bee6c0d6aeb4d4f74a347bf171dfe6b70e4ce764",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/28228102918",
+  "summary": "test remote",
+  "editTraceCount": 1,
+  "snapshotPath": "content-versions/snapshots/2026/20260715T171700Z_req-1784135798879.json",
+  "contentSha256": "cbe0526e35a71bdca091a14273a7e4450faf198a8a638a61fbc45ba387215710",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/29435833248",
   "environment": "predeploy"
 }
