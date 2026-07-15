@@ -430,5 +430,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260715T171700Z_req-1784135798879.json",
     "contentSha256": "17d37aea21c423532e25bdb2043eacd313a39f9093707cc506af3f6ea98e62d3",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/29435833248"
+  },
+  {
+    "versionId": "20260715T174418Z_req-1784137434744",
+    "publishedAt": "2026-07-15T17:44:18.897Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1784137434744",
+    "sourceRef": "main",
+    "summary": "Test remote draft 2",
+    "editTraceCount": 1,
+    "snapshotPath": "content-versions/snapshots/2026/20260715T174418Z_req-1784137434744.json",
+    "contentSha256": "30e3bde0477a382fdc3a52c8c04e031e78b7ec9cf1375879650217432dba2bb3",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/29437702018"
   }
 ]
