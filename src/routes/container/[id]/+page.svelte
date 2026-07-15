@@ -1,6 +1,6 @@
 <script>
     import "../../global.css"; // Import global CSS
-    import { isAdmin, isCreateMode } from "../../stores";
+    import { beginEditSession, isAdmin, isCreateMode } from "../../stores";
     import { isEditMode } from "../../stores";
     import { onDestroy } from "svelte";
     import DataRow from "$lib/DataRow.svelte";
@@ -31,7 +31,11 @@
         unsubscribeIsEditMode();
     });
 
-    function setEditMode() {
+    async function setEditMode() {
+        if (typeof $beginEditSession === 'function') {
+            await $beginEditSession();
+            return;
+        }
         isEditMode.set(true);
     }
 

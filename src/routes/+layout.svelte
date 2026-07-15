@@ -14,8 +14,7 @@
   import { pauseEditorRender } from './stores';
  
   import lunr from 'lunr';
-  import { setGlobalFunctions } from './stores';
-    import { form } from '$app/server';
+  import { setBeginEditSession, setGlobalFunctions } from './stores';
 
   /**
    * @param {any} value
@@ -355,6 +354,8 @@
     removeEditTrace
   });
 
+  setBeginEditSession(beginRemoteEditSession);
+
 
   let publicIndexData = $state({
     tests: [],
@@ -681,6 +682,15 @@
   let publishInProgress = $state(false);
   let publishStatusMessage = $state('');
   let publishActionsUrl = $state('');
+  let draftStatusMessage = $state('');
+  let draftRevision = $state(0);
+  let draftSaveInProgress = $state(false);
+  let draftLoadInProgress = $state(false);
+  let draftReady = $state(false);
+  let suppressDraftAutosave = $state(false);
+  let draftLastUpdatedAt = $state('');
+  let draftLastUpdatedBy = $state('');
+  let draftAutosaveTimer = null;
   let syncCheckEnabled = $state(false);
   let syncStatus = $state('idle');
   let syncStatusMessage = $state('');
@@ -688,6 +698,47 @@
   let productionVersion = $state(null);
   let syncCheckTimer = null;
   const defaultPublishEndpoint = 'https://emanual-publish-api.rayyt2020.workers.dev/publish';
+
+  function deepCloneJSON(value) {
+    return JSON.parse(JSON.stringify(value));
+  }
+
+  function normalizeApiBase(rawValue) {
+    if (!rawValue) {
+      return '';
+    }
+
+    let value = rawValue.trim();
+    if (!/^https?:\/\//i.test(value)) {
+      value = `https://${value}`;
+    }
+
+    value = value.replace(/\/$/, '');
+    if (value.endsWith('/publish')) {
+      return value.slice(0, -('/publish'.length));
+    }
+
+    return value;
+  }
+
+  function endpointFromBase(apiBase, route) {
+    return `${apiBase.replace(/\/$/, '')}${route}`;
+  }
+
+  function getSavedApiBase() {
+    const directBase = localStorage.getItem('publishApiBase') || '';
+    if (directBase) {
+      return normalizeApiBase(directBase);
+    }
+
+    const publishUrl = localStorage.getItem('publishApiUrl') || defaultPublishEndpoint;
+    return normalizeApiBase(publishUrl);
+  }
+
+  function persistApiBase(apiBase) {
+    localStorage.setItem('publishApiBase', apiBase);
+    localStorage.setItem('publishApiUrl', endpointFromBase(apiBase, '/publish'));
+  }
 
   function normalizeVersionUrl(rawValue) {
     return (rawValue || '').trim();
@@ -841,20 +892,209 @@
   }
 
   function normalizePublishEndpoint(rawValue) {
-    if (!rawValue) {
+    const apiBase = normalizeApiBase(rawValue);
+    return apiBase ? endpointFromBase(apiBase, '/publish') : '';
+  }
+
+  async function ensureApiBaseInteractive() {
+    const defaultEndpoint = localStorage.getItem('publishApiUrl') || defaultPublishEndpoint;
+    const endpointInput = window.prompt(
+      'Enter the publish API endpoint URL (Cloudflare Worker URL or /publish endpoint):',
+      defaultEndpoint
+    );
+
+    if (!endpointInput) {
       return '';
     }
 
-    let value = rawValue.trim();
-    if (!/^https?:\/\//i.test(value)) {
-      value = `https://${value}`;
+    const apiBase = normalizeApiBase(endpointInput);
+    if (!apiBase) {
+      return '';
     }
 
-    if (!value.endsWith('/publish')) {
-      value = `${value.replace(/\/$/, '')}/publish`;
+    persistApiBase(apiBase);
+    return apiBase;
+  }
+
+  async function ensureSecretInteractive() {
+    const existingSecret = sessionStorage.getItem('publishApiSecret') || '';
+    const secretInput = window.prompt(
+      'Enter the publish API bearer secret. It will be kept only for this browser tab.',
+      existingSecret
+    );
+
+    if (!secretInput) {
+      return '';
     }
 
-    return value;
+    sessionStorage.setItem('publishApiSecret', secretInput);
+    return secretInput;
+  }
+
+  function getPublisherName() {
+    return (localStorage.getItem('publishAdminName') || '').trim();
+  }
+
+  function getDraftLoadEndpoint() {
+    const apiBase = getSavedApiBase();
+    return apiBase ? endpointFromBase(apiBase, '/draft/load') : '';
+  }
+
+  function getDraftSaveEndpoint() {
+    const apiBase = getSavedApiBase();
+    return apiBase ? endpointFromBase(apiBase, '/draft/save') : '';
+  }
+
+  async function beginRemoteEditSession() {
+    if (!$isAdmin) {
+      isEditMode.set(true);
+      return;
+    }
+
+    if (draftLoadInProgress) {
+      return;
+    }
+
+    const apiBase = await ensureApiBaseInteractive();
+    if (!apiBase) {
+      return;
+    }
+
+    const secret = await ensureSecretInteractive();
+    if (!secret) {
+      return;
+    }
+
+    draftLoadInProgress = true;
+    draftStatusMessage = 'Loading remote draft...';
+
+    try {
+      const response = await fetch(endpointFromBase(apiBase, '/draft/load'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({ _secret: secret })
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        const details = result?.details ? `\n\nDetails: ${result.details}` : '';
+        throw new Error((result?.error || `HTTP ${response.status}`) + details);
+      }
+
+      suppressDraftAutosave = true;
+      if (result.exists && result.editedJSON) {
+        editedJSON.set(deepCloneJSON(result.editedJSON));
+        draftRevision = Number(result.revision || 0);
+        draftLastUpdatedAt = result.updatedAt || '';
+        draftLastUpdatedBy = result.updatedBy || '';
+        draftStatusMessage = `Remote draft loaded (rev ${draftRevision}).`;
+      } else {
+        editedJSON.set(deepCloneJSON(initialJSON));
+        draftRevision = 0;
+        draftLastUpdatedAt = '';
+        draftLastUpdatedBy = '';
+        draftStatusMessage = 'No remote draft found. Started a new draft from published content.';
+      }
+
+      draftReady = true;
+      isEditMode.set(true);
+      queueMicrotask(() => {
+        suppressDraftAutosave = false;
+      });
+    } catch (error) {
+      draftStatusMessage = 'Failed to load remote draft.';
+      alert(`Failed to load remote draft: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    } finally {
+      draftLoadInProgress = false;
+    }
+  }
+
+  async function saveRemoteDraft(reason = 'autosave', options = {}) {
+    if (!$isAdmin || !$isEditMode || !draftReady) {
+      return false;
+    }
+
+    if (draftSaveInProgress && reason === 'autosave') {
+      return false;
+    }
+
+    const interactive = options.interactive === true;
+    const showAlertOnError = options.showAlertOnError === true;
+
+    let saveEndpoint = getDraftSaveEndpoint();
+    if (!saveEndpoint && interactive) {
+      const apiBase = await ensureApiBaseInteractive();
+      if (apiBase) {
+        saveEndpoint = endpointFromBase(apiBase, '/draft/save');
+      }
+    }
+
+    if (!saveEndpoint) {
+      draftStatusMessage = 'Draft save skipped: publish API endpoint is not configured.';
+      return false;
+    }
+
+    let secret = sessionStorage.getItem('publishApiSecret') || '';
+    if (!secret && interactive) {
+      secret = await ensureSecretInteractive();
+    }
+
+    if (!secret) {
+      draftStatusMessage = 'Draft save skipped: publish API secret is not configured.';
+      return false;
+    }
+
+    draftSaveInProgress = true;
+    if (reason !== 'autosave') {
+      draftStatusMessage = 'Saving remote draft...';
+    }
+
+    try {
+      const editorId = getPublisherName() || 'admin-editor';
+      const response = await fetch(saveEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({
+          _secret: secret,
+          editedJSON: $editedJSON,
+          expectedRevision: draftRevision,
+          editorId
+        })
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (response.status === 409 || result?.code === 'REVISION_CONFLICT') {
+        draftStatusMessage = `Remote draft conflict. Latest is rev ${result?.currentRevision ?? 'unknown'} by ${result?.updatedBy || 'another user'}. Reload edit mode to continue.`;
+        return false;
+      }
+
+      if (!response.ok || !result.ok) {
+        const details = result?.details ? `\n\nDetails: ${result.details}` : '';
+        throw new Error((result?.error || `HTTP ${response.status}`) + details);
+      }
+
+      draftRevision = Number(result.revision || draftRevision);
+      draftLastUpdatedAt = result.updatedAt || '';
+      draftLastUpdatedBy = result.updatedBy || editorId;
+      draftStatusMessage = `Remote draft saved (rev ${draftRevision}).`;
+      return true;
+    } catch (error) {
+      draftStatusMessage = 'Remote draft save failed.';
+      if (showAlertOnError) {
+        alert(`Failed to save remote draft: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+      return false;
+    } finally {
+      draftSaveInProgress = false;
+    }
+  }
+
+  async function saveDraftNowListener() {
+    await saveRemoteDraft('manual', { interactive: true, showAlertOnError: true });
   }
 
   async function publishChangesListener() {
@@ -867,30 +1107,15 @@
       return;
     }
 
-    const defaultEndpoint = localStorage.getItem('publishApiUrl') || defaultPublishEndpoint;
-    const endpointInput = window.prompt(
-      'Enter the publish API endpoint URL (Cloudflare Worker URL or /publish endpoint):',
-      defaultEndpoint
-    );
-
-    if (!endpointInput) {
+    const apiBase = await ensureApiBaseInteractive();
+    if (!apiBase) {
       return;
     }
 
-    const endpoint = normalizePublishEndpoint(endpointInput);
-    localStorage.setItem('publishApiUrl', endpoint);
-
-    const existingSecret = sessionStorage.getItem('publishApiSecret') || '';
-    const secretInput = window.prompt(
-      'Enter the publish API bearer secret. It will be kept only for this browser tab.',
-      existingSecret
-    );
-
+    const secretInput = await ensureSecretInteractive();
     if (!secretInput) {
       return;
     }
-
-    sessionStorage.setItem('publishApiSecret', secretInput);
 
     const existingPublisherName = localStorage.getItem('publishAdminName') || '';
     const publisherNameInput = window.prompt(
@@ -913,7 +1138,13 @@
     const publishSummaryInput = window.prompt('Describe this publish (optional, press Cancel to skip):', '');
     const publishSummary = publishSummaryInput !== null ? publishSummaryInput.trim() : '';
 
-    if (!window.confirm('Publish the current edited JSON to GitHub Actions?')) {
+    if (!window.confirm('Publish the current remote draft to GitHub Actions?')) {
+      return;
+    }
+
+    const manualSaveOk = await saveRemoteDraft('pre-publish', { interactive: false, showAlertOnError: true });
+    if (!manualSaveOk) {
+      alert('Publish stopped because the latest draft could not be saved to remote storage.');
       return;
     }
 
@@ -921,18 +1152,16 @@
     publishStatusMessage = 'Publishing...';
 
     try {
-      // Send as text/plain to avoid CORS preflight; secret goes in body as _secret
-      const response = await fetch(endpoint, {
+      const response = await fetch(endpointFromBase(apiBase, '/publish'), {
         method: 'POST',
         headers: {
-          'Content-Type': 'text/plain',
+          'Content-Type': 'text/plain'
         },
         body: JSON.stringify({
           _secret: secretInput,
-          editedJSON: $editedJSON,
           adminId: publisherName,
           publishSummary,
-          commitMessage: `chore: publish editedJSON from UI (${new Date().toISOString()})`
+          commitMessage: `chore: publish remote draft (${new Date().toISOString()})`
         })
       });
 
@@ -961,8 +1190,37 @@
     startSyncPolling();
   });
 
+  $effect(() => {
+    const draftSnapshot = $editedJSON;
+
+    if (!$isAdmin || !$isEditMode || !draftReady || suppressDraftAutosave) {
+      if (draftAutosaveTimer) {
+        clearTimeout(draftAutosaveTimer);
+        draftAutosaveTimer = null;
+      }
+      return;
+    }
+
+    if (draftAutosaveTimer) {
+      clearTimeout(draftAutosaveTimer);
+      draftAutosaveTimer = null;
+    }
+
+    if (!draftSnapshot || draftSaveInProgress) {
+      return;
+    }
+
+    draftAutosaveTimer = window.setTimeout(() => {
+      void saveRemoteDraft('autosave', { interactive: false, showAlertOnError: false });
+    }, 20000);
+  });
+
   onDestroy(() => {
     stopSyncPolling();
+    if (draftAutosaveTimer) {
+      clearTimeout(draftAutosaveTimer);
+      draftAutosaveTimer = null;
+    }
   });
 
   let searchResultsDetails = $derived.by(() => {
@@ -1668,7 +1926,8 @@
           <div class="nav-tools-menu">
             <button id="exportButton" type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1">Save Changes</button>
             <button id="exportReviewExcelButton" type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1">Export Review Excel</button>
-            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={publishChangesListener} disabled={publishInProgress}>{publishInProgress ? 'Publishing...' : 'Publish Site'}</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={saveDraftNowListener} disabled={draftSaveInProgress || draftLoadInProgress || !$isEditMode}>{draftSaveInProgress ? 'Saving Draft...' : 'Save Remote Draft'}</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={publishChangesListener} disabled={publishInProgress || draftLoadInProgress || !$isEditMode}>{publishInProgress ? 'Publishing...' : 'Publish Site'}</button>
             {#if syncCheckEnabled}
             <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={configurePredeployVersionUrl}>Set Pre-deploy URL</button>
             {/if}
@@ -1695,6 +1954,14 @@
       
     </ul>
   </header>
+  {#if draftStatusMessage}
+  <div class="small text-muted mb-1">
+    {draftStatusMessage}
+    {#if draftLastUpdatedAt}
+      ({draftLastUpdatedBy || 'unknown'} at {draftLastUpdatedAt})
+    {/if}
+  </div>
+  {/if}
   {#if publishStatusMessage}
   <div class="small text-muted mb-2">
     {publishStatusMessage}

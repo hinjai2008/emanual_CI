@@ -6,7 +6,7 @@
     import { isCreateMode } from "../../stores";
     import { onDestroy } from "svelte";
     import DataRow from "$lib/DataRow.svelte";
-    import { editedJSON, globalFunctions } from "../../stores";
+    import { beginEditSession, editedJSON, globalFunctions } from "../../stores";
     import { page } from "$app/state";
 
 
@@ -41,7 +41,11 @@
         unsubscribeIsEditMode();
     });
 
-    function setEditMode() {
+    async function setEditMode() {
+        if (typeof $beginEditSession === 'function') {
+            await $beginEditSession();
+            return;
+        }
         isEditMode.set(true);
     }
 

@@ -10,4 +10,9 @@ GH_WORKFLOW_FILE = "content-build-handoff.yml"
 GH_REF = "main"
 # For strict security, set your app origin instead of *
 ALLOWED_ORIGIN = "*"
+DRAFT_KEY = "drafts/shared/latest.json"
+
+[[r2_buckets]]
+binding = "DRAFTS_BUCKET"
+bucket_name = "emanual-drafts"
  

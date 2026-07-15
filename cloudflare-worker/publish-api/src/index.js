@@ -1,9 +1,23 @@
 /**
  * Cloudflare Worker: Publish endpoint for eManual
  *
+ * POST /draft/load
+ * Body: { _secret: string }
+ *
+ * POST /draft/save
+ * Body: {
+ *   _secret: string,
+ *   editedJSON: object,
+ *   expectedRevision?: number,
+ *   editorId?: string
+ * }
+ *
+ * POST /draft/discard
+ * Body: { _secret: string, expectedRevision?: number, editorId?: string }
+ *
  * POST /publish
  * Body: {
- *   editedJSON: object,
+ *   _secret: string,
  *   requestId?: string,
  *   adminId?: string,
  *   publishSummary?: string,
@@ -23,6 +37,7 @@
  * - GH_WORKFLOW_FILE       (default: content-build-handoff.yml)
  * - GH_REF                 (default: gh-pages)
  * - ALLOWED_ORIGIN         (default: *)
+ * - DRAFT_KEY              (default: drafts/shared/latest.json)
  */
 
 export default {
@@ -39,7 +54,10 @@ export default {
       return json({ ok: true, service: 'publish-api' }, 200, corsHeaders);
     }
 
-    if (url.pathname !== '/publish' || request.method !== 'POST') {
+    const supportsBody = request.method === 'POST';
+    const route = url.pathname;
+
+    if (!supportsBody || !isSupportedRoute(route)) {
       return json({ ok: false, error: 'Not found' }, 404, corsHeaders);
     }
 
@@ -61,22 +79,44 @@ export default {
       return json({ ok: false, error: 'Unauthorized' }, 401, corsHeaders);
     }
 
-    const editedJSON = body?.editedJSON;
+    if (!env.DRAFTS_BUCKET) {
+      return json(
+        {
+          ok: false,
+          error: 'Worker env missing DRAFTS_BUCKET R2 binding'
+        },
+        500,
+        corsHeaders
+      );
+    }
+
+    if (route === '/draft/load') {
+      return handleDraftLoad(env, corsHeaders);
+    }
+
+    if (route === '/draft/save') {
+      return handleDraftSave(body, env, corsHeaders);
+    }
+
+    if (route === '/draft/discard') {
+      return handleDraftDiscard(body, env, corsHeaders);
+    }
+
     const requestId = String(body?.requestId || `req-${Date.now()}`);
     const adminId = String(body?.adminId || 'ui-admin');
     const publishSummary = String(body?.publishSummary || '');
-    const commitMessage = String(body?.commitMessage || `chore: update rawData.json (${requestId})`);  
+    const commitMessage = String(body?.commitMessage || `chore: update rawData.json (${requestId})`);
 
-    if (!editedJSON || typeof editedJSON !== 'object') {
-      return json({ ok: false, error: 'editedJSON is required' }, 400, corsHeaders);
+    const draftEnvelope = await readDraftEnvelope(env);
+    if (!draftEnvelope.exists) {
+      return json({ ok: false, error: 'No remote draft available to publish' }, 400, corsHeaders);
     }
 
-    // Basic shape validation
-    const requiredKeys = ['config', 'testData', 'formData', 'containerData'];
-    for (const key of requiredKeys) {
-      if (!(key in editedJSON)) {
-        return json({ ok: false, error: `editedJSON missing key: ${key}` }, 400, corsHeaders);
-      }
+    const editedJSON = draftEnvelope.editedJSON;
+
+    const validationError = validateEditedJsonShape(editedJSON);
+    if (validationError) {
+      return json({ ok: false, error: validationError }, 400, corsHeaders);
     }
 
     // 3) Build workflow dispatch payload
@@ -159,6 +199,7 @@ export default {
         message: 'Content build workflow dispatched',
         workflow: workflowFile,
         requestId,
+        draftRevision: draftEnvelope.revision,
         actionsUrl
       },
       202,
@@ -174,6 +215,15 @@ function buildCorsHeaders(allowedOrigin) {
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Allow-Credentials': 'false'
   };
+}
+
+function isSupportedRoute(pathname) {
+  return (
+    pathname === '/publish' ||
+    pathname === '/draft/load' ||
+    pathname === '/draft/save' ||
+    pathname === '/draft/discard'
+  );
 }
 
 function json(payload, status = 200, extraHeaders = {}) {
@@ -238,6 +288,165 @@ async function upsertRawDataFile(env, owner, repo, ref, contentBase64, commitMes
     method: 'PUT',
     body: JSON.stringify(payload)
   });
+}
+
+function draftObjectKey(env) {
+  return env.DRAFT_KEY || 'drafts/shared/latest.json';
+}
+
+async function readDraftEnvelope(env) {
+  const key = draftObjectKey(env);
+  const object = await env.DRAFTS_BUCKET.get(key);
+  if (!object) {
+    return { exists: false };
+  }
+
+  let payload;
+  try {
+    payload = await object.json();
+  } catch {
+    return { exists: false, invalid: true };
+  }
+
+  const revision = Number(payload?.revision || 0);
+  return {
+    exists: true,
+    revision,
+    updatedAt: payload?.updatedAt || null,
+    updatedBy: payload?.updatedBy || null,
+    editedJSON: payload?.editedJSON || null
+  };
+}
+
+function validateEditedJsonShape(editedJSON) {
+  if (!editedJSON || typeof editedJSON !== 'object') {
+    return 'editedJSON is required';
+  }
+
+  const requiredKeys = ['config', 'testData', 'formData', 'containerData'];
+  for (const key of requiredKeys) {
+    if (!(key in editedJSON)) {
+      return `editedJSON missing key: ${key}`;
+    }
+  }
+
+  return '';
+}
+
+async function handleDraftLoad(env, corsHeaders) {
+  const current = await readDraftEnvelope(env);
+  if (!current.exists) {
+    return json({ ok: true, exists: false }, 200, corsHeaders);
+  }
+
+  if (current.invalid) {
+    return json({ ok: false, error: 'Stored draft is invalid JSON' }, 500, corsHeaders);
+  }
+
+  return json(
+    {
+      ok: true,
+      exists: true,
+      revision: current.revision,
+      updatedAt: current.updatedAt,
+      updatedBy: current.updatedBy,
+      editedJSON: current.editedJSON
+    },
+    200,
+    corsHeaders
+  );
+}
+
+async function handleDraftSave(body, env, corsHeaders) {
+  const editedJSON = body?.editedJSON;
+  const expectedRevision = Number(body?.expectedRevision ?? 0);
+  const editorId = String(body?.editorId || 'unknown-editor');
+
+  const validationError = validateEditedJsonShape(editedJSON);
+  if (validationError) {
+    return json({ ok: false, error: validationError }, 400, corsHeaders);
+  }
+
+  const current = await readDraftEnvelope(env);
+  const currentRevision = current.exists ? Number(current.revision || 0) : 0;
+
+  if (expectedRevision !== currentRevision) {
+    return json(
+      {
+        ok: false,
+        error: 'Revision conflict',
+        code: 'REVISION_CONFLICT',
+        currentRevision,
+        updatedAt: current.updatedAt || null,
+        updatedBy: current.updatedBy || null
+      },
+      409,
+      corsHeaders
+    );
+  }
+
+  const nextRevision = currentRevision + 1;
+  const updatedAt = new Date().toISOString();
+  const payload = {
+    revision: nextRevision,
+    updatedAt,
+    updatedBy: editorId,
+    editedJSON
+  };
+
+  await env.DRAFTS_BUCKET.put(draftObjectKey(env), JSON.stringify(payload), {
+    httpMetadata: {
+      contentType: 'application/json; charset=utf-8'
+    }
+  });
+
+  return json(
+    {
+      ok: true,
+      revision: nextRevision,
+      updatedAt,
+      updatedBy: editorId
+    },
+    200,
+    corsHeaders
+  );
+}
+
+async function handleDraftDiscard(body, env, corsHeaders) {
+  const expectedRevision = body?.expectedRevision;
+  const editorId = String(body?.editorId || 'unknown-editor');
+  const current = await readDraftEnvelope(env);
+
+  if (!current.exists) {
+    return json({ ok: true, discarded: false, message: 'No draft to discard' }, 200, corsHeaders);
+  }
+
+  if (expectedRevision !== undefined && Number(expectedRevision) !== Number(current.revision || 0)) {
+    return json(
+      {
+        ok: false,
+        error: 'Revision conflict',
+        code: 'REVISION_CONFLICT',
+        currentRevision: Number(current.revision || 0),
+        updatedAt: current.updatedAt || null,
+        updatedBy: current.updatedBy || null
+      },
+      409,
+      corsHeaders
+    );
+  }
+
+  await env.DRAFTS_BUCKET.delete(draftObjectKey(env));
+  return json(
+    {
+      ok: true,
+      discarded: true,
+      discardedBy: editorId,
+      discardedAt: new Date().toISOString()
+    },
+    200,
+    corsHeaders
+  );
 }
 
 function bytesToBase64(bytes) {
