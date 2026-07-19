@@ -693,14 +693,12 @@
   let issuesUpdatedBy = $state('');
   let issuesLoadedForSession = $state(false);
   let issueLogs = $state([]);
-  let issueDraftById = $state({});
   let issueActionInputById = $state({});
+  let issueActionTypeById = $state({});
+  let showResolvedClosedInPanel = $state(false);
   let newIssueTitle = $state('');
   let newIssueDescription = $state('');
-  let newIssueStatus = $state('open');
   let newIssueRefsInput = $state('');
-  let newIssueTargetDate = $state('');
-  let newIssueClosureDate = $state('');
 
   function deepCloneJSON(value) {
     return JSON.parse(JSON.stringify(value));
@@ -798,7 +796,7 @@
 
     const predeployVersionUrl = normalizeVersionUrl(
       localStorage.getItem('predeployContentVersionUrl') || defaultPredeployVersionUrl()
-    );
+    );  
     if (!predeployVersionUrl) {
       syncStatus = 'idle';
       syncStatusMessage = '';
@@ -1091,8 +1089,8 @@
     staffLoginError = '';
     issuesLoadedForSession = false;
     issueLogs = [];
-    issueDraftById = {};
     issueActionInputById = {};
+    issueActionTypeById = {};
     issuesStatusMessage = '';
     issuesErrorMessage = '';
   }
@@ -1174,38 +1172,21 @@
       .join(', ');
   }
 
-  function setIssueDraftMap(issues) {
-    const nextDraftMap = {};
+  function setIssueActionMaps(issues) {
     const nextActionInputMap = {};
+    const nextActionTypeMap = {};
 
     for (const issue of issues) {
       const issueId = String(issue?.id || '');
       if (!issueId) {
         continue;
       }
-      nextDraftMap[issueId] = {
-        title: String(issue?.title || ''),
-        description: String(issue?.description || ''),
-        status: String(issue?.status || 'open'),
-        targetDate: String(issue?.targetDate || ''),
-        closureDate: String(issue?.closureDate || ''),
-        refsInput: stringifyEntryRefs(issue?.entryRefs)
-      };
-      nextActionInputMap[issueId] = '';
+      nextActionInputMap[issueId] = issueActionInputById[issueId] || '';
+      nextActionTypeMap[issueId] = issueActionTypeById[issueId] || '';
     }
 
-    issueDraftById = nextDraftMap;
     issueActionInputById = nextActionInputMap;
-  }
-
-  function updateIssueDraftField(issueId, fieldName, value) {
-    issueDraftById = {
-      ...issueDraftById,
-      [issueId]: {
-        ...(issueDraftById[issueId] || {}),
-        [fieldName]: value
-      }
-    };
+    issueActionTypeById = nextActionTypeMap;
   }
 
   function updateIssueActionInput(issueId, value) {
@@ -1215,13 +1196,133 @@
     };
   }
 
+  function updateIssueActionType(issueId, value) {
+    issueActionTypeById = {
+      ...issueActionTypeById,
+      [issueId]: value
+    };
+  }
+
+  function issueIsTerminal(statusValue) {
+    const normalized = String(statusValue || '').toLowerCase();
+    return normalized === 'closed' || normalized === 'resolved';
+  }
+
+  function getIssueStatusFromAction(actionType) {
+    if (actionType === 'follow-up') {
+      return 'in-progress';
+    }
+    if (actionType === 'resolve') {
+      return 'resolved';
+    }
+    if (actionType === 'close') {
+      return 'closed';
+    }
+    return null;
+  }
+
+  function beginIssueAction(issueId, actionType, currentStatus) {
+    if (issueIsTerminal(currentStatus) && actionType !== 'comment') {
+      issuesErrorMessage = 'Only comment action is allowed for closed or resolved issues.';
+      return;
+    }
+    issuesErrorMessage = '';
+    updateIssueActionType(issueId, actionType);
+  }
+
+  function normalizeIssueRecord(issue) {
+    return {
+      ...issue,
+      id: String(issue?.id || ''),
+      status: String(issue?.status || 'open'),
+      entryRefs: Array.isArray(issue?.entryRefs) ? issue.entryRefs : [],
+      actions: Array.isArray(issue?.actions) ? issue.actions : [],
+      timeline: Array.isArray(issue?.timeline) ? issue.timeline : []
+    };
+  }
+
+  function applyIssueMutation(result, options = {}) {
+    const normalizedIssue = result?.issue ? normalizeIssueRecord(result.issue) : null;
+    const shouldPrepend = options.prepend === true;
+
+    if (normalizedIssue) {
+      const existingIndex = issueLogs.findIndex((issue) => String(issue?.id || '') === normalizedIssue.id);
+      const nextIssues = [...issueLogs];
+
+      if (existingIndex === -1) {
+        if (shouldPrepend) {
+          nextIssues.unshift(normalizedIssue);
+        } else {
+          nextIssues.push(normalizedIssue);
+        }
+      } else {
+        nextIssues[existingIndex] = normalizedIssue;
+      }
+
+      issueLogs = nextIssues;
+    }
+
+    issuesRevision = Number(result?.revision || issuesRevision);
+    issuesUpdatedAt = String(result?.updatedAt || issuesUpdatedAt || '');
+    issuesUpdatedBy = String(result?.updatedBy || issuesUpdatedBy || '');
+    issuesLoadedForSession = true;
+    setIssueActionMaps(issueLogs);
+  }
+
+  function getIssueStatusBadgeClass(statusValue) {
+    const normalized = String(statusValue || '').toLowerCase();
+    if (normalized === 'open') {
+      return 'text-bg-danger';
+    }
+    if (normalized === 'in-progress') {
+      return 'text-bg-warning';
+    }
+    if (normalized === 'resolved') {
+      return 'text-bg-success';
+    }
+    if (normalized === 'closed') {
+      return 'text-bg-secondary';
+    }
+    return 'text-bg-light';
+  }
+
+  function getIssueActionButtonClass(actionType) {
+    if (actionType === 'comment') {
+      return 'btn-outline-secondary';
+    }
+    if (actionType === 'follow-up') {
+      return 'btn-outline-primary';
+    }
+    if (actionType === 'resolve') {
+      return 'btn-outline-success';
+    }
+    if (actionType === 'close') {
+      return 'btn-outline-dark';
+    }
+    return 'btn-outline-secondary';
+  }
+
+  function getTimelineEventClass(eventType) {
+    const normalized = String(eventType || '').toLowerCase();
+    if (normalized === 'created') {
+      return 'issue-timeline-event-created';
+    }
+    if (normalized === 'updated') {
+      return 'issue-timeline-event-updated';
+    }
+    if (normalized === 'action-added' || normalized === 'action-updated') {
+      return 'issue-timeline-event-action';
+    }
+    return '';
+  }
+
   function setIssueEnvelopeState(result) {
     const issues = Array.isArray(result?.issues) ? result.issues : [];
     issueLogs = issues;
     issuesRevision = Number(result?.revision || 0);
     issuesUpdatedAt = String(result?.updatedAt || '');
     issuesUpdatedBy = String(result?.updatedBy || '');
-    setIssueDraftMap(issues);
+    setIssueActionMaps(issues);
   }
 
   async function resolveIssueApiContext(interactive = false) {
@@ -1326,9 +1427,7 @@
           issue: {
             title,
             description: newIssueDescription,
-            status: newIssueStatus,
-            targetDate: newIssueTargetDate,
-            closureDate: newIssueClosureDate,
+            status: 'open',
             entryRefs: parseEntryRefsInput(newIssueRefsInput)
           }
         })
@@ -1339,13 +1438,10 @@
         throw new Error(result?.error || `HTTP ${response.status}`);
       }
 
-      await loadIssueLogs({ silent: true, interactive: false });
+      applyIssueMutation(result, { prepend: true });
       newIssueTitle = '';
       newIssueDescription = '';
-      newIssueStatus = 'open';
       newIssueRefsInput = '';
-      newIssueTargetDate = '';
-      newIssueClosureDate = '';
       issuesStatusMessage = 'Issue created.';
     } catch (error) {
       issuesErrorMessage = error instanceof Error ? error.message : 'Failed to create issue.';
@@ -1354,56 +1450,17 @@
     }
   }
 
-  async function saveIssueLog(issueId) {
-    const issueDraft = issueDraftById[issueId];
-    if (!issueDraft) {
+  async function submitIssueAction(issue, actionType) {
+    const issueId = String(issue?.id || '');
+    if (!issueId) {
       return;
     }
 
-    const issueApiContext = await resolveIssueApiContext(true);
-    if (!issueApiContext) {
-      issuesErrorMessage = 'Issue log endpoint or secret is not configured.';
+    if (issueIsTerminal(issue?.status) && actionType !== 'comment') {
+      issuesErrorMessage = 'Only comment action is allowed for closed or resolved issues.';
       return;
     }
 
-    issuesLoading = true;
-    issuesErrorMessage = '';
-    try {
-      const response = await fetch(endpointFromBase(issueApiContext.apiBase, '/issues/update'), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain'
-        },
-        body: JSON.stringify({
-          _secret: issueApiContext.secret,
-          actor: getPublisherName() || 'admin',
-          issueId,
-          patch: {
-            title: issueDraft.title,
-            description: issueDraft.description,
-            status: issueDraft.status,
-            targetDate: issueDraft.targetDate,
-            closureDate: issueDraft.closureDate,
-            entryRefs: parseEntryRefsInput(issueDraft.refsInput)
-          }
-        })
-      });
-
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok || !result.ok) {
-        throw new Error(result?.error || `HTTP ${response.status}`);
-      }
-
-      await loadIssueLogs({ silent: true, interactive: false });
-      issuesStatusMessage = `Issue ${issueId} saved.`;
-    } catch (error) {
-      issuesErrorMessage = error instanceof Error ? error.message : 'Failed to save issue.';
-    } finally {
-      issuesLoading = false;
-    }
-  }
-
-  async function addIssueAction(issueId) {
     const actionText = String(issueActionInputById[issueId] || '').trim();
     if (!actionText) {
       issuesErrorMessage = 'Action text is required.';
@@ -1429,8 +1486,8 @@
           actor: getPublisherName() || 'admin',
           issueId,
           action: {
-            text: actionText,
-            status: 'todo'
+            text: `[${actionType}] ${actionText}`,
+            status: 'done'
           }
         })
       });
@@ -1440,51 +1497,39 @@
         throw new Error(result?.error || `HTTP ${response.status}`);
       }
 
-      await loadIssueLogs({ silent: true, interactive: false });
+      let latestResult = result;
+
+      const nextStatus = getIssueStatusFromAction(actionType);
+      if (nextStatus && nextStatus !== String(issue?.status || '').toLowerCase()) {
+        const updateResponse = await fetch(endpointFromBase(issueApiContext.apiBase, '/issues/update'), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain'
+          },
+          body: JSON.stringify({
+            _secret: issueApiContext.secret,
+            actor: getPublisherName() || 'admin',
+            issueId,
+            patch: {
+              status: nextStatus
+            }
+          })
+        });
+
+        const updateResult = await updateResponse.json().catch(() => ({}));
+        if (!updateResponse.ok || !updateResult.ok) {
+          throw new Error(updateResult?.error || `HTTP ${updateResponse.status}`);
+        }
+
+        latestResult = updateResult;
+      }
+
+      applyIssueMutation(latestResult);
       updateIssueActionInput(issueId, '');
-      issuesStatusMessage = `Action added to ${issueId}.`;
+      updateIssueActionType(issueId, '');
+      issuesStatusMessage = `Action ${actionType} added to ${issueId}.`;
     } catch (error) {
       issuesErrorMessage = error instanceof Error ? error.message : 'Failed to add action.';
-    } finally {
-      issuesLoading = false;
-    }
-  }
-
-  async function toggleIssueActionStatus(issueId, actionId, nextStatus) {
-    const issueApiContext = await resolveIssueApiContext(true);
-    if (!issueApiContext) {
-      issuesErrorMessage = 'Issue log endpoint or secret is not configured.';
-      return;
-    }
-
-    issuesLoading = true;
-    issuesErrorMessage = '';
-    try {
-      const response = await fetch(endpointFromBase(issueApiContext.apiBase, '/issues/update-action'), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain'
-        },
-        body: JSON.stringify({
-          _secret: issueApiContext.secret,
-          actor: getPublisherName() || 'admin',
-          issueId,
-          actionId,
-          patch: {
-            status: nextStatus
-          }
-        })
-      });
-
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok || !result.ok) {
-        throw new Error(result?.error || `HTTP ${response.status}`);
-      }
-
-      await loadIssueLogs({ silent: true, interactive: false });
-      issuesStatusMessage = `Action ${actionId} updated.`;
-    } catch (error) {
-      issuesErrorMessage = error instanceof Error ? error.message : 'Failed to update action.';
     } finally {
       issuesLoading = false;
     }
@@ -1496,14 +1541,28 @@
       return [];
     }
 
-    return issueLogs.filter((issue) =>
-      Array.isArray(issue?.entryRefs) &&
-      issue.entryRefs.some((ref) => ref?.type === context.entryType && Number(ref?.id) === context.entryId)
-    );
+    return issueLogs.filter((issue) => {
+      const status = String(issue?.status || '').toLowerCase();
+      if (!showResolvedClosedInPanel && (status === 'resolved' || status === 'closed')) {
+        return false;
+      }
+
+      return (
+        Array.isArray(issue?.entryRefs) &&
+        issue.entryRefs.some((ref) => ref?.type === context.entryType && Number(ref?.id) === context.entryId)
+      );
+    });
   });
 
   let generalIssues = $derived.by(() => {
-    return issueLogs.filter((issue) => !Array.isArray(issue?.entryRefs) || issue.entryRefs.length === 0);
+    return issueLogs.filter((issue) => {
+      const status = String(issue?.status || '').toLowerCase();
+      if (!showResolvedClosedInPanel && (status === 'resolved' || status === 'closed')) {
+        return false;
+      }
+
+      return !Array.isArray(issue?.entryRefs) || issue.entryRefs.length === 0;
+    });
   });
 
   async function beginRemoteEditSession() {
@@ -2493,6 +2552,10 @@
       <li class="nav-item ms-2 d-flex align-items-center">
         <span class="badge text-bg-primary">Admin: {getPublisherName() || 'signed in'}</span>
       </li>
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <button type="button" class="btn btn-outline-info btn-sm" onclick={() => issuesPanelOpen = true}>Issues Panel</button>
+      </li>
+      <li class="nav-item"><a href="{base}/issues" class="nav-link active ms-2">Issues</a></li>
       <li class="nav-item ms-2 nav-tools-wrapper">
         <details class="nav-tools">
           <summary class="nav-link active">Admin Tools</summary>
@@ -2537,143 +2600,6 @@
       
     </ul>
   </header>
-      {#if $isAdmin}
-      <div class="card border-info mb-2">
-        <div class="card-body py-3">
-          <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
-            <h6 class="mb-0">Issue Log</h6>
-            <div class="d-flex gap-2">
-              <button type="button" class="btn btn-outline-info btn-sm" onclick={() => issuesPanelOpen = !issuesPanelOpen}>{issuesPanelOpen ? 'Hide' : 'Show'} issues</button>
-              <button type="button" class="btn btn-outline-secondary btn-sm" onclick={() => loadIssueLogs({ interactive: true })} disabled={issuesLoading}>{issuesLoading ? 'Loading...' : 'Refresh'}</button>
-            </div>
-          </div>
-
-          {#if issuesStatusMessage}
-          <div class="small text-muted mb-1">{issuesStatusMessage}</div>
-          {/if}
-          {#if issuesUpdatedAt}
-          <div class="small text-muted mb-1">Updated by {issuesUpdatedBy || 'unknown'} at {issuesUpdatedAt}</div>
-          {/if}
-          {#if issuesErrorMessage}
-          <div class="small text-danger mb-2">{issuesErrorMessage}</div>
-          {/if}
-
-          {#if issuesPanelOpen}
-          <div class="border rounded p-2 mb-3 bg-light-subtle">
-            <div class="fw-semibold mb-2">Create issue</div>
-            <div class="row g-2">
-              <div class="col-md-4">
-                <input class="form-control form-control-sm" bind:value={newIssueTitle} placeholder="Issue title">
-              </div>
-              <div class="col-md-2">
-                <select class="form-select form-select-sm" bind:value={newIssueStatus}>
-                  <option value="open">open</option>
-                  <option value="in-progress">in-progress</option>
-                  <option value="blocked">blocked</option>
-                  <option value="resolved">resolved</option>
-                  <option value="closed">closed</option>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <input class="form-control form-control-sm" bind:value={newIssueRefsInput} placeholder="Refs: test/12, form/7">
-              </div>
-              <div class="col-md-1">
-                <input class="form-control form-control-sm" bind:value={newIssueTargetDate} type="date" title="Target date">
-              </div>
-              <div class="col-md-1">
-                <input class="form-control form-control-sm" bind:value={newIssueClosureDate} type="date" title="Closure date">
-              </div>
-              <div class="col-md-1 d-grid">
-                <button type="button" class="btn btn-sm btn-info" onclick={createIssueLog} disabled={issuesLoading}>Add</button>
-              </div>
-              <div class="col-12">
-                <textarea class="form-control form-control-sm" bind:value={newIssueDescription} rows="2" placeholder="Issue description"></textarea>
-              </div>
-            </div>
-          </div>
-
-          {#if currentEntryIssues.length > 0}
-          <div class="mb-3">
-            <div class="fw-semibold mb-2">Current entry issues</div>
-            {#each currentEntryIssues as issue}
-              <div class="border rounded p-2 mb-2">
-                <div class="small text-muted mb-1">{issue.id}</div>
-                <div class="row g-2">
-                  <div class="col-md-4">
-                    <input class="form-control form-control-sm" value={issueDraftById[issue.id]?.title || issue.title || ''} oninput={(e) => updateIssueDraftField(issue.id, 'title', e.currentTarget.value)}>
-                  </div>
-                  <div class="col-md-2">
-                    <select class="form-select form-select-sm" value={issueDraftById[issue.id]?.status || issue.status || 'open'} onchange={(e) => updateIssueDraftField(issue.id, 'status', e.currentTarget.value)}>
-                      <option value="open">open</option>
-                      <option value="in-progress">in-progress</option>
-                      <option value="blocked">blocked</option>
-                      <option value="resolved">resolved</option>
-                      <option value="closed">closed</option>
-                    </select>
-                  </div>
-                  <div class="col-md-3">
-                    <input class="form-control form-control-sm" value={issueDraftById[issue.id]?.refsInput || stringifyEntryRefs(issue.entryRefs)} oninput={(e) => updateIssueDraftField(issue.id, 'refsInput', e.currentTarget.value)}>
-                  </div>
-                  <div class="col-md-1">
-                    <input class="form-control form-control-sm" type="date" value={issueDraftById[issue.id]?.targetDate || issue.targetDate || ''} oninput={(e) => updateIssueDraftField(issue.id, 'targetDate', e.currentTarget.value)}>
-                  </div>
-                  <div class="col-md-1">
-                    <input class="form-control form-control-sm" type="date" value={issueDraftById[issue.id]?.closureDate || issue.closureDate || ''} oninput={(e) => updateIssueDraftField(issue.id, 'closureDate', e.currentTarget.value)}>
-                  </div>
-                  <div class="col-md-1 d-grid">
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick={() => saveIssueLog(issue.id)} disabled={issuesLoading}>Save</button>
-                  </div>
-                  <div class="col-12">
-                    <textarea class="form-control form-control-sm" rows="2" oninput={(e) => updateIssueDraftField(issue.id, 'description', e.currentTarget.value)}>{issueDraftById[issue.id]?.description || issue.description || ''}</textarea>
-                  </div>
-                  <div class="col-12">
-                    <div class="small fw-semibold mb-1">Follow-up actions</div>
-                    {#if Array.isArray(issue.actions) && issue.actions.length > 0}
-                      {#each issue.actions as action}
-                      <div class="d-flex align-items-center gap-2 mb-1 small">
-                        <button type="button" class="btn btn-sm {action.status === 'done' ? 'btn-success' : 'btn-outline-secondary'}" onclick={() => toggleIssueActionStatus(issue.id, action.id, action.status === 'done' ? 'todo' : 'done')} disabled={issuesLoading}>{action.status === 'done' ? 'Done' : 'Todo'}</button>
-                        <span>{action.text}</span>
-                        {#if action.dueDate}
-                        <span class="text-muted">due {action.dueDate}</span>
-                        {/if}
-                      </div>
-                      {/each}
-                    {/if}
-                    <div class="d-flex gap-2 mt-1">
-                      <input class="form-control form-control-sm" value={issueActionInputById[issue.id] || ''} oninput={(e) => updateIssueActionInput(issue.id, e.currentTarget.value)} placeholder="Add follow-up action">
-                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick={() => addIssueAction(issue.id)} disabled={issuesLoading}>Add Action</button>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="small fw-semibold mb-1">Timeline</div>
-                    <div class="small text-muted" style="max-height: 120px; overflow-y: auto;">
-                      {#if Array.isArray(issue.timeline) && issue.timeline.length > 0}
-                        {#each issue.timeline.slice().reverse() as event}
-                        <div class="mb-1">[{event.timestamp}] {event.actor || 'unknown'}: {event.message || event.eventType}</div>
-                        {/each}
-                      {:else}
-                        <div>No timeline events yet.</div>
-                      {/if}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            {/each}
-          </div>
-          {/if}
-
-          {#if generalIssues.length > 0}
-          <div class="mb-3">
-            <div class="fw-semibold mb-2">General issues</div>
-            <div class="small text-muted">{generalIssues.length} general issue(s) not tied to specific entries.</div>
-          </div>
-          {/if}
-
-          <div class="small text-muted">Total issues: {issueLogs.length}</div>
-          {/if}
-        </div>
-      </div>
-      {/if}
   {#if showAdminLogin}
   <div class="card border-primary mb-2">
     <div class="card-body py-3">
@@ -2743,6 +2669,132 @@
       <a class="btn btn-sm btn-outline-dark" href={predeployVersion.buildRunUrl} target="_blank" rel="noopener noreferrer">Download Latest Build</a>
     {/if}
   </div>
+  {/if}
+
+  {#if $isAdmin}
+  {#if issuesPanelOpen}
+  <button type="button" class="issues-drawer-backdrop" onclick={() => issuesPanelOpen = false} aria-label="Close issues panel"></button>
+  {/if}
+  <aside class="issues-drawer" class:open={issuesPanelOpen}>
+    <div class="issues-drawer-header">
+      <h6 class="mb-0">Issue Log</h6>
+      <div class="d-flex gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick={() => loadIssueLogs({ interactive: true })} disabled={issuesLoading}>{issuesLoading ? 'Loading...' : 'Refresh'}</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" onclick={() => issuesPanelOpen = false}>Close</button>
+      </div>
+    </div>
+
+    {#if issuesStatusMessage}
+    <div class="small text-muted mb-1">{issuesStatusMessage}</div>
+    {/if}
+    {#if issuesUpdatedAt}
+    <div class="small text-muted mb-1">Updated by {issuesUpdatedBy || 'unknown'} at {issuesUpdatedAt}</div>
+    {/if}
+    {#if issuesErrorMessage}
+    <div class="small text-danger mb-2">{issuesErrorMessage}</div>
+    {/if}
+
+    <div class="border rounded p-2 mb-3 bg-light-subtle">
+      <div class="fw-semibold mb-2">Create issue</div>
+      <div class="row g-2">
+        <div class="col-md-6">
+          <input class="form-control form-control-sm" bind:value={newIssueTitle} placeholder="Issue title">
+        </div>
+        <div class="col-md-4">
+          <input class="form-control form-control-sm" bind:value={newIssueRefsInput} placeholder="Refs: test/12, form/7">
+        </div>
+        <div class="col-md-2 d-grid">
+          <button type="button" class="btn btn-sm btn-info" onclick={createIssueLog} disabled={issuesLoading}>Add</button>
+        </div>
+        <div class="col-12">
+          <textarea class="form-control form-control-sm" bind:value={newIssueDescription} rows="2" placeholder="Issue description"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-check mb-2">
+      <input id="panel-show-resolved-closed" class="form-check-input" type="checkbox" bind:checked={showResolvedClosedInPanel}>
+      <label class="form-check-label small" for="panel-show-resolved-closed">Show resolved and closed issues</label>
+    </div>
+
+    {#if currentEntryIssues.length > 0}
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Current entry issues</div>
+      {#each currentEntryIssues as issue}
+        <div class="issue-card mb-3">
+          <div class="issue-card-header">
+            <div>
+              <div class="issue-id">{issue.id}</div>
+              <div class="fw-semibold mb-1">{issue.title || 'Untitled issue'}</div>
+            </div>
+            <span class="badge {getIssueStatusBadgeClass(issue.status)} issue-status-badge">{issue.status || 'open'}</span>
+          </div>
+          <div class="small mb-2">{issue.description || 'No description provided.'}</div>
+          <div class="small text-muted mb-2">Refs: {stringifyEntryRefs(issue.entryRefs) || 'general'}</div>
+          <div class="row g-2">
+            <div class="col-12">
+              <div class="small fw-semibold mb-1">Actions</div>
+              <div class="d-flex flex-wrap gap-2 mb-2">
+                <button type="button" class="btn btn-sm {getIssueActionButtonClass('comment')}" onclick={() => beginIssueAction(issue.id, 'comment', issue.status)} disabled={issuesLoading}>Comment</button>
+                {#if !issueIsTerminal(issue.status)}
+                <button type="button" class="btn btn-sm {getIssueActionButtonClass('follow-up')}" onclick={() => beginIssueAction(issue.id, 'follow-up', issue.status)} disabled={issuesLoading}>Follow-up</button>
+                <button type="button" class="btn btn-sm {getIssueActionButtonClass('resolve')}" onclick={() => beginIssueAction(issue.id, 'resolve', issue.status)} disabled={issuesLoading}>Resolve</button>
+                <button type="button" class="btn btn-sm {getIssueActionButtonClass('close')}" onclick={() => beginIssueAction(issue.id, 'close', issue.status)} disabled={issuesLoading}>Close</button>
+                {/if}
+              </div>
+
+              {#if issueActionTypeById[issue.id]}
+              <div class="issue-action-composer mb-2">
+              <div class="small text-muted mb-1 text-capitalize">{issueActionTypeById[issue.id]} description</div>
+              <textarea class="form-control form-control-sm mb-2" rows="2" value={issueActionInputById[issue.id] || ''} oninput={(e) => updateIssueActionInput(issue.id, e.currentTarget.value)} placeholder="Describe this action"></textarea>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-sm btn-primary" onclick={() => submitIssueAction(issue, issueActionTypeById[issue.id])} disabled={issuesLoading}>Submit Action</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" onclick={() => updateIssueActionType(issue.id, '')} disabled={issuesLoading}>Cancel</button>
+              </div>
+              </div>
+              {/if}
+
+              {#if Array.isArray(issue.actions) && issue.actions.length > 0}
+                <div class="issue-actions-list">
+                {#each issue.actions.slice().reverse() as action}
+                <div class="issue-action-row small">
+                  <span class="issue-action-bullet"></span>
+                  <span>{action.text}</span>
+                </div>
+                {/each}
+                </div>
+              {/if}
+            </div>
+            <div class="col-12">
+              <div class="small fw-semibold mb-1">Timeline</div>
+              <div class="issue-timeline">
+                {#if Array.isArray(issue.timeline) && issue.timeline.length > 0}
+                  {#each issue.timeline.slice().reverse() as event}
+                  <div class="issue-timeline-event {getTimelineEventClass(event.eventType)}">
+                    <div class="issue-timeline-meta">{event.actor || 'unknown'} · {event.timestamp}</div>
+                    <div>{event.message || event.eventType}</div>
+                  </div>
+                  {/each}
+                {:else}
+                  <div class="small text-muted">No timeline events yet.</div>
+                {/if}
+              </div>
+            </div>
+          </div>
+        </div>
+      {/each}
+    </div>
+    {/if}
+
+    {#if generalIssues.length > 0}
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">General issues</div>
+      <div class="small text-muted">{generalIssues.length} general issue(s) not tied to specific entries.</div>
+    </div>
+    {/if}
+
+    <div class="small text-muted">Total issues: {issueLogs.length}</div>
+  </aside>
   {/if}
 </div>
 
@@ -2878,5 +2930,137 @@
 
   .nav-tools-wrapper {
     position: relative;
+  }
+
+  .issues-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    border: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 1055;
+  }
+
+  .issues-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(94vw, 860px);
+    height: 100vh;
+    padding: 1rem;
+    background: #fff;
+    border-left: 1px solid #dee2e6;
+    box-shadow: -0.5rem 0 1.25rem rgba(0, 0, 0, 0.2);
+    transform: translateX(100%);
+    transition: transform 0.2s ease-in-out;
+    overflow-y: auto;
+    z-index: 1060;
+  }
+
+  .issues-drawer.open {
+    transform: translateX(0);
+  }
+
+  .issues-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .issue-card {
+    border: 1px solid #dbe5f0;
+    border-radius: 0.85rem;
+    padding: 0.9rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    box-shadow: 0 0.35rem 1rem rgba(42, 72, 108, 0.08);
+  }
+
+  .issue-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .issue-id {
+    font-size: 0.78rem;
+    color: #6c757d;
+    margin-bottom: 0.15rem;
+  }
+
+  .issue-status-badge {
+    text-transform: capitalize;
+    letter-spacing: 0.02em;
+  }
+
+  .issue-action-composer {
+    padding: 0.75rem;
+    border: 1px solid #d9e3f0;
+    border-radius: 0.75rem;
+    background: #f5f9ff;
+  }
+
+  .issue-actions-list {
+    display: grid;
+    gap: 0.45rem;
+    margin-top: 0.75rem;
+  }
+
+  .issue-action-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.45rem 0.6rem;
+    border-radius: 0.65rem;
+    background: #f8f9fb;
+    border: 1px solid #edf1f6;
+  }
+
+  .issue-action-bullet {
+    width: 0.55rem;
+    height: 0.55rem;
+    margin-top: 0.28rem;
+    border-radius: 999px;
+    background: #0d6efd;
+    flex: 0 0 auto;
+  }
+
+  .issue-timeline {
+    display: grid;
+    gap: 0.5rem;
+    max-height: 14rem;
+    overflow-y: auto;
+    padding-right: 0.15rem;
+  }
+
+  .issue-timeline-event {
+    padding: 0.55rem 0.7rem;
+    border-left: 3px solid #adb5bd;
+    border-radius: 0.55rem;
+    background: #fafbfd;
+    color: #495057;
+  }
+
+  .issue-timeline-event-created {
+    border-left-color: #0d6efd;
+    background: #f3f8ff;
+  }
+
+  .issue-timeline-event-updated {
+    border-left-color: #fd7e14;
+    background: #fff8f1;
+  }
+
+  .issue-timeline-event-action {
+    border-left-color: #198754;
+    background: #f3fcf6;
+  }
+
+  .issue-timeline-meta {
+    font-size: 0.78rem;
+    color: #6c757d;
+    margin-bottom: 0.15rem;
   }
 </style>
