@@ -11,6 +11,7 @@ GH_REF = "main"
 # For strict security, set your app origin instead of *
 ALLOWED_ORIGIN = "*"
 DRAFT_KEY = "drafts/shared/latest.json"
+ISSUES_KEY = "issues/shared/latest.json"
 
 [[r2_buckets]]
 binding = "DRAFTS_BUCKET"

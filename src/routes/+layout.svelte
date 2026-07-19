@@ -684,6 +684,23 @@
   let predeployVersion = $state(null);
   let productionVersion = $state(null);
   let syncCheckTimer = null;
+  let issuesPanelOpen = $state(false);
+  let issuesStatusMessage = $state('');
+  let issuesErrorMessage = $state('');
+  let issuesLoading = $state(false);
+  let issuesRevision = $state(0);
+  let issuesUpdatedAt = $state('');
+  let issuesUpdatedBy = $state('');
+  let issuesLoadedForSession = $state(false);
+  let issueLogs = $state([]);
+  let issueDraftById = $state({});
+  let issueActionInputById = $state({});
+  let newIssueTitle = $state('');
+  let newIssueDescription = $state('');
+  let newIssueStatus = $state('open');
+  let newIssueRefsInput = $state('');
+  let newIssueTargetDate = $state('');
+  let newIssueClosureDate = $state('');
 
   function deepCloneJSON(value) {
     return JSON.parse(JSON.stringify(value));
@@ -935,6 +952,9 @@
   }
 
   function openAdminLogin() {
+    if (!$isStaff && !$isAdmin) {
+      return;
+    }
     showAdminLogin = true;
     showStaffLogin = false;
     adminLoginError = '';
@@ -1005,6 +1025,7 @@
 
       isStaff.set(false);
       isAdmin.set(true);
+      issuesLoadedForSession = false;
       closeAdminLogin();
       publishStatusMessage = '';
       draftStatusMessage = 'Admin login verified. Start a new edit to load the remote draft.';
@@ -1068,6 +1089,12 @@
     showStaffLogin = false;
     adminLoginError = '';
     staffLoginError = '';
+    issuesLoadedForSession = false;
+    issueLogs = [];
+    issueDraftById = {};
+    issueActionInputById = {};
+    issuesStatusMessage = '';
+    issuesErrorMessage = '';
   }
 
   function getDraftLoadEndpoint() {
@@ -1079,6 +1106,405 @@
     const apiBase = getSavedApiBase();
     return apiBase ? endpointFromBase(apiBase, '/draft/save') : '';
   }
+
+  function getIssuesLoadEndpoint() {
+    const apiBase = getSavedApiBase();
+    return apiBase ? endpointFromBase(apiBase, '/issues/load') : '';
+  }
+
+  function getIssuesCreateEndpoint() {
+    const apiBase = getSavedApiBase();
+    return apiBase ? endpointFromBase(apiBase, '/issues/create') : '';
+  }
+
+  function getIssuesUpdateEndpoint() {
+    const apiBase = getSavedApiBase();
+    return apiBase ? endpointFromBase(apiBase, '/issues/update') : '';
+  }
+
+  function getIssuesAddActionEndpoint() {
+    const apiBase = getSavedApiBase();
+    return apiBase ? endpointFromBase(apiBase, '/issues/add-action') : '';
+  }
+
+  function getIssuesUpdateActionEndpoint() {
+    const apiBase = getSavedApiBase();
+    return apiBase ? endpointFromBase(apiBase, '/issues/update-action') : '';
+  }
+
+  function parseEntryRefsInput(rawInput) {
+    if (!rawInput) {
+      return [];
+    }
+
+    const rawParts = String(rawInput)
+      .split(',')
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0);
+
+    const refs = [];
+    const seen = new Set();
+    for (const part of rawParts) {
+      const [rawType, rawId] = part.split('/');
+      const type = String(rawType || '').trim().toLowerCase();
+      const id = Number(rawId);
+      if (!['test', 'form', 'container'].includes(type) || !Number.isFinite(id) || id <= 0) {
+        continue;
+      }
+
+      const key = `${type}/${id}`;
+      if (seen.has(key)) {
+        continue;
+      }
+      seen.add(key);
+      refs.push({ type, id });
+    }
+
+    return refs;
+  }
+
+  function stringifyEntryRefs(entryRefs) {
+    if (!Array.isArray(entryRefs) || entryRefs.length === 0) {
+      return '';
+    }
+
+    return entryRefs
+      .map((ref) => `${ref?.type || ''}/${ref?.id || ''}`)
+      .filter((ref) => ref !== '/')
+      .join(', ');
+  }
+
+  function setIssueDraftMap(issues) {
+    const nextDraftMap = {};
+    const nextActionInputMap = {};
+
+    for (const issue of issues) {
+      const issueId = String(issue?.id || '');
+      if (!issueId) {
+        continue;
+      }
+      nextDraftMap[issueId] = {
+        title: String(issue?.title || ''),
+        description: String(issue?.description || ''),
+        status: String(issue?.status || 'open'),
+        targetDate: String(issue?.targetDate || ''),
+        closureDate: String(issue?.closureDate || ''),
+        refsInput: stringifyEntryRefs(issue?.entryRefs)
+      };
+      nextActionInputMap[issueId] = '';
+    }
+
+    issueDraftById = nextDraftMap;
+    issueActionInputById = nextActionInputMap;
+  }
+
+  function updateIssueDraftField(issueId, fieldName, value) {
+    issueDraftById = {
+      ...issueDraftById,
+      [issueId]: {
+        ...(issueDraftById[issueId] || {}),
+        [fieldName]: value
+      }
+    };
+  }
+
+  function updateIssueActionInput(issueId, value) {
+    issueActionInputById = {
+      ...issueActionInputById,
+      [issueId]: value
+    };
+  }
+
+  function setIssueEnvelopeState(result) {
+    const issues = Array.isArray(result?.issues) ? result.issues : [];
+    issueLogs = issues;
+    issuesRevision = Number(result?.revision || 0);
+    issuesUpdatedAt = String(result?.updatedAt || '');
+    issuesUpdatedBy = String(result?.updatedBy || '');
+    setIssueDraftMap(issues);
+  }
+
+  async function resolveIssueApiContext(interactive = false) {
+    let apiBase = getSavedApiBase();
+    if (!apiBase && interactive) {
+      apiBase = await ensureApiBaseInteractive();
+    }
+    if (!apiBase) {
+      return null;
+    }
+
+    let secret = sessionStorage.getItem('publishApiSecret') || '';
+    if (!secret && interactive) {
+      secret = await ensureSecretInteractive();
+    }
+    if (!secret) {
+      return null;
+    }
+
+    return { apiBase, secret };
+  }
+
+  async function loadIssueLogs(options = {}) {
+    if (!$isAdmin) {
+      return false;
+    }
+
+    const interactive = options.interactive === true;
+    const silent = options.silent === true;
+    if (issuesLoading) {
+      return false;
+    }
+
+    const issueApiContext = await resolveIssueApiContext(interactive);
+    if (!issueApiContext) {
+      if (!silent) {
+        issuesErrorMessage = 'Issue log endpoint or secret is not configured.';
+      }
+      return false;
+    }
+
+    issuesLoading = true;
+    issuesErrorMessage = '';
+    if (!silent) {
+      issuesStatusMessage = 'Loading issue logs...';
+    }
+
+    try {
+      const response = await fetch(endpointFromBase(issueApiContext.apiBase, '/issues/load'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({ _secret: issueApiContext.secret })
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        throw new Error(result?.error || `HTTP ${response.status}`);
+      }
+
+      setIssueEnvelopeState(result);
+      issuesStatusMessage = `Issue logs loaded (${issueLogs.length}).`;
+      issuesLoadedForSession = true;
+      return true;
+    } catch (error) {
+      issuesErrorMessage = error instanceof Error ? error.message : 'Failed to load issue logs.';
+      return false;
+    } finally {
+      issuesLoading = false;
+    }
+  }
+
+  async function createIssueLog() {
+    if (!$isAdmin) {
+      return;
+    }
+
+    const title = newIssueTitle.trim();
+    if (!title) {
+      issuesErrorMessage = 'Issue title is required.';
+      return;
+    }
+
+    const issueApiContext = await resolveIssueApiContext(true);
+    if (!issueApiContext) {
+      issuesErrorMessage = 'Issue log endpoint or secret is not configured.';
+      return;
+    }
+
+    issuesLoading = true;
+    issuesErrorMessage = '';
+    try {
+      const response = await fetch(endpointFromBase(issueApiContext.apiBase, '/issues/create'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({
+          _secret: issueApiContext.secret,
+          actor: getPublisherName() || 'admin',
+          issue: {
+            title,
+            description: newIssueDescription,
+            status: newIssueStatus,
+            targetDate: newIssueTargetDate,
+            closureDate: newIssueClosureDate,
+            entryRefs: parseEntryRefsInput(newIssueRefsInput)
+          }
+        })
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        throw new Error(result?.error || `HTTP ${response.status}`);
+      }
+
+      await loadIssueLogs({ silent: true, interactive: false });
+      newIssueTitle = '';
+      newIssueDescription = '';
+      newIssueStatus = 'open';
+      newIssueRefsInput = '';
+      newIssueTargetDate = '';
+      newIssueClosureDate = '';
+      issuesStatusMessage = 'Issue created.';
+    } catch (error) {
+      issuesErrorMessage = error instanceof Error ? error.message : 'Failed to create issue.';
+    } finally {
+      issuesLoading = false;
+    }
+  }
+
+  async function saveIssueLog(issueId) {
+    const issueDraft = issueDraftById[issueId];
+    if (!issueDraft) {
+      return;
+    }
+
+    const issueApiContext = await resolveIssueApiContext(true);
+    if (!issueApiContext) {
+      issuesErrorMessage = 'Issue log endpoint or secret is not configured.';
+      return;
+    }
+
+    issuesLoading = true;
+    issuesErrorMessage = '';
+    try {
+      const response = await fetch(endpointFromBase(issueApiContext.apiBase, '/issues/update'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({
+          _secret: issueApiContext.secret,
+          actor: getPublisherName() || 'admin',
+          issueId,
+          patch: {
+            title: issueDraft.title,
+            description: issueDraft.description,
+            status: issueDraft.status,
+            targetDate: issueDraft.targetDate,
+            closureDate: issueDraft.closureDate,
+            entryRefs: parseEntryRefsInput(issueDraft.refsInput)
+          }
+        })
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        throw new Error(result?.error || `HTTP ${response.status}`);
+      }
+
+      await loadIssueLogs({ silent: true, interactive: false });
+      issuesStatusMessage = `Issue ${issueId} saved.`;
+    } catch (error) {
+      issuesErrorMessage = error instanceof Error ? error.message : 'Failed to save issue.';
+    } finally {
+      issuesLoading = false;
+    }
+  }
+
+  async function addIssueAction(issueId) {
+    const actionText = String(issueActionInputById[issueId] || '').trim();
+    if (!actionText) {
+      issuesErrorMessage = 'Action text is required.';
+      return;
+    }
+
+    const issueApiContext = await resolveIssueApiContext(true);
+    if (!issueApiContext) {
+      issuesErrorMessage = 'Issue log endpoint or secret is not configured.';
+      return;
+    }
+
+    issuesLoading = true;
+    issuesErrorMessage = '';
+    try {
+      const response = await fetch(endpointFromBase(issueApiContext.apiBase, '/issues/add-action'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({
+          _secret: issueApiContext.secret,
+          actor: getPublisherName() || 'admin',
+          issueId,
+          action: {
+            text: actionText,
+            status: 'todo'
+          }
+        })
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        throw new Error(result?.error || `HTTP ${response.status}`);
+      }
+
+      await loadIssueLogs({ silent: true, interactive: false });
+      updateIssueActionInput(issueId, '');
+      issuesStatusMessage = `Action added to ${issueId}.`;
+    } catch (error) {
+      issuesErrorMessage = error instanceof Error ? error.message : 'Failed to add action.';
+    } finally {
+      issuesLoading = false;
+    }
+  }
+
+  async function toggleIssueActionStatus(issueId, actionId, nextStatus) {
+    const issueApiContext = await resolveIssueApiContext(true);
+    if (!issueApiContext) {
+      issuesErrorMessage = 'Issue log endpoint or secret is not configured.';
+      return;
+    }
+
+    issuesLoading = true;
+    issuesErrorMessage = '';
+    try {
+      const response = await fetch(endpointFromBase(issueApiContext.apiBase, '/issues/update-action'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({
+          _secret: issueApiContext.secret,
+          actor: getPublisherName() || 'admin',
+          issueId,
+          actionId,
+          patch: {
+            status: nextStatus
+          }
+        })
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        throw new Error(result?.error || `HTTP ${response.status}`);
+      }
+
+      await loadIssueLogs({ silent: true, interactive: false });
+      issuesStatusMessage = `Action ${actionId} updated.`;
+    } catch (error) {
+      issuesErrorMessage = error instanceof Error ? error.message : 'Failed to update action.';
+    } finally {
+      issuesLoading = false;
+    }
+  }
+
+  let currentEntryIssues = $derived.by(() => {
+    const context = getCurrentEntryContext();
+    if (!context) {
+      return [];
+    }
+
+    return issueLogs.filter((issue) =>
+      Array.isArray(issue?.entryRefs) &&
+      issue.entryRefs.some((ref) => ref?.type === context.entryType && Number(ref?.id) === context.entryId)
+    );
+  });
+
+  let generalIssues = $derived.by(() => {
+    return issueLogs.filter((issue) => !Array.isArray(issue?.entryRefs) || issue.entryRefs.length === 0);
+  });
 
   async function beginRemoteEditSession() {
     if (!$isAdmin) {
@@ -1361,6 +1787,14 @@
     syncCheckEnabled = isSyncCheckHostEnabled();
     await refreshSyncStatus();
     startSyncPolling();
+  });
+
+  $effect(() => {
+    if (!$isAdmin || issuesLoadedForSession) {
+      return;
+    }
+
+    void loadIssueLogs({ silent: true, interactive: false });
   });
 
   onDestroy(() => {
@@ -2030,10 +2464,13 @@
 
       {#if !$isAdmin && !$isStaff}
       <li class="nav-item ms-2 d-flex align-items-center">
-        <button type="button" class="btn btn-outline-primary btn-sm" onclick={openAdminLogin}>Admin login</button>
-      </li>
-      <li class="nav-item ms-2 d-flex align-items-center">
         <button type="button" class="btn btn-outline-secondary btn-sm" onclick={openStaffLogin}>Staff login</button>
+      </li>
+      {/if}
+
+      {#if $isStaff && !$isAdmin}
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick={openAdminLogin}>Admin login</button>
       </li>
       {/if}
 
@@ -2100,6 +2537,143 @@
       
     </ul>
   </header>
+      {#if $isAdmin}
+      <div class="card border-info mb-2">
+        <div class="card-body py-3">
+          <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+            <h6 class="mb-0">Issue Log</h6>
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-outline-info btn-sm" onclick={() => issuesPanelOpen = !issuesPanelOpen}>{issuesPanelOpen ? 'Hide' : 'Show'} issues</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" onclick={() => loadIssueLogs({ interactive: true })} disabled={issuesLoading}>{issuesLoading ? 'Loading...' : 'Refresh'}</button>
+            </div>
+          </div>
+
+          {#if issuesStatusMessage}
+          <div class="small text-muted mb-1">{issuesStatusMessage}</div>
+          {/if}
+          {#if issuesUpdatedAt}
+          <div class="small text-muted mb-1">Updated by {issuesUpdatedBy || 'unknown'} at {issuesUpdatedAt}</div>
+          {/if}
+          {#if issuesErrorMessage}
+          <div class="small text-danger mb-2">{issuesErrorMessage}</div>
+          {/if}
+
+          {#if issuesPanelOpen}
+          <div class="border rounded p-2 mb-3 bg-light-subtle">
+            <div class="fw-semibold mb-2">Create issue</div>
+            <div class="row g-2">
+              <div class="col-md-4">
+                <input class="form-control form-control-sm" bind:value={newIssueTitle} placeholder="Issue title">
+              </div>
+              <div class="col-md-2">
+                <select class="form-select form-select-sm" bind:value={newIssueStatus}>
+                  <option value="open">open</option>
+                  <option value="in-progress">in-progress</option>
+                  <option value="blocked">blocked</option>
+                  <option value="resolved">resolved</option>
+                  <option value="closed">closed</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <input class="form-control form-control-sm" bind:value={newIssueRefsInput} placeholder="Refs: test/12, form/7">
+              </div>
+              <div class="col-md-1">
+                <input class="form-control form-control-sm" bind:value={newIssueTargetDate} type="date" title="Target date">
+              </div>
+              <div class="col-md-1">
+                <input class="form-control form-control-sm" bind:value={newIssueClosureDate} type="date" title="Closure date">
+              </div>
+              <div class="col-md-1 d-grid">
+                <button type="button" class="btn btn-sm btn-info" onclick={createIssueLog} disabled={issuesLoading}>Add</button>
+              </div>
+              <div class="col-12">
+                <textarea class="form-control form-control-sm" bind:value={newIssueDescription} rows="2" placeholder="Issue description"></textarea>
+              </div>
+            </div>
+          </div>
+
+          {#if currentEntryIssues.length > 0}
+          <div class="mb-3">
+            <div class="fw-semibold mb-2">Current entry issues</div>
+            {#each currentEntryIssues as issue}
+              <div class="border rounded p-2 mb-2">
+                <div class="small text-muted mb-1">{issue.id}</div>
+                <div class="row g-2">
+                  <div class="col-md-4">
+                    <input class="form-control form-control-sm" value={issueDraftById[issue.id]?.title || issue.title || ''} oninput={(e) => updateIssueDraftField(issue.id, 'title', e.currentTarget.value)}>
+                  </div>
+                  <div class="col-md-2">
+                    <select class="form-select form-select-sm" value={issueDraftById[issue.id]?.status || issue.status || 'open'} onchange={(e) => updateIssueDraftField(issue.id, 'status', e.currentTarget.value)}>
+                      <option value="open">open</option>
+                      <option value="in-progress">in-progress</option>
+                      <option value="blocked">blocked</option>
+                      <option value="resolved">resolved</option>
+                      <option value="closed">closed</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <input class="form-control form-control-sm" value={issueDraftById[issue.id]?.refsInput || stringifyEntryRefs(issue.entryRefs)} oninput={(e) => updateIssueDraftField(issue.id, 'refsInput', e.currentTarget.value)}>
+                  </div>
+                  <div class="col-md-1">
+                    <input class="form-control form-control-sm" type="date" value={issueDraftById[issue.id]?.targetDate || issue.targetDate || ''} oninput={(e) => updateIssueDraftField(issue.id, 'targetDate', e.currentTarget.value)}>
+                  </div>
+                  <div class="col-md-1">
+                    <input class="form-control form-control-sm" type="date" value={issueDraftById[issue.id]?.closureDate || issue.closureDate || ''} oninput={(e) => updateIssueDraftField(issue.id, 'closureDate', e.currentTarget.value)}>
+                  </div>
+                  <div class="col-md-1 d-grid">
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick={() => saveIssueLog(issue.id)} disabled={issuesLoading}>Save</button>
+                  </div>
+                  <div class="col-12">
+                    <textarea class="form-control form-control-sm" rows="2" oninput={(e) => updateIssueDraftField(issue.id, 'description', e.currentTarget.value)}>{issueDraftById[issue.id]?.description || issue.description || ''}</textarea>
+                  </div>
+                  <div class="col-12">
+                    <div class="small fw-semibold mb-1">Follow-up actions</div>
+                    {#if Array.isArray(issue.actions) && issue.actions.length > 0}
+                      {#each issue.actions as action}
+                      <div class="d-flex align-items-center gap-2 mb-1 small">
+                        <button type="button" class="btn btn-sm {action.status === 'done' ? 'btn-success' : 'btn-outline-secondary'}" onclick={() => toggleIssueActionStatus(issue.id, action.id, action.status === 'done' ? 'todo' : 'done')} disabled={issuesLoading}>{action.status === 'done' ? 'Done' : 'Todo'}</button>
+                        <span>{action.text}</span>
+                        {#if action.dueDate}
+                        <span class="text-muted">due {action.dueDate}</span>
+                        {/if}
+                      </div>
+                      {/each}
+                    {/if}
+                    <div class="d-flex gap-2 mt-1">
+                      <input class="form-control form-control-sm" value={issueActionInputById[issue.id] || ''} oninput={(e) => updateIssueActionInput(issue.id, e.currentTarget.value)} placeholder="Add follow-up action">
+                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick={() => addIssueAction(issue.id)} disabled={issuesLoading}>Add Action</button>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="small fw-semibold mb-1">Timeline</div>
+                    <div class="small text-muted" style="max-height: 120px; overflow-y: auto;">
+                      {#if Array.isArray(issue.timeline) && issue.timeline.length > 0}
+                        {#each issue.timeline.slice().reverse() as event}
+                        <div class="mb-1">[{event.timestamp}] {event.actor || 'unknown'}: {event.message || event.eventType}</div>
+                        {/each}
+                      {:else}
+                        <div>No timeline events yet.</div>
+                      {/if}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {/each}
+          </div>
+          {/if}
+
+          {#if generalIssues.length > 0}
+          <div class="mb-3">
+            <div class="fw-semibold mb-2">General issues</div>
+            <div class="small text-muted">{generalIssues.length} general issue(s) not tied to specific entries.</div>
+          </div>
+          {/if}
+
+          <div class="small text-muted">Total issues: {issueLogs.length}</div>
+          {/if}
+        </div>
+      </div>
+      {/if}
   {#if showAdminLogin}
   <div class="card border-primary mb-2">
     <div class="card-body py-3">

@@ -15,6 +15,21 @@
  * POST /draft/discard
  * Body: { _secret: string, expectedRevision?: number, editorId?: string }
  *
+ * POST /issues/load
+ * Body: { _secret: string }
+ *
+ * POST /issues/create
+ * Body: { _secret: string, actor?: string, issue: object }
+ *
+ * POST /issues/update
+ * Body: { _secret: string, actor?: string, issueId: string, patch: object }
+ *
+ * POST /issues/add-action
+ * Body: { _secret: string, actor?: string, issueId: string, action: object }
+ *
+ * POST /issues/update-action
+ * Body: { _secret: string, actor?: string, issueId: string, actionId: string, patch: object }
+ *
  * POST /publish
  * Body: {
  *   _secret: string,
@@ -38,6 +53,7 @@
  * - GH_REF                 (default: gh-pages)
  * - ALLOWED_ORIGIN         (default: *)
  * - DRAFT_KEY              (default: drafts/shared/latest.json)
+ * - ISSUES_KEY             (default: issues/shared/latest.json)
  */
 
 export default {
@@ -100,6 +116,26 @@ export default {
 
     if (route === '/draft/discard') {
       return handleDraftDiscard(body, env, corsHeaders);
+    }
+
+    if (route === '/issues/load') {
+      return handleIssuesLoad(env, corsHeaders);
+    }
+
+    if (route === '/issues/create') {
+      return handleIssueCreate(body, env, corsHeaders);
+    }
+
+    if (route === '/issues/update') {
+      return handleIssueUpdate(body, env, corsHeaders);
+    }
+
+    if (route === '/issues/add-action') {
+      return handleIssueAddAction(body, env, corsHeaders);
+    }
+
+    if (route === '/issues/update-action') {
+      return handleIssueUpdateAction(body, env, corsHeaders);
     }
 
     const requestId = String(body?.requestId || `req-${Date.now()}`);
@@ -222,7 +258,12 @@ function isSupportedRoute(pathname) {
     pathname === '/publish' ||
     pathname === '/draft/load' ||
     pathname === '/draft/save' ||
-    pathname === '/draft/discard'
+    pathname === '/draft/discard' ||
+    pathname === '/issues/load' ||
+    pathname === '/issues/create' ||
+    pathname === '/issues/update' ||
+    pathname === '/issues/add-action' ||
+    pathname === '/issues/update-action'
   );
 }
 
@@ -443,6 +484,417 @@ async function handleDraftDiscard(body, env, corsHeaders) {
       discarded: true,
       discardedBy: editorId,
       discardedAt: new Date().toISOString()
+    },
+    200,
+    corsHeaders
+  );
+}
+
+function issuesObjectKey(env) {
+  return env.ISSUES_KEY || 'issues/shared/latest.json';
+}
+
+async function readIssuesEnvelope(env) {
+  const key = issuesObjectKey(env);
+  const object = await env.DRAFTS_BUCKET.get(key);
+  if (!object) {
+    return {
+      exists: false,
+      revision: 0,
+      issues: [],
+      updatedAt: null,
+      updatedBy: null
+    };
+  }
+
+  try {
+    const payload = await object.json();
+    const issues = Array.isArray(payload?.issues) ? payload.issues : [];
+    return {
+      exists: true,
+      revision: Number(payload?.revision || 0),
+      issues,
+      updatedAt: payload?.updatedAt || null,
+      updatedBy: payload?.updatedBy || null
+    };
+  } catch {
+    return {
+      exists: false,
+      invalid: true,
+      revision: 0,
+      issues: [],
+      updatedAt: null,
+      updatedBy: null
+    };
+  }
+}
+
+async function writeIssuesEnvelope(env, revision, updatedBy, issues) {
+  const payload = {
+    revision,
+    updatedAt: new Date().toISOString(),
+    updatedBy,
+    issues
+  };
+
+  await env.DRAFTS_BUCKET.put(issuesObjectKey(env), JSON.stringify(payload), {
+    httpMetadata: {
+      contentType: 'application/json; charset=utf-8'
+    }
+  });
+
+  return payload;
+}
+
+function normalizeIssueStatus(input) {
+  const value = String(input || '').trim().toLowerCase();
+  if (['open', 'in-progress', 'blocked', 'resolved', 'closed'].includes(value)) {
+    return value;
+  }
+  return 'open';
+}
+
+function normalizeIssueRefs(input) {
+  if (!Array.isArray(input)) {
+    return [];
+  }
+
+  const refs = [];
+  const seen = new Set();
+  for (const rawRef of input) {
+    const type = String(rawRef?.type || '').trim().toLowerCase();
+    const id = Number(rawRef?.id);
+    if (!['test', 'form', 'container'].includes(type) || !Number.isFinite(id) || id <= 0) {
+      continue;
+    }
+
+    const key = `${type}/${id}`;
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    refs.push({ type, id });
+  }
+
+  return refs;
+}
+
+function normalizeIssue(input, actor, now) {
+  const title = String(input?.title || '').trim();
+  const description = String(input?.description || '').trim();
+  if (!title) {
+    return { ok: false, error: 'Issue title is required' };
+  }
+
+  const issue = {
+    id: String(input?.id || `ISSUE-${Date.now()}`),
+    title,
+    description,
+    status: normalizeIssueStatus(input?.status),
+    targetDate: input?.targetDate ? String(input.targetDate) : '',
+    closureDate: input?.closureDate ? String(input.closureDate) : '',
+    entryRefs: normalizeIssueRefs(input?.entryRefs),
+    actions: Array.isArray(input?.actions) ? input.actions : [],
+    timeline: Array.isArray(input?.timeline) ? input.timeline : [],
+    createdAt: input?.createdAt ? String(input.createdAt) : now,
+    createdBy: input?.createdBy ? String(input.createdBy) : actor,
+    updatedAt: now,
+    updatedBy: actor
+  };
+
+  return { ok: true, issue };
+}
+
+function issueTimelineEvent(actor, eventType, message, details = {}) {
+  return {
+    id: `evt-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    timestamp: new Date().toISOString(),
+    actor,
+    eventType,
+    message,
+    details
+  };
+}
+
+function normalizeIssueAction(input, actor, now) {
+  const text = String(input?.text || '').trim();
+  if (!text) {
+    return { ok: false, error: 'Action text is required' };
+  }
+
+  const status = String(input?.status || 'todo').trim().toLowerCase() === 'done' ? 'done' : 'todo';
+  return {
+    ok: true,
+    action: {
+      id: String(input?.id || `act-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`),
+      text,
+      status,
+      dueDate: input?.dueDate ? String(input.dueDate) : '',
+      completedAt: status === 'done' ? now : '',
+      createdAt: input?.createdAt ? String(input.createdAt) : now,
+      createdBy: input?.createdBy ? String(input.createdBy) : actor,
+      updatedAt: now,
+      updatedBy: actor
+    }
+  };
+}
+
+async function handleIssuesLoad(env, corsHeaders) {
+  const envelope = await readIssuesEnvelope(env);
+  if (envelope.invalid) {
+    return json({ ok: false, error: 'Stored issues payload is invalid' }, 500, corsHeaders);
+  }
+
+  return json(
+    {
+      ok: true,
+      revision: envelope.revision,
+      updatedAt: envelope.updatedAt,
+      updatedBy: envelope.updatedBy,
+      issues: envelope.issues
+    },
+    200,
+    corsHeaders
+  );
+}
+
+async function handleIssueCreate(body, env, corsHeaders) {
+  const actor = String(body?.actor || 'admin');
+  const now = new Date().toISOString();
+  const normalized = normalizeIssue(body?.issue, actor, now);
+  if (!normalized.ok) {
+    return json({ ok: false, error: normalized.error }, 400, corsHeaders);
+  }
+
+  const envelope = await readIssuesEnvelope(env);
+  const issue = normalized.issue;
+  issue.timeline.push(issueTimelineEvent(actor, 'created', 'Issue created'));
+  const nextIssues = [...envelope.issues, issue];
+  const nextRevision = envelope.revision + 1;
+  const payload = await writeIssuesEnvelope(env, nextRevision, actor, nextIssues);
+
+  return json(
+    {
+      ok: true,
+      revision: payload.revision,
+      updatedAt: payload.updatedAt,
+      updatedBy: payload.updatedBy,
+      issue
+    },
+    200,
+    corsHeaders
+  );
+}
+
+async function handleIssueUpdate(body, env, corsHeaders) {
+  const issueId = String(body?.issueId || '').trim();
+  const patch = body?.patch;
+  const actor = String(body?.actor || 'admin');
+  if (!issueId) {
+    return json({ ok: false, error: 'issueId is required' }, 400, corsHeaders);
+  }
+  if (!patch || typeof patch !== 'object') {
+    return json({ ok: false, error: 'patch is required' }, 400, corsHeaders);
+  }
+
+  const envelope = await readIssuesEnvelope(env);
+  const index = envelope.issues.findIndex((item) => String(item?.id) === issueId);
+  if (index === -1) {
+    return json({ ok: false, error: 'Issue not found' }, 404, corsHeaders);
+  }
+
+  const now = new Date().toISOString();
+  const issue = { ...envelope.issues[index] };
+  const changes = {};
+
+  if ('title' in patch) {
+    const value = String(patch.title || '').trim();
+    if (!value) {
+      return json({ ok: false, error: 'title cannot be empty' }, 400, corsHeaders);
+    }
+    issue.title = value;
+    changes.title = value;
+  }
+
+  if ('description' in patch) {
+    const value = String(patch.description || '');
+    issue.description = value;
+    changes.description = value;
+  }
+
+  if ('status' in patch) {
+    const value = normalizeIssueStatus(patch.status);
+    issue.status = value;
+    changes.status = value;
+  }
+
+  if ('targetDate' in patch) {
+    const value = patch.targetDate ? String(patch.targetDate) : '';
+    issue.targetDate = value;
+    changes.targetDate = value;
+  }
+
+  if ('closureDate' in patch) {
+    const value = patch.closureDate ? String(patch.closureDate) : '';
+    issue.closureDate = value;
+    changes.closureDate = value;
+  }
+
+  if ('entryRefs' in patch) {
+    const value = normalizeIssueRefs(patch.entryRefs);
+    issue.entryRefs = value;
+    changes.entryRefs = value;
+  }
+
+  issue.updatedAt = now;
+  issue.updatedBy = actor;
+  issue.timeline = Array.isArray(issue.timeline) ? issue.timeline : [];
+  issue.timeline.push(issueTimelineEvent(actor, 'updated', 'Issue updated', changes));
+
+  const nextIssues = [...envelope.issues];
+  nextIssues[index] = issue;
+  const nextRevision = envelope.revision + 1;
+  const payload = await writeIssuesEnvelope(env, nextRevision, actor, nextIssues);
+
+  return json(
+    {
+      ok: true,
+      revision: payload.revision,
+      updatedAt: payload.updatedAt,
+      updatedBy: payload.updatedBy,
+      issue
+    },
+    200,
+    corsHeaders
+  );
+}
+
+async function handleIssueAddAction(body, env, corsHeaders) {
+  const issueId = String(body?.issueId || '').trim();
+  const actor = String(body?.actor || 'admin');
+  if (!issueId) {
+    return json({ ok: false, error: 'issueId is required' }, 400, corsHeaders);
+  }
+
+  const envelope = await readIssuesEnvelope(env);
+  const index = envelope.issues.findIndex((item) => String(item?.id) === issueId);
+  if (index === -1) {
+    return json({ ok: false, error: 'Issue not found' }, 404, corsHeaders);
+  }
+
+  const now = new Date().toISOString();
+  const normalized = normalizeIssueAction(body?.action, actor, now);
+  if (!normalized.ok) {
+    return json({ ok: false, error: normalized.error }, 400, corsHeaders);
+  }
+
+  const issue = { ...envelope.issues[index] };
+  issue.actions = Array.isArray(issue.actions) ? issue.actions : [];
+  issue.actions.push(normalized.action);
+  issue.updatedAt = now;
+  issue.updatedBy = actor;
+  issue.timeline = Array.isArray(issue.timeline) ? issue.timeline : [];
+  issue.timeline.push(
+    issueTimelineEvent(actor, 'action-added', 'Follow-up action added', {
+      actionId: normalized.action.id,
+      text: normalized.action.text
+    })
+  );
+
+  const nextIssues = [...envelope.issues];
+  nextIssues[index] = issue;
+  const nextRevision = envelope.revision + 1;
+  const payload = await writeIssuesEnvelope(env, nextRevision, actor, nextIssues);
+
+  return json(
+    {
+      ok: true,
+      revision: payload.revision,
+      updatedAt: payload.updatedAt,
+      updatedBy: payload.updatedBy,
+      issue
+    },
+    200,
+    corsHeaders
+  );
+}
+
+async function handleIssueUpdateAction(body, env, corsHeaders) {
+  const issueId = String(body?.issueId || '').trim();
+  const actionId = String(body?.actionId || '').trim();
+  const patch = body?.patch;
+  const actor = String(body?.actor || 'admin');
+  if (!issueId || !actionId) {
+    return json({ ok: false, error: 'issueId and actionId are required' }, 400, corsHeaders);
+  }
+  if (!patch || typeof patch !== 'object') {
+    return json({ ok: false, error: 'patch is required' }, 400, corsHeaders);
+  }
+
+  const envelope = await readIssuesEnvelope(env);
+  const index = envelope.issues.findIndex((item) => String(item?.id) === issueId);
+  if (index === -1) {
+    return json({ ok: false, error: 'Issue not found' }, 404, corsHeaders);
+  }
+
+  const now = new Date().toISOString();
+  const issue = { ...envelope.issues[index] };
+  issue.actions = Array.isArray(issue.actions) ? issue.actions : [];
+  const actionIndex = issue.actions.findIndex((item) => String(item?.id) === actionId);
+  if (actionIndex === -1) {
+    return json({ ok: false, error: 'Action not found' }, 404, corsHeaders);
+  }
+
+  const action = { ...issue.actions[actionIndex] };
+  const actionChanges = {};
+
+  if ('text' in patch) {
+    const value = String(patch.text || '').trim();
+    if (!value) {
+      return json({ ok: false, error: 'Action text cannot be empty' }, 400, corsHeaders);
+    }
+    action.text = value;
+    actionChanges.text = value;
+  }
+
+  if ('status' in patch) {
+    const status = String(patch.status || 'todo').trim().toLowerCase() === 'done' ? 'done' : 'todo';
+    action.status = status;
+    action.completedAt = status === 'done' ? now : '';
+    actionChanges.status = status;
+  }
+
+  if ('dueDate' in patch) {
+    const value = patch.dueDate ? String(patch.dueDate) : '';
+    action.dueDate = value;
+    actionChanges.dueDate = value;
+  }
+
+  action.updatedAt = now;
+  action.updatedBy = actor;
+  issue.actions[actionIndex] = action;
+  issue.updatedAt = now;
+  issue.updatedBy = actor;
+  issue.timeline = Array.isArray(issue.timeline) ? issue.timeline : [];
+  issue.timeline.push(
+    issueTimelineEvent(actor, 'action-updated', 'Follow-up action updated', {
+      actionId,
+      changes: actionChanges
+    })
+  );
+
+  const nextIssues = [...envelope.issues];
+  nextIssues[index] = issue;
+  const nextRevision = envelope.revision + 1;
+  const payload = await writeIssuesEnvelope(env, nextRevision, actor, nextIssues);
+
+  return json(
+    {
+      ok: true,
+      revision: payload.revision,
+      updatedAt: payload.updatedAt,
+      updatedBy: payload.updatedBy,
+      issue
     },
     200,
     corsHeaders
