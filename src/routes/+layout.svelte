@@ -1554,6 +1554,26 @@
     });
   });
 
+  let currentEntryHasLinkedIssues = $derived.by(() => {
+    const context = getCurrentEntryContext();
+    if (!context) {
+      return false;
+    }
+
+    return issueLogs.some((issue) =>
+      Array.isArray(issue?.entryRefs) &&
+      issue.entryRefs.some((ref) => ref?.type === context.entryType && Number(ref?.id) === context.entryId)
+    );
+  });
+
+  let openIssueCount = $derived.by(() => {
+    return issueLogs.filter((issue) => String(issue?.status || '').toLowerCase() === 'open').length;
+  });
+
+  let inProgressIssueCount = $derived.by(() => {
+    return issueLogs.filter((issue) => String(issue?.status || '').toLowerCase() === 'in-progress').length;
+  });
+
   let generalIssues = $derived.by(() => {
     return issueLogs.filter((issue) => {
       const status = String(issue?.status || '').toLowerCase();
@@ -2552,9 +2572,6 @@
       <li class="nav-item ms-2 d-flex align-items-center">
         <span class="badge text-bg-primary">Admin: {getPublisherName() || 'signed in'}</span>
       </li>
-      <li class="nav-item ms-2 d-flex align-items-center">
-        <button type="button" class="btn btn-outline-info btn-sm" onclick={() => issuesPanelOpen = true}>Issues Panel</button>
-      </li>
       <li class="nav-item"><a href="{base}/issues" class="nav-link active ms-2">Issues</a></li>
       <li class="nav-item ms-2 nav-tools-wrapper">
         <details class="nav-tools">
@@ -2672,6 +2689,22 @@
   {/if}
 
   {#if $isAdmin}
+  <button
+    type="button"
+    class="issues-tab"
+    class:issues-tab-highlight={currentEntryHasLinkedIssues}
+    onclick={() => issuesPanelOpen = true}
+    aria-label="Open issues panel"
+  >
+    <span class="issues-tab-title">Issues</span>
+    <span class="issues-tab-metrics">
+      <span class="issues-tab-badge issues-tab-badge-open">Open {openIssueCount}</span>
+      <span class="issues-tab-badge issues-tab-badge-progress">In Progress {inProgressIssueCount}</span>
+    </span>
+    {#if currentEntryHasLinkedIssues}
+    <span class="issues-tab-hint">Current entry linked</span>
+    {/if}
+  </button>
   {#if issuesPanelOpen}
   <button type="button" class="issues-drawer-backdrop" onclick={() => issuesPanelOpen = false} aria-label="Close issues panel"></button>
   {/if}
@@ -2938,6 +2971,80 @@
     border: 0;
     background: rgba(0, 0, 0, 0.25);
     z-index: 1055;
+  }
+
+  .issues-tab {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    min-width: 10.5rem;
+    padding: 0.85rem 0.9rem 0.85rem 1rem;
+    border: 1px solid #0d6efd;
+    border-right: 0;
+    border-radius: 0.9rem 0 0 0.9rem;
+    background: linear-gradient(180deg, #f5faff 0%, #dcecff 100%);
+    box-shadow: -0.45rem 0 1.2rem rgba(13, 110, 253, 0.18);
+    color: #0b3f91;
+    z-index: 1054;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .issues-tab:hover {
+    transform: translateY(-50%) translateX(-0.15rem);
+    box-shadow: -0.55rem 0 1.35rem rgba(13, 110, 253, 0.24);
+  }
+
+  .issues-tab-highlight {
+    border-color: #dc3545;
+    background: linear-gradient(180deg, #fff5f6 0%, #ffdfe3 100%);
+    box-shadow: -0.55rem 0 1.35rem rgba(220, 53, 69, 0.22);
+    color: #8a1c2e;
+  }
+
+  .issues-tab-title {
+    font-weight: 700;
+    font-size: 0.98rem;
+    letter-spacing: 0.01em;
+  }
+
+  .issues-tab-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    width: 100%;
+  }
+
+  .issues-tab-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0.22rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 600;
+  }
+
+  .issues-tab-badge-open {
+    background: rgba(220, 53, 69, 0.12);
+    color: #b02a37;
+  }
+
+  .issues-tab-badge-progress {
+    background: rgba(255, 193, 7, 0.2);
+    color: #8a6200;
+  }
+
+  .issues-tab-hint {
+    font-size: 0.74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .issues-drawer {
