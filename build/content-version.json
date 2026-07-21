@@ -1,13 +1,13 @@
 {
-  "versionId": "20260715T181737Z_req-1784139437462",
-  "requestId": "req-1784139437462",
-  "publishedAt": "2026-07-15T18:17:37.415Z",
+  "versionId": "20260721T013638Z_req-1784597781267",
+  "requestId": "req-1784597781267",
+  "publishedAt": "2026-07-21T01:36:38.965Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "",
-  "editTraceCount": 1,
-  "snapshotPath": "content-versions/snapshots/2026/20260715T181737Z_req-1784139437462.json",
-  "contentSha256": "6160c8bb75e4d373fc51a004b2434e821b21fd13ea4e18616a95918c888ab60b",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/29439936672",
+  "summary": "aplabs",
+  "editTraceCount": 6,
+  "snapshotPath": "content-versions/snapshots/2026/20260721T013638Z_req-1784597781267.json",
+  "contentSha256": "b1672175d70fb7ffa6106ea2f5402986275fc13edc844513fa5907c793f08188",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/29793575080",
   "environment": "predeploy"
 }
