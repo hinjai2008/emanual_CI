@@ -163,6 +163,42 @@
       const timestamp = new Date().toISOString();
       const nameSnapshot = resolveNameSnapshot(dataType, dataId, field, newValue);
 
+      if (editType == "add") {
+        const existingAddTraceIndex = $editedJSON.config.editTrace.findIndex(trace =>
+          trace.dataType === dataType &&
+          trace.dataId === dataId &&
+          trace.editType === "add"
+        );
+
+        if (existingAddTraceIndex !== -1) {
+          editedJSON.update((draft) => {
+            draft.config.editTrace[existingAddTraceIndex].timestamp = timestamp;
+            draft.config.editTrace[existingAddTraceIndex].nameSnapshot = nameSnapshot;
+            draft.config.editTrace[existingAddTraceIndex].refId = refId;
+            return draft;
+          });
+          return;
+        }
+
+        const newTrace = {
+          dataType,
+          dataId,
+          refId,
+          editType,
+          field: null,
+          originalValue: null,
+          newValue: null,
+          nameSnapshot,
+          timestamp
+        };
+
+        editedJSON.update((draft) => {
+          draft.config.editTrace.push(newTrace);
+          return draft;
+        });
+        return;
+      }
+
       if (editType == "hide" || editType == "unhide") {
         const sameActionIndex = $editedJSON.config.editTrace.findIndex(trace =>
           trace.dataType === dataType &&
@@ -197,6 +233,13 @@
         }
 
         const newTrace = {
+          dataType,
+          dataId,
+          refId,
+          editType,
+          field,
+          originalValue,
+          newValue,
           nameSnapshot,
           timestamp
         };
@@ -216,31 +259,46 @@
         );
 
         if (existingEntryEditTraceIndex !== -1) {
-          // If the entry was newly added, remove the "add" trace instead of logging a "remove"
+          // Clear stale add trace before writing an explicit remove trace.
           editedJSON.update((draft) => {
             draft.config.editTrace.splice(existingEntryEditTraceIndex, 1);
             return draft;
           });
-          return;
-        } else {
-          const newTrace = {
-            dataType,
-            dataId,
-            refId,
-            editType,
-            field: null,
-            originalValue: null,
-            newValue: null,
-            nameSnapshot,
-            timestamp
-          };
+        }
 
+        const existingRemoveTraceIndex = $editedJSON.config.editTrace.findIndex(trace =>
+          trace.dataType === dataType &&
+          trace.dataId === dataId &&
+          trace.editType === "remove"
+        );
+
+        if (existingRemoveTraceIndex !== -1) {
           editedJSON.update((draft) => {
-            draft.config.editTrace.push(newTrace);
+            draft.config.editTrace[existingRemoveTraceIndex].timestamp = timestamp;
+            draft.config.editTrace[existingRemoveTraceIndex].nameSnapshot = nameSnapshot;
+            draft.config.editTrace[existingRemoveTraceIndex].refId = refId;
             return draft;
           });
           return;
         }
+
+        const newTrace = {
+          dataType,
+          dataId,
+          refId,
+          editType,
+          field: null,
+          originalValue: null,
+          newValue: null,
+          nameSnapshot,
+          timestamp
+        };
+
+        editedJSON.update((draft) => {
+          draft.config.editTrace.push(newTrace);
+          return draft;
+        });
+        return;
 
       }
 
@@ -512,16 +570,28 @@
 
     if($isAdmin){
 
-    const editTrace = rawData.config.editTrace;
+    const editTrace = Array.isArray(rawData?.config?.editTrace) ? rawData.config.editTrace : [];
 
     for (let i=0; i<editTrace.length; i++) {
       const trace = editTrace[i];
+      if (!trace || typeof trace !== 'object') {
+        continue;
+      }
+
+      if (typeof trace.dataType !== 'string') {
+        continue; // skip malformed rows
+      }
+
       const dataType = trace.dataType.replace("Data", "s"); // "tests", "forms", or "containers"
       const entryId = trace.dataId;
       const editType = trace.editType; // "add", "modify", "remove", "hide", "unhide"
 
       if (editType !== "add" && editType !== "modify" && editType !== "remove" && editType !== "hide" && editType !== "unhide") {
         continue; // skip invalid edit types
+      }
+
+      if (!Array.isArray(indexData[dataType])) {
+        continue;
       }
 
       const toUpdate = indexData[dataType].find(item => item.id === trace.dataType.replace("Data", "/") + entryId);
@@ -2328,6 +2398,21 @@
       if (!window.confirm(`Confirm removing this ${entryType} entry (ID: ${entryId})?`)) {
         return; // User cancelled the removal
       }
+
+      const dataTypeByEntryType = {
+        test: 'testData',
+        form: 'formData',
+        container: 'containerData'
+      };
+      const dataType = dataTypeByEntryType[entryType];
+      const currentEntry = $editedJSON[dataType]?.find((entry) => entry.id === entryId);
+
+      if (!currentEntry) {
+        alert('Removal failed. Entry was not found in the current draft.');
+        return;
+      }
+
+      updateEditTrace(dataType, entryId, currentEntry.refId || null, 'remove', null, null, null);
 
       // Call the appropriate store action to remove the entry
       switch (entryType) {
