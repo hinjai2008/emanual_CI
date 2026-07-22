@@ -1,13 +1,13 @@
 {
-  "versionId": "20260722T014222Z_req-1784684518772",
-  "requestId": "req-1784684518772",
-  "publishedAt": "2026-07-22T01:42:22.122Z",
+  "versionId": "20260722T015354Z_req-1784685214074",
+  "requestId": "req-1784685214074",
+  "publishedAt": "2026-07-22T01:53:54.149Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "Apformlink",
-  "editTraceCount": 12,
-  "snapshotPath": "content-versions/snapshots/2026/20260722T014222Z_req-1784684518772.json",
-  "contentSha256": "c3e5527234c4e7e3fcc43e2505b1802f9952e31e2d44c37d579974be1b8498a1",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/29883812038",
+  "summary": "pendingFormBugFix",
+  "editTraceCount": 14,
+  "snapshotPath": "content-versions/snapshots/2026/20260722T015354Z_req-1784685214074.json",
+  "contentSha256": "55d010de6298ae4924d1e39c481948b74ffd805d13799061809a7f78ce629fbf",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/29884335607",
   "environment": "predeploy"
 }
