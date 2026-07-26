@@ -708,8 +708,8 @@ async function handlePublishUpdate(body, env, corsHeaders) {
 }
 
 async function handlePublishArtifact(env, corsHeaders) {
-  const publishState = await readPublishState(env);
-  const artifactId = publishState?.artifact?.id || '';
+  let publishState = await readPublishState(env);
+  let artifactId = publishState?.artifact?.id || '';
   const owner = env.GH_OWNER;
   const repo = env.GH_REPO;
 
@@ -724,7 +724,37 @@ async function handlePublishArtifact(env, corsHeaders) {
     );
   }
 
+  // Recover from missing/stale state by resolving artifact from the latest workflow run.
+  if (!artifactId && publishState.workflowRunId) {
+    const recovered = await resolveLatestArtifactForRun(env, owner, repo, publishState.workflowRunId);
+    if (recovered?.id || recovered?.archiveUrl) {
+      publishState = await writePublishState(env, {
+        ...publishState,
+        artifact: {
+          ...createDefaultArtifactInfo(),
+          ...recovered,
+          unavailable: recovered.unavailable === true
+        },
+        status: recovered.unavailable ? 'artifact-unavailable' : publishState.status,
+        message: recovered.unavailable
+          ? 'Artifact exists but is marked unavailable/expired.'
+          : 'Recovered artifact metadata from workflow run.'
+      });
+      artifactId = publishState?.artifact?.id || '';
+    }
+  }
+
   if (!artifactId) {
+    await writePublishState(env, {
+      ...publishState,
+      status: 'artifact-unavailable',
+      message: 'Latest artifact is unavailable. Please rerun publish.',
+      artifact: {
+        ...createDefaultArtifactInfo(),
+        unavailable: true
+      }
+    });
+
     return json(
       {
         ok: false,
@@ -735,9 +765,76 @@ async function handlePublishArtifact(env, corsHeaders) {
     );
   }
 
+  let artifactResponse = await downloadArtifactZip(env, owner, repo, artifactId);
+
+  // Artifact IDs can become stale (e.g., expired/deleted); try once to refresh from run metadata.
+  if (!artifactResponse.ok && (artifactResponse.status === 404 || artifactResponse.status === 410) && publishState.workflowRunId) {
+    const refreshed = await resolveLatestArtifactForRun(env, owner, repo, publishState.workflowRunId);
+    const refreshedId = String(refreshed?.id || '');
+
+    if ((refreshedId && refreshedId !== artifactId) || refreshed?.archiveUrl) {
+      publishState = await writePublishState(env, {
+        ...publishState,
+        artifact: {
+          ...createDefaultArtifactInfo(),
+          ...refreshed,
+          unavailable: refreshed?.unavailable === true
+        },
+        message: 'Artifact metadata refreshed from workflow run.'
+      });
+
+      artifactId = publishState?.artifact?.id || artifactId;
+      artifactResponse = await downloadArtifactZip(env, owner, repo, artifactId);
+    }
+  }
+
+  if (!artifactResponse.ok) {
+    const isUnavailable = artifactResponse.status === 404 || artifactResponse.status === 410;
+
+    if (isUnavailable) {
+      await writePublishState(env, {
+        ...publishState,
+        status: 'artifact-unavailable',
+        message: 'Latest artifact is unavailable (expired or removed). Please rerun publish.',
+        artifact: {
+          ...createDefaultArtifactInfo(),
+          unavailable: true
+        }
+      });
+    }
+
+    return json(
+      {
+        ok: false,
+        error: isUnavailable
+          ? 'Latest artifact is unavailable (expired or removed). Please rerun publish.'
+          : 'Unable to download latest artifact from GitHub.',
+        status: artifactResponse.status,
+        details: artifactResponse.details
+      },
+      isUnavailable ? 404 : 502,
+      corsHeaders
+    );
+  }
+
+  const safeName = String(publishState?.artifact?.name || `site-build-${artifactId}`)
+    .replace(/[^a-zA-Z0-9._-]/g, '_');
+
+  return new Response(artifactResponse.response.body, {
+    status: 200,
+    headers: {
+      ...corsHeaders,
+      'Content-Type': 'application/zip',
+      'Content-Disposition': `attachment; filename="${safeName}.zip"`
+    }
+  });
+}
+
+async function downloadArtifactZip(env, owner, repo, artifactId) {
   const artifactUrl = `https://api.github.com/repos/${owner}/${repo}/actions/artifacts/${encodeURIComponent(artifactId)}/zip`;
-  const artifactResponse = await fetch(artifactUrl, {
+  const response = await fetch(artifactUrl, {
     method: 'GET',
+    redirect: 'manual',
     headers: {
       Authorization: `Bearer ${env.GH_TOKEN}`,
       'User-Agent': 'emanual-publish-api-worker',
@@ -746,31 +843,44 @@ async function handlePublishArtifact(env, corsHeaders) {
     }
   });
 
-  if (!artifactResponse.ok) {
-    const details = await safeText(artifactResponse);
-    return json(
-      {
+  // GitHub can return a redirect to object storage. Follow it without the GitHub
+  // Authorization header to avoid sending bearer auth to a non-GitHub host.
+  if (response.status >= 300 && response.status < 400) {
+    const location = response.headers.get('Location') || response.headers.get('location') || '';
+    if (!location) {
+      return {
         ok: false,
-        error: 'Unable to download latest artifact from GitHub.',
-        status: artifactResponse.status,
-        details
-      },
-      502,
-      corsHeaders
-    );
+        status: response.status,
+        details: 'GitHub artifact endpoint returned redirect without location header.',
+        response
+      };
+    }
+
+    const redirected = await fetch(location, {
+      method: 'GET',
+      redirect: 'follow',
+      headers: {
+        'User-Agent': 'emanual-publish-api-worker',
+        Accept: 'application/octet-stream, application/zip, */*'
+      }
+    });
+
+    const redirectedDetails = redirected.ok ? '' : await safeText(redirected);
+    return {
+      ok: redirected.ok,
+      status: redirected.status,
+      details: redirectedDetails,
+      response: redirected
+    };
   }
 
-  const safeName = String(publishState?.artifact?.name || `site-build-${artifactId}`)
-    .replace(/[^a-zA-Z0-9._-]/g, '_');
-
-  return new Response(artifactResponse.body, {
-    status: 200,
-    headers: {
-      ...corsHeaders,
-      'Content-Type': 'application/zip',
-      'Content-Disposition': `attachment; filename="${safeName}.zip"`
-    }
-  });
+  const details = response.ok ? '' : await safeText(response);
+  return {
+    ok: response.ok,
+    status: response.status,
+    details,
+    response
+  };
 }
 
 function draftObjectKey(env) {

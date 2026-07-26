@@ -719,6 +719,89 @@
   });
 
   const defaultPublishEndpoint = 'https://emanual-publish-api.rayyt2020.workers.dev/publish';
+  const sharedTokenHelpUrl = 'https://hateams.home/onlyoffice/doceditor.php?bitrixID=14433988&action=view';
+  const staffPasskeyHelpUrl = 'https://hateams.home/onlyoffice/doceditor.php?bitrixID=14434826&action=view';
+    const deploymentScriptText = String.raw`# ==============================================================================
+  # CONFIGURATION
+  # ==============================================================================
+  $DesignatedFolder = "\\cmcpat-nas01\Core Lab\Clinical Chemistry\Staff personal folder\Ray\emanual_deployment_content"
+  $TargetFolder1    = "\\PMHWEBVMWPRD05\emanual"
+  $TargetFolder2    = "\\CMCWEBVMWPRD05\emanual"
+
+  $Targets = @($TargetFolder1, $TargetFolder2)
+
+  # ==============================================================================
+  # SCRIPT EXECUTION
+  # ==============================================================================
+  try {
+    Write-Host "[1/4] Validating ZIP file..." -ForegroundColor Cyan
+    $ZipFiles = Get-ChildItem -Path $DesignatedFolder -Filter "*.zip" -File
+    if ($ZipFiles.Count -eq 0) { throw "Deployment failed: Zero .zip files found." }
+    if ($ZipFiles.Count -gt 1) { throw "Deployment failed: Multiple .zip files found." }
+    $ZipFile = $ZipFiles[0]
+
+    # --------------------------------------------------------------------------
+    Write-Host "\`n[2/4] Extracting ZIP and TAR.GZ artifacts..." -ForegroundColor Cyan
+    $ExtractionTemp = Join-Path -Path $DesignatedFolder -ChildPath "Temp_Zip_Extract"
+    if (Test-Path $ExtractionTemp) { Remove-Item $ExtractionTemp -Recurse -Force }
+    Expand-Archive -Path $ZipFile.FullName -DestinationPath $ExtractionTemp -Force -ErrorAction Stop
+
+    $TarGzPath = Join-Path -Path $ExtractionTemp -ChildPath "site-build.tar.gz"
+    if (-not (Test-Path $TarGzPath)) { throw "site-build.tar.gz not found inside ZIP." }
+
+    $TarExtractOutput = Join-Path -Path $DesignatedFolder -ChildPath "Temp_Tar_Extract"
+    if (Test-Path $TarExtractOutput) { Remove-Item $TarExtractOutput -Recurse -Force }
+    New-Item -ItemType Directory -Path $TarExtractOutput -Force | Out-Null
+
+    # Extracted with native Windows tar (removed the unsupported --force-local flag)
+    tar -xzf $TarGzPath -C $TarExtractOutput
+    if ($LASTEXITCODE -ne 0) { throw "Failed to extract site-build.tar.gz." }
+
+    # FIX: Point the source content directly to the root extract folder
+    $SourceContentFolder = $TarExtractOutput
+
+    # --------------------------------------------------------------------------
+    Write-Host "\`n[3/4] Deploying directly to Live Targets via Robocopy..." -ForegroundColor Cyan
+    foreach ($Target in $Targets) {
+      if (-not (Test-Path $Target)) { throw "Target share does not exist: $Target" }
+
+      Write-Host "Mirroring files directly to $Target ..."
+
+      # Robocopy /MIR exactly matches the destination to the source (Deletes old, copies new)
+      # /R:1 /W:1 means retry once, wait 1 second if a file is locked
+      # /NDL /NFL /NJH /NJS suppresses the massive log output to keep the console clean
+      $robocopyParams = @(
+        $SourceContentFolder,
+        $Target,
+        "/MIR",
+        "/R:1",
+        "/W:1",
+        "/NDL",
+        "/NFL",
+        "/NJH",
+        "/NJS"
+      )
+
+      & robocopy $robocopyParams
+
+      # Robocopy exit codes: 0-7 are success/informational. 8+ indicates an error.
+      if ($LASTEXITCODE -ge 8) {
+        throw "Robocopy failed while deploying to $Target with exit code $LASTEXITCODE."
+      }
+    }
+
+    # --------------------------------------------------------------------------
+    Write-Host "\`n[4/4] Deployment complete. Purging artifacts..." -ForegroundColor Green
+    if (Test-Path $ExtractionTemp) { Remove-Item $ExtractionTemp -Recurse -Force }
+    if (Test-Path $TarExtractOutput) { Remove-Item $TarExtractOutput -Recurse -Force }
+    Get-ChildItem -Path $DesignatedFolder -File | Remove-Item -Force
+    Get-ChildItem -Path $DesignatedFolder -Directory | Remove-Item -Recurse -Force
+
+    Write-Host "Cleanup completed successfully." -ForegroundColor Green
+
+  } catch {
+    Write-Error "Deployment script failed: $_"
+  }`;
 
   let searchInput = $state('');
   let goToIdInput = $state('');
@@ -783,6 +866,7 @@
   let latestArtifactUnavailable = $state(false);
   let publishFlowLoading = $state(false);
   let publishArtifactDownloadInProgress = $state(false);
+  let deploymentScriptCopyMessage = $state('');
   let publishFlowPollingTimer = null;
   const publishFlowPollDelayMs = 15000;
 
@@ -1390,7 +1474,10 @@
 
       if (!response.ok) {
         const result = await response.json().catch(() => ({}));
-        throw new Error(result?.error || `HTTP ${response.status}`);
+        const reason = String(result?.error || `HTTP ${response.status}`);
+        const details = String(result?.details || '').trim();
+        const upstreamStatus = result?.status ? ` (upstream ${result.status})` : '';
+        throw new Error(details ? `${reason}${upstreamStatus}: ${details}` : `${reason}${upstreamStatus}`);
       }
 
       const blob = await response.blob();
@@ -1407,6 +1494,32 @@
       alert(`Failed to download publish artifact: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       publishArtifactDownloadInProgress = false;
+    }
+  }
+
+  async function copyDeploymentScriptListener() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(deploymentScriptText);
+      } else {
+        const textArea = document.createElement('textarea');
+        textArea.value = deploymentScriptText;
+        textArea.setAttribute('readonly', '');
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+
+      deploymentScriptCopyMessage = 'Deployment script copied.';
+    } catch {
+      deploymentScriptCopyMessage = 'Failed to copy deployment script.';
     }
   }
 
@@ -1815,22 +1928,14 @@
     }
   }
 
-  let currentEntryIssues = $derived.by(() => {
-    const context = getCurrentEntryContext();
-    if (!context) {
-      return [];
-    }
-
+  let panelIssues = $derived.by(() => {
     return issueLogs.filter((issue) => {
       const status = String(issue?.status || '').toLowerCase();
       if (!showResolvedClosedInPanel && (status === 'resolved' || status === 'closed')) {
         return false;
       }
 
-      return (
-        Array.isArray(issue?.entryRefs) &&
-        issue.entryRefs.some((ref) => ref?.type === context.entryType && Number(ref?.id) === context.entryId)
-      );
+      return true;
     });
   });
 
@@ -1852,17 +1957,6 @@
 
   let inProgressIssueCount = $derived.by(() => {
     return issueLogs.filter((issue) => String(issue?.status || '').toLowerCase() === 'in-progress').length;
-  });
-
-  let generalIssues = $derived.by(() => {
-    return issueLogs.filter((issue) => {
-      const status = String(issue?.status || '').toLowerCase();
-      if (!showResolvedClosedInPanel && (status === 'resolved' || status === 'closed')) {
-        return false;
-      }
-
-      return !Array.isArray(issue?.entryRefs) || issue.entryRefs.length === 0;
-    });
   });
 
   async function beginRemoteEditSession() {
@@ -2928,7 +3022,6 @@
       <li class="nav-item ms-2 d-flex align-items-center">
         <span class="badge text-bg-info">Latest Published: {latestPublishedVersion || 'unknown'}</span>
       </li>
-      <li class="nav-item"><a href="{base}/issues" class="nav-link active ms-2">Issues</a></li>
       <li class="nav-item ms-2 nav-tools-wrapper">
         <details class="nav-tools">
           <summary class="nav-link active">Admin Tools</summary>
@@ -2982,7 +3075,17 @@
           <input id="admin-display-name" class="form-control form-control-sm" bind:value={adminLoginName} placeholder="Your name">
         </div>
         <div class="col-md-4">
-          <label class="form-label form-label-sm mb-1" for="admin-shared-token">Shared token</label>
+          <label class="form-label form-label-sm mb-1" for="admin-shared-token">
+            Shared token
+            <a
+              class="help-icon-link"
+              href={sharedTokenHelpUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Get shared token"
+              aria-label="Get shared token"
+            >?</a>
+          </label>
           <input id="admin-shared-token" class="form-control form-control-sm" bind:value={adminLoginSecret} type="password" placeholder="Worker shared token">
         </div>
         <div class="col-md-3">
@@ -3005,7 +3108,17 @@
     <div class="card-body py-3">
       <div class="row g-2 align-items-end">
         <div class="col-md-6">
-          <label class="form-label form-label-sm mb-1" for="staff-passkey">Staff passkey</label>
+          <label class="form-label form-label-sm mb-1" for="staff-passkey">
+            Staff passkey
+            <a
+              class="help-icon-link"
+              href={staffPasskeyHelpUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Get staff passkey"
+              aria-label="Get staff passkey"
+            >?</a>
+          </label>
           <input id="staff-passkey" class="form-control form-control-sm" bind:value={staffLoginPasskey} type="password" placeholder="Staff passkey">
         </div>
         <div class="col-md-3 d-flex gap-2">
@@ -3097,7 +3210,19 @@
       {/if}
 
       <div class="small">
-        <div class="fw-semibold mb-1">Deployment steps</div>
+        <div class="d-flex justify-content-between align-items-center gap-2 mb-1">
+          <div class="fw-semibold">Deployment steps</div>
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary"
+            onclick={copyDeploymentScriptListener}
+          >
+            Copy Deployment Script
+          </button>
+        </div>
+        {#if deploymentScriptCopyMessage}
+        <div class="small text-muted mb-1">{deploymentScriptCopyMessage}</div>
+        {/if}
         <ol class="publish-flow-steps mb-0">
           <li>Save the artifact to \\cmcpat-nas01\Core Lab\Clinical Chemistry\Staff personal folder\Ray\emanual_deployment_content.</li>
           <li>Log in to your Windows Corp account with read/write permission.</li>
@@ -3170,10 +3295,10 @@
       <label class="form-check-label small" for="panel-show-resolved-closed">Show resolved and closed issues</label>
     </div>
 
-    {#if currentEntryIssues.length > 0}
+    {#if panelIssues.length > 0}
     <div class="mb-3">
-      <div class="fw-semibold mb-2">Current entry issues</div>
-      {#each currentEntryIssues as issue}
+      <div class="fw-semibold mb-2">All issues</div>
+      {#each panelIssues as issue}
         <div class="issue-card mb-3">
           <div class="issue-card-header">
             <div>
@@ -3237,13 +3362,8 @@
         </div>
       {/each}
     </div>
-    {/if}
-
-    {#if generalIssues.length > 0}
-    <div class="mb-3">
-      <div class="fw-semibold mb-2">General issues</div>
-      <div class="small text-muted">{generalIssues.length} general issue(s) not tied to specific entries.</div>
-    </div>
+    {:else}
+    <div class="small text-muted mb-3">No issues to display.</div>
     {/if}
 
     <div class="small text-muted">Total issues: {issueLogs.length}</div>
@@ -3385,6 +3505,28 @@
     position: relative;
   }
 
+  .help-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.35rem;
+    border-radius: 999px;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: text-top;
+  }
+
+  .help-icon-link:hover {
+    color: #0d6efd;
+    border-color: #0d6efd;
+  }
+
   .issues-drawer-backdrop {
     position: fixed;
     inset: 0;
@@ -3395,9 +3537,8 @@
 
   .issues-tab {
     position: fixed;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
+    top: 5.25rem;
+    right: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -3405,24 +3546,23 @@
     min-width: 10.5rem;
     padding: 0.85rem 0.9rem 0.85rem 1rem;
     border: 1px solid #0d6efd;
-    border-right: 0;
-    border-radius: 0.9rem 0 0 0.9rem;
+    border-radius: 0.9rem;
     background: linear-gradient(180deg, #f5faff 0%, #dcecff 100%);
-    box-shadow: -0.45rem 0 1.2rem rgba(13, 110, 253, 0.18);
+    box-shadow: 0 0.45rem 1.2rem rgba(13, 110, 253, 0.18);
     color: #0b3f91;
     z-index: 1054;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   }
 
   .issues-tab:hover {
-    transform: translateY(-50%) translateX(-0.15rem);
-    box-shadow: -0.55rem 0 1.35rem rgba(13, 110, 253, 0.24);
+    transform: translateY(-0.12rem);
+    box-shadow: 0 0.55rem 1.35rem rgba(13, 110, 253, 0.24);
   }
 
   .issues-tab-highlight {
     border-color: #dc3545;
     background: linear-gradient(180deg, #fff5f6 0%, #ffdfe3 100%);
-    box-shadow: -0.55rem 0 1.35rem rgba(220, 53, 69, 0.22);
+    box-shadow: 0 0.55rem 1.35rem rgba(220, 53, 69, 0.22);
     color: #8a1c2e;
   }
 
