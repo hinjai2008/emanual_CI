@@ -1,13 +1,13 @@
 {
-  "versionId": "20260726T193128Z_req-1785094260679",
-  "requestId": "req-1785094260679",
-  "publishedAt": "2026-07-26T19:31:28.715Z",
+  "versionId": "20260726T200841Z_req-1785096498559",
+  "requestId": "req-1785096498559",
+  "publishedAt": "2026-07-26T20:08:41.635Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "testing deploy flow",
-  "editTraceCount": 16,
-  "snapshotPath": "content-versions/snapshots/2026/20260726T193128Z_req-1785094260679.json",
-  "contentSha256": "8c4210aa217925c00d7a28c049b8e0618fd5d5cd3e023c2a6df0be6a1be96069",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/30217015281",
+  "summary": "abc",
+  "editTraceCount": 1,
+  "snapshotPath": "content-versions/snapshots/2026/20260726T200841Z_req-1785096498559.json",
+  "contentSha256": "c49c5abfadff082775d200fceaa9814b19587f6942d2232c740b5f8973fa8067",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/30218343740",
   "environment": "predeploy"
 }
