@@ -15,7 +15,7 @@
     import ReferToTool from './refer-to/refer-to';
     import { formChangePropagation, containerChangePropagation } from './changePropagation.js';
     import { afterNavigate, beforeNavigate, onNavigate } from "$app/navigation";
-    import { concurrentEditLock } from "../routes/stores";
+    import { concurrentEditLock, isPublishFlowBlocked } from "../routes/stores";
     import "$lib/hideParagraphTool.css";
     import "$lib/labSelectionTool/labSelectionTool.css";
     import InlineCode from '@editorjs/inline-code';
@@ -50,6 +50,82 @@
         }
 }
 
+    function buildDefaultFormBlock(formName = "") {
+        return {
+            type: "form",
+            data: {
+                form: {
+                    form_id: "",
+                    form_ref_id: "",
+                    form_code: "",
+                    form_name: formName,
+                    form_link: "",
+                    form_external_link: "",
+                    formRequestOnly: false,
+                    specialTier: false
+                }
+            }
+        };
+    }
+
+    function normalizeFormRowData(value) {
+        const source = value && typeof value === 'object' ? value : {};
+        const sourceBlocks = Array.isArray(source.blocks) ? source.blocks : [];
+        const normalizedBlocks = [];
+
+        for (const block of sourceBlocks) {
+            if (!block || typeof block !== 'object') {
+                continue;
+            }
+
+            if (block.type === 'form') {
+                const raw = (block.data && typeof block.data === 'object')
+                    ? (block.data.form && typeof block.data.form === 'object' ? block.data.form : block.data)
+                    : {};
+
+                normalizedBlocks.push({
+                    ...block,
+                    type: 'form',
+                    data: {
+                        form: {
+                            form_id: raw.form_id ?? "",
+                            form_ref_id: raw.form_ref_id ?? "",
+                            form_code: raw.form_code ?? "",
+                            form_name: raw.form_name ?? "",
+                            form_link: raw.form_link ?? "",
+                            form_external_link: raw.form_external_link ?? "",
+                            formRequestOnly: raw.formRequestOnly === true,
+                            specialTier: raw.specialTier === true
+                        }
+                    }
+                });
+                continue;
+            }
+
+            if (block.type === 'paragraph' && normalizedBlocks.length === 0) {
+                const legacyText = typeof block?.data?.text === 'string' ? block.data.text.replace(/<[^>]*>/g, '').trim() : '';
+                normalizedBlocks.push(buildDefaultFormBlock(legacyText));
+            }
+        }
+
+        if (normalizedBlocks.length === 0) {
+            normalizedBlocks.push(buildDefaultFormBlock());
+        }
+
+        return {
+            ...source,
+            blocks: normalizedBlocks
+        };
+    }
+
+    function normalizeLoadedDataForRow(value) {
+        if (rowName === 'form') {
+            return normalizeFormRowData(value);
+        }
+
+        return value;
+    }
+
     if (isEditable) {
         checkModifyTrace();
     }
@@ -75,17 +151,9 @@
 
     async function initializeEditor() {
 
-        let loadedData;
+        const loadedData = getCurrentLoadedData();
 
-        if (thisEntryEdit && isEditable) {
-            loadedData = thisEntryEdit[rowName];
-        }
-
-        else if (!isEditable && entryData) {
-            loadedData = entryData[rowName];
-        }
-
-        else {
+        if (!loadedData) {
             return
         }
 
@@ -227,15 +295,20 @@
     }
 
     function getCurrentLoadedData() {
+        let value = null;
+
         if (thisEntryEdit && isEditable) {
-            return thisEntryEdit[rowName];
+            value = thisEntryEdit[rowName];
+        }
+        else if (!isEditable && entryData) {
+            value = entryData[rowName];
         }
 
-        if (!isEditable && entryData) {
-            return entryData[rowName];
+        if (!value) {
+            return null;
         }
 
-        return null;
+        return normalizeLoadedDataForRow(value);
     }
 
     async function renderCurrentDataInEditor() {
@@ -281,6 +354,11 @@
 
 
     function editButtonhandler() {
+
+        if ($isPublishFlowBlocked) {
+            alert("Editing is temporarily locked while publish/deployment is in progress. Please complete deployment and refresh status.");
+            return;
+        }
 
         if ($concurrentEditLock) {
             alert("Please complete/cancel the other editing action before starting a new one.");
@@ -457,7 +535,7 @@
             </div>
         </div>
 
-        {:else if isEditable && !$concurrentEditLock}
+        {:else if isEditable && !$concurrentEditLock && !$isPublishFlowBlocked}
         <div>
             <button type="button" class="btn btn-sm btn-secondary position-absolute top-50 end-0 mx-3 translate-middle-y opacity-75 z-3" onclick={() => editButtonhandler()}>Edit</button>
         </div>

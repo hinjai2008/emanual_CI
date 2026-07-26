@@ -1,6 +1,6 @@
 <script>
     import "../../global.css"; // Import global CSS
-    import { beginEditSession, editedJSON, isAdmin } from "../../stores";
+    import { beginEditSession, editedJSON, isAdmin, isPublishFlowBlocked } from "../../stores";
     import { isEditMode } from "../../stores";
     import { onDestroy } from "svelte";
     import { isCreateMode } from "../../stores";
@@ -37,6 +37,12 @@
             await $beginEditSession();
             return;
         }
+
+        if ($isPublishFlowBlocked) {
+            window.alert("Editing is temporarily locked while publish/deployment is in progress.");
+            return;
+        }
+
         isEditMode.set(true);
     }
 

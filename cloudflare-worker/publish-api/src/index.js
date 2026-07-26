@@ -38,6 +38,28 @@
  *   publishSummary?: string,
  *   commitMessage?: string
  * }
+ *
+ * POST /publish/status
+ * Body: { _secret: string }
+ *
+ * POST /publish/update
+ * Body: {
+ *   _secret: string,
+ *   requestId?: string,
+ *   status?: 'pending' | 'running' | 'succeeded' | 'failed' | 'artifact-unavailable',
+ *   message?: string,
+ *   workflowRunId?: string,
+ *   workflowRunUrl?: string,
+ *   versionId?: string,
+ *   contentSha256?: string,
+ *   artifactId?: string,
+ *   artifactName?: string,
+ *   artifactArchiveUrl?: string,
+ *   artifactUnavailable?: boolean
+ * }
+ *
+ * POST /publish/artifact
+ * Body: { _secret: string }
  * Header: Authorization: Bearer <PUBLISH_SHARED_SECRET>
  *
  * Required Worker Secrets:
@@ -138,6 +160,18 @@ export default {
       return handleIssueUpdateAction(body, env, corsHeaders);
     }
 
+    if (route === '/publish/status') {
+      return handlePublishStatus(env, corsHeaders);
+    }
+
+    if (route === '/publish/update') {
+      return handlePublishUpdate(body, env, corsHeaders);
+    }
+
+    if (route === '/publish/artifact') {
+      return handlePublishArtifact(env, corsHeaders);
+    }
+
     const requestId = String(body?.requestId || `req-${Date.now()}`);
     const adminId = String(body?.adminId || 'ui-admin');
     const publishSummary = String(body?.publishSummary || '');
@@ -160,6 +194,28 @@ export default {
     const repo = env.GH_REPO;
     const workflowFile = env.GH_WORKFLOW_FILE || 'content-build-handoff.yml';
     const ref = env.GH_REF || 'gh-pages';
+    const workflowRunListUrl = `https://github.com/${owner}/${repo}/actions/workflows/${workflowFile}`;
+
+    const previousPublishState = await readPublishState(env);
+    const startedAt = new Date().toISOString();
+    const publishStateOnStart = {
+      ...createDefaultPublishState(),
+      latestPublishedVersion: previousPublishState.latestPublishedVersion || '',
+      latestPublishedSha: previousPublishState.latestPublishedSha || '',
+      artifact: previousPublishState.artifact || createDefaultArtifactInfo(),
+      requestId,
+      adminId,
+      workflow: workflowFile,
+      workflowRef: ref,
+      workflowRunUrl: workflowRunListUrl,
+      status: 'pending',
+      startedAt,
+      completedAt: '',
+      updatedAt: startedAt,
+      message: 'Publish requested. Waiting for workflow execution status.'
+    };
+
+    await writePublishState(env, publishStateOnStart);
 
     if (!owner || !repo || !env.GH_TOKEN) {
       return json(
@@ -186,6 +242,14 @@ export default {
     );
 
     if (!updateRawDataResp.ok) {
+      await writePublishState(env, {
+        ...publishStateOnStart,
+        status: 'failed',
+        completedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        message: 'Failed to update src/routes/rawData.json before workflow dispatch.'
+      });
+
       return json(
         {
           ok: false,
@@ -215,6 +279,14 @@ export default {
     );
 
     if (!dispatchResp.ok) {
+      await writePublishState(env, {
+        ...publishStateOnStart,
+        status: 'failed',
+        completedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        message: 'Failed to trigger GitHub workflow dispatch.'
+      });
+
       return json(
         {
           ok: false,
@@ -227,7 +299,17 @@ export default {
       );
     }
 
-    const actionsUrl = `https://github.com/${owner}/${repo}/actions/workflows/${workflowFile}`;
+    const actionsUrl = workflowRunListUrl;
+
+    const publishStateAfterDispatch = {
+      ...publishStateOnStart,
+      status: 'running',
+      updatedAt: new Date().toISOString(),
+      message: 'Workflow dispatched. Build is in progress.',
+      workflowRunUrl: actionsUrl
+    };
+
+    await writePublishState(env, publishStateAfterDispatch);
 
     return json(
       {
@@ -236,7 +318,8 @@ export default {
         workflow: workflowFile,
         requestId,
         draftRevision: draftEnvelope.revision,
-        actionsUrl
+        actionsUrl,
+        publishState: publishStateAfterDispatch
       },
       202,
       corsHeaders
@@ -256,6 +339,9 @@ function buildCorsHeaders(allowedOrigin) {
 function isSupportedRoute(pathname) {
   return (
     pathname === '/publish' ||
+    pathname === '/publish/status' ||
+    pathname === '/publish/update' ||
+    pathname === '/publish/artifact' ||
     pathname === '/draft/load' ||
     pathname === '/draft/save' ||
     pathname === '/draft/discard' ||
@@ -328,6 +414,362 @@ async function upsertRawDataFile(env, owner, repo, ref, contentBase64, commitMes
   return githubRequest(env, `https://api.github.com/repos/${owner}/${repo}/contents/src/routes/rawData.json`, {
     method: 'PUT',
     body: JSON.stringify(payload)
+  });
+}
+
+function publishStateObjectKey(env) {
+  return env.PUBLISH_STATE_KEY || 'publish/shared/state.json';
+}
+
+function createDefaultArtifactInfo() {
+  return {
+    id: '',
+    name: '',
+    archiveUrl: '',
+    unavailable: false
+  };
+}
+
+function createDefaultPublishState() {
+  return {
+    requestId: '',
+    adminId: '',
+    workflow: '',
+    workflowRef: '',
+    workflowRunId: '',
+    workflowRunUrl: '',
+    status: 'idle',
+    startedAt: '',
+    completedAt: '',
+    updatedAt: '',
+    latestPublishedVersion: '',
+    latestPublishedSha: '',
+    artifact: createDefaultArtifactInfo(),
+    message: ''
+  };
+}
+
+function normalizePublishStatus(rawStatus) {
+  const status = String(rawStatus || '').trim().toLowerCase();
+  if (status === 'pending') {
+    return 'pending';
+  }
+  if (status === 'running') {
+    return 'running';
+  }
+  if (status === 'succeeded' || status === 'success') {
+    return 'succeeded';
+  }
+  if (status === 'artifact-unavailable') {
+    return 'artifact-unavailable';
+  }
+  if (status === 'failed' || status === 'failure') {
+    return 'failed';
+  }
+  return '';
+}
+
+async function readPublishState(env) {
+  const object = await env.DRAFTS_BUCKET.get(publishStateObjectKey(env));
+  if (!object) {
+    return createDefaultPublishState();
+  }
+
+  try {
+    const payload = await object.json();
+    const state = createDefaultPublishState();
+    const artifact = payload?.artifact || {};
+
+    return {
+      ...state,
+      requestId: String(payload?.requestId || ''),
+      adminId: String(payload?.adminId || ''),
+      workflow: String(payload?.workflow || ''),
+      workflowRef: String(payload?.workflowRef || ''),
+      workflowRunId: String(payload?.workflowRunId || ''),
+      workflowRunUrl: String(payload?.workflowRunUrl || ''),
+      status: normalizePublishStatus(payload?.status) || 'idle',
+      startedAt: String(payload?.startedAt || ''),
+      completedAt: String(payload?.completedAt || ''),
+      updatedAt: String(payload?.updatedAt || ''),
+      latestPublishedVersion: String(payload?.latestPublishedVersion || ''),
+      latestPublishedSha: String(payload?.latestPublishedSha || ''),
+      artifact: {
+        id: String(artifact?.id || ''),
+        name: String(artifact?.name || ''),
+        archiveUrl: String(artifact?.archiveUrl || ''),
+        unavailable: artifact?.unavailable === true
+      },
+      message: String(payload?.message || '')
+    };
+  } catch {
+    return createDefaultPublishState();
+  }
+}
+
+async function writePublishState(env, publishState) {
+  const normalized = {
+    ...createDefaultPublishState(),
+    ...publishState,
+    status: normalizePublishStatus(publishState?.status) || 'idle',
+    artifact: {
+      ...createDefaultArtifactInfo(),
+      ...(publishState?.artifact || {})
+    },
+    updatedAt: publishState?.updatedAt || new Date().toISOString()
+  };
+
+  await env.DRAFTS_BUCKET.put(publishStateObjectKey(env), JSON.stringify(normalized), {
+    httpMetadata: {
+      contentType: 'application/json; charset=utf-8'
+    }
+  });
+
+  return normalized;
+}
+
+async function handlePublishStatus(env, corsHeaders) {
+  let publishState = await readPublishState(env);
+
+  if (!publishState.latestPublishedVersion && env.GH_OWNER && env.GH_REPO) {
+    const marker = await readContentVersionMarkerFromRepo(env, env.GH_OWNER, env.GH_REPO, env.GH_REF || 'main');
+    if (marker) {
+      publishState = await writePublishState(env, {
+        ...publishState,
+        latestPublishedVersion: marker.versionId,
+        latestPublishedSha: marker.contentSha256,
+        message: publishState.message || 'Publish state synchronized from repository marker.'
+      });
+    }
+  }
+
+  return json(
+    {
+      ok: true,
+      publishState
+    },
+    200,
+    corsHeaders
+  );
+}
+
+async function resolveLatestArtifactForRun(env, owner, repo, workflowRunId) {
+  if (!workflowRunId) {
+    return null;
+  }
+
+  const response = await githubRequest(
+    env,
+    `https://api.github.com/repos/${owner}/${repo}/actions/runs/${encodeURIComponent(workflowRunId)}/artifacts`
+  );
+
+  if (!response.ok) {
+    return null;
+  }
+
+  try {
+    const payload = JSON.parse(response.text);
+    const artifacts = Array.isArray(payload?.artifacts) ? payload.artifacts : [];
+    const candidate = artifacts.find((artifact) => artifact?.expired !== true) || artifacts[0];
+    if (!candidate) {
+      return null;
+    }
+
+    return {
+      id: String(candidate.id || ''),
+      name: String(candidate.name || ''),
+      archiveUrl: String(candidate.archive_download_url || ''),
+      unavailable: candidate.expired === true
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function readContentVersionMarkerFromRepo(env, owner, repo, ref) {
+  const response = await githubRequest(
+    env,
+    `https://api.github.com/repos/${owner}/${repo}/contents/static/content-version.json?ref=${encodeURIComponent(ref)}`
+  );
+
+  if (!response.ok) {
+    return null;
+  }
+
+  try {
+    const payload = JSON.parse(response.text);
+    const encoded = String(payload?.content || '').replace(/\s+/g, '');
+    if (!encoded) {
+      return null;
+    }
+
+    const marker = JSON.parse(atob(encoded));
+    const versionId = String(marker?.versionId || '').trim();
+    const contentSha256 = String(marker?.contentSha256 || '').trim();
+    if (!versionId) {
+      return null;
+    }
+
+    return {
+      versionId,
+      contentSha256
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function handlePublishUpdate(body, env, corsHeaders) {
+  const previous = await readPublishState(env);
+  const nextStatus = normalizePublishStatus(body?.status);
+  if (!nextStatus) {
+    return json({ ok: false, error: 'status is required' }, 400, corsHeaders);
+  }
+
+  const owner = env.GH_OWNER;
+  const repo = env.GH_REPO;
+  const now = new Date().toISOString();
+
+  const next = {
+    ...previous,
+    requestId: String(body?.requestId || previous.requestId || ''),
+    adminId: String(body?.adminId || previous.adminId || ''),
+    workflowRunId: String(body?.workflowRunId || previous.workflowRunId || ''),
+    workflowRunUrl: String(body?.workflowRunUrl || previous.workflowRunUrl || ''),
+    status: nextStatus,
+    updatedAt: now,
+    message: String(body?.message || previous.message || '')
+  };
+
+  if (nextStatus === 'running' && !next.startedAt) {
+    next.startedAt = now;
+    next.completedAt = '';
+  }
+
+  if (nextStatus === 'pending') {
+    next.startedAt = next.startedAt || now;
+    next.completedAt = '';
+  }
+
+  if (nextStatus === 'succeeded' || nextStatus === 'failed' || nextStatus === 'artifact-unavailable') {
+    next.completedAt = String(body?.completedAt || now);
+  }
+
+  if (nextStatus === 'succeeded') {
+    next.latestPublishedVersion = String(body?.versionId || next.latestPublishedVersion || '');
+    next.latestPublishedSha = String(body?.contentSha256 || next.latestPublishedSha || '');
+
+    const callbackArtifact = {
+      id: String(body?.artifactId || ''),
+      name: String(body?.artifactName || ''),
+      archiveUrl: String(body?.artifactArchiveUrl || ''),
+      unavailable: body?.artifactUnavailable === true
+    };
+
+    let resolvedArtifact = callbackArtifact;
+    if (!resolvedArtifact.id && owner && repo && next.workflowRunId) {
+      const found = await resolveLatestArtifactForRun(env, owner, repo, next.workflowRunId);
+      if (found) {
+        resolvedArtifact = found;
+      }
+    }
+
+    if (!resolvedArtifact.id && !resolvedArtifact.archiveUrl) {
+      next.status = 'artifact-unavailable';
+      next.message = next.message || 'Publish completed but artifact metadata is unavailable.';
+      next.artifact = {
+        ...createDefaultArtifactInfo(),
+        unavailable: true
+      };
+    } else {
+      next.artifact = {
+        ...createDefaultArtifactInfo(),
+        ...resolvedArtifact,
+        unavailable: resolvedArtifact.unavailable === true
+      };
+      next.message = next.message || 'Publish completed and artifact is ready.';
+    }
+  }
+
+  if (nextStatus === 'failed') {
+    next.message = next.message || 'Publish workflow failed.';
+  }
+
+  if (nextStatus === 'artifact-unavailable') {
+    next.artifact = {
+      ...createDefaultArtifactInfo(),
+      unavailable: true
+    };
+    next.message = next.message || 'Publish completed but artifact is unavailable.';
+  }
+
+  const persisted = await writePublishState(env, next);
+  return json({ ok: true, publishState: persisted }, 200, corsHeaders);
+}
+
+async function handlePublishArtifact(env, corsHeaders) {
+  const publishState = await readPublishState(env);
+  const artifactId = publishState?.artifact?.id || '';
+  const owner = env.GH_OWNER;
+  const repo = env.GH_REPO;
+
+  if (!owner || !repo || !env.GH_TOKEN) {
+    return json(
+      {
+        ok: false,
+        error: 'Worker env missing GH_OWNER, GH_REPO, or GH_TOKEN'
+      },
+      500,
+      corsHeaders
+    );
+  }
+
+  if (!artifactId) {
+    return json(
+      {
+        ok: false,
+        error: 'Latest artifact is unavailable. Please rerun publish.'
+      },
+      404,
+      corsHeaders
+    );
+  }
+
+  const artifactUrl = `https://api.github.com/repos/${owner}/${repo}/actions/artifacts/${encodeURIComponent(artifactId)}/zip`;
+  const artifactResponse = await fetch(artifactUrl, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${env.GH_TOKEN}`,
+      'User-Agent': 'emanual-publish-api-worker',
+      Accept: 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    }
+  });
+
+  if (!artifactResponse.ok) {
+    const details = await safeText(artifactResponse);
+    return json(
+      {
+        ok: false,
+        error: 'Unable to download latest artifact from GitHub.',
+        status: artifactResponse.status,
+        details
+      },
+      502,
+      corsHeaders
+    );
+  }
+
+  const safeName = String(publishState?.artifact?.name || `site-build-${artifactId}`)
+    .replace(/[^a-zA-Z0-9._-]/g, '_');
+
+  return new Response(artifactResponse.body, {
+    status: 200,
+    headers: {
+      ...corsHeaders,
+      'Content-Type': 'application/zip',
+      'Content-Disposition': `attachment; filename="${safeName}.zip"`
+    }
   });
 }
 

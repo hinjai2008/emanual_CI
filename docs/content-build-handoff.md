@@ -38,6 +38,11 @@ Notes:
 
 ## Required Secrets
 
+### Publish Status Callback Secrets (required for controlled publish flow)
+
+- `PUBLISH_CALLBACK_URL`: Full worker callback endpoint URL (for example `https://<worker-host>/publish/update`)
+- `PUBLISH_SHARED_SECRET`: Shared worker auth token used by callback requests
+
 ### Email Notification Secrets (required for email delivery)
 
 - `ADMIN_BUILD_EMAIL_TO`: Default recipient email address for admin notifications
@@ -78,3 +83,18 @@ curl -X POST \
 - It is an email-based handoff pipeline: build, package, email notification, admin-reviewed final publish.
 - Success and failure emails include artifact metadata and download links.
 - Build artifacts are stored in GitHub Actions for 14 days (configurable).
+
+## Controlled Publish Flow (Worker-managed state)
+
+- Worker endpoints:
+  - `POST /publish/status` returns current publish lifecycle state.
+  - `POST /publish/update` receives workflow status callbacks (`running`, `succeeded`, `failed`, `artifact-unavailable`).
+  - `POST /publish/artifact` proxies latest artifact download for the admin UI.
+- The workflow posts status updates to `PUBLISH_CALLBACK_URL` at start, success, and failure.
+- Admin UI polls `POST /publish/status` every 15 seconds and blocks editing when:
+  - workflow status is `pending` or `running`, or
+  - UI version and latest published version do not match.
+- Deployment handoff in admin UI instructs users to:
+  1. Save artifact to `\\cmcpat-nas01\Core Lab\Clinical Chemistry\Staff personal folder\Ray\emanual_deployment_content`.
+  2. Sign in with Windows Corp account (read/write access).
+  3. Run the e-manual deploy PowerShell script.

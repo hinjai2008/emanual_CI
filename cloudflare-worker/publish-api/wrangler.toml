@@ -12,6 +12,7 @@ GH_REF = "main"
 ALLOWED_ORIGIN = "*"
 DRAFT_KEY = "drafts/shared/latest.json"
 ISSUES_KEY = "issues/shared/latest.json"
+PUBLISH_STATE_KEY = "publish/shared/state.json"
 
 [[r2_buckets]]
 binding = "DRAFTS_BUCKET"

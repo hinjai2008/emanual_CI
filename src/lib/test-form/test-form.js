@@ -1,7 +1,6 @@
 import "./test-form.css"
 import { formModules } from "$lib/form-link/form-link";
 import { base } from '$app/paths';
-import { form } from "$app/server";
 
 const TIER_OPTION_LABELS = [
     "Biochemistry Test Tier1",
@@ -22,6 +21,14 @@ function isTierOptionCode(form_code = "") {
 function getTierNoticeText(tierLabel = "") {
     const contactNumber = tierLabel.includes("Microbiology") ? "29901851" : "34087740";
     return `GCRS ordering was not specifically set up for this test, please order (${tierLabel}) in CMS and contact ${contactNumber} for authorization code.`;
+}
+
+function readBlockText(field) {
+    return field?.blocks?.[0]?.data?.text ?? "";
+}
+
+function readFormLinkUrl(field) {
+    return field?.blocks?.[0]?.data?.url ?? "";
 }
 
 
@@ -162,16 +169,20 @@ export default class TestFormTool {
                 formSelect.appendChild(tierOption);
             });
 
-            this.config.formList.forEach(optionform => {
+            const safeFormList = Array.isArray(this.config.formList) ? this.config.formList : [];
+            safeFormList.forEach(optionform => {
                 const option = document.createElement('option');
 
                 const option_form_id = optionform.id;
                 const option_form_ref_id = optionform.refId;
-                const option_form_code = optionform.form_code.blocks[0].data.text;
-                const option_form_name = optionform.form_name.blocks[0].data.text;
-                const option_form_link = optionform.form_link.blocks[0].data.url;
-                console.log(optionform);
-                const option_form_external_link = optionform.form_external_link.blocks[0].data.text;
+                const option_form_code = readBlockText(optionform.form_code);
+                const option_form_name = readBlockText(optionform.form_name);
+                const option_form_link = readFormLinkUrl(optionform.form_link);
+                const option_form_external_link = readBlockText(optionform.form_external_link);
+
+                if (option_form_id === null || option_form_id === undefined || option_form_ref_id === null || option_form_ref_id === undefined) {
+                    return;
+                }
 
                 option.value = optionform.id;
                 option.setAttribute('data-form_id', option_form_id.toString());
@@ -348,15 +359,23 @@ export default class TestFormTool {
         accordionBody.appendChild(formLink);
 
         if (form_link !== "") {
-            const buildUrl = formModules[`/src/lib/forms/${form_link}`].default;
-            const downloadButton = document.createElement('button');
-            const buttonTone = formRequestOnly ? "btn-primary" : "btn-secondary";
-            downloadButton.classList.add('btn', buttonTone, 'btn-sm');
-            downloadButton.innerText = "Download Form";
-            downloadButton.onclick = () => {
-                window.open(buildUrl, '_blank');
+            const moduleRecord = formModules[`/src/lib/forms/${form_link}`];
+            if (moduleRecord?.default) {
+                const buildUrl = moduleRecord.default;
+                const downloadButton = document.createElement('button');
+                const buttonTone = formRequestOnly ? "btn-primary" : "btn-secondary";
+                downloadButton.classList.add('btn', buttonTone, 'btn-sm');
+                downloadButton.innerText = "Download Form";
+                downloadButton.onclick = () => {
+                    window.open(buildUrl, '_blank');
+                }
+                accordionBody.appendChild(downloadButton);
+            } else {
+                const noFormLinkMessage = document.createElement('p');
+                noFormLinkMessage.classList.add('text-muted', 'mb-0');
+                noFormLinkMessage.innerText = "The local form file is unavailable. Please use the form page link above.";
+                accordionBody.appendChild(noFormLinkMessage);
             }
-            accordionBody.appendChild(downloadButton);
         } else if (form_external_link !== "") {
             const downloadButton = document.createElement('button');
             const buttonTone = formRequestOnly ? "btn-primary" : "btn-secondary";

@@ -21,6 +21,8 @@ export const concurrentEditLock = writable(false);
 
 export const pauseEditorRender = writable(false);
 
+export const isPublishFlowBlocked = writable(false);
+
 export const globalFunctions = writable({
   updateEditTrace: null,
   deleteEntry: null

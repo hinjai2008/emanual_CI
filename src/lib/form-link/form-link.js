@@ -45,15 +45,34 @@ export default class FormLinkTool {
     }
 
     save(blockContent) {
+        if (!blockContent || !blockContent.tagName) {
+            return {
+                url: "",
+            };
+        }
 
         if (blockContent.tagName === 'DIV') {
-            let url = blockContent.querySelector('button').id;
+            if (blockContent.id === "defaultText") {
+                return {
+                    url: "",
+                };
+            }
+
+            const input = blockContent.querySelector('input');
+            if (input) {
+                return {
+                    url: input.value || "",
+                };
+            }
+
+            const button = blockContent.querySelector('button');
+            let url = button ? button.id : "";
             return {
                 url: url,
             };
         }
 
-        if (blockContent.tagName === 'SPAN' && blockContent.id === "defaultText") {
+        if ((blockContent.tagName === 'SPAN' || blockContent.tagName === 'DIV') && blockContent.id === "defaultText") {
             return {
                 url: "",
             };
@@ -65,6 +84,10 @@ export default class FormLinkTool {
                 url: url,
             };
         }
+
+        return {
+            url: "",
+        };
     }
 
 
@@ -81,7 +104,15 @@ export default class FormLinkTool {
 
             const wrapper = document.createElement('div');
 
-            const buildUrl = formModules[`/src/lib/forms/${url}`].default;
+            const moduleRecord = formModules[`/src/lib/forms/${url}`];
+            if (!moduleRecord?.default) {
+                const defaultText = document.createElement('div');
+                defaultText.id = "defaultText";
+                defaultText.innerText = "";
+                return defaultText;
+            }
+
+            const buildUrl = moduleRecord.default;
             const button = document.createElement('button');
             button.id = url
             button.classList.add('btn', 'btn-primary', 'mb-2');

@@ -11,7 +11,7 @@
   import { editedJSON, initialJSON, isCreateMode } from './stores';
   import { isAdmin , isStaff } from './stores';
   import { isEditMode } from './stores';
-  import { pauseEditorRender } from './stores';
+  import { pauseEditorRender, isPublishFlowBlocked } from './stores';
  
   import lunr from 'lunr';
   import { setBeginEditSession, setGlobalFunctions } from './stores';
@@ -769,6 +769,56 @@
   let newIssueTitle = $state('');
   let newIssueDescription = $state('');
   let newIssueRefsInput = $state('');
+  let publishFlowStatus = $state('idle');
+  let publishFlowMessage = $state('');
+  let publishFlowRequestId = $state('');
+  let publishFlowRunUrl = $state('');
+  let publishFlowRunId = $state('');
+  let publishFlowStartedAt = $state('');
+  let publishFlowCompletedAt = $state('');
+  let latestPublishedVersion = $state('');
+  let latestPublishedSha = $state('');
+  let latestArtifactId = $state('');
+  let latestArtifactName = $state('');
+  let latestArtifactUnavailable = $state(false);
+  let publishFlowLoading = $state(false);
+  let publishArtifactDownloadInProgress = $state(false);
+  let publishFlowPollingTimer = null;
+  const publishFlowPollDelayMs = 15000;
+
+  let isPublishFlowActive = $derived.by(() => {
+    return publishFlowStatus === 'pending' || publishFlowStatus === 'running';
+  });
+
+  let isVersionMismatchBlocking = $derived.by(() => {
+    if (!$isAdmin) {
+      return false;
+    }
+
+    const uiVersion = String(productionVersion?.versionId || '').trim();
+    const publishedVersion = String(latestPublishedVersion || '').trim();
+    if (!uiVersion || !publishedVersion) {
+      return false;
+    }
+
+    return uiVersion !== publishedVersion;
+  });
+
+  let isAdminPublishBlocked = $derived.by(() => {
+    if (!$isAdmin) {
+      return false;
+    }
+
+    if (isPublishFlowActive) {
+      return true;
+    }
+
+    return isVersionMismatchBlocking;
+  });
+
+  $effect(() => {
+    isPublishFlowBlocked.set(Boolean(isAdminPublishBlocked));
+  });
 
   function deepCloneJSON(value) {
     return JSON.parse(JSON.stringify(value));
@@ -1144,6 +1194,7 @@
     isEditMode.set(false);
     isAdmin.set(false);
     isStaff.set(false);
+    isPublishFlowBlocked.set(false);
     draftReady = false;
     draftRevision = 0;
     draftLastUpdatedAt = '';
@@ -1198,6 +1249,165 @@
   function getIssuesUpdateActionEndpoint() {
     const apiBase = getSavedApiBase();
     return apiBase ? endpointFromBase(apiBase, '/issues/update-action') : '';
+  }
+
+  function getPublishStatusEndpoint() {
+    const apiBase = getSavedApiBase();
+    return apiBase ? endpointFromBase(apiBase, '/publish/status') : '';
+  }
+
+  function getPublishArtifactEndpoint() {
+    const apiBase = getSavedApiBase();
+    return apiBase ? endpointFromBase(apiBase, '/publish/artifact') : '';
+  }
+
+  function applyPublishFlowState(state) {
+    const artifact = state?.artifact || {};
+    publishFlowStatus = String(state?.status || 'idle').trim().toLowerCase() || 'idle';
+    publishFlowMessage = String(state?.message || '');
+    publishFlowRequestId = String(state?.requestId || '');
+    publishFlowRunUrl = String(state?.workflowRunUrl || '');
+    publishFlowRunId = String(state?.workflowRunId || '');
+    publishFlowStartedAt = String(state?.startedAt || '');
+    publishFlowCompletedAt = String(state?.completedAt || '');
+    latestPublishedVersion = String(state?.latestPublishedVersion || '');
+    latestPublishedSha = String(state?.latestPublishedSha || '');
+    latestArtifactId = String(artifact?.id || '');
+    latestArtifactName = String(artifact?.name || '');
+    latestArtifactUnavailable = artifact?.unavailable === true;
+  }
+
+  /**
+   * @param {{ interactive?: boolean, silent?: boolean }=} options
+   */
+  async function refreshPublishFlowStatus(options = {}) {
+    if (!$isAdmin) {
+      return false;
+    }
+
+    const interactive = options.interactive === true;
+    const silent = options.silent === true;
+
+    let statusEndpoint = getPublishStatusEndpoint();
+    if (!statusEndpoint && interactive) {
+      const apiBase = await ensureApiBaseInteractive();
+      if (apiBase) {
+        statusEndpoint = endpointFromBase(apiBase, '/publish/status');
+      }
+    }
+
+    if (!statusEndpoint) {
+      return false;
+    }
+
+    let secret = sessionStorage.getItem('publishApiSecret') || '';
+    if (!secret && interactive) {
+      secret = await ensureSecretInteractive();
+    }
+
+    if (!secret) {
+      return false;
+    }
+
+    if (!silent) {
+      publishFlowLoading = true;
+    }
+
+    try {
+      const response = await fetch(statusEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({ _secret: secret })
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        throw new Error(result?.error || `HTTP ${response.status}`);
+      }
+
+      applyPublishFlowState(result.publishState || {});
+      if (publishFlowRunUrl) {
+        publishActionsUrl = publishFlowRunUrl;
+      }
+      return true;
+    } catch (error) {
+      if (!silent) {
+        publishStatusMessage = `Unable to load publish status: ${error instanceof Error ? error.message : 'Unknown error'}`;
+      }
+      return false;
+    } finally {
+      if (!silent) {
+        publishFlowLoading = false;
+      }
+    }
+  }
+
+  function startPublishFlowPolling() {
+    if (typeof window === 'undefined' || publishFlowPollingTimer) {
+      return;
+    }
+
+    publishFlowPollingTimer = window.setInterval(() => {
+      void refreshPublishFlowStatus({ silent: true, interactive: false });
+    }, publishFlowPollDelayMs);
+  }
+
+  function stopPublishFlowPolling() {
+    if (publishFlowPollingTimer) {
+      clearInterval(publishFlowPollingTimer);
+      publishFlowPollingTimer = null;
+    }
+  }
+
+  async function downloadLatestArtifactListener() {
+    if (!$isAdmin || publishArtifactDownloadInProgress) {
+      return;
+    }
+
+    const artifactEndpoint = getPublishArtifactEndpoint();
+    if (!artifactEndpoint) {
+      alert('Publish artifact endpoint is not configured.');
+      return;
+    }
+
+    const secret = sessionStorage.getItem('publishApiSecret') || '';
+    if (!secret) {
+      alert('Publish API secret is not configured.');
+      return;
+    }
+
+    publishArtifactDownloadInProgress = true;
+    try {
+      const response = await fetch(artifactEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({ _secret: secret })
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result?.error || `HTTP ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      const disposition = response.headers.get('Content-Disposition') || '';
+      const match = disposition.match(/filename="([^"]+)"/i);
+      const fileName = (match && match[1]) || `${latestArtifactName || 'site-build'}.zip`;
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = fileName;
+      anchor.click();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      alert(`Failed to download publish artifact: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    } finally {
+      publishArtifactDownloadInProgress = false;
+    }
   }
 
   function parseEntryRefsInput(rawInput) {
@@ -1661,6 +1871,11 @@
       return;
     }
 
+    if (isAdminPublishBlocked) {
+      alert('Editing is locked while publish/deployment is in progress or pending deployment sync. Please complete deployment first.');
+      return;
+    }
+
     if (draftLoadInProgress) {
       return;
     }
@@ -1830,8 +2045,40 @@
     await saveRemoteDraft('manual', { interactive: true, showAlertOnError: true });
   }
 
+  async function clearEditTraceAfterPublish() {
+    suppressDraftAutosave = true;
+
+    editedJSON.update((draft) => {
+      if (!draft.config || typeof draft.config !== 'object') {
+        draft.config = { editTrace: [] };
+        return draft;
+      }
+
+      draft.config.editTrace = [];
+      return draft;
+    });
+
+    const clearSaved = await saveRemoteDraft('post-publish-clear', {
+      interactive: false,
+      showAlertOnError: false
+    });
+
+    if (clearSaved) {
+      draftStatusMessage = `Remote draft saved (rev ${draftRevision}). Edit trace reset after publish.`;
+      return true;
+    }
+
+    draftStatusMessage = 'Publish started. Edit trace reset locally; remote trace reset is pending.';
+    return false;
+  }
+
   async function publishChangesListener() {
     if (publishInProgress) {
+      return;
+    }
+
+    if (isPublishFlowActive) {
+      alert('A publish workflow is already in progress. Please wait for completion.');
       return;
     }
 
@@ -1905,14 +2152,21 @@
         throw new Error((result?.error || `HTTP ${response.status}`) + details);
       }
 
+      await clearEditTraceAfterPublish();
+
       publishStatusMessage = 'Publish started.';
       publishActionsUrl = result.actionsUrl || '';
+      if (result.publishState) {
+        applyPublishFlowState(result.publishState);
+      }
+      await refreshPublishFlowStatus({ silent: true, interactive: false });
       await refreshSyncStatus();
     } catch (error) {
       publishStatusMessage = 'Publish failed.';
       publishActionsUrl = '';
       alert(`Publish failed: ${error instanceof Error ? error.message : 'Unknown error'}`); 
     } finally {
+      suppressDraftAutosave = false;
       publishInProgress = false;
     }
   }
@@ -1935,7 +2189,17 @@
     });
     syncCheckEnabled = isSyncCheckHostEnabled();
     await refreshSyncStatus();
+    await refreshPublishFlowStatus({ silent: true, interactive: false });
     startSyncPolling();
+    startPublishFlowPolling();
+  });
+
+  $effect(() => {
+    if (!$isAdmin) {
+      return;
+    }
+
+    void refreshPublishFlowStatus({ silent: true, interactive: false });
   });
 
   $effect(() => {
@@ -1948,6 +2212,7 @@
 
   onDestroy(() => {
     stopSyncPolling();
+    stopPublishFlowPolling();
     clearDraftAutosaveTimer();
     if (draftStoreUnsubscribe) {
       draftStoreUnsubscribe();
@@ -2643,11 +2908,11 @@
         <details class="nav-tools">
           <summary class="nav-link">Entry Tools</summary>
           <div class="nav-tools-menu">
-            <button id="newTestButton" type="button" onclick={newTestListener} class="btn btn-outline-secondary btn-sm w-100 mb-1">New Test</button>
-            <button id="newFormButton" type="button" onclick={newFormListener} class="btn btn-outline-secondary btn-sm w-100 mb-1">New Form</button>
-            <button id="newContainerButton" type="button" onclick={newContainerListener} class="btn btn-outline-secondary btn-sm w-100 mb-1">New Container</button>
-            <button id="hideEntryButton" type="button" onclick={hideEntryListener} class="btn btn-outline-secondary btn-sm w-100 mb-1">Hide/Unhide Current Entry</button>
-            <button id="removeContainerButton" type="button" onclick={removeEntryListener} class="btn btn-outline-danger btn-sm w-100">Remove Current Entry</button>
+            <button id="newTestButton" type="button" onclick={newTestListener} class="btn btn-outline-secondary btn-sm w-100 mb-1" disabled={isAdminPublishBlocked}>New Test</button>
+            <button id="newFormButton" type="button" onclick={newFormListener} class="btn btn-outline-secondary btn-sm w-100 mb-1" disabled={isAdminPublishBlocked}>New Form</button>
+            <button id="newContainerButton" type="button" onclick={newContainerListener} class="btn btn-outline-secondary btn-sm w-100 mb-1" disabled={isAdminPublishBlocked}>New Container</button>
+            <button id="hideEntryButton" type="button" onclick={hideEntryListener} class="btn btn-outline-secondary btn-sm w-100 mb-1" disabled={isAdminPublishBlocked}>Hide/Unhide Current Entry</button>
+            <button id="removeContainerButton" type="button" onclick={removeEntryListener} class="btn btn-outline-danger btn-sm w-100" disabled={isAdminPublishBlocked}>Remove Current Entry</button>
           </div>
         </details>
       </li>
@@ -2657,6 +2922,12 @@
       <li class="nav-item ms-2 d-flex align-items-center">
         <span class="badge text-bg-primary">Admin: {getPublisherName() || 'signed in'}</span>
       </li>
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <span class="badge text-bg-dark">UI Version: {productionVersion?.versionId || 'unknown'}</span>
+      </li>
+      <li class="nav-item ms-2 d-flex align-items-center">
+        <span class="badge text-bg-info">Latest Published: {latestPublishedVersion || 'unknown'}</span>
+      </li>
       <li class="nav-item"><a href="{base}/issues" class="nav-link active ms-2">Issues</a></li>
       <li class="nav-item ms-2 nav-tools-wrapper">
         <details class="nav-tools">
@@ -2664,8 +2935,8 @@
           <div class="nav-tools-menu">
             <button id="exportButton" type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1">Save Changes</button>
             <button id="exportReviewExcelButton" type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1">Export Review Excel</button>
-            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={saveDraftNowListener} disabled={draftSaveInProgress || draftLoadInProgress || !$isEditMode}>{draftSaveInProgress ? 'Saving Draft...' : 'Save Remote Draft'}</button>
-            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={publishChangesListener} disabled={publishInProgress || draftLoadInProgress || !$isEditMode}>{publishInProgress ? 'Publishing...' : 'Publish Site'}</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={saveDraftNowListener} disabled={draftSaveInProgress || draftLoadInProgress || !$isEditMode || isAdminPublishBlocked}>{draftSaveInProgress ? 'Saving Draft...' : 'Save Remote Draft'}</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={publishChangesListener} disabled={publishInProgress || draftLoadInProgress || !$isEditMode || isPublishFlowActive}>{publishInProgress ? 'Publishing...' : 'Publish Site'}</button>
             {#if syncCheckEnabled}
             <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={configurePredeployVersionUrl}>Set Pre-deploy URL</button>
             {/if}
@@ -2771,6 +3042,70 @@
       <a class="btn btn-sm btn-outline-dark" href={predeployVersion.buildRunUrl} target="_blank" rel="noopener noreferrer">Download Latest Build</a>
     {/if}
   </div>
+  {/if}
+
+  {#if $isAdmin && isAdminPublishBlocked}
+  <aside class="publish-flow-overlay" aria-live="polite">
+    <div class="publish-flow-overlay-card">
+      <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+        <div>
+          <div class="fw-semibold">Publish and Deployment In Progress</div>
+          <div class="small text-muted">Editing is locked until deployment sync is complete.</div>
+        </div>
+        <span class="badge text-bg-secondary text-uppercase">{publishFlowStatus}</span>
+      </div>
+
+      <div class="small mb-2">{publishFlowMessage || 'Waiting for publish state update...'}</div>
+      <div class="small mb-1"><strong>UI Version:</strong> {productionVersion?.versionId || 'unknown'}</div>
+      <div class="small mb-1"><strong>Latest Published Version:</strong> {latestPublishedVersion || 'unknown'}</div>
+      {#if publishFlowRequestId}
+      <div class="small mb-1"><strong>Request ID:</strong> {publishFlowRequestId}</div>
+      {/if}
+      {#if publishFlowStartedAt}
+      <div class="small mb-1"><strong>Started:</strong> {publishFlowStartedAt}</div>
+      {/if}
+      {#if publishFlowCompletedAt}
+      <div class="small mb-1"><strong>Completed:</strong> {publishFlowCompletedAt}</div>
+      {/if}
+      {#if publishFlowRunUrl}
+      <div class="small mb-2"><a href={publishFlowRunUrl} target="_blank" rel="noopener noreferrer">View GitHub workflow run</a></div>
+      {/if}
+
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <button
+          type="button"
+          class="btn btn-sm btn-primary"
+          onclick={downloadLatestArtifactListener}
+          disabled={publishArtifactDownloadInProgress || !latestArtifactId || latestArtifactUnavailable}
+        >
+          {publishArtifactDownloadInProgress ? 'Downloading...' : 'Download Latest Build Artifact'}
+        </button>
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-secondary"
+          onclick={() => refreshPublishFlowStatus({ interactive: true })}
+          disabled={publishFlowLoading}
+        >
+          {publishFlowLoading ? 'Refreshing...' : 'Refresh Publish Status'}
+        </button>
+      </div>
+
+      {#if latestArtifactUnavailable || publishFlowStatus === 'artifact-unavailable'}
+      <div class="alert alert-danger py-2 px-3 small mb-3">
+        Latest artifact is unavailable or expired. Please rerun publish.
+      </div>
+      {/if}
+
+      <div class="small">
+        <div class="fw-semibold mb-1">Deployment steps</div>
+        <ol class="publish-flow-steps mb-0">
+          <li>Save the artifact to \\cmcpat-nas01\Core Lab\Clinical Chemistry\Staff personal folder\Ray\emanual_deployment_content.</li>
+          <li>Log in to your Windows Corp account with read/write permission.</li>
+          <li>Copy the e-manual deploy PowerShell script into PowerShell and run it.</li>
+        </ol>
+      </div>
+    </div>
+  </aside>
   {/if}
 
   {#if $isAdmin}
@@ -3254,5 +3589,35 @@
     font-size: 0.78rem;
     color: #6c757d;
     margin-bottom: 0.15rem;
+  }
+
+  .publish-flow-overlay {
+    position: fixed;
+    top: 86px;
+    right: 0;
+    width: min(50vw, 920px);
+    height: calc(100vh - 96px);
+    z-index: 1052;
+    padding: 1rem;
+    background: rgba(248, 249, 250, 0.86);
+    backdrop-filter: blur(2px);
+    border-left: 1px solid #dee2e6;
+    overflow-y: auto;
+  }
+
+  .publish-flow-overlay-card {
+    background: #ffffff;
+    border: 1px solid #dbe3f0;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.12);
+    padding: 1rem;
+  }
+
+  .publish-flow-steps {
+    padding-left: 1.2rem;
+  }
+
+  .publish-flow-steps li {
+    margin-bottom: 0.35rem;
   }
 </style>

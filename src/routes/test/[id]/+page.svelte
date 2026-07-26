@@ -6,7 +6,7 @@
     import { isCreateMode } from "../../stores";
     import { onDestroy } from "svelte";
     import DataRow from "$lib/DataRow.svelte";
-    import { beginEditSession, editedJSON, globalFunctions } from "../../stores";
+    import { beginEditSession, editedJSON, globalFunctions, isPublishFlowBlocked } from "../../stores";
     import { page } from "$app/state";
 
 
@@ -46,6 +46,12 @@
             await $beginEditSession();
             return;
         }
+
+        if ($isPublishFlowBlocked) {
+            window.alert("Editing is temporarily locked while publish/deployment is in progress.");
+            return;
+        }
+
         isEditMode.set(true);
     }
 
