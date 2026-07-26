@@ -526,5 +526,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20260722T020543Z_req-1784685925266.json",
     "contentSha256": "29517e44ee3b3924d9f4715a24c708e0eb32be98eee12e9af65c2dfe940fdb21",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/29884877273"
+  },
+  {
+    "versionId": "20260726T193128Z_req-1785094260679",
+    "publishedAt": "2026-07-26T19:31:28.715Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1785094260679",
+    "sourceRef": "main",
+    "summary": "testing deploy flow",
+    "editTraceCount": 16,
+    "snapshotPath": "content-versions/snapshots/2026/20260726T193128Z_req-1785094260679.json",
+    "contentSha256": "9e179895752c56d063eedc1d8dc7cd0c9b3c7e9c73b605c8aeb3d42930a5fbd0",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/30217015281"
   }
 ]
