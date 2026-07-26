@@ -202,7 +202,8 @@ export default {
       ...createDefaultPublishState(),
       latestPublishedVersion: previousPublishState.latestPublishedVersion || '',
       latestPublishedSha: previousPublishState.latestPublishedSha || '',
-      artifact: previousPublishState.artifact || createDefaultArtifactInfo(),
+      // Always reset artifact for a new publish request to avoid exposing stale downloads.
+      artifact: createDefaultArtifactInfo(),
       requestId,
       adminId,
       workflow: workflowFile,
@@ -651,6 +652,11 @@ async function handlePublishUpdate(body, env, corsHeaders) {
     next.completedAt = '';
   }
 
+  if (nextStatus === 'pending' || nextStatus === 'running') {
+    // Keep downloads locked to the current workflow output only.
+    next.artifact = createDefaultArtifactInfo();
+  }
+
   if (nextStatus === 'succeeded' || nextStatus === 'failed' || nextStatus === 'artifact-unavailable') {
     next.completedAt = String(body?.completedAt || now);
   }
@@ -710,6 +716,7 @@ async function handlePublishUpdate(body, env, corsHeaders) {
 async function handlePublishArtifact(env, corsHeaders) {
   let publishState = await readPublishState(env);
   let artifactId = publishState?.artifact?.id || '';
+  const publishStatus = normalizePublishStatus(publishState?.status) || 'idle';
   const owner = env.GH_OWNER;
   const repo = env.GH_REPO;
 
@@ -720,6 +727,18 @@ async function handlePublishArtifact(env, corsHeaders) {
         error: 'Worker env missing GH_OWNER, GH_REPO, or GH_TOKEN'
       },
       500,
+      corsHeaders
+    );
+  }
+
+  if (publishStatus !== 'succeeded') {
+    return json(
+      {
+        ok: false,
+        error: 'Artifact download is available only after the workflow completes successfully.',
+        status: publishStatus
+      },
+      409,
       corsHeaders
     );
   }

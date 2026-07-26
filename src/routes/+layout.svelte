@@ -3189,7 +3189,7 @@
           type="button"
           class="btn btn-sm btn-primary"
           onclick={downloadLatestArtifactListener}
-          disabled={publishArtifactDownloadInProgress || !latestArtifactId || latestArtifactUnavailable}
+          disabled={publishArtifactDownloadInProgress || publishFlowStatus !== 'succeeded' || !latestArtifactId || latestArtifactUnavailable}
         >
           {publishArtifactDownloadInProgress ? 'Downloading...' : 'Download Latest Build Artifact'}
         </button>
