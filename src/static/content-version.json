@@ -1,13 +1,13 @@
 {
-  "versionId": "20260804T020250Z_req-1785808949060",
-  "requestId": "req-1785808949060",
-  "publishedAt": "2026-08-04T02:02:50.854Z",
+  "versionId": "20260903T012637Z_req-1788398773462",
+  "requestId": "req-1788398773462",
+  "publishedAt": "2026-09-03T01:26:37.400Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "EPO 2x 5ml clot blood",
-  "editTraceCount": 1,
-  "snapshotPath": "content-versions/snapshots/2026/20260804T020250Z_req-1785808949060.json",
-  "contentSha256": "f28ca6bef11e9d41a9c9e7540e46384d326d0bd7c3fd670ff48cc8b6c9f7456c",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/30870588418",
+  "summary": "CH50",
+  "editTraceCount": 12,
+  "snapshotPath": "content-versions/snapshots/2026/20260903T012637Z_req-1788398773462.json",
+  "contentSha256": "aea513d7acaf5acc7a4a07f51293590f361b231f504d1d25a262fe63a64fb14a",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/33703633651",
   "environment": "predeploy"
 }
