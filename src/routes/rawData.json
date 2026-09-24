@@ -34189,13 +34189,28 @@
 				"version": "2.31.0-rc.7"
 			},
 			"container": {
-				"time": 1773564955229,
+				"time": 1785808905773,
 				"blocks": [
 					{
 						"id": "pbyAgzT1UI",
 						"type": "paragraph",
 						"data": {
-							"text": "3 mL EDTA and 5 mL clotted blood"
+							"text": "3 mL EDTA and <b>2x</b> 5 mL clotted blood"
+						}
+					},
+					{
+						"id": "Dr7mwv6QFo",
+						"type": "container",
+						"data": {
+							"text": "2x ##CLOT_BLOOD_TUBE##",
+							"imageSrc": "/clot_blood_x1.webp"
+						}
+					},
+					{
+						"id": "cWgr79gN_C",
+						"type": "paragraph",
+						"data": {
+							"text": "<b>AND</b>"
 						}
 					},
 					{
@@ -59114,101 +59129,117 @@
 			"id": 339,
 			"refId": 23655581,
 			"full_name": {
+				"time": 1788398737135,
 				"blocks": [
 					{
+						"id": "c3FVeucUjb",
 						"type": "paragraph",
 						"data": {
-							"text": "Protein S"
+							"text": "Functional evaluation of classical and alternative complement pathways (CH50)"
 						}
 					}
-				]
+				],
+				"version": "2.31.0-rc.7"
 			},
 			"GCRS_name": {
-				"time": 1761232990464,
+				"time": 1788398739791,
 				"blocks": [
 					{
 						"id": "cms_339",
 						"type": "paragraph",
 						"data": {
-							"text": "Protein S"
+							"text": "Functional evaluation of classical and alternative complement pathways (CH50)"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
 			},
 			"label_name": {
-				"time": 1761232990464,
+				"time": 1788398632311,
 				"blocks": [
 					{
 						"id": "label_339",
 						"type": "paragraph",
 						"data": {
-							"text": "Protein S"
+							"text": "CH50"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
 			},
 			"synonyms": {
+				"time": 1788398745407,
 				"blocks": [
 					{
+						"id": "W2I89Ptyi3",
 						"type": "synonyms",
 						"data": {
-							"synonymList": []
-						}
-					}
-				]
-			},
-			"turn_around_time": {
-				"time": 1747560232537,
-				"blocks": [
-					{
-						"id": "30qdPqhmvA",
-						"type": "paragraph",
-						"data": {
-							"text": "30 working days"
+							"synonymList": [
+								"CH50"
+							]
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
 			},
+			"turn_around_time": {
+				"time": 1788398622535,
+				"blocks": [],
+				"version": "2.31.0-rc.7"
+			},
 			"requirement": {
-				"time": 1761401402461,
+				"time": 1788398566742,
 				"blocks": [
 					{
 						"id": "QZEnuHSPDT",
 						"type": "paragraph",
 						"data": {
-							"text": "Aemolysed sample not accepted. Fresh specimen needed."
+							"text": "Pre-arrangment with QMH Immunology lab is required. Specimens must arrive at QMH Immunology lab within 2 hours of collection and before 4:00pm"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
 			},
 			"lab_and_category": {
-				"time": 1747560232537,
+				"time": 1788398578327,
 				"blocks": [
 					{
 						"id": "2hkpIQ0Yua",
 						"type": "lab_and_category",
 						"data": {
-							"labName": "PMH Haematology Lab",
-							"categoryCode": "HAEM",
-							"categoryName": "Haematology"
+							"labName": "QMH Immunology Lab",
+							"categoryCode": "IMM",
+							"categoryName": "Immunology"
 						}
 					}
 				],
 				"version": "2.31.0-rc.7"
 			},
 			"alert": {
-				"time": 1773568778587,
+				"time": 1788398434416,
 				"blocks": [
 					{
-						"id": "alert_339_FRESH_wK5U",
+						"id": "TC7iy4YQME",
+						"type": "alertTag",
+						"data": {
+							"text": "Advance Booking/Consultation",
+							"background": "text-bg-info"
+						}
+					},
+					{
+						"id": "zxDdKdmkev",
 						"type": "alertTag",
 						"data": {
 							"text": "Fresh specimen required",
 							"background": "text-bg-warning"
+						}
+					},
+					{
+						"id": "T5ATUVlJpC",
+						"type": "alertTag",
+						"data": {
+							"text": "Send to lab immediately",
+							"background": "text-bg-danger"
 						}
 					}
 				],
@@ -59242,41 +59273,26 @@
 				"version": "2.31.0-rc.7"
 			},
 			"form": {
-				"time": 1761418299025,
-				"blocks": [
-					{
-						"id": "NqaZPo6eid",
-						"type": "form",
-						"data": {
-							"form": {
-								"form_id": "",
-								"form_ref_id": "",
-								"form_code": "",
-								"form_name": "",
-								"form_link": "",
-								"formRequestOnly": false
-							}
-						}
-					}
-				],
+				"time": 1788398573311,
+				"blocks": [],
 				"version": "2.31.0-rc.7"
 			},
 			"container": {
-				"time": 1773564955229,
+				"time": 1788398615311,
 				"blocks": [
 					{
 						"id": "HMNf-G3woZ",
 						"type": "paragraph",
 						"data": {
-							"text": "3 x 2 mL citrate blood (Fresh)"
+							"text": "4mL clot blood"
 						}
 					},
 					{
-						"id": "ILrNqsjTls",
+						"id": "3p4H8sFxaQ",
 						"type": "container",
 						"data": {
-							"text": "##CITRATE_TUBE##",
-							"imageSrc": "/Sodium Citrate.jpg"
+							"text": "##CLOT_BLOOD_TUBE##",
+							"imageSrc": "/clot_blood_x1.webp"
 						}
 					}
 				],
@@ -59295,7 +59311,7 @@
 				],
 				"version": "2.31.0-rc.7"
 			},
-			"is_hidden": true,
+			"is_hidden": false,
 			"is_simple_layout": true
 		},
 		{
@@ -74085,16 +74101,8 @@
 				"version": "2.31.0-rc.7"
 			},
 			"requirement": {
-				"time": 1785097397753,
-				"blocks": [
-					{
-						"id": "FrW_JlgQV4",
-						"type": "paragraph",
-						"data": {
-							"text": "abcd"
-						}
-					}
-				],
+				"time": 1785137601045,
+				"blocks": [],
 				"version": "2.31.0-rc.7"
 			},
 			"is_hidden": false
