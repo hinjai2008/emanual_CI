@@ -908,6 +908,30 @@
     return JSON.parse(JSON.stringify(value));
   }
 
+  /** @param {any} result */
+  function applyRemoteDraftResult(result) {
+    suppressDraftAutosave = true;
+    if (result.exists && result.editedJSON) {
+      editedJSON.set(deepCloneJSON(result.editedJSON));
+      draftRevision = Number(result.revision || 0);
+      draftLastUpdatedAt = result.updatedAt || '';
+      draftLastUpdatedBy = result.updatedBy || '';
+      draftStatusMessage = `Remote draft loaded (rev ${draftRevision}).`;
+    } else {
+      editedJSON.set(deepCloneJSON(initialJSON));
+      draftRevision = 0;
+      draftLastUpdatedAt = '';
+      draftLastUpdatedBy = '';
+      draftStatusMessage = 'No remote draft found. Started a new draft from published content.';
+    }
+
+    draftReady = true;
+    isEditMode.set(true);
+    queueMicrotask(() => {
+      suppressDraftAutosave = false;
+    });
+  }
+
   function normalizeApiBase(rawValue) {
     if (!rawValue) {
       return '';
@@ -1230,7 +1254,7 @@
       issuesLoadedForSession = false;
       closeAdminLogin();
       publishStatusMessage = '';
-      draftStatusMessage = 'Admin login verified. Start a new edit to load the remote draft.';
+      applyRemoteDraftResult(result);
     } catch (error) {
       adminLoginError = error instanceof Error ? error.message : 'Admin login failed.';
     } finally {
@@ -2002,26 +2026,7 @@
         throw new Error((result?.error || `HTTP ${response.status}`) + details);
       }
 
-      suppressDraftAutosave = true;
-      if (result.exists && result.editedJSON) {
-        editedJSON.set(deepCloneJSON(result.editedJSON));
-        draftRevision = Number(result.revision || 0);
-        draftLastUpdatedAt = result.updatedAt || '';
-        draftLastUpdatedBy = result.updatedBy || '';
-        draftStatusMessage = `Remote draft loaded (rev ${draftRevision}).`;
-      } else {
-        editedJSON.set(deepCloneJSON(initialJSON));
-        draftRevision = 0;
-        draftLastUpdatedAt = '';
-        draftLastUpdatedBy = '';
-        draftStatusMessage = 'No remote draft found. Started a new draft from published content.';
-      }
-
-      draftReady = true;
-      isEditMode.set(true);
-      queueMicrotask(() => {
-        suppressDraftAutosave = false;
-      });
+      applyRemoteDraftResult(result);
     } catch (error) {
       draftStatusMessage = 'Failed to load remote draft.';
       alert(`Failed to load remote draft: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -2576,7 +2581,16 @@
       ],
     },
 
-    GCRS_name: {},
+    GCRS_name: {
+      blocks: [
+        {
+          type: "paragraph",
+          data: {
+            text: "",
+          },
+        },
+      ],
+    },
 
     label_name: {
       blocks: [
@@ -2595,6 +2609,99 @@
           type: "synonyms",
           data: {
             synonymList: [],
+          },
+        },
+      ],
+    },
+
+    alert: {
+      blocks: [],
+    },
+
+    requirement: {
+      blocks: [
+        {
+          type: "paragraph",
+          data: {
+            text: "",
+          },
+        },
+      ],
+    },
+
+    container: {
+      blocks: [
+        {
+          type: "container",
+          data: {
+            text: "",
+            imageSrc: "",
+          },
+        },
+      ],
+    },
+
+    form: {
+      blocks: [
+        {
+          type: "form",
+          data: {
+            form: {
+              form_id: "",
+              form_ref_id: "",
+              form_code: "",
+              form_name: "",
+              form_link: "",
+              form_external_link: "",
+              formRequestOnly: false,
+              specialTier: false,
+            },
+          },
+        },
+      ],
+    },
+
+    lab_and_category: {
+      blocks: [
+        {
+          type: "lab_and_category",
+          data: {
+            labName: "",
+            categoryCode: "",
+            categoryName: "",
+          },
+        },
+      ],
+    },
+
+    indication: {
+      blocks: [
+        {
+          type: "paragraph",
+          data: {
+            text: "",
+          },
+        },
+      ],
+    },
+
+    turn_around_time: {
+      blocks: [
+        {
+          type: "paragraph",
+          data: {
+            text: "",
+          },
+        },
+      ],
+    },
+
+    test_handling: {
+      blocks: [
+        {
+          type: "paragraph",
+          data: {
+            text: "",
           },
         },
       ],
@@ -2978,13 +3085,6 @@
         </div>
       </li>
 
-      <li class="nav-item ms-1 d-flex align-items-center">
-        <div class="btn-group btn-group-sm">
-          <button type="button" class="btn btn-outline-secondary" onclick={goToPreviousEntryIdListener} title="Previous existing entry">&#8592; Prev</button>
-          <button type="button" class="btn btn-outline-secondary" onclick={goToNextEntryIdListener} title="Next existing entry">Next &#8594;</button>
-        </div>
-      </li>
-
       {#if !$isAdmin && !$isStaff}
       <li class="nav-item ms-2 d-flex align-items-center">
         <button type="button" class="btn btn-outline-secondary btn-sm" onclick={openStaffLogin}>Staff login</button>
@@ -2998,9 +3098,9 @@
       {/if}
 
       {#if $isEditMode}
-      <li class="nav-item ms-2 nav-tools-wrapper">
+      <li class="nav-item ms-2 nav-tools-wrapper d-flex align-items-center">
         <details class="nav-tools">
-          <summary class="nav-link">Entry Tools</summary>
+          <summary class="btn btn-outline-secondary btn-sm">Editing Tools</summary>
           <div class="nav-tools-menu">
             <button id="newTestButton" type="button" onclick={newTestListener} class="btn btn-outline-secondary btn-sm w-100 mb-1" disabled={isAdminPublishBlocked}>New Test</button>
             <button id="newFormButton" type="button" onclick={newFormListener} class="btn btn-outline-secondary btn-sm w-100 mb-1" disabled={isAdminPublishBlocked}>New Form</button>
@@ -3013,45 +3113,21 @@
       {/if}
       
       {#if $isAdmin}
-      <li class="nav-item ms-2 d-flex align-items-center">
-        <span class="badge text-bg-primary">Admin: {getPublisherName() || 'signed in'}</span>
-      </li>
-      <li class="nav-item ms-2 d-flex align-items-center">
-        <span class="badge text-bg-dark">UI Version: {productionVersion?.versionId || 'unknown'}</span>
-      </li>
-      <li class="nav-item ms-2 d-flex align-items-center">
-        <span class="badge text-bg-info">Latest Published: {latestPublishedVersion || 'unknown'}</span>
-      </li>
-      <li class="nav-item ms-2 nav-tools-wrapper">
+      <li class="nav-item ms-2 nav-tools-wrapper d-flex align-items-center">
         <details class="nav-tools">
-          <summary class="nav-link active">Admin Tools</summary>
+          <summary class="btn btn-outline-secondary btn-sm">Admin Tools</summary>
           <div class="nav-tools-menu">
             <button id="exportButton" type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1">Save Changes</button>
             <button id="exportReviewExcelButton" type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1">Export Review Excel</button>
             <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={saveDraftNowListener} disabled={draftSaveInProgress || draftLoadInProgress || !$isEditMode || isAdminPublishBlocked}>{draftSaveInProgress ? 'Saving Draft...' : 'Save Remote Draft'}</button>
-            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={publishChangesListener} disabled={publishInProgress || draftLoadInProgress || !$isEditMode || isPublishFlowActive}>{publishInProgress ? 'Publishing...' : 'Publish Site'}</button>
-            {#if syncCheckEnabled}
-            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={configurePredeployVersionUrl}>Set Pre-deploy URL</button>
-            {/if}
-            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" onclick={goToPreviousEntryIdListener}>Previous ID</button>
-            <button type="button" class="btn btn-outline-secondary btn-sm w-100" onclick={goToNextEntryIdListener}>Next ID</button>
           </div>
         </details>
       </li>
-      {#if syncCheckEnabled}
       <li class="nav-item ms-2 d-flex align-items-center">
-        {#if syncStatus === 'in-sync'}
-          <span class="badge text-bg-success">insync</span>
-        {:else if syncStatus === 'out-of-sync'}
-          <span class="badge text-bg-danger">out of sync</span>
-        {:else if syncStatus === 'checking'}
-          <span class="badge text-bg-secondary">checking sync</span>
-        {:else if syncStatus === 'unknown'}
-          <span class="badge text-bg-warning">sync unknown</span>
-        {/if}
+        <button type="button" class="btn btn-primary btn-sm" onclick={publishChangesListener} disabled={publishInProgress || draftLoadInProgress || !$isEditMode || isPublishFlowActive}>
+          {publishInProgress ? 'Publishing...' : 'Publish Site'}
+        </button>
       </li>
-      {/if}
-      <li class="nav-item"><a href="{base}/dashboard" class="nav-link active ms-2">Dashboard</a></li>
       {/if}
       {#if $isStaff && !$isAdmin}
       <li class="nav-item ms-2 d-flex align-items-center">
@@ -3169,8 +3245,6 @@
       </div>
 
       <div class="small mb-2">{publishFlowMessage || 'Waiting for publish state update...'}</div>
-      <div class="small mb-1"><strong>UI Version:</strong> {productionVersion?.versionId || 'unknown'}</div>
-      <div class="small mb-1"><strong>Latest Published Version:</strong> {latestPublishedVersion || 'unknown'}</div>
       {#if publishFlowRequestId}
       <div class="small mb-1"><strong>Request ID:</strong> {publishFlowRequestId}</div>
       {/if}
@@ -3234,22 +3308,6 @@
   {/if}
 
   {#if $isAdmin}
-  <button
-    type="button"
-    class="issues-tab"
-    class:issues-tab-highlight={currentEntryHasLinkedIssues}
-    onclick={() => issuesPanelOpen = true}
-    aria-label="Open issues panel"
-  >
-    <span class="issues-tab-title">Issues</span>
-    <span class="issues-tab-metrics">
-      <span class="issues-tab-badge issues-tab-badge-open">Open {openIssueCount}</span>
-      <span class="issues-tab-badge issues-tab-badge-progress">In Progress {inProgressIssueCount}</span>
-    </span>
-    {#if currentEntryHasLinkedIssues}
-    <span class="issues-tab-hint">Current entry linked</span>
-    {/if}
-  </button>
   {#if issuesPanelOpen}
   <button type="button" class="issues-drawer-backdrop" onclick={() => issuesPanelOpen = false} aria-label="Close issues panel"></button>
   {/if}

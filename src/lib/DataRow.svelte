@@ -26,6 +26,7 @@
     let isEditing = $state(false);
 
     let editor = null; // Define editor at the top level
+    let editorInitialization = null;
 
     let thisEntryEdit = $editedJSON[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
 
@@ -134,7 +135,7 @@
 
         checkModifyTrace();
 
-        if (pauseEditorRender) { return; } // Skip rendering if pauseEditorRender is true
+        if ($pauseEditorRender) { return; } // Skip rendering if pauseEditorRender is true
 
         thisEntryEdit = value[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
 
@@ -150,6 +151,23 @@
 
 
     async function initializeEditor() {
+        if (editor) {
+            return;
+        }
+
+        if (editorInitialization) {
+            return editorInitialization;
+        }
+
+        editorInitialization = createEditorInstance();
+        try {
+            await editorInitialization;
+        } finally {
+            editorInitialization = null;
+        }
+    }
+
+    async function createEditorInstance() {
 
         const loadedData = getCurrentLoadedData();
 
@@ -305,7 +323,7 @@
         }
 
         if (!value) {
-            return null;
+            return isEditable ? { blocks: [] } : null;
         }
 
         return normalizeLoadedDataForRow(value);
@@ -353,7 +371,7 @@
     }
 
 
-    function editButtonhandler() {
+    async function editButtonhandler() {
 
         if ($isPublishFlowBlocked) {
             alert("Editing is temporarily locked while publish/deployment is in progress. Please complete deployment and refresh status.");
@@ -365,8 +383,20 @@
             return;
         }
 
+        if (!editor) {
+            await initializeEditor();
+        }
+
+        if (!editor) {
+            return;
+        }
+
+        if (editor.isReady && typeof editor.isReady.then === 'function') {
+            await editor.isReady;
+        }
+
         isEditing = true;
-        editor.readOnly.toggle();
+        await editor.readOnly.toggle();
         concurrentEditLock.set(true); // Set the lock to true when editing starts
 
     }
@@ -489,17 +519,24 @@
 
         // This effect will run whenever the page changes
         let currentPage = page.params.id; // Get the current page ID from the URL
-        if (editor) {
-            thisEntryEdit = $editedJSON[datatype].find(editedEntry => editedEntry.id.toString() === page.params.id);
-            void (async () => {
+        thisEntryEdit = $editedJSON[datatype].find(editedEntry => editedEntry.id.toString() === currentPage);
+        void (async () => {
+            if (!editor) {
+                await initializeEditor();
+            }
+
+            if (!editor) {
+                await initializeEditor();
+            }
+
+            if (editor) {
                 const rendered = await renderCurrentDataInEditor();
                 if (!rendered) {
                     await destroyEditorInstance();
                     await initializeEditor();
                 }
-            })();
-
-        }
+            }
+        })();
 
     });
 
