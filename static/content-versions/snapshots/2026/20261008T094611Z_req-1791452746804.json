@@ -1,6 +1,29 @@
 {
 	"config": {
-		"editTrace": [],
+		"editTrace": [
+			{
+				"dataType": "testData",
+				"dataId": 1000,
+				"refId": 40970060,
+				"editType": "remove",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 1000",
+				"timestamp": "2026-10-08T09:10:45.716Z"
+			},
+			{
+				"dataType": "testData",
+				"dataId": 1000,
+				"refId": 37945220,
+				"editType": "add",
+				"field": null,
+				"originalValue": null,
+				"newValue": null,
+				"nameSnapshot": "New Test 1000",
+				"timestamp": "2026-10-08T09:10:50.775Z"
+			}
+		],
 		"category": [
 			{
 				"code": "CHEM",
