@@ -4,10 +4,10 @@
   "publishedAt": "2026-10-07T23:18:32.670Z",
   "publishedBy": "Ray",
   "sourceRef": "main",
-  "summary": "",
+  "summary": "FIX REDIRECT",
   "editTraceCount": 5,
   "snapshotPath": "content-versions/snapshots/2026/20261007T231832Z_req-1791415091151.json",
   "contentSha256": "d2d9d1cdec9e236651b72bdd5e2d9d6ceba45c3f20223b0b867dbbdbcb3ff40b",
-  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/37701491605",
+  "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/37723654372",
   "environment": "predeploy"
 }
