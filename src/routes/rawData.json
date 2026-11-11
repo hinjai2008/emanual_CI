@@ -1,18 +1,6 @@
 {
 	"config": {
-		"editTrace": [
-			{
-				"dataType": "testData",
-				"dataId": 1001,
-				"refId": 11906373,
-				"editType": "add",
-				"field": null,
-				"originalValue": null,
-				"newValue": null,
-				"nameSnapshot": "New Test 1001",
-				"timestamp": "2026-11-11T06:28:44.329Z"
-			}
-		],
+		"editTrace": [],
 		"category": [
 			{
 				"code": "CHEM",
