@@ -646,5 +646,17 @@
     "snapshotPath": "content-versions/snapshots/2026/20261111T074752Z_req-1794383249028.json",
     "contentSha256": "402aaefa8aebac2e1756fba295328c08a9828339998b3d63e1f96690787b9e53",
     "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/42982085691"
+  },
+  {
+    "versionId": "20261112T075723Z_req-1794470221021",
+    "publishedAt": "2026-11-12T07:57:23.281Z",
+    "publishedBy": "Ray",
+    "requestId": "req-1794470221021",
+    "sourceRef": "main",
+    "summary": "Haematologist Tests",
+    "editTraceCount": 50,
+    "snapshotPath": "content-versions/snapshots/2026/20261112T075723Z_req-1794470221021.json",
+    "contentSha256": "30ecb86c159b5a235905190187dcd0f3972c93605149dc6fc2bb2223f3418a69",
+    "buildRunUrl": "https://github.com/hinjai2008/emanual_CI/actions/runs/43179048813"
   }
 ]
